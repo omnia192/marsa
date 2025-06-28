@@ -1,0 +1,120 @@
+<section class="wishlist">
+  <div class="container">
+    <div *ngIf="whishlistEmpty">
+      <section class="wishlist-empty">
+        <div
+          class="d-flex justify-content-center align-items-start gap-4 flex-column flex-md-row"
+        >
+          <div>
+            <img
+              src="../../../../../assets/images/whislist.png"
+              class="img-fluid"
+             alt="whislist"
+            />
+          </div>
+          <div class="whishlist-content">
+            <h3>Your wish list is empty</h3>
+            <p>
+              Save favorites to your wish list by clicking on the heart icon
+            </p>
+
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-------------------------------------->
+    <div *ngIf="!whishlistEmpty">
+      <section class="wishlist-notempty">
+
+        <div *ngFor="let item of result">
+          <ng-container class="card p-4 my-5" *ngIf="item.trips.length > 0">
+            <p-carousel
+              [value]="item.trips"
+              [numVisible]="3"
+              [numScroll]="1"
+              [showIndicators]="false"
+              [responsiveOptions]="responsiveOptions"
+              [showNavigators]="item.trips.length > 1"
+              [ngClass]="item.trips.length ===  1 ? 'single-item' : 'multiple-items'"
+            >
+              <ng-template pTemplate="header">
+                <p class="fs-3 text-dark fw-bold">{{ item.category }}</p>
+              </ng-template>
+              <ng-template let-trips pTemplate="item">
+                <div class="border-1 surface-border border-round m-2 p-3">
+                  <div class="mb-3">
+                    <div class="relative mx-auto">
+                      <img
+                        [src]="trips?.trip?.[0]?.cover"
+                        [alt]="trips?.trip?.[0]?.name"
+                        class="w-full border-round w-100"
+                        height="200px"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3 font-medium">
+                    {{ trips?.trip?.[0]?.Title }}
+                  </div>
+                  <div class="flex justify-content-between align-items-center">
+                    <span
+                      class="d-flex gap-4 align-items-center justify-content-evenly"
+                    >
+                      <button
+                        [routerLink]="['../../'+ item.url  + trips?.trip?.[0]?.id + '/' + trips?.trip?.[0]?.Title] "
+                        class="border-radius-5"
+                      >
+                        View Details
+                      </button>
+                      <button
+                        icon="pi pi-shopping-cart"
+                        (click)="RemoveFromWishlist(trips?.id)"
+                        class="border-radius-5"
+                      >
+                        Remove
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </ng-container>
+        </div>
+        <div class="d-flex flex-column whishlist-card-content">
+         
+        </div>
+        <!----------------------------->
+      </section>
+    </div>
+    <!---------------------------------->
+  </div>
+</section>
+
+<!----------Create new List Model--------------------->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Create New List</h5>
+        <input type="text" class="form-control" placeholder="Wish list name" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="done">Done</button>
+      </div>
+    </div>
+  </div>
+</div>

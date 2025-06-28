@@ -1,0 +1,468 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+<ng-container *ngIf="confirmRequest">
+  <div class="container content">
+    <div class="row">
+      <div class="col-10 m-auto">
+        <div class="py-3 px-md-4 px-xl-12 border-bottom">
+          <ul
+            style="justify-content: center !important"
+            class="list-group flex-nowrap overflow-auto overflow-md-visble list-group-horizontal list-group-borderless flex-center-between pt-1"
+          >
+            <li
+              class="list-group-item text-center flex-shrink-0 flex-md-shrink-1"
+            >
+              <div
+                class="flex-content-center mb-3 width-40 height-40 border bg-primary border-width-2 border-primary text-white mx-auto rounded-circle"
+              >
+                4
+              </div>
+              <div class="text-primary">Booking confirmation</div>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="mb-5 bg-white rounded-sm"
+          style="
+            margin: 30px auto !important;
+            max-width: 100%;
+            overflow: hidden;
+          "
+        >
+          <div
+            class="py-6 px-5 border-bottom d-flex justify-content-center"
+            style="background: rgba(235, 240, 247, 1); text-align: center"
+          >
+            <div
+              class="flex-horizontal-center flex-column text-center"
+              style="word-break: break-word; white-space: normal"
+            >
+              <div
+                class="height-50 width-50 flex-shrink-0 flex-content-center bg-primary rounded-circle"
+              >
+                <i class="fa-solid fa-check text-white font-size-24"></i>
+              </div>
+              <div class="ml-3">
+                <h3 class="responsive-text">
+                  Thank you for choosing Marsa Waves Great News! We have sent
+                  your confirmation to
+                  <a
+                    [href]="'mailto:' + confirmRequest['E-mail']"
+                    style="
+                      font-family: Lato;
+                      font-size: 21px;
+                      font-weight: 700;
+                      line-height: 25px;
+                      letter-spacing: 0em;
+                      color: rgba(54, 153, 255, 1);
+                      word-wrap: break-word;
+                    "
+                  >
+                    {{ confirmRequest["E-mail"] }}<br />
+                  </a>
+                  Expect a follow-up email or WhatsApp message shortly with your
+                  scheduled pickup time from your location.
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mb-5 bg-white rounded-sm"
+          style="
+            margin: 30px auto !important;
+            box-shadow: 0.5px 0.8659999966621399px 4px 0px
+              rgba(27, 32, 50, 0.08);
+          "
+        >
+          <div class="pt-4 pb-3 px-5">
+            <div class="d-flex justify-content-between">
+              <h5
+                id="scroll-description"
+                class="font-size-21 font-weight-bold text-dark mb-2"
+              >
+                Traveler Information
+              </h5>
+            </div>
+            <!-- Fact List -->
+            <ul class="list-unstyled font-size-1 mb-0 font-size-16">
+              <li
+                class="d-flex justify-content-between py-2 flex-column flex-sm-row"
+              >
+                <span class="text-secondary text-right"></span>
+                <span
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal2"
+                  class="payment text-white"
+                  >Edit</span
+                >
+              </li>
+              <li class="d-flex justify-content-between py-2">
+                <span class="font-weight-medium">Booking number</span>
+                <span class="text-secondary text-right">{{
+                  confirmRequest?.Bookingnumber
+                }}</span>
+              </li>
+
+              <li class="d-flex justify-content-between py-2">
+                <span class="font-weight-medium">Name</span>
+                <span class="text-secondary text-right">{{
+                  confirmRequest?.name
+                }}</span>
+              </li>
+
+              <li class="row py-2">
+                <div class="col-12 col-md-6">
+                  <span class="font-weight-medium">E-mail address</span>
+                </div>
+                <div class="col-12 col-md-6 text-md-right">
+                  <span class="text-secondary">{{
+                    confirmRequest["E-mail"]
+                  }}</span>
+                </div>
+              </li>
+
+              <li class="d-flex justify-content-between py-2">
+                <span class="font-weight-medium">Phone Number</span>
+                <span class="text-secondary text-right">{{
+                  confirmRequest?.Phone
+                }}</span>
+              </li>
+            </ul>
+            <!-- End Fact List -->
+          </div>
+          <div
+            class="pt-4 pb-3 px-5"
+            [innerHTML]="confirmRequest?.Bookinginstraction"
+          ></div>
+        </div>
+        <div class="my-tours-work">
+          <h5 class="text-center mb-5 head">You might also like</h5>
+
+          <owl-carousel-o [options]="customOptions" class="my-tours">
+            <ng-container *ngFor="let item of relatedtrips">
+              <ng-template carouselSlide>
+                <app-activity-card [item]="item"></app-activity-card>
+              </ng-template>
+            </ng-container>
+
+            <!-- <ng-container *ngFor="let item of relatedtrips">
+              <ng-template carouselSlide>
+                <app-activity-card [item]="item"></app-activity-card>
+              </ng-template>
+            </ng-container> -->
+          </owl-carousel-o>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div
+  class="modal fade py-3 step1"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered"
+    style="margin: auto; max-width: 80% !important"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="customerForm">
+          <div class="row">
+            <!-- Input -->
+            <div class="col-sm-4 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Name </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  [ngClass]="{
+                    'is-invalid':
+                      customerForm.get('name')?.invalid &&
+                      customerForm.get('name')?.touched
+                  }"
+                  placeholder="Please enter your name."
+                  required
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('name')?.invalid &&
+                    (customerForm.get('name')?.dirty ||
+                      customerForm.get('name')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Email </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid':
+                      customerForm.get('email')?.invalid &&
+                      customerForm.get('email')?.touched
+                  }"
+                  placeholder="enter emial"
+                  required
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('email')?.invalid &&
+                    (customerForm.get('email')?.dirty ||
+                      customerForm.get('email')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Email is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Phone </label>
+                <div>
+                  
+                  <ngx-intl-tel-input
+                    [cssClass]="'form-control'"
+                    [enableAutoCountrySelect]="true"
+                    [searchCountryFlag]="true"
+                    [selectFirstCountry]="false"
+                    [separateDialCode]="true"
+                    [maxLength]="20"
+                    [phoneValidation]="false"
+                    name="phone"
+                    [enablePlaceholder]="true"
+                    [customPlaceholder]="'Enter phone number'"
+                    [preferredCountries]="['de']"
+                    formControlName="phone"
+                    (countryChange)="onCountryChange($event)"
+                  ></ngx-intl-tel-input>
+                </div>
+
+
+                <ng-container
+                  *ngIf="
+                    customerForm.get('phone')?.errors &&
+                    customerForm.get('phone')?.touched
+                  "
+                >
+                  <div
+                    class="alert alert-danger my-2 text-dark"
+                    *ngIf="customerForm.get('phone')?.errors?.['required']"
+                  >
+                    Phone is required
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <!-- End Input -->
+
+            <div class="w-100"></div>
+
+            <!-- End Input -->
+            <div class="w-100"></div>
+            <p class="text-left fs-6">Do you want a pick up services ?</p>
+            <div class="d-flex gap-3 flex-wrap mb-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="pickupService"
+                  id="flexRadioDefault1"
+                  [checked]="showServices"
+                  (change)="showServices = true"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Yes, I can add it now (recommended)
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="pickupService"
+                  id="flexRadioDefault2"
+                  [checked]="!showServices"
+                  (change)="showServices = false"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  I don't know yet ( later )
+                </label>
+              </div>
+            </div>
+            <!-- Input -->
+            <ng-container *ngIf="showServices">
+              <div class="col-sm-6 mb-4">
+                <div class="js-form-message">
+                  <label class="form-label"> Pick up Location </label>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control location"
+                      aria-describedby="helpId"
+                      [value]="locationValue"
+                      placeholder="Location"
+                      formControlName="locationValue"
+                      (click)="openMapModal()"
+                      readonly
+                    />
+                   
+                  </div>
+                  <div
+                    *ngIf="
+                      !locationValue &&
+                      customerForm.get('locationValue')?.touched
+                    "
+                    class="alert alert-danger my-2"
+                  >
+                    Pick up Location is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mb-4">
+                <label class="form-label"> Name your place </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="pickup_point"
+                  placeholder="Enter Pick up Place"
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('pickup_point')?.invalid &&
+                    (customerForm.get('pickup_point')?.dirty ||
+                      customerForm.get('pickup_point')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Pick up Place is required
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div class="col-sm-6 mb-4">
+                <div class="js-form-message">
+                  <label class="form-label">
+                    <p class="text-left fs-6">
+                      You must choose location before 24 hours
+                    </p>
+                  </label>
+                </div>
+              </div>
+            </ng-template>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-12 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Special Requirements </label>
+                <textarea
+                  type="number"
+                  class="form-control w-100"
+                  formControlName="note"
+                  placeholder="Enter Special Requirements"
+                  style="font-size: 15px"
+                  rows="2"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="payment bg-danger text-white"
+          data-bs-dismiss="modal"
+          #btn
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="payment text-white"
+          (click)="confirmEdit()"
+        >
+          Confirm Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Map Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="max-width: 90%; margin: 1.75rem auto;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="map-container">
+          <div class="search-box mb-3">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search location"
+                [formControl]="searchControl"
+                (keyup)="onSearchInput($event)"
+                autocomplete="off"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()" *ngIf="searchControl.value">
+                  <i class="fa fa-times"></i>
+                </button>
+                <div class="btn btn-outline-secondary" *ngIf="isSearching">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </div>
+              </div>
+            </div>
+            <!-- Search Results -->
+            <div *ngIf="showResults" class="search-results">
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let result of searchResults" (click)="selectLocation(result)">
+                  {{ result.name }}
+                </li>
+              </ul>
+            </div>
+            <!-- No results message -->
+            <div *ngIf="searchControl.value && !isSearching && searchResults.length === 0 && searchControl.value.trim().length >= 2" class="alert alert-info mt-2">
+              No locations found for "{{ searchControl.value }}"
+            </div>
+          </div>
+          <div id="googleMap" style="height:400px; width: 100%;"></div>
+          <div class="mt-3">
+            <button class="btn btn-secondary mr-2" (click)="setCurrentLocation()">
+              <i class="fa fa-location-arrow mr-1"></i> Set Current Location
+            </button>
+            <button class="btn btn-primary" (click)="confirmLocation()" data-bs-dismiss="modal">
+              <i class="fa fa-check mr-1"></i> Confirm Location
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

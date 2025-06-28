@@ -1,0 +1,76 @@
+<!-- map-modal.component.html -->
+<div class="modal-header mymap">
+  <h4 class="modal-title">Choose Location</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeDialog()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="white" mat-dialog-content>
+  <p>Please specify the location through the following fields or directly through the map</p>
+
+  <!-- Basic search input - no Material components -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="input-group">
+        <input
+          #searchInput
+          type="text"
+          class="form-control"
+          placeholder="Search location"
+          [(ngModel)]="searchValue"
+          (keyup)="onSearchInput($event)"
+          autocomplete="off"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()" *ngIf="searchValue">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="btn btn-outline-secondary" *ngIf="isSearching">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div *ngIf="showResults" class="search-results mb-3">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let result of searchResults" (click)="selectLocation(result)">
+        {{ result.name }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- No results message -->
+  <div *ngIf="searchValue && !isSearching && !showResults && searchValue.length >= 2" class="alert alert-info mb-3">
+    No locations found for "{{ searchValue }}"
+  </div>
+
+  <!-- Map container -->
+  <div id="googleMap" style="height: 400px; width: 100%;"></div>
+
+  <!-- Coordinates display -->
+  <div class="row mt-3">
+    <div class="col-6">
+      <div class="form-group">
+        <label>Latitude</label>
+        <input type="text" class="form-control" [ngModel]="latitudeValue" readonly>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label>Longitude</label>
+        <input type="text" class="form-control" [ngModel]="longitudeValue" readonly>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="white" mat-dialog-actions>
+  <button class="btn btn-secondary mr-2" (click)="setCurrentLocation()">
+    <i class="fa fa-location-arrow mr-1"></i> Set Current Location
+  </button>
+  <button class="btn btn-primary" (click)="closeDialog()">
+    <i class="fa fa-check mr-1"></i> Confirm
+  </button>
+</div>

@@ -1,0 +1,620 @@
+
+
+
+.dropdown button span {
+  width: 100%;
+  max-height: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* يضيف "..." إذا كان النص طويلًا */
+  max-width: 100%;
+}
+
+::ng-deep  .p-datepicker-touch-ui {
+  width: 250px !important; /* تقليل العرض */
+  min-width:30%; /* التأكد من عدم تجاوز الشاشة */
+}
+
+
+::ng-deep{
+
+
+  .mat-datepicker-toggle button svg {
+    color: #0057FF !important;
+  }
+  .custom-calendar .p-inputwrapper .p-datepicker-trigger {
+    background-color: transparent !important;
+    border: none;
+  }
+
+  .custom-calendar calendaricon svg {
+    color: #0057FF !important;
+    font-size: 1.2rem;
+  }
+  .custom-calendar .p-input-icon-right>.p-icon-wrapper{
+    left: 0 !important;
+    padding-left: 0.5rem;
+  }
+  .custom-calendar .p-inputtext, .time-calendar .p-inputtext{
+    padding-left: 1.9rem;
+  }
+  .custom-calendar .p-inputtext::placeholder, .time-calendar .p-inputtext::placeholder {
+    color: #3b444f;
+  }
+  .pickup-time svg {
+    color: #0057FF !important;
+  }
+  .custom-calendar .p-datepicker {
+   margin-top: 4rem;
+
+  }
+
+
+
+
+
+}
+
+
+
+.time-calendar .p-inputwrapper {
+  position: relative;
+}
+
+.time-calendar .input-icon {
+  position: absolute;
+  top: 42%;
+  left: 10px; /* المسافة من اليسار */
+  transform: translateY(-50%);
+  color: #0057FF; /* لون الأيقونة */
+  pointer-events: none; /* عدم تفاعل الأيقونة مع الأحداث */
+  font-size: 1.2rem;
+}
+
+.time-calendar input {
+  padding-left: 30px; /* لتجنب تداخل النص مع الأيقونة */
+}
+
+
+
+
+
+
+
+.media-body a{
+  font-family: Lato;
+  font-size: 16px;
+   font-weight: 700;
+   line-height: 10;
+   letter-spacing: 0em;
+    text-align: left;
+}
+.comment-container {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+.card {
+  overflow: visible !important;
+}
+
+.see-more {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.bg-img-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0; /* يبدأ بشكل غير مرئي */
+  transition: opacity 1s ease-in-out; /* تأثير التلاشي */
+}
+.gradient-overlay-half-black-gradient::before {
+  background-color: #18181a !important;
+  opacity: 0.5 !important;
+}
+
+.bg-img-hero.active::before {
+  opacity: 1; /* يصبح مرئيًا عند إضافة الكلاس active */
+}
+#content {
+  margin-top: 100px;
+}
+.custom-select-wrapper {
+  position: relative;
+}
+.btnReview,
+.check {
+  background-color: #0db1ff;
+  transition: all 0.5s ease-in-out;
+}
+.btnReview:hover {
+  opacity: 0.8;
+  transform: translateY(3px);
+  cursor: pointer;
+}
+.custom-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none;
+}
+
+.form-control {
+  padding-left: 26px; /* Adjust padding to make space for the placeholder */
+}
+
+.caption h1 {
+  font-family: Poppins;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 90px;
+  letter-spacing: 0em;
+  color: rgba(255, 255, 255, 1);
+}
+
+.caption p {
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.025em;
+  color: rgba(255, 255, 255, 1);
+}
+
+.list-search {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  color: rgba(103, 116, 124, 1);
+}
+
+h4 {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0em;
+  color: rgba(37, 37, 37, 1);
+}
+
+p {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: rgba(86, 86, 86, 1);
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(59, 68, 79, 1);
+}
+.activity {
+  .image {
+    margin: 0 auto;
+    background-image: url("../../../../../../assets/custom/Activity/freeVector.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 95.426px;
+    background-size: contain;
+    height: 102px;
+  }
+}
+.layer {
+  position: absolute;
+  bottom: 0;
+  background: rgba(217, 217, 217, 0.82);
+  width: 100%;
+  border-radius: 10px;
+}
+.layer-img {
+  :is(img) {
+    width: 100%;
+    height: 334px !important;
+    border-radius: 10px;
+  }
+}
+
+.layer p {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  color: rgba(63, 66, 84, 1);
+  padding: 10px;
+  padding-bottom: 3px;
+}
+
+li {
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  color: rgba(103, 116, 124, 1);
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+h5 {
+  font-family: Poppins;
+  font-size: 35px;
+  font-weight: 700;
+  line-height: 53px;
+  letter-spacing: -0.025em;
+  color: rgba(255, 255, 255, 1);
+}
+.reviews {
+  margin-top: 80px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 466px;
+}
+.faq {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #183462
+}
+.faq-title h3{
+  font-size: 33px !important;
+    line-height: 59px !important;
+}
+.top-tap {
+  position: absolute;
+  bottom: -4%;
+  left: 5%;
+}
+.layer-card {
+  background: rgba(255, 255, 255, 0.47);
+  border: 1px solid rgba(83, 146, 249, 1);
+  padding: 20px;
+  height: 144px;
+  align-self: flex-start;
+  width: 100%;
+  height: auto;
+}
+.small-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  list-style-type: none;
+  padding-top: 15px;
+  gap: 10px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  :is(li) {
+    color: #67747c !important;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+    position: relative;
+    &.active {
+      color: #008ccf !important;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 25px;
+        left: 50%;
+        width: 10%;
+        height: 10px;
+        border-radius: 50%;
+        display: block;
+        background-color: #008ccf;
+      }
+    }
+  }
+}
+.layer-card h5 {
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(59, 68, 79, 1);
+}
+
+.layer-card span {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgb(33 97 201);
+}
+
+.layer-card p {
+  font-family: Lato;
+  font-size: 17px;
+   font-weight: 600;
+  font-style: italic;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(71, 71, 71, 1);
+  padding: 10px 0;
+  word-wrap: break-word;
+}
+
+#review h5 {
+  font-family: Lato;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #3b444f;
+}
+
+
+/*************New edits************************/
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 10px;
+  color: #0057FF !important;
+}
+input[type="date"] {
+  color: #0057FF !important;
+  padding: 0 15px;
+  padding-left: 45px;
+}
+.input-label {
+  position: relative;
+  :is(input) {
+    padding-left: 40px;
+  }
+  :is(label) {
+    position: absolute;
+    left: 26px;
+    top: 18px;
+    z-index: 2;
+    color: #d9d9d9;
+  }
+}
+.input-label-1 {
+  position: relative;
+
+  label {
+    position: absolute;
+    left: 31px;
+    bottom: 11px;
+    z-index: 2;
+    color: #d9d9d9;
+  }
+}
+
+label,
+::placeholder {
+  text-transform: capitalize;
+  color: #d9d9d9;
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.input-border {
+  border: 2px solid #e4e4e4;
+  border-radius: 5px !important;
+}
+.selected {
+  color: gold !important;
+  text-shadow: 0.5px 0.5px #ffea01;
+}
+::ng-deep{
+  :is(p-calendar) span {
+    height: 54px !important;
+  }
+}
+.persons {
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  padding-bottom: 5px;
+  width: 172px;
+  height: 52px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  :is(button) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 23px;
+    flex-shrink: 0;
+    border: 1px solid transparent;
+    background-color: #008ccf;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
+
+.tab-shadow {
+  border-top-left-radius: 0;
+}
+.submit {
+  background-color: rgba(13, 177, 255, 1);
+  font-family: Lato;
+  font-size: 16px;
+  line-height: 19px;
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: normal;
+  border: 1px solid transparent;
+  width: 109px;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+  color: #fff !important;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(3px);
+  }
+}
+.btn-content {
+  margin-bottom: 13px;
+}
+.nav {
+  :is(li) {
+    color: #fff;
+    font-family: Lato;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 25px 18px;
+    cursor: pointer;
+    text-transform: capitalize;
+    &.active {
+      color: var(--d-9-d-9-d-9, #000);
+      font-family: Lato;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: normal;
+      border-radius: 5px 5px 0px 0px;
+      background: #fff;
+    }
+  }
+}
+.faq-title{
+  width: 35%;
+  margin-right:0.5rem;
+  h4{
+    color: rgb(128, 127, 127) !important;
+    text-align: center;
+    font-weight: 400;
+    font-size: 23px;
+    letter-spacing: 2px;
+  }
+}
+
+.faq-question{
+  width: 65%;
+}
+/*********************************************/
+@media screen and (max-width: 993px) {
+  .mat-expansion-panel-header{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+}
+  .reviews {
+    margin-top: 1rem;
+
+  }
+  .faq-title h3{
+    font-size: 21px !important;
+      line-height: 50px !important;
+  }
+  .faq-title, .faq-question{
+    width: 100%;
+  }
+
+  .top-tap {
+    position: relative;
+  }
+  .media-body a{
+
+     line-height: 2;
+
+  }
+  .bg-img-hero-bottom {
+    background-size: 100%;
+    height: 220px !important;
+
+    .caption {
+      :is(h1){
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #18181a;
+        }
+    }
+
+}
+p-calendar{
+  width: 100% !important;
+}
+::ng-deep{
+  .custom-calendar .p-calendar {
+    width:100% !important;
+
+  }
+}
+}
+@media screen and (max-width: 1200px) {
+  ::ng-deep{
+    .feature-carousel .owl-theme{
+      height: 210px;
+      white-space: nowrap;
+    }
+  }
+
+  #content {
+    margin-top: 0px;
+  }
+}
+  @media screen and (min-width: 1200px) {
+    ::ng-deep{
+
+      .review-carousel .owl-theme{
+        height: 292px !important;
+      }
+      .review-carousel .ng-tns-c556756694-8{
+        height: 200px;
+      }
+      .review-carousel .owl-item{
+        width: 630px !important;
+      }
+    }
+}
+

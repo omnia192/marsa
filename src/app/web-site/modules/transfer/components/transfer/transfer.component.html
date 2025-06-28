@@ -1,0 +1,851 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+<main>
+  <main id="content">
+    <!-- ========== HERO ========== -->
+    <div class="bg-img-hero-bottom gradient-overlay-half-black-gradient text-center"
+      [style.backgroundImage]="'url(' + currentBackgroundImage + ')'" style="
+        background-position: center center;
+        background-size: cover;
+        height: 520px;
+      ">
+      <!-- Info -->
+      <div class="py-xl-10 d-flex flex-column justify-content-center align-content-center caption" style="height: 100%">
+        <h1>{{h1Text}}</h1>
+        <p>
+         {{pText}}
+        </p>
+      </div>
+      <!-- End Info -->
+      <div class="container top-tap d-none d-lg-block">
+        <!--------------->
+        <ul class="nav">
+          <li *ngFor="let tab of tabs" class="nav-item" [class.active]="tab.section === activeSection"
+            (click)="setActiveSection(tab.section)">
+            {{ tab.label }}
+          </li>
+        </ul>
+        <!---------------->
+        <section *ngIf="activeSection === 'section2'" style="width: 100%;">
+          <div class="card border-0 tab-shadow px-1">
+            <div class="card-body" style="padding: 12px">
+              <div>
+                <div class="d-flex flex-column flex-lg-row justify-content-start align-items-center">
+
+
+                  <div class="col-md-3 col-6" style="margin-bottom: 0px !important;">
+                    <!-- First dropdown (From) with search -->
+                    <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                      <button
+                        class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                        <span class="d-flex align-items-center">
+                          <i style="color: #0057FF;  margin-right: 0.5rem; margin-left: 0.5rem;"
+                            class="fa-solid fa-location-dot"></i>
+                          {{ selectedFromName || 'From' }}
+                        </span>
+                        <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                      style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+
+                    <!-- Search input for the first dropdown -->
+                    <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                      <input type="text" class="form-control" placeholder="Search..." name="searchFrom"
+                        [(ngModel)]="searchFrom" (input)="filterFromOptions()" style="margin: 5px; width: 95%;" />
+                    </li>
+
+                    <!-- Show filtered airports -->
+                    <li *ngFor="let airport of filteredFromAirports" (click)="selectFromOption(airport)" style="cursor: pointer;">
+                      <a class="dropdown-item">{{ airport?.name }}</a>
+                    </li>
+
+                    <!-- Show filtered hotels -->
+                    <li *ngFor="let hotel of filteredFromHotels" (click)="selectFromOption(hotel)" style="cursor: pointer;">
+                      <a class="dropdown-item">{{ hotel.title }}</a>
+                    </li>
+                  </ul>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 col-6" style="margin-bottom: 0px !important;">
+                    <!-- Second dropdown (To) with search -->
+                    <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                      <button
+                        class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                        <span class="d-flex align-items-center">
+                          <i style="color: #0057FF; margin-right: 0.5rem; margin-left: 0.5rem;"
+                            class="fa-solid fa-location-dot"></i>
+                          {{ selectedOptionName || 'To' }}
+                        </span>
+                        <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                      style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+                        <!-- Search input for the second dropdown -->
+                        <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                          <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTo"
+                            (input)="filterToOptions()" name="searchTo" style="margin: 5px; width: 95%;" />
+                        </li>
+                        <!-- Show filtered To options -->
+                        <li *ngFor="let option of filteredToOptions" (click)="selectOption(option)"
+                          style="cursor: pointer;">
+                          <a class="dropdown-item">{{ option?.name || option.title }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+
+                  <!-- Date Picker -->
+                  <div class="col-md-2 col-6 mt-1">
+                    <p-calendar
+                      [(ngModel)]="date"
+                      [appendTo]="'body'"
+                      [showIcon]="true"
+                      [iconDisplay]="'input'"
+                      inputId="icondisplay"
+                      [showTime]="false"
+                      [dateFormat]="'yy-mm-dd'"
+                      [minDate]="minSelectableDate"
+                      placeholder="Date"
+                      class="custom-calendar"
+                      (onSelect)="onDateSelect($event)"
+                      [touchUI]="true">
+                    </p-calendar>
+                  </div>
+
+
+                  <!-- Pickup Time -->
+
+                  <!----------------------------------->
+                  <div class="col-md-2 col-6">
+                    <div class="persons">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <button (click)="decrease()">-</button>
+                        </div>
+                        <div>
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"
+                              fill="none">
+                              <path
+                                d="M17.8337 22.0941V19.6247H15.3632C15.125 19.6247 14.8965 19.5301 14.728 19.3618C14.5596 19.1934 14.4649 18.965 14.4649 18.7269C14.4649 18.4888 14.5596 18.2604 14.728 18.092C14.8965 17.9236 15.125 17.829 15.3632 17.829H17.8337V15.3596C17.8337 15.1213 17.9284 14.8928 18.097 14.7243C18.2655 14.5558 18.4942 14.4612 18.7325 14.4612C18.9709 14.4612 19.1996 14.5558 19.3681 14.7243C19.5367 14.8928 19.6314 15.1213 19.6314 15.3596V17.829H22.1018C22.34 17.829 22.5684 17.9236 22.7369 18.092C22.9054 18.2604 23 18.4888 23 18.7269C23 18.965 22.9054 19.1934 22.7369 19.3618C22.5684 19.5301 22.34 19.6247 22.1018 19.6247H19.6314V22.0941C19.6314 22.3323 19.5367 22.5606 19.3683 22.729C19.1998 22.8974 18.9713 22.992 18.7331 22.992C18.4949 22.992 18.2664 22.8974 18.098 22.729C17.9295 22.5606 17.8337 22.3323 17.8337 22.0941ZM2.72566 22.992C2.31982 22.9915 1.91929 22.9005 1.55307 22.7256C1.18686 22.5508 0.86427 22.2966 0.608776 21.9814C0.353281 21.6662 0.171287 21.298 0.0761161 20.9037C-0.0190545 20.5093 -0.0250638 20.0987 0.0585667 19.7018C0.47805 17.6956 1.41841 15.8351 2.78518 14.3073C4.15196 12.7794 5.89701 11.6381 7.84489 10.998C6.81721 10.2301 6.05756 9.15826 5.67354 7.93452C5.28952 6.71078 5.30062 5.39725 5.70541 4.18022C6.11019 2.96318 6.88811 1.90443 7.92871 1.15411C8.9693 0.403794 10.2198 0 11.5029 0C12.786 0 14.0365 0.403794 15.0771 1.15411C16.1177 1.90443 16.8954 2.96318 17.3002 4.18022C17.705 5.39725 17.7163 6.71078 17.3322 7.93452C16.9482 9.15826 16.1884 10.2301 15.1607 10.998C15.6218 11.1513 16.0731 11.3326 16.5122 11.5406C16.7185 11.6482 16.8751 11.8314 16.9491 12.0519C17.0231 12.2725 17.0087 12.513 16.909 12.7232C16.8092 12.9333 16.6319 13.0966 16.4142 13.1788C16.1965 13.2609 15.9554 13.2556 15.7416 13.1639C14.4901 12.5677 13.1263 12.244 11.7403 12.2143C11.6609 12.2143 11.5804 12.2143 11.4999 12.2143C11.4194 12.2143 11.34 12.2143 11.2618 12.2143C9.03324 12.2739 6.88962 13.0815 5.17612 14.5071C3.46261 15.9327 2.27909 17.8933 1.81603 20.0731C1.78721 20.2101 1.78932 20.3518 1.82235 20.4879C1.85539 20.6239 1.91839 20.7508 2.00683 20.8594C2.09276 20.9675 2.20214 21.0547 2.32665 21.1145C2.45116 21.1742 2.58755 21.2049 2.72566 21.2043H13.7911C14.0293 21.2043 14.2577 21.2989 14.4262 21.4673C14.5947 21.6356 14.6893 21.864 14.6893 22.1021C14.6893 22.3403 14.5947 22.5686 14.4262 22.737C14.2577 22.9054 14.0293 23 13.7911 23L2.72566 22.992ZM11.7197 10.4128C12.8435 10.3559 13.9004 9.86224 14.6653 9.03727C15.4302 8.2123 15.8424 7.12124 15.8139 5.99685C15.7854 4.87245 15.3184 3.80371 14.5127 3.01853C13.707 2.23334 12.6263 1.7939 11.5011 1.7939C10.3758 1.7939 9.29513 2.23334 8.48944 3.01853C7.68376 3.80371 7.21691 4.87245 7.1884 5.99685C7.15989 7.12124 7.57198 8.2123 8.33683 9.03727C9.10169 9.86224 10.1588 10.3559 11.2826 10.4128H11.4999H11.7197Z"
+                                fill="#D9D9D9" />
+                            </svg>
+
+                            {{ persons }}
+                          </span>
+                        </div>
+
+                        <div>
+                          <button (click)="increase()">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-6" style="margin-bottom: 0.5rem;">
+                    <a class="text-capitalize submit" (click)="seePrice()">See Price</a>
+
+                  </div>
+                  <!-------------------------------->
+                </div>
+
+              </div>
+              <!-- End Checkbox -->
+            </div>
+          </div>
+        </section>
+
+        <section *ngIf="activeSection === 'section1'" style="width:100%;">
+          <div class="card border-0 tab-shadow px-1">
+            <div class="card-body" style="padding: 12px;">
+              <div class="row justify-content-between">
+                <div class="col-md-2 col-6" style="margin-bottom: 0px !important;">
+                  <!-- First dropdown (From) with search -->
+                  <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                    <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                      style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                      <span class="d-flex align-items-center">
+                        <i style="color: #0057FF; margin-right: 0.5rem; margin-left: 0.5rem;"
+                          class="fa-solid fa-location-dot"></i>
+                        {{ selectedFromName || 'From' }}
+                      </span>
+                      <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                    style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+                      <!-- Search input for the first dropdown -->
+                      <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchFrom"
+                          (input)="filterFromOptions()" name="searchFrom" style="margin: 5px; width: 95%;" />
+                      </li>
+                      <!-- Show filtered airports -->
+                      <li *ngFor="let airport of filteredFromAirports" (click)="selectFromOption(airport)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item">{{ airport?.name }}</a>
+                      </li>
+                      <!-- Show filtered hotels -->
+                      <li *ngFor="let hotel of filteredFromHotels" (click)="selectFromOption(hotel)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item"> {{ hotel.title }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-md-2 col-6" style="margin-bottom: 0px !important;">
+                  <!-- Second dropdown (To) with search -->
+                  <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                    <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                      style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                      <span class="d-flex align-items-center">
+                        <i style="color: #0057FF; margin-right: 0.5rem; margin-left: 0.5rem;"
+                          class="fa-solid fa-location-dot"></i>
+                        {{ selectedOptionName || 'To' }}
+                      </span>
+                      <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                    style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+                      <!-- Search input for the second dropdown -->
+                      <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTo"
+                          (input)="filterToOptions()" name="searchTo" style="margin: 5px; width: 95%;" />
+                      </li>
+                      <!-- Show filtered To options -->
+                      <li *ngFor="let option of filteredToOptions" (click)="selectOption(option)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item">{{ option?.name || option.title }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-md-2 col-6" style="margin-bottom: 0px !important;">
+                  <!-- Departure Date -->
+                  <p-calendar [(ngModel)]="date"  [showIcon]="true" [iconDisplay]="'input'" inputId="departureCalendar"
+                    [showTime]="false" [dateFormat]="'yy-mm-dd'" [minDate]="minSelectableDate"
+                    (onSelect)="updateMinReturnDate()" placeholder="Departure" class="custom-calendar"  [touchUI]="true">
+                  </p-calendar>
+                </div>
+
+
+                <div class="col-md-2 col-6" style="margin-bottom: 0px !important;">
+                  <p-calendar [(ngModel)]="returnDate" [showIcon]="true" [iconDisplay]="'input'"
+                    inputId="returnCalendar" [showTime]="false" [dateFormat]="'yy-mm-dd'" [minDate]="minReturnDate"
+                    placeholder="Return" class="custom-calendar"  [touchUI]="true">
+                  </p-calendar>
+                </div>
+                <div class="col-md-2 col-6" style="margin-bottom: 0px;">
+                  <div class="persons" style="margin-bottom: 0px !important;">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>
+                        <button (click)="decrease()">-</button>
+
+                      </div>
+                      <div>
+                        <span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"
+                            fill="none">
+                            <path
+                              d="M17.8337 22.0941V19.6247H15.3632C15.125 19.6247 14.8965 19.5301 14.728 19.3618C14.5596 19.1934 14.4649 18.965 14.4649 18.7269C14.4649 18.4888 14.5596 18.2604 14.728 18.092C14.8965 17.9236 15.125 17.829 15.3632 17.829H17.8337V15.3596C17.8337 15.1213 17.9284 14.8928 18.097 14.7243C18.2655 14.5558 18.4942 14.4612 18.7325 14.4612C18.9709 14.4612 19.1996 14.5558 19.3681 14.7243C19.5367 14.8928 19.6314 15.1213 19.6314 15.3596V17.829H22.1018C22.34 17.829 22.5684 17.9236 22.7369 18.092C22.9054 18.2604 23 18.4888 23 18.7269C23 18.965 22.9054 19.1934 22.7369 19.3618C22.5684 19.5301 22.34 19.6247 22.1018 19.6247H19.6314V22.0941C19.6314 22.3323 19.5367 22.5606 19.3683 22.729C19.1998 22.8974 18.9713 22.992 18.7331 22.992C18.4949 22.992 18.2664 22.8974 18.098 22.729C17.9295 22.5606 17.8337 22.3323 17.8337 22.0941ZM2.72566 22.992C2.31982 22.9915 1.91929 22.9005 1.55307 22.7256C1.18686 22.5508 0.86427 22.2966 0.608776 21.9814C0.353281 21.6662 0.171287 21.298 0.0761161 20.9037C-0.0190545 20.5093 -0.0250638 20.0987 0.0585667 19.7018C0.47805 17.6956 1.41841 15.8351 2.78518 14.3073C4.15196 12.7794 5.89701 11.6381 7.84489 10.998C6.81721 10.2301 6.05756 9.15826 5.67354 7.93452C5.28952 6.71078 5.30062 5.39725 5.70541 4.18022C6.11019 2.96318 6.88811 1.90443 7.92871 1.15411C8.9693 0.403794 10.2198 0 11.5029 0C12.786 0 14.0365 0.403794 15.0771 1.15411C16.1177 1.90443 16.8954 2.96318 17.3002 4.18022C17.705 5.39725 17.7163 6.71078 17.3322 7.93452C16.9482 9.15826 16.1884 10.2301 15.1607 10.998C15.6218 11.1513 16.0731 11.3326 16.5122 11.5406C16.7185 11.6482 16.8751 11.8314 16.9491 12.0519C17.0231 12.2725 17.0087 12.513 16.909 12.7232C16.8092 12.9333 16.6319 13.0966 16.4142 13.1788C16.1965 13.2609 15.9554 13.2556 15.7416 13.1639C14.4901 12.5677 13.1263 12.244 11.7403 12.2143C11.6609 12.2143 11.5804 12.2143 11.4999 12.2143C11.4194 12.2143 11.34 12.2143 11.2618 12.2143C9.03324 12.2739 6.88962 13.0815 5.17612 14.5071C3.46261 15.9327 2.27909 17.8933 1.81603 20.0731C1.78721 20.2101 1.78932 20.3518 1.82235 20.4879C1.85539 20.6239 1.91839 20.7508 2.00683 20.8594C2.09276 20.9675 2.20214 21.0547 2.32665 21.1145C2.45116 21.1742 2.58755 21.2049 2.72566 21.2043H13.7911C14.0293 21.2043 14.2577 21.2989 14.4262 21.4673C14.5947 21.6356 14.6893 21.864 14.6893 22.1021C14.6893 22.3403 14.5947 22.5686 14.4262 22.737C14.2577 22.9054 14.0293 23 13.7911 23L2.72566 22.992ZM11.7197 10.4128C12.8435 10.3559 13.9004 9.86224 14.6653 9.03727C15.4302 8.2123 15.8424 7.12124 15.8139 5.99685C15.7854 4.87245 15.3184 3.80371 14.5127 3.01853C13.707 2.23334 12.6263 1.7939 11.5011 1.7939C10.3758 1.7939 9.29513 2.23334 8.48944 3.01853C7.68376 3.80371 7.21691 4.87245 7.1884 5.99685C7.15989 7.12124 7.57198 8.2123 8.33683 9.03727C9.10169 9.86224 10.1588 10.3559 11.2826 10.4128H11.4999H11.7197Z"
+                              fill="#D9D9D9" />
+                          </svg>
+
+                          {{ persons }}
+                        </span>
+                      </div>
+                      <div>
+                        <button (click)="increase()">+</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-2 col-6 d-flex justify-content-center align-items-center">
+                  <a class="text-capitalize submit" (click)="seePrice()">See Price</a>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+
+        <!-- Nav Classic -->
+        <!---------------->
+
+        <!-- Nav Classic -->
+      </div>
+    </div>
+
+    <!-- ========== END HERO ========== -->
+    <!---------For Small Screen------------------------->
+    <div class="container d-block d-lg-none">
+      <!--------------->
+      <ul class="small-nav">
+        <li *ngFor="let tab of tabs" class="nav-item" [class.active]="tab.section === activeSection"
+          (click)="setActiveSection(tab.section)">
+          {{ tab.label }}
+        </li>
+      </ul>
+
+      <!---------------->
+      <section *ngIf="activeSection === 'section2'">
+        <div class="card border-0 tab-shadow px-1">
+          <div class="card-body" style="padding: 12px">
+            <div>
+              <div class="d-flex flex-column">
+                <div class="d-flex flex-column gap-3">
+
+                  <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                    <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                      style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                      <span class="d-flex align-items-center">
+                        <i style="color: #0057FF; margin-right: 0.5rem; margin-left: 0.5rem;"
+                          class="fa-solid fa-location-dot"></i>
+                        {{ selectedFromName || 'From' }}
+                      </span>
+                      <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                    style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+                      <!-- Search input for the first dropdown -->
+                      <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchFrom"
+                          (input)="filterFromOptions()" name="searchFrom" style="margin: 5px; width: 95%;" />
+                      </li>
+                      <!-- Show filtered airports -->
+                      <li *ngFor="let airport of filteredFromAirports" (click)="selectFromOption(airport)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item">{{ airport?.name }}</a>
+                      </li>
+                      <!-- Show filtered hotels -->
+                      <li *ngFor="let hotel of filteredFromHotels" (click)="selectFromOption(hotel)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item">{{ hotel.title }}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+
+                  <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                    <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                      style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                      <span class="d-flex align-items-center">
+                        <i style="color: #0057FF; margin-right: 0.5rem; margin-left: 0.5rem;"
+                          class="fa-solid fa-location-dot"></i>
+                        {{ selectedOptionName || 'To' }}
+                      </span>
+                      <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                    style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+                      <!-- Search input for the second dropdown -->
+                      <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTo"
+                          (input)="filterToOptions()" name="searchTo" style="margin: 5px; width: 95%;" />
+                      </li>
+                      <!-- Show filtered To options -->
+                      <li *ngFor="let option of filteredToOptions" (click)="selectOption(option)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item"> {{ option?.name || option.title }}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+
+
+                  <div class="mb-4 mb-lg-0">
+                    <!-- Input -->
+                    <div id="datepickerWrapperFromOne d-flex" class="u-datepicker input-group">
+
+
+                      <p-calendar [(ngModel)]="date" [showIcon]="true" [iconDisplay]="'input'" inputId="icondisplay"
+                        [showTime]="false" [dateFormat]="'yy-mm-dd'" [minDate]="minSelectableDate" placeholder="Date"
+                        class="custom-calendar" (onSelect)="onDateSelect($event)"  [readonlyInput]="true">
+                      </p-calendar>
+
+
+                    </div>
+                    <!-- End Input -->
+                  </div>
+
+
+
+
+
+
+                  <!----------------------------------->
+                  <div class="m-auto">
+                    <div class="persons">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <button (click)="decrease()">-</button>
+
+                        </div>
+                        <div>
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"
+                              fill="none">
+                              <path
+                                d="M17.8337 22.0941V19.6247H15.3632C15.125 19.6247 14.8965 19.5301 14.728 19.3618C14.5596 19.1934 14.4649 18.965 14.4649 18.7269C14.4649 18.4888 14.5596 18.2604 14.728 18.092C14.8965 17.9236 15.125 17.829 15.3632 17.829H17.8337V15.3596C17.8337 15.1213 17.9284 14.8928 18.097 14.7243C18.2655 14.5558 18.4942 14.4612 18.7325 14.4612C18.9709 14.4612 19.1996 14.5558 19.3681 14.7243C19.5367 14.8928 19.6314 15.1213 19.6314 15.3596V17.829H22.1018C22.34 17.829 22.5684 17.9236 22.7369 18.092C22.9054 18.2604 23 18.4888 23 18.7269C23 18.965 22.9054 19.1934 22.7369 19.3618C22.5684 19.5301 22.34 19.6247 22.1018 19.6247H19.6314V22.0941C19.6314 22.3323 19.5367 22.5606 19.3683 22.729C19.1998 22.8974 18.9713 22.992 18.7331 22.992C18.4949 22.992 18.2664 22.8974 18.098 22.729C17.9295 22.5606 17.8337 22.3323 17.8337 22.0941ZM2.72566 22.992C2.31982 22.9915 1.91929 22.9005 1.55307 22.7256C1.18686 22.5508 0.86427 22.2966 0.608776 21.9814C0.353281 21.6662 0.171287 21.298 0.0761161 20.9037C-0.0190545 20.5093 -0.0250638 20.0987 0.0585667 19.7018C0.47805 17.6956 1.41841 15.8351 2.78518 14.3073C4.15196 12.7794 5.89701 11.6381 7.84489 10.998C6.81721 10.2301 6.05756 9.15826 5.67354 7.93452C5.28952 6.71078 5.30062 5.39725 5.70541 4.18022C6.11019 2.96318 6.88811 1.90443 7.92871 1.15411C8.9693 0.403794 10.2198 0 11.5029 0C12.786 0 14.0365 0.403794 15.0771 1.15411C16.1177 1.90443 16.8954 2.96318 17.3002 4.18022C17.705 5.39725 17.7163 6.71078 17.3322 7.93452C16.9482 9.15826 16.1884 10.2301 15.1607 10.998C15.6218 11.1513 16.0731 11.3326 16.5122 11.5406C16.7185 11.6482 16.8751 11.8314 16.9491 12.0519C17.0231 12.2725 17.0087 12.513 16.909 12.7232C16.8092 12.9333 16.6319 13.0966 16.4142 13.1788C16.1965 13.2609 15.9554 13.2556 15.7416 13.1639C14.4901 12.5677 13.1263 12.244 11.7403 12.2143C11.6609 12.2143 11.5804 12.2143 11.4999 12.2143C11.4194 12.2143 11.34 12.2143 11.2618 12.2143C9.03324 12.2739 6.88962 13.0815 5.17612 14.5071C3.46261 15.9327 2.27909 17.8933 1.81603 20.0731C1.78721 20.2101 1.78932 20.3518 1.82235 20.4879C1.85539 20.6239 1.91839 20.7508 2.00683 20.8594C2.09276 20.9675 2.20214 21.0547 2.32665 21.1145C2.45116 21.1742 2.58755 21.2049 2.72566 21.2043H13.7911C14.0293 21.2043 14.2577 21.2989 14.4262 21.4673C14.5947 21.6356 14.6893 21.864 14.6893 22.1021C14.6893 22.3403 14.5947 22.5686 14.4262 22.737C14.2577 22.9054 14.0293 23 13.7911 23L2.72566 22.992ZM11.7197 10.4128C12.8435 10.3559 13.9004 9.86224 14.6653 9.03727C15.4302 8.2123 15.8424 7.12124 15.8139 5.99685C15.7854 4.87245 15.3184 3.80371 14.5127 3.01853C13.707 2.23334 12.6263 1.7939 11.5011 1.7939C10.3758 1.7939 9.29513 2.23334 8.48944 3.01853C7.68376 3.80371 7.21691 4.87245 7.1884 5.99685C7.15989 7.12124 7.57198 8.2123 8.33683 9.03727C9.10169 9.86224 10.1588 10.3559 11.2826 10.4128H11.4999H11.7197Z"
+                                fill="#D9D9D9" />
+                            </svg>
+
+                            {{ persons }}
+                          </span>
+                        </div>
+                        <div>
+                          <button (click)="increase()">+</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-------------------------------->
+                </div>
+
+                <div class="d-flex btn-content justify-content-center align-items-end mt-2">
+                  <div class="">
+                    <!-- Input -->
+                    <a class="text-capitalize submit" (click)="seePrice()">See Price</a>
+
+                    <!-- End Input -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Checkbox -->
+          </div>
+        </div>
+      </section>
+      <!-- Nav Classic -->
+      <section *ngIf="activeSection === 'section1'">
+        <div class="card border-0 tab-shadow px-1">
+          <div class="card-body" style="padding: 12px">
+            <div>
+              <div class="d-flex flex-column">
+                <div class="d-flex flex-column gap-3">
+
+                  <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                    <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                      style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                      <span class="d-flex align-items-center">
+                        <i style="color: #0057FF; margin-right: 0.5rem; margin-left: 0.5rem;"
+                          class="fa-solid fa-location-dot"></i>
+                        {{ selectedFromName || 'From' }}
+                      </span>
+                      <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                    style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+                      <!-- Search input for the first dropdown -->
+                      <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                        <input type="text" class="form-control" name="searchFrom" placeholder="Search..."
+                          [(ngModel)]="searchFrom" (input)="filterFromOptions()" style="margin: 5px; width: 95%;" />
+                      </li>
+                      <!-- Show filtered airports -->
+                      <li *ngFor="let airport of filteredFromAirports" (click)="selectFromOption(airport)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item">{{ airport?.name }}</a>
+                      </li>
+                      <!-- Show filtered hotels -->
+                      <li *ngFor="let hotel of filteredFromHotels" (click)="selectFromOption(hotel)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item">{{ hotel.title }}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+
+                  <div class="mb-4 mb-lg-0 dropdown" style="position: relative;">
+                    <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                      style="width: 100%; background-color: transparent !important; color:#3b444f; border-color: #e3e5e7 !important; padding-right: 2rem;">
+                      <span class="d-flex align-items-center">
+                        <i style="color: #0057FF; margin-right: 0.5rem; margin-left: 0.5rem;"
+                          class="fa-solid fa-location-dot"></i>
+                        {{ selectedOptionName || 'To' }}
+                      </span>
+                      <span class="dropdown-toggle-icon" style="position: absolute; right: 10px;"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                    style="width: 100%; max-height: 200px; overflow-y: auto; padding: 0;">
+                      <!-- Search input for the second dropdown -->
+                      <li style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                        <input type="text" class="form-control" name="searchTo" placeholder="Search..."
+                          [(ngModel)]="searchTo" (input)="filterToOptions()" style="margin: 5px; width: 95%;" />
+                      </li>
+                      <!-- Show filtered To options -->
+                      <li *ngFor="let option of filteredToOptions" (click)="selectOption(option)"
+                        style="cursor: pointer;">
+                        <a class="dropdown-item">{{ option?.name || option.title }}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+
+
+                  <div class="mb-4 mb-lg-0">
+                    <!-- Input -->
+                    <div id="datepickerWrapperFromOne d-flex" class="u-datepicker input-group">
+
+                      <p-calendar [(ngModel)]="date" [showIcon]="true" [iconDisplay]="'input'"
+                        inputId="departureCalendar" [showTime]="false" [dateFormat]="'yy-mm-dd'"
+                        [minDate]="minSelectableDate" (onSelect)="updateMinReturnDate()" placeholder="Departure"
+                        class="custom-calendar"[readonlyInput]="true">
+                        >
+                      </p-calendar>
+
+
+                    </div>
+                    <!-- End Input -->
+                  </div>
+
+
+                  <div class="mb-4 mb-lg-0">
+
+                    <p-calendar [(ngModel)]="returnDate" [showIcon]="true" [iconDisplay]="'input'"
+                      inputId="returnCalendar" [showTime]="false" [dateFormat]="'yy-mm-dd'" [minDate]="minReturnDate"
+                      placeholder="Return" class="custom-calendar"  [readonlyInput]="true">
+                    </p-calendar>
+                  </div>
+
+
+
+
+
+                  <!----------------------------------->
+                  <div class="m-auto">
+                    <div class="persons">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <button (click)="decrease()">-</button>
+
+                        </div>
+                        <div>
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"
+                              fill="none">
+                              <path
+                                d="M17.8337 22.0941V19.6247H15.3632C15.125 19.6247 14.8965 19.5301 14.728 19.3618C14.5596 19.1934 14.4649 18.965 14.4649 18.7269C14.4649 18.4888 14.5596 18.2604 14.728 18.092C14.8965 17.9236 15.125 17.829 15.3632 17.829H17.8337V15.3596C17.8337 15.1213 17.9284 14.8928 18.097 14.7243C18.2655 14.5558 18.4942 14.4612 18.7325 14.4612C18.9709 14.4612 19.1996 14.5558 19.3681 14.7243C19.5367 14.8928 19.6314 15.1213 19.6314 15.3596V17.829H22.1018C22.34 17.829 22.5684 17.9236 22.7369 18.092C22.9054 18.2604 23 18.4888 23 18.7269C23 18.965 22.9054 19.1934 22.7369 19.3618C22.5684 19.5301 22.34 19.6247 22.1018 19.6247H19.6314V22.0941C19.6314 22.3323 19.5367 22.5606 19.3683 22.729C19.1998 22.8974 18.9713 22.992 18.7331 22.992C18.4949 22.992 18.2664 22.8974 18.098 22.729C17.9295 22.5606 17.8337 22.3323 17.8337 22.0941ZM2.72566 22.992C2.31982 22.9915 1.91929 22.9005 1.55307 22.7256C1.18686 22.5508 0.86427 22.2966 0.608776 21.9814C0.353281 21.6662 0.171287 21.298 0.0761161 20.9037C-0.0190545 20.5093 -0.0250638 20.0987 0.0585667 19.7018C0.47805 17.6956 1.41841 15.8351 2.78518 14.3073C4.15196 12.7794 5.89701 11.6381 7.84489 10.998C6.81721 10.2301 6.05756 9.15826 5.67354 7.93452C5.28952 6.71078 5.30062 5.39725 5.70541 4.18022C6.11019 2.96318 6.88811 1.90443 7.92871 1.15411C8.9693 0.403794 10.2198 0 11.5029 0C12.786 0 14.0365 0.403794 15.0771 1.15411C16.1177 1.90443 16.8954 2.96318 17.3002 4.18022C17.705 5.39725 17.7163 6.71078 17.3322 7.93452C16.9482 9.15826 16.1884 10.2301 15.1607 10.998C15.6218 11.1513 16.0731 11.3326 16.5122 11.5406C16.7185 11.6482 16.8751 11.8314 16.9491 12.0519C17.0231 12.2725 17.0087 12.513 16.909 12.7232C16.8092 12.9333 16.6319 13.0966 16.4142 13.1788C16.1965 13.2609 15.9554 13.2556 15.7416 13.1639C14.4901 12.5677 13.1263 12.244 11.7403 12.2143C11.6609 12.2143 11.5804 12.2143 11.4999 12.2143C11.4194 12.2143 11.34 12.2143 11.2618 12.2143C9.03324 12.2739 6.88962 13.0815 5.17612 14.5071C3.46261 15.9327 2.27909 17.8933 1.81603 20.0731C1.78721 20.2101 1.78932 20.3518 1.82235 20.4879C1.85539 20.6239 1.91839 20.7508 2.00683 20.8594C2.09276 20.9675 2.20214 21.0547 2.32665 21.1145C2.45116 21.1742 2.58755 21.2049 2.72566 21.2043H13.7911C14.0293 21.2043 14.2577 21.2989 14.4262 21.4673C14.5947 21.6356 14.6893 21.864 14.6893 22.1021C14.6893 22.3403 14.5947 22.5686 14.4262 22.737C14.2577 22.9054 14.0293 23 13.7911 23L2.72566 22.992ZM11.7197 10.4128C12.8435 10.3559 13.9004 9.86224 14.6653 9.03727C15.4302 8.2123 15.8424 7.12124 15.8139 5.99685C15.7854 4.87245 15.3184 3.80371 14.5127 3.01853C13.707 2.23334 12.6263 1.7939 11.5011 1.7939C10.3758 1.7939 9.29513 2.23334 8.48944 3.01853C7.68376 3.80371 7.21691 4.87245 7.1884 5.99685C7.15989 7.12124 7.57198 8.2123 8.33683 9.03727C9.10169 9.86224 10.1588 10.3559 11.2826 10.4128H11.4999H11.7197Z"
+                                fill="#D9D9D9" />
+                            </svg>
+
+                            {{ persons }}
+                          </span>
+                        </div>
+                        <div>
+                          <button (click)="increase()">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-------------------------------->
+                </div>
+
+                <div class="d-flex btn-content justify-content-center align-items-end mt-2">
+                  <div class="">
+                    <!-- Input -->
+                    <a class="text-capitalize submit" (click)="seePrice()">See Price</a>
+
+                    <!-- End Input -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Checkbox -->
+          </div>
+        </div>
+      </section>
+
+      <!---------------->
+
+      <!-- Nav Classic -->
+    </div>
+    <!---------------------------------------------->
+  </main>
+  <section style="margin-top: 80px">
+    <div class="container activity">
+      <div class="row d-md-flex d-none">
+        <div *ngFor="let feature of transferDetails?.features.slice(0,4)" class="col-md-3 text-center">
+          <div class="image">
+            <img [src]="feature.icon" [alt]="getImageName(feature.icon)" style="width: 50px; height: 50px" />
+          </div>
+          <div class="caption text-center">
+            <h4 class="pt-4">{{ feature?.title }}</h4>
+            <p style="color:#3b444f; font-size: 13px;">
+              {{ feature?.desc }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Owl Carousel for Mobile Only -->
+      <owl-carousel-o class="d-block d-md-none feature-carousel mb-5" [options]="carouselOptions2">
+        <ng-container *ngFor="let feature of transferDetails?.features">
+          <ng-template carouselSlide>
+            <div class="text-center">
+              <div class="image">
+                <img [src]="feature.icon" [alt]="getImageName(feature.icon)" style="width: 29px; height: 29px" />
+              </div>
+              <div class="caption text-center">
+                <h4 class="pt-4">{{ feature?.title }}</h4>
+                <p class="text-wrap" style="color:#3b444f; font-size: 13px;
+                 max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  padding: 10px;
+                  ">
+                  {{ feature?.desc }}
+                </p>
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+
+      <div class="row mt-5">
+        <h3 class="pb-2">Transfer service includes</h3>
+        <div class="col-lg-6">
+          <div class="position-relative layer-img">
+            <img src={{transferDetails?.includeimage}} />
+            <div class="layer">
+              <p>
+                {{transferDetails?.includetext}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <ul class="list-unstyled ps-4 mt-3">
+            <li *ngFor="let inc of transferDetails?.includes" class="mb-4 d-flex">
+              <!-- <img
+                src="../../../../../../assets/custom/Activity/healthicons_group-discussion-meeting-outline.png"
+                class="pe-3"
+                alt="img"
+              /> -->
+
+              <img [src]="inc?.icon" [alt]="getImageName(inc?.icon)" style="width: 40px; height: 40px" class="me-3" />
+              <div style="margin-top:0.5rem">
+                {{ inc.desc }}
+              </div>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="reviews gradient-overlay-half-black-gradient"
+    [style.background]="'url(' + transferDetails?.pepolesayimage?.[0] + ') no-repeat center center / cover'">
+    <div class="content container">
+      <div class="align-self-start">
+        <h5>What People Say</h5>
+      </div>
+      <div class="d-flex flex-wrap flex-md-nowrap gap-3 w-100">
+        <div *ngFor="let review of topTwoReviews" class="layer-card col-12 col-md-6">
+          <h5>{{ review?.name }}</h5>
+          <span>Client</span>
+          <p>{{ review?.comment }}</p>
+
+          <div class="d-flex align-items-center font-size-16 text-gray-1 gap-3">
+            <div>
+              <i *ngFor="let star of [1, 2, 3, 4, 5]"
+                class="fa-solid fa-star"
+                [ngClass]="{ 'fa-star-filled': star <= review?.rate, 'yellow-star': star <= review?.rate }">
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="margin-top: 38px">
+    <div class="container">
+      <div class="d-xl-flex justify-content-between w-100">
+        <div class="faq-title">
+          <h3 class="mb-3 pb-1 faq">Frequently Asked Questions</h3>
+          <div class="text-center">
+            <h4 class="mb-3 pb-1">Find your answer's</h4>
+          </div>
+        </div>
+        <div class="faq-question">
+          <mat-accordion *ngFor="let q of transferDetails?.Faqs">
+            <mat-expansion-panel #panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <div class="me-5 faq">
+                    <i *ngIf="panel.expanded" class="fa-solid fa-minus"></i>
+                    <i *ngIf="!panel.expanded" class="fa-solid fa-plus"></i>
+                  </div>
+
+                  {{ q.question }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p style="padding-left: 55px; text-align: justify">
+                {{ q.desc }}
+              </p>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+  <section class="mt-4" id="review">
+    <div class="container">
+
+      <div class="py-4">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between mb-4"
+        >
+          <div>
+            <h5
+              class="font-size-21 fw-bold text-dark mb-2 mb-md-6"
+              style="cursor: pointer"
+            >
+              Write a Review
+              <i
+                class="fa-solid fa-star text-black-50"
+                (mouseenter)="onStarHover(1)"
+                (click)="onStarClick(1)"
+                [ngClass]="{ selected: selectedStar >= 1 }"
+              ></i>
+              <i
+                class="fa-solid fa-star text-black-50"
+                (mouseenter)="onStarHover(2)"
+                (click)="onStarClick(2)"
+                [ngClass]="{ selected: selectedStar >= 2 }"
+              ></i>
+              <i
+                class="fa-solid fa-star text-black-50"
+                (mouseenter)="onStarHover(3)"
+                (click)="onStarClick(3)"
+                [ngClass]="{ selected: selectedStar >= 3 }"
+              ></i>
+              <i
+                class="fa-solid fa-star text-black-50"
+                (mouseenter)="onStarHover(4)"
+                (click)="onStarClick(4)"
+                [ngClass]="{ selected: selectedStar >= 4 }"
+              ></i>
+              <i
+                class="fa-solid fa-star text-black-50"
+                (mouseenter)="onStarHover(5)"
+                (click)="onStarClick(5)"
+                [ngClass]="{ selected: selectedStar >= 5 }"
+              ></i>
+            </h5>
+          </div>
+
+        </div>
+        <form class="js-validate" novalidate="novalidate">
+          <div class="row mb-5 mb-lg-0">
+            <div class="col-sm-12 mb-5">
+              <div class="js-form-message">
+                <div class="input-group">
+                  <textarea
+                    class="form-control"
+                    rows="6"
+                    cols="77"
+                    name="text"
+                    placeholder="Hi there, I would like to ..."
+                    [(ngModel)]="comment"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <!-- End Input -->
+            <div
+              class="col d-flex justify-content-center justify-content-lg-start"
+            >
+              <button
+                type="submit"
+                class="btn rounded-xs btnReview text-white p-2 height-51 width-190"
+                (click)="addReview()"
+              >
+                Submit Review
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="border-top py-4" style="height: auto;">
+        <!-- <h5 class="font-size-21 font-weight-bold text-dark mb-8">
+          Showing {{reviews?.length}} verified guest comments
+
+        </h5> -->
+        <app-clients></app-clients>
+
+        <!-- <div class="container review-carousel">
+
+           <owl-carousel-o [options]="carouselOptions">
+            <ng-container *ngFor="let review of reviews" class="m-auto">
+              <ng-template carouselSlide>
+
+                <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4">
+                  <div class="">
+                    <a class="d-block" href="#">
+                      <img class="img-fluid mb-3 mb-md-0 rounded-circle" style="width: 75%; margin: auto;"
+                        [src]="review.avatar" [alt]="getImageName(review.avatar)" />
+                    </a>
+                  </div>
+                  <div class="media-body text-center text-md-left">
+                    <div class="mb-4">
+
+                      <h6 class="font-weight-bold text-gray-3">
+                        <a href="#">
+                          {{review?.name}}
+                        </a>
+                      </h6>
+                      <div class="font-weight-normal font-size-14 text-gray-9 mb-2">
+                        {{review.date | date:'medium'}}
+                      </div>
+                      <div class="d-flex align-items-center flex-column flex-md-row mb-2">
+                        <div>
+                          <button type="button"
+                            class="btn btn-xs btn-primary rounded-xs font-size-14 py-1 px-2 mr-2 mb-2 mb-md-0">
+                            {{review.rate}} / 5
+                          </button>
+                        </div>
+                        <div class="comment-container">
+                          <span class="font-weight-bold font-italic text-gray-3">{{review?.comment}}</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+
+
+        </div> -->
+
+
+      </div>
+    </div>
+  </section>
+</main>

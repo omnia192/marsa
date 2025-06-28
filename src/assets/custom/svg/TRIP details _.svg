@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="265" height="34" viewBox="0 0 265 34">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 41.667px;
+        fill: #ffca0e;
+        text-anchor: middle;
+        font-family: Poppins;
+        font-weight: 600;
+      }
+    </style>
+  </defs>
+  <text id="TRIP_details_:" data-name="TRIP details :" class="cls-1" x="132.954" y="33.101"><tspan x="132.954">TRIP details :</tspan></text>
+</svg>

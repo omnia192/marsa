@@ -1,0 +1,237 @@
+// Define common styles
+$font-lato: Lato;
+$color-primary: rgba(41, 124, 187, 1);
+$color-secondary: rgba(103, 116, 124, 1);
+$color-heading: #3B444F;
+$color-highlight: #297CBB;
+$color-warning: #FF681A;
+
+// Common styles for text elements
+@mixin text-styles {
+  font-family: $font-lato;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0em;
+}
+
+// Common styles for headings
+@mixin heading-styles {
+  @include text-styles;
+  font-weight: 700;
+}
+
+// Define styles for specific elements
+h5, h3 {
+  @include heading-styles;
+  font-size: 21px;
+}
+
+a {
+  @include text-styles;
+  font-size: 14px;
+  color: $color-primary;
+}
+
+li span, p {
+  @include text-styles;
+  font-size: 16px;
+  color: $color-secondary;
+}
+
+h3 {
+  text-align: center;
+  color: $color-primary;
+}
+
+.my-tours-work {
+  h5 {
+    @include heading-styles;
+    font-size: 30px;
+    color: $color-heading;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 40px;
+      height: 2px;
+      background-color: $color-highlight;
+      position: absolute;
+      bottom: -6px;
+      left: 40%;
+    }
+  }
+}
+
+.payment {
+  width: auto;
+  padding: 10px 15px;
+  border: 1px solid rgba(13, 177, 255, 1);
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: rgba(13, 177, 255, 1);
+  background-color: rgba(13, 177, 255, 1);
+  border-radius: 10px;
+}
+
+.content{
+  margin-top: 150px;
+}
+.fa-star {
+  color: #C6C7C6;
+  font-size: 15px;
+}
+
+.btnReview {
+  background-color: #0DB1FF;
+}
+
+.card-body {
+  h6, h5 {
+    @include heading-styles;
+    color: $color-highlight;
+    font-size: 17px;
+  }
+
+  .review {
+    @include text-styles;
+    font-size: 13px;
+    color: #FFF;
+    background-color: $color-warning;
+    border-radius: 5px;
+    width: 59px;
+    height: 22px;
+    padding: 7px;
+  }
+}
+/*********************************/
+@media screen and (max-width: 1200px){
+  .content{
+    margin-top: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .responsive-text {
+      font-size: 16px !important;
+      line-height: 22px !important;
+  }
+}
+
+.map-container {
+  position: relative;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-box {
+  position: relative;
+  z-index: 1001;
+
+  .input-group {
+    .input-group-append {
+      .btn {
+        border-left: none;
+        background-color: #f8f9fa;
+        
+        &:hover {
+          background-color: #e9ecef;
+        }
+        
+        i.fa-spinner {
+          color: #007bff;
+        }
+      }
+    }
+  }
+
+  .search-results {
+    position: absolute;
+    z-index: 1002;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-top: 2px;
+
+    .list-group-item {
+      cursor: pointer;
+      padding: 8px 15px;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .alert-info {
+    font-size: 14px;
+    padding: 8px 12px;
+    margin-top: 5px;
+    border-radius: 4px;
+  }
+}
+
+#googleMap {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  z-index: 1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+::ng-deep {
+  .leaflet-container {
+    height: 400px;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .leaflet-control-container {
+    z-index: 2;
+  }
+}
+
+// تحسين مظهر حقول الإدخال readonly
+.form-control[readonly] {
+  cursor: pointer;
+  background-color: #f8f9fa;
+  
+  &:hover {
+    background-color: #e9ecef;
+  }
+  
+  &:focus {
+    background-color: #fff;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+}
+
+// تحسين مظهر أزرار المودال
+.modal-footer {
+  .btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  }
+}

@@ -1,0 +1,350 @@
+<header
+  id="header"
+  class="u-header u-header--abs-top-xl u-header--white-nav-links-xl u-header--bg-transparent-xl u-header--show-hide-xl"
+  data-header-fix-moment="500"
+  data-header-fix-effect="slide"
+>
+  <div class="u-header__section u-header__shadow-on-show-hide py-4 py-xl-0">
+    <!-- Topbar -->
+    <div
+      class="container-fluid u-header__hide-content u-header__topbar u-header__topbar-lg border-bottom border-color-white d-none d-lg-block"
+    >
+      <div class="d-flex align-items-center">
+        <ul class="list-inline u-header__topbar-nav-divider mb-0">
+          <li class="list-inline-item mr-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M5.733 2.04281C6.95 0.832808 8.954 1.04781 9.973 2.40981L11.235 4.09381C12.065 5.20181 11.991 6.74981 11.006 7.72881L10.768 7.96681C10.7411 8.06673 10.7384 8.17162 10.76 8.27281C10.823 8.68081 11.164 9.54481 12.592 10.9648C14.02 12.3848 14.89 12.7248 15.304 12.7888C15.4082 12.811 15.5162 12.8079 15.619 12.7798L16.027 12.3738C16.903 11.5038 18.247 11.3408 19.331 11.9298L21.241 12.9698C22.878 13.8578 23.291 16.0818 21.951 17.4148L20.53 18.8268C20.082 19.2718 19.48 19.6428 18.746 19.7118C16.936 19.8808 12.719 19.6648 8.286 15.2578C4.149 11.1438 3.355 7.55581 3.254 5.78781C3.204 4.89381 3.626 4.13781 4.164 3.60381L5.733 2.04281ZM8.773 3.30881C8.266 2.63181 7.322 2.57781 6.79 3.10681L5.22 4.66681C4.89 4.99481 4.732 5.35681 4.752 5.70281C4.832 7.10781 5.472 10.3448 9.344 14.1948C13.406 18.2328 17.157 18.3538 18.607 18.2178C18.903 18.1908 19.197 18.0368 19.472 17.7638L20.892 16.3508C21.47 15.7768 21.343 14.7308 20.525 14.2868L18.615 13.2478C18.087 12.9618 17.469 13.0558 17.085 13.4378L16.63 13.8908L16.1 13.3588C16.63 13.8908 16.629 13.8918 16.628 13.8918L16.627 13.8938L16.624 13.8968L16.617 13.9028L16.602 13.9168C16.5595 13.9556 16.514 13.9911 16.466 14.0228C16.386 14.0758 16.28 14.1348 16.147 14.1838C15.877 14.2848 15.519 14.3388 15.077 14.2708C14.21 14.1378 13.061 13.5468 11.534 12.0288C10.008 10.5108 9.412 9.36881 9.278 8.50281C9.209 8.06081 9.264 7.70281 9.366 7.43281C9.42256 7.28107 9.5029 7.1393 9.604 7.01281L9.636 6.97781L9.65 6.96281L9.656 6.95681L9.659 6.95381L9.661 6.95181L9.949 6.66581C10.377 6.23881 10.437 5.53181 10.034 4.99281L8.773 3.30881Z"
+                fill="white"
+              />
+            </svg>
+            <a
+              style="cursor: pointer"
+              (click)="contactWhatsapp()"
+              class="u-header__navbar-link pl-1"
+            >
+              {{ social?.Call ? social?.Call : "+201011117381" }}</a
+            >
+          </li>
+          <li class="list-inline-item mr-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ml-3"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M7 9L12 12.5L17 9"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 17V7C2 6.46957 2.21071 5.96086 2.58579 5.58579C2.96086 5.21071 3.46957 5 4 5H20C20.5304 5 21.0391 5.21071 21.4142 5.58579C21.7893 5.96086 22 6.46957 22 7V17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17Z"
+                stroke="white"
+                stroke-width="1.5"
+              />
+            </svg>
+            <a
+              style="cursor: pointer"
+              (click)="call('mail')"
+              class="u-header__navbar-link pl-1"
+            >
+              {{ social?.Mail ? social?.Mail : "info@marsawaves.com" }}<br
+            /></a>
+          </li>
+        </ul>
+        <div class="ml-auto d-flex align-items-center">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <a
+                class="btn btn-sm btn-icon btn-pill btn-bg-primary"
+                [href]="youtubeLink"
+                target="_blank"
+              >
+                <span
+                  ><img
+                    src="assets/custom/icons/Home page icons/video.svg"
+                    alt="video"
+                    loading="lazy"
+                /></span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a
+                class="btn btn-sm btn-icon btn-pill btn-bg-primary"
+                [href]="social?.tripAdvisor"
+                target="_blank"
+              >
+                <span
+                  ><img
+                    src="assets/custom/icons/Home page icons/navIconDark.svg"
+                    alt="navIconDark"
+                    loading="lazy"
+                /></span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a
+                class="btn btn-sm btn-icon btn-pill btn-bg-primary"
+                [href]="social?.facebook"
+                href="https://www.facebook.com/marsawaves/"
+                target="_blank"
+              >
+                <span
+                  ><img
+                    src="assets/custom/icons/Home page icons/facebook.svg"
+                    alt="facebook"
+                    loading="lazy"
+                /></span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a
+                class="btn btn-sm btn-icon btn-pill btn-bg-primary"
+                [href]="social?.instgram"
+                target="_blank"
+              >
+                <span
+                  ><img src="assets/custom/icons/Home page icons/instagramDark.svg" alt="IMG" loading="lazy"
+                /></span>
+              </a>
+            </li>
+          </ul>
+          <div
+            class="position-relative u-header__login-form dropdown-connector-xl"
+            *ngIf="!isLogin"
+          >
+            <a
+              id="signUpDropdownInvoker"
+              class="d-flex align-items-center text-white py-3"
+              data-unfold-event="click"
+              data-unfold-target="#signUpDropdown"
+              data-unfold-type="css-animation"
+              data-unfold-duration="300"
+              data-unfold-delay="300"
+              data-unfold-hide-on-scroll="true"
+              data-unfold-animation-in="slideInUp"
+              data-unfold-animation-out="fadeOut"
+              (click)="toggleDropdown()"
+            >
+              <img
+                src="assets/icons/user-light.svg"
+                class="mx-3"
+                loading="lazy"
+                alt="Sign in or Register"
+              />
+              <span
+                class="d-inline-block font-size-14 mr-1"
+                style="padding-right: 7px"
+              >
+                Sign in or Register
+              </span>
+            </a>
+            <div
+              id="signUpDropdown"
+              class="dropdown-menu dropdown-unfold dropdown-menu-right py-0 mt-0"
+              [ngClass]="{
+                'u-unfold--css-animation slideInUp animation': signClick
+              }"
+              aria-labelledby="signUpDropdownInvoker"
+              style="min-width: 500px"
+            >
+              <div class="card rounded-xs">
+                <app-login
+                  *ngIf="registerBehavoiur === 'login'"
+                  (close)="toggleLoginForm()"
+                ></app-login>
+                <app-register
+                  *ngIf="registerBehavoiur === 'signup'"
+                  (close)="toggleLoginForm()"
+                ></app-register>
+              </div>
+            </div>
+          </div>
+
+          <li
+            *ngIf="isLogin"
+            class="header-actions d-flex hide-mobile align-items-center justify-content-center"
+          >
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="assets/icons/login1.svg"
+                alt="login"
+                width="25px"
+                height="25px"
+                class="w-20 px-1"
+                loading="lazy"
+              />
+            </a>
+            <ul class="dropdown-menu menu-login">
+              <li
+                class="menu-item"
+                style="border-bottom: 1px solid #eee"
+                routerLink="/{{ translate.currentLang }}/userDashboard"
+              >
+              Hello {{ userDetails?.name }}
+              </li>
+              <li
+                class="menu-item"
+                routerLink="/{{ translate.currentLang }}/userDashboard"
+              >
+                <img
+                  src="assets/icons/dashbourd.svg"
+                  alt="dashbourd"
+                  loading="lazy"
+                />
+
+                {{ "Profile" | translate }}
+              </li>
+              <li
+                class="menu-item"
+                routerLink="/{{ translate.currentLang }}/wishlist"
+              >
+                <img src="assets/icons/heart.svg" alt="heart" loading="lazy" />
+
+                {{ "Wishlist" | translate }}
+              </li>
+              <li
+                class="menu-item"
+                routerLink="/{{ translate.currentLang }}/booking"
+              >
+                <img
+                  src="assets/icons/booking.svg"
+                  alt="booking"
+                  loading="lazy"
+                />
+
+                {{ "Bookings" | translate }}
+              </li>
+              <li
+                class="menu-item"
+                routerLink="/{{ translate.currentLang }}/app-download"
+              >
+                <img
+                  src="assets/icons/downloadMobile.svg"
+                  alt="download Mobile"
+                  loading="lazy"
+                />
+
+                {{ "Download the APP" | translate }}
+              </li>
+
+              <li
+                class="menu-item"
+                (click)="callLogout()"
+                style="border-top: 1px solid #eee"
+              >
+                <i class="fa fa-sign-out"></i>
+
+                {{ "Sign Out" | translate }}
+              </li>
+            </ul>
+          </li>
+          <div
+            class="header-actions d-flex align-items-center justify-content-center"
+          >
+            <div class="lang">
+              <ng-select
+                #selectRef
+                [(ngModel)]="selectedLang"
+                [items]="languageOptions"
+                bindLabel="label"
+                bindValue="value"
+                [virtualScroll]="true"
+                (change)="changeLang()"
+                [clearable]="false"
+              >
+                <ng-template
+                  ng-option-tmp
+                  let-item="item"
+                  let-search="searchTerm"
+                >
+                  <img
+                    [src]="'assets/images/flags/' + item.flag"
+                    width="20"
+                    height="15"
+                    loading="lazy"
+                  />
+                  {{ item.label }}
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-navbar [isWhiteByDefault]="false" ></app-navbar>
+
+
+  </div>
+</header>
+
+
+<main id="content" >
+  <!-- ========== HERO ========== -->
+  <div
+  class="bg-img-hero-bottom gradient-overlay-half-black-gradient text-center"
+  [style.background]="'url(' + currentCoverImage + ')'"
+>
+  <!-- Info -->
+  <div class="caption" style="margin-bottom:150px ;">
+    <h1 style="padding-top:-50px !important ;">{{h1Text}}</h1>
+    <p>
+      {{pText}}
+    </p>
+  </div>
+  <!-- End Info -->
+  <div class="container quick-search-form d-none d-lg-block" style="margin-top:-45px ;">
+    <app-quick-search [changeStyle]="false"></app-quick-search>
+  </div>
+</div>
+
+
+  <div class="container d-block d-lg-none">
+    <app-quick-search [changeStyle]="true"></app-quick-search>
+    <!-- Nav Classic -->
+  </div>
+
+  <!-- ========== END HERO ========== -->
+
+  <app-destination></app-destination>
+  <app-package-edit></app-package-edit>
+  <app-trending></app-trending>
+  <app-upcoming></app-upcoming>
+  <app-booking-us></app-booking-us>
+  <app-application></app-application>
+  <app-clients></app-clients>
+</main>
+<ng-template
+  ng-option-tmp
+  let-item="item"
+  let-search="searchTerm"
+  (click)="selectRef.toggle()"
+>
+  <img
+    [src]="'assets/images/flags/' + item.flag"
+    width="20"
+    height="15"
+    loading="lazy"
+  />
+  {{ item.label }}
+</ng-template>

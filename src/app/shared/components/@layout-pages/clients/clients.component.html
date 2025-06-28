@@ -1,0 +1,47 @@
+<section style="margin-top: 70px;
+height:450px;
+margin-bottom: -73px;" class="reviews">
+
+    <div class="container mb-5">
+        <div class="title text-center " style="color: #004796;">
+            <h3 class="mb-5">Our Customer’s Reviews </h3>
+        </div>
+        <section class="myDestination pt-5  ">
+          <div class="my-destination-work">
+            <div class="my-destination-work">
+              <owl-carousel-o [options]="customOptions" class="my-destination client-review">
+                <ng-template carouselSlide *ngFor="let item of data?.SocialReview">
+                  <div class="card rounded-xs border-color-7 w-100">
+                    <div class="card-body w-100 review-card p-2" >
+
+                      <div class="dynamic-image-container">
+                        <a [href]="item.link" target="_blank">
+                          <img
+                          [src]="item.Reviwe"
+                          class="dynamic-review-img"
+                          (load)="adjustImageSize($event)"
+                          (error)="onImgError($event)">
+                        </a>
+
+                      </div>
+                    </div>
+                    <div class="card-img z-index-2 mb-3">
+                      <div class="ml-3">
+                        <img
+                          style="position: absolute; right: 0; top: -100px; background-color: white; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 1rem; width:85px; height: 85px;"
+                          class="img-fluid rounded-circle"
+                          (error)="onImgError($event)"
+                          [src]="item.from"
+                          [alt]="getImageName(item.from)"
+                          loading="lazy">
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </owl-carousel-o>
+            </div>
+          </div>
+        </section>
+    </div>
+
+</section>

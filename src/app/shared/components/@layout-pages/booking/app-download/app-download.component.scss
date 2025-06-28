@@ -1,0 +1,67 @@
+.container{
+    margin-top: 170px;
+}
+.app-download{
+    margin-top:38px;
+    h4{
+        color: #004796;
+        font-family: Poppins;
+        font-size: 60px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+    p{
+        color: #004796;
+        font-family: Poppins;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+}
+.images{
+    margin-top: 50px;
+}
+.boat{
+    border-radius: 40px;
+    background: #FFF;
+    box-shadow: 40px 34px 94px 0px rgba(30, 40, 68, 0.10);
+    padding: 18px 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+        border-radius: 40px;
+        height: auto;
+        display: inline-block;
+        width: 100%;
+    }
+}
+.google-play{
+    img{
+        transition: all 0.5s ease-in-out;
+        &:hover{
+            cursor: pointer;
+            transform: translateY(5px);
+        }
+    }
+}
+/****************************/
+@media screen and (max-width: 768px){
+    .app-download{
+        h4{
+            font-size: 50px;
+        }
+    }
+}
+@media screen and (max-width: 1200px){
+    .container{
+        margin-top: 20px;
+    }
+}
+@media screen and (min-width: 1800px){
+    .boat{
+        margin: 10px auto;
+    }
+}

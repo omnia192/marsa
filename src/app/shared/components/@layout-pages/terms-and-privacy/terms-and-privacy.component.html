@@ -1,0 +1,23 @@
+<section class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <ul class="nav">
+        <li
+          *ngFor="let tab of tabs"
+          class="nav-item"
+          [class.active]="tab.id === activeSection"
+          (click)="setActiveSection(tab.id)"
+        >
+          {{ tab.title }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-9">
+      <section *ngFor="let section of tabs">
+        <div *ngIf="activeSection === section?.id" class="content">
+          <p [innerHTML]="section?.desc"></p>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>

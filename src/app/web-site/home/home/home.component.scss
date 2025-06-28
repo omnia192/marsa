@@ -1,0 +1,458 @@
+.bg-img-hero-bottom {
+  position: relative;
+  overflow: hidden;
+}
+.nav-item a {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  white-space: nowrap;
+}
+.navbar {
+  background-color: transparent;
+}
+::placeholder {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  padding-top: 14px;
+  color: #5f5e5e;
+}
+
+.gradient-overlay-half-black-gradient::before {
+  opacity: 0.5 !important;
+}
+
+.nav-link {
+  color: #fff !important;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Poppins;
+}
+
+.search {
+  display: flex;
+  height: 100%;
+  top: 0%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 42%;
+  color: #fff !important;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  background: #0db1ff !important;
+  border-radius: 2px;
+}
+/************************************************/
+.bg-img-hero-bottom {
+  overflow: visible;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  /*height: 729px;*/
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .caption {
+    .trips {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      span {
+        color: #fff;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 41.667px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+    h1 {
+      color: var(--White, #fff);
+      font-family: Poppins;
+      font-size: 60px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    p {
+      color: #fff;
+      text-align: center;
+      font-family: Poppins;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.5px;
+    }
+  }
+}
+/*****************************/
+.right-popup {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  .right-popup-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: -4px -5px 4px 0px rgba(181, 181, 195, 0.46);
+    padding-left: 18px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    padding-top: 22px;
+  }
+  .marsa-name {
+    span:nth-of-type(1) {
+      color: #000;
+      text-align: center;
+      font-family: Poppins;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.45px;
+    }
+    .offer {
+      margin-top: 5px;
+      margin-bottom: 8px;
+      span {
+        color: #000;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.45px;
+      }
+    }
+  }
+  .close-icon {
+    margin-top: -25px;
+    display: inline-block;
+  }
+  .num {
+    color: rgba(0, 0, 0, 0.74);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.4px;
+  }
+  button {
+    color: #fff;
+    font-family: Lato;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: #0db1ff;
+    border: 1px solid #0db1ff;
+    width: 92.25px;
+    height: 36.5px;
+  }
+}
+.quick-search-form {
+  position: absolute;
+  top: 65%;
+  bottom: 50%;
+
+  //   left: 5%;
+  /*transform: translateY(-10%);*/
+}
+
+/*********************************************/
+@media screen and (max-width: 550px) {
+  .bg-img-hero-bottom {
+    background-size: 100%;
+    height: 192px !important;
+    .caption {
+      padding-top: 140px ;
+      h1 {
+        font-size: 20px;
+      }
+      p {
+        font-size: 14px;
+      }
+      .trips {
+        justify-content: center;
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .right-popup {
+    .right-popup-content {
+      margin: 10px auto;
+      margin-top: 1px;
+    }
+    .marsa-name {
+      span:nth-of-type(1) {
+        font-size: 14px;
+      }
+    }
+  }
+  .offer {
+    span {
+      font-size: 14px;
+    }
+  }
+
+}
+@media (max-width: 600px) {
+  .u-header__hide-content {
+    display: none !important;
+  }
+  .nav-item a {
+    border-bottom: 1px solid #cccccc;
+    border-right: 1px solid #eee;
+    color: #000 !important;
+    padding: 12px 0;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  #navbarSupportedContent ul {
+    position: relative;
+    top: 15px;
+    z-index: 1;
+  }
+  ul#navbarSupportedContent2 {
+    top: 0px !important;
+    li {
+      padding-left: 15px;
+    }
+  }
+
+  form {
+    left: 5px;
+    top: 5px;
+    margin-top: 10px;
+    width: 100% !important;
+
+    input {
+      width: 100% !important;
+    }
+
+    .search {
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-item a {
+    border-bottom: 1px solid #cccccc;
+    border-right: 1px solid #eee;
+    color: #000 !important;
+    padding: 12px 0;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  form {
+    margin-top: 10px;
+    width: 100% !important;
+
+    input {
+      width: 100% !important;
+    }
+
+    .search {
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+}
+
+@media screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+  .container {
+    bottom: 35% !important;
+    left: 2% !important;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+  .container {
+    bottom: 42% !important;
+    left: 2% !important;
+  }
+  .caption h1 {
+    font-size: 38px;
+  }
+
+  svg.ml-3 {
+    margin-left: 0 !important;
+  }
+}
+
+.lang {
+  select {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background: transparent;
+    margin: 10px;
+    color: #fff;
+    z-index: 99;
+
+    option {
+      background: #fff;
+      color: #000;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+      cursor: pointer;
+    }
+  }
+}
+/*********************************/
+@media screen and (max-width: 992px) {
+  .bg-img-hero-bottom {
+    height: fit-content;
+  }
+  .caption {
+    padding-top: 100px;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .quick-search-form {
+    position: absolute;
+    top: 55%;
+  }
+  .nav-item a {
+    color: #000 !important;
+  }
+
+  .bg-img-hero-bottom {
+    padding-bottom: 20px;
+    margin-bottom: 120px;
+  }
+}
+@media screen and (min-width: 1200.98px) and (max-width: 1370px) {
+  .quick-search-form {
+    position: absolute;
+    top: 60%;
+  }
+
+  .bg-img-hero-bottom {
+    padding-bottom: 20px;
+    margin-bottom: 100px;
+  }
+}
+/*************************************/
+::ng-deep {
+  .ng-select {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    color: #fff;
+    padding: 10px;
+  }
+
+  .ng-dropdown-panel .scroll-host {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    width: 130px;
+    height: 130px;
+    left: 0px;
+  }
+  .ng-dropdown-panel .scroll-host {
+    left: -60px;
+    top: 24px;
+  }
+  .ng-dropdown-panel .scrollable-content {
+    top: 8px;
+    left: 0;
+    width: 154px;
+    position: absolute;
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #000;
+    background: #fff;
+    padding: 3px;
+    position: relative;
+  }
+
+  .ng-dropdown-panel .scroll-host {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    text-align: center;
+    color: #000;
+    width: 136px;
+    height: 146px;
+    align-content: center;
+    border-radius: 3px;
+    top: 10px;
+    align-content: center;
+    align-items: center;
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+    margin: 0px;
+    border-bottom: 3px solid #eee;
+    left: -20px;
+  }
+}
+.menu-item {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  padding: 10px;
+  color: #000;
+  cursor: pointer;
+
+  i {
+    font-size: 16px;
+  }
+}

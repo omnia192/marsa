@@ -1,0 +1,307 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+
+<div class="container content">
+  <div class="row">
+    <div class="col-lg-4 col-xl-3 order-lg-1 width-md-50 top-margin">
+      <div class="navbar-expand-lg navbar-expand-lg-collapse-block">
+        <button
+          (click)="showFilter = !showFilter"
+          class="btn d-lg-none mb-5 p-0"
+          type="button"
+          data-toggle="collapse"
+          data-target="#sidebar"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i
+            class="far fa-caret-square-down text-primary font-size-20 card-btn-arrow ml-0"
+          ></i>
+          <span class="text-primary ml-2">Boats Filter</span>
+        </button>
+        <div class="pb-4 mb-2">
+          <div class="sidebar border border-color-1 rounded-xs">
+            <div class="p-4 mx-1 mb-1">
+              <!-- Input -->
+              <span
+                class="d-block text-gray-1 font-weight-normal mb-0 text-left"
+                >Destination</span
+              >
+              <div class="mb-4">
+                <div
+                  class="input-group border-bottom border-width-2 border-color-1"
+                >
+                  <img
+                    src="/assets/custom/Activity/location.svg"
+                    class="me-2"
+                    alt="loation"
+                  />
+                  <select
+                    [(ngModel)]="place_id"
+                    (change)="searchDestination($event)"
+                    class="form-select border-0 border-bottom"
+                    aria-label="Select example"
+                  >
+                    <option
+                      class="input-field"
+                      selected
+                      disabled
+                      [value]="null"
+                      hidden
+                    >
+                      Where are you going?
+                    </option>
+                    <option
+                      *ngFor="let dist of destination"
+                      [value]="dist.id"
+                    >
+                      {{ dist.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+
+              <!-- <div class="col dropdown-custom px-0 mb-5">
+             
+                <span
+                  class="d-block text-gray-1 text-left font-weight-normal mb-2">Trip Type</span>
+                <div
+                  class="flex-horizontal-center border-bottom border-width-2 border-color-1 pb-2"
+                >
+                  <img
+                    src="assets/custom/Activity/booking.svg"
+                    class="me-2"
+                    alt="boking"
+                  />
+                  <select
+                    class="form-select js-select selectpicker dropdown-select bootstrap-select__custom-nav truncate-select"
+                    (change)="searchByType($event)"
+                  >
+                    <option [value]="null" selected>All</option>
+                    <option *ngFor="let item of types" [value]="item.id">
+                      {{ item.type }}
+                    </option>
+                  </select>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div id="sidebar" *ngIf="showFilter || !isMobile">
+          <div class="mb-6 w-100">
+
+
+
+            <div class="sidenav border border-color-8 rounded-xs">
+              <!-- Accordiaon -->
+
+              <div
+                id="priceCartAccordion"
+                class="accordion rounded shadow-none"
+              >
+                <div class="border-0">
+                  <div class="card-collapse" id="priceCardHeadingOne">
+                    <h3 class="mb-0">
+                      <button
+                        type="button"
+                        class="btn btn-link btn-block card-btn py-2 px-5 text-lh-3 collapsed"
+                        data-toggle="collapse"
+                        data-target="#priceCardOne"
+                        aria-expanded="false"
+                        aria-controls="priceCardOne"
+                      >
+                        <span class="row align-items-center">
+                          <span class="col-12">
+                            <span
+                              class="d-block font-size-lg-15 font-size-17 font-weight-bold text-dark"
+                              >Price Range ($)</span
+                            >
+                          </span>
+                        </span>
+                      </button>
+                    </h3>
+                  </div>
+                <div id="shopCardOne" class="collapse show" aria-labelledby="shopCardHeadingOne"
+                    data-parent="#shopCartAccordion">
+                    <div class="card-body pt-0 px-5">
+                      <div class="pb-3 mb-1 d-flex text-lh-1">
+                        <span>$</span>
+                        <span id="rangeSliderExample3MinResult" class="">{{
+                          min_priceChoosen ? min_priceChoosen : min_price
+                          }}</span>
+                        <span class="mx-0dot5"> — </span>
+                        <span>$</span>
+                        <span id="rangeSliderExample3MaxResult" class="">{{
+                          max_priceChoosen ? max_priceChoosen : max_price
+                          }}</span>
+                      </div>
+                      <mat-slider
+                        class="w-100"
+                        [min]="min_price"
+                        [max]="max_price"
+                        step="1"
+                        thumbLabel
+                      >
+                        <input
+                          (input)="setMinPrice($event)"
+                          [(ngModel)]="min_priceChoosen"
+                          matSliderStartThumb
+                        />
+                        <input
+                          (input)="setMaxPrice($event)"
+                          [(ngModel)]="max_priceChoosen"
+                          matSliderEndThumb
+                        />
+                      </mat-slider>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                id="shopCartAccordion"
+                class="accordion rounded shadow-none p-4"
+              >
+                <div class="border-0">
+                  <h5 class="heading">Guest Rating</h5>
+                  <div class="btns d-flex gap-1 justify-content-center mb-5">
+                    <button
+                      (click)="setRate(2)"
+                      id="btn-2"
+                      (click)="(search)"
+                      class="btn active-rate"
+                    >
+                      2+
+                    </button>
+                    <button (click)="setRate(3)" id="btn-3" class="btn">
+                      3+
+                    </button>
+                    <button (click)="setRate(4)" id="btn-4" class="btn">
+                      4+
+                    </button>
+                    <button (click)="setRate(5)" id="btn-5" class="btn">
+                      5
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body pt-0 mt-1 px-5">
+                <button
+                  (click)="clearSelection()"
+                  class="nav-link active"
+                  id="pills-marsa-trending-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-allActivity"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-marstrending"
+                  style="
+                    background-color: #008ccf;
+                    border: none;
+                    color: white !important;
+                  "
+                  aria-selected="true"
+                >
+                  Clear Selected
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 order-md-1 order-lg-2">
+      <!-- Activity Title -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="font-size-21 mb-0 text-lh-1" style="font-weight: 700">
+        	Private Boats : {{ boats?.data?.length }} boats found
+        </h3>
+      </div>
+      <!-- End Activity Title -->
+
+      <ul
+        class="nav nav-pills mb-3 d-flex justify-content-between flex-nowrap border border-radius-3 m-auto tab-nav align-items-center py-2 px-0"
+        id="pills-tab"
+        role="tablist"
+        style="padding-left: 2px !important"
+      >
+        <li
+          class="nav-item d-flex align-items-center flex-shrink-0 flex-xl-shrink-1"
+          role="presentation"
+        >
+          <button
+            (click)="searchByType({ target: { value: null } })"
+            class="nav-link active"
+            id="pills-marsa-trending-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-allActivity"
+            type="button"
+            role="tab"
+            aria-controls="pills-marstrending"
+            aria-selected="true"
+          >
+            All
+          </button>
+        </li>
+        <li
+          class="nav-item d-flex align-items-center flex-shrink-0 flex-xl-shrink-1"
+          role="presentation"
+          *ngFor="let item of types"
+        >
+          <button
+            (click)="searchByType({ target: { value: item.id } })"
+            class="nav-link"
+            data-bs-toggle="pill"
+            type="button"
+            role="tab"
+            aria-selected="false"
+          >
+            {{ item?.type }}
+          </button>
+        </li>
+      </ul>
+      <select
+        name=""
+        class="form-select-fill-pill form-select form-select-lg mb-3"
+        aria-label=".form-select-lg example"
+        #option
+        id=""
+        (change)="searchByType({ target: { value: option.value } })"
+      >
+        <option value="null" selected>All</option>
+        <option value="item.id" *ngFor="let item of types">
+          {{ item?.type }}
+        </option>
+      </select>
+      <div class="tab-content">
+        <div
+          class="tab-pane fade active show"
+          id="pills-Recommended"
+          role="tabpanel"
+          aria-labelledby="pills-one-example-t1-tab"
+        >
+          <div class="row">
+            <div
+              class="col-md-6 col-xl-4 mb-3 mb-md-4 pb-2 px-2"
+              *ngFor="let trips of boats?.data"
+            >
+              <app-boat-card [item]="trips"></app-boat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <p-paginator
+      [rows]="10"
+      [totalRecords]="boats?.total || boats?.data?.length"
+      [first]="(boats?.current_page - 1) * 10"
+      (onPageChange)="onPageChange($event)"
+      [showFirstLastIcon]="true"
+      [showJumpToPageInput]="true"
+      class="m-auto border border-color-4 rounded-sm mb-5 mb-lg-0 overflow-auto overflow-xl-visible justify-content-center align-items-center py-2 w-100"
+    >
+    </p-paginator>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="modal-header  Cabin">
+    <h4 class="modal-title">Cabin Information
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body Cabin" style="height:600px; overflow:auto;">
+    <div class="row">
+
+        <div class="col-lg-6 col-12">
+            <div class="image-slider">
+                <owl-carousel-o [options]="imagesOptions" class="my-tours w-100">
+                    <ng-container *ngFor="let img of images" class="w-100">
+                        <ng-template carouselSlide class="w-100">
+                            <img [src]="img" style="max-height: 400px;"  [alt]="getImageName(img)"  loading="lazy" class="pe-3" />
+                        </ng-template>
+                    </ng-container>
+                </owl-carousel-o>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 ">
+            <h4 class="my-3 p-0 mx-0">{{data?.accommodation_title}}</h4>
+            <h5 class="p-0">{{data?.description}}</h5>
+            <p class="my-3 text-dark" *ngIf="data?.boatname != null">Boat Name : {{data?.boatname}}</p>
+            <!-- <p class="my-1 ">Available : {{data?.available}}</p> -->
+
+            <ul class="p-3">
+                <li *ngIf="data?.max_occupancy != null">Max occupancy :
+                    <span class="text-dark">
+                        {{data?.max_occupancy}}
+                    </span>
+                </li>
+                <li *ngIf="data?.bedding != null">Bedding :
+                    <span class="text-dark">
+                        {{data?.bedding}}
+                    </span>
+                </li>
+                <li *ngIf="data?.ensuite_bathroom != null">Ensuite Bathroom :
+                    <span class="text-dark">
+                        {{data?.ensuite_bathroom}}
+                    </span>
+                </li>
+                <li *ngIf="data?.aircon != null">Aircon :
+                    <span class="text-dark">
+                        {{data?.aircon}}
+                    </span>
+                </li>
+                <li *ngIf="data?.price != null">Price :
+                    <span class="text-success">
+                        ${{data?.price}}
+                    </span>
+                </li>
+                <li *ngIf="data?.discount > 0">Discount :
+                    <span class="text-danger">
+                        {{data?.discount}}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

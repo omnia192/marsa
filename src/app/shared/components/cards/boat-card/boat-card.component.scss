@@ -1,0 +1,106 @@
+.card {
+  transition: all 0.3s linear;
+  overflow: hidden;
+  h5 {
+    color: #297cbb;
+    font-family: Lato;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+}
+
+.boat-icon {
+  display: inline !important;
+  width: auto !important;
+}
+
+.fa-heart {
+  // color: #ff681a;
+  font-size: 20px;
+}
+
+.card p {
+  color: #3b444f;
+  font-family: Lato;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.card small {
+  color: #67747c;
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.review,
+.icons {
+  color: #67747c;
+  font-family: Lato;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.review span {
+  border-radius: 5px;
+  background: #ff681a;
+  color: #fff;
+  font-family: Lato;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 5px;
+}
+
+.yellow-star {
+  color: #ffd700 !important;
+}
+
+.icon span {
+  color: #67747c;
+  font-family: Lato;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.gradient-overlay-half-bg-gradient-v5::before {
+  background: none;
+}
+
+.featured {
+  width: 97px;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  color: #297cbb;
+  padding: 6px 8px;
+}
+
+.sale {
+  width: 60px;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  text-align: left;
+  color: #ff0045;
+  text-align: center;
+}
+.card:hover .gradient-overlay-half-bg-gradient-v5 {
+  transform: scale(1.2);
+}
+.gradient-overlay-half-bg-gradient-v5 {
+  transition: transform 0.3s ease;
+}

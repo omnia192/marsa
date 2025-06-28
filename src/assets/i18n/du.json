@@ -1,0 +1,70 @@
+{
+  "dir": "ltr",
+  "header": {
+    "home": "Zuhause",
+    "tours-activities": "Touren & Aktivitäten",
+    "liveboard": "Liveboard",
+    "hotels": "Hotels",
+    "boat": "Boote",
+    "transport": "Transfer",
+    "contact-us": "Kontaktiere uns",
+    "more": "Mehr",
+    "blog": "Bloggen",
+    "faq": "FAQ",
+    "about": "Über uns",
+    "search": "Suche",
+    "placeholder": "Wo möchten Sie hin?",
+    "sign-in-or-register": "Anmelden oder Registrieren"
+  },
+  "signup": {
+    "": "Registrieren",
+    "fname": "Vorname",
+    "lname": "Nachname",
+    "password": "Passwort",
+    "email": "E-Mail",
+    "phone": "Telefon"
+  },
+  "boat": {
+    "boat": "Boot"
+  },
+  "transfer": {
+    "transfer": "Transfer"
+  },
+  "places": {
+    "marsa-alam": "Marsa Alam",
+    "hurghada": "Hurghada",
+    "porto-ghalib": "Porto Ghalib",
+    "sharm-ellsheikh": "Sharm El-Sheikh",
+    "el-quseir": "El Quseir"
+  },
+  "packages": "Pakete",
+  "footer": {
+    "Services": "Dienstleistungen",
+    "PAYMENT_METHODS": "ZAHLUNGSMETHODEN",
+    "FOLLOW_US": "FOLGE UNS",
+    "termsandpolicies": "AGBs",
+    "Tours_&_Activities": "Touren & Aktivitäten",
+    "Hotels": "Hotels",
+    "Liveabroad": "Liveaboard",
+    "transfer": "Transfer",
+    "contactUs": "Kontaktiere uns",
+    "aboutUs": "Über uns",
+    "Events": "Veranstaltungen",
+    "Copyright": "Alle Urheberrechte vorbehalten für MarsaWaves betrieben von:",
+    "MARSA_WAVES_NEWSLETTER": "MARSA WAVES NEWSLETTER",
+    "Signupandbethefirsttogetourbestoffersandnews": "Melden Sie sich an und seien Sie der Erste, der unsere besten Angebote und Nachrichten erhält",
+    "Join_Now": "Jetzt beitreten"
+  },
+  "validation": {
+    "company": "Firmenname ist erforderlich",
+    "position": "Position ist erforderlich",
+    "user_name": "Benutzername ist erforderlich",
+    "user_mail": "Benutzer-E-Mail ist erforderlich",
+    "phone": "Telefonnummer ist erforderlich",
+    "password": "Passwort ist erforderlich",
+    "confirmPass": "Passwortbestätigung ist erforderlich",
+    "passMinlength": "Das Passwort muss mindestens 6 Zeichen lang sein",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "Unauthorized": "Ihr Konto wurde noch nicht aktiviert, Ihr Konto wird überprüft."
+  }
+}

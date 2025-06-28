@@ -1,0 +1,122 @@
+h5 {
+    font-family: Lato;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+.content{
+    margin-top: 150px;
+}
+a {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    color: rgba(41, 124, 187, 1);
+}
+
+li span {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: rgba(103, 116, 124, 1);
+}
+
+p {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: rgba(103, 116, 124, 1);
+}
+
+h3 {
+    font-family: Lato;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: rgba(41, 124, 187, 1);
+}
+
+.my-tours-work h5 {
+    color: #3B444F;
+    font-family: Lato;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position: relative;
+}
+
+.my-tours-work .head::after {
+    content: '';
+    width: 40px;
+    height: 2px;
+    background-color: #297CBB;
+    position: absolute;
+    bottom: -6px;
+    left: 40%;
+}
+
+.fa-star {
+    color: #C6C7C6;
+    font-size: 15px;
+}
+
+.btnReview {
+    background-color: #0DB1FF;
+}
+
+.card-body h6 {
+    color: #297CBB;
+    font-family: Lato;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.card-body h5 {
+    color: #3B444F;
+    font-family: Lato;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.card-body .review {
+    color: #FFF;
+    font-family: Lato;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: #FF681A;
+    border-radius: 5px;
+    width: 59px;
+    height: 22px;
+    padding: 7px;
+}
+
+/******************************/
+@media screen and (max-width: 1200px) {
+    .content{
+        margin-top: 10px;
+    }
+}
+@media (max-width: 768px) {
+  .responsive-text {
+      font-size: 16px !important;
+      line-height: 22px !important;
+  }
+}

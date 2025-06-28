@@ -1,0 +1,283 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+
+<main id="content">
+  <!-- Hero Section -->
+  <div
+    class="bg-img-hero text-center mb-5 mb-lg-8 gradient-overlay-half-black-gradient "
+    [style.backgroundImage]="'url(' + backgroundImageUrl + ')'"
+  >
+    <div class="container space-top-xl-3 py-6 py-xl-0">
+      <div class="row justify-content-center py-xl-4">
+        <!-- Info -->
+        <div class="py-xl-10 py-5">
+          <h1
+            class="font-size-40 font-size-xs-30 text-white font-weight-bold mb-0"
+          >
+            Contact Us
+          </h1>
+          <nav aria-label="breadcrumb">
+            <ol
+              class="breadcrumb breadcrumb-no-gutter justify-content-center mb-0"
+            >
+              <li class="breadcrumb-item font-size-14">
+                <a
+                  class="text-white"
+                  [routerLink]="['/', translate.currentLang]"
+                  >Home</a
+                >
+              </li>
+              <li
+                class="breadcrumb-item custom-breadcrumb-item font-size-14 text-white active"
+                aria-current="page"
+              >
+                Contact Us
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <!-- End Info -->
+      </div>
+    </div>
+  </div>
+  <!-- End Hero Section -->
+  <div class="border-color-8 pb-6 pb-lg-8 mb-5 mb-lg-7">
+    <div class="container pb-1">
+      <div class="w-md-80 w-lg-50 text-center mx-md-auto my-3">
+        <h2 class="section-title pb-xl-1">Sends us a Message</h2>
+      </div>
+      <div class="row mt-5">
+        <div class="mt-4 col-md-4">
+          <div class="mb-5 mb-lg-0 text-center text-md-center py-5 list-icon">
+            <div class="round">
+              <img
+                style="margin-top: 20px"
+                src="assets/images/mdi_address-marker.png"
+                alt="mdi-address"
+              />
+            </div>
+            <div>
+              <h5>Our Location</h5>
+              <p>{{ contactus?.Location }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 col-md-4">
+          <div class="mb-5 mb-lg-0 text-center text-md-center py-5 list-icon">
+            <div class="round">
+              <img alt="phone" style="margin-top: 20px" src="assets/images/phone.svg" />
+            </div>
+            <div>
+              <h5>Call US</h5>
+              <p>{{ contactus?.Call }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 col-md-4">
+          <div class="mb-5 mb-lg-0 text-center text-md-center py-5 list-icon">
+            <div class="round">
+              <img  alt="mail"style="margin-top: 20px" src="assets/images/mail.svg" />
+            </div>
+            <div>
+              <h5>Our Mail</h5>
+              <p class="contact">
+                <a href="mailto:info@marsawaves.com">
+                  {{ contactus?.Mail }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border-bottom border-color-8">
+    <div class="container mb-8">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="caption">
+            <h5>We’d love to hear from you</h5>
+            <small [innerHtml]="contactus.contactusText"
+              ></small
+            >
+          </div>
+          <div class="icons d-flex gap-3 my-3">
+            <div class="icon-round">
+              <a [href]="contactus?.facebook" target="_blank">
+                <img
+                  src="../../../../../../assets/images/icons/facebook.svg"
+                  alt="facebook"
+                  style="width: 30px; height: 30px"
+                  width="30"
+                  height="30"
+                />
+              </a>
+            </div>
+            <div class="icon-round">
+              <a [href]="contactus?.tripAdvisor" target="_blank">
+                <img
+                  src="assets/images/icons/tripadvisor.svg"
+                  alt="tripadvisor"
+                  style="width: 30px; height: 30px"
+                  width="30"
+                  height="30"
+                />
+              </a>
+            </div>
+            <div class="icon-round">
+              <a [href]="contactus?.instgram" target="_blank">
+                <img
+                  src="assets/images/icons/instagram.svg"
+                  alt="instagram"
+                  style="width: 30px; height: 30px"
+                  width="30"
+                  height="30"
+                />
+              </a>
+            </div>
+            <div class="icon-round">
+              <a [href]="youtubeLink" target="_blank">
+                <img
+                  src="assets/images/icons/youtube.svg"
+                  alt="youtube"
+                  style="width: 30px; height: 30px"
+                  width="30"
+                  height="30"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="comment-section max-width-810 mx-auto">
+            <form [formGroup]="contactForm">
+              <div class="row">
+                <!-- Input -->
+                <div class="col-sm-6 mb-5">
+                  <div class="js-form-message">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [class.is-invalid]="name.errors && name.touched"
+                      formControlName="name"
+                      placeholder="Name"
+                      required
+                    />
+                    <ng-container *ngIf="name.errors && name.touched">
+                      <div
+                        class="alert alert-danger my-2"
+                        *ngIf="name.errors?.['required']"
+                      >
+                        <p class="mb-0"  >Name is required</p>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <!-- End Input -->
+
+                <!-- Input -->
+                <div class="col-sm-6 mb-5">
+                  <div class="js-form-message">
+                    <input
+                      type="email"
+                      class="form-control"
+                      formControlName="email"
+                      placeholder="Email"
+                      required
+                      [class.is-invalid]="email.errors && email.touched"
+                    />
+                    <ng-container *ngIf="email.errors && email.touched">
+                      <div class="alert alert-danger my-2" *ngIf="email.errors?.['required']">
+                        <p class="mb-0">Email is required</p>
+                      </div>
+                      <div class="alert alert-danger my-2" *ngIf="email.errors?.['email']">
+                        <p class="mb-0">Please enter a valid email address in the format XXX&#64;XX.XX.</p>
+                      </div>
+
+                    </ng-container>
+                  </div>
+
+                </div>
+                <!-- End Input -->
+                <div class="col-sm-12 mb-5">
+                  <div class="js-form-message">
+                    <div class="input-group">
+                      <textarea
+                        class="form-control"
+                        rows="6"
+                        cols="77"
+                        formControlName="message"
+                        placeholder="Message"
+                        [class.is-invalid]="message.errors && message.touched"
+                        required
+                      ></textarea>
+
+                      <ng-container *ngIf="message.errors && message.touched">
+                        <div class="w-100">
+                          <div
+                            class="alert alert-danger my-2"
+                            *ngIf="message.errors?.['required']"
+                          >
+                            <p class="mb-0" >Message is required</p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- End Input -->
+                <div class="col d-flex justify-content-lg-center">
+                  <button
+                    type="submit"
+                    class="btn rounded-xs height-51 width-190"
+                    style="background: #008ccf"
+                    (click)="contact()"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption container">
+      <h5>Where we are located </h5>
+
+    </div>
+
+    <div [innerHTML]="googleIframe" class="map-container"></div>
+    <div class="team border-color-3">
+      <div class="container space-top-1">
+        <div class="w-md-80 w-lg-70 text-center mx-md-auto mb-5 mt-3">
+          <h2 class="title mb-0">Deticated Team</h2>
+        </div>
+        <div class="row text-center pb-2 pt-5">
+          
+
+          <owl-carousel-o [options]="aboutOptions" class="my-destination">
+            <ng-container *ngFor="let item of data?.team">
+              <ng-template carouselSlide>
+                <div style="display: flex;
+                     justify-content: center;">
+                  <figure class="d-inline-block u-avatar-image rounded-circle overflow-hidden">
+                    <img [src]="item.icon"  [alt]="getImageName(item.icon)"  alt="Image-Descrition" />
+                  </figure>
+                </div>
+
+                <div>
+                  <h6 class="mb-0">{{ item.title }}</h6>
+                  <span class="l">
+                    {{ item.desc }}
+                  </span>
+                </div>
+
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

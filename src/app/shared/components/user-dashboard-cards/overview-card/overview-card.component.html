@@ -1,0 +1,19 @@
+<div class="container">
+  <ul class="nav flex-nowrap overflow-x-auto">
+    <li
+      *ngFor="let tab of tabs"
+      class="nav-item"
+      [class.active]="tab.section === activeSection"
+      (click)="setActiveSection(tab.section)"
+    >
+      {{ tab.label }}
+    </li>
+  </ul>
+</div>
+
+<div class="container">
+  <section *ngIf="activeSection === 'section1'">
+    <app-user-settings [userDetails]="userDetails"></app-user-settings>
+  </section>
+ 
+</div>

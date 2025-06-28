@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$one-primary :mat.define-palette(mat.$blue-palette);
+$one-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$one-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$global-theme: mat.define-light-theme((
+  color: (
+    primary:$one-primary,
+    accent: $one-accent,
+    warn: $one-warn,
+  )
+));
+@include mat.all-component-themes($global-theme);

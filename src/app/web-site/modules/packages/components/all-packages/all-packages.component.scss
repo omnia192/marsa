@@ -1,0 +1,137 @@
+h3{
+    color: #3B444F;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    position: relative;
+}
+h3::after{
+    content: '';
+    position: absolute;
+    width: 45.67px;
+    height: 1.41px;
+    background-color: #004796;
+    top: 100%;
+    left: 49%;
+}
+.content{
+    margin-top: 150px 
+}
+.sale{
+    background-color: #FF681A;
+    display: inline-block;
+    width: 169px;
+    height: 45px;
+    border-radius: 4px;
+    text-align: center;
+    transform: translate(-8%,-350%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+}
+i{
+    color: #FF681A;
+    font-size: 18px;
+}
+.btns button{
+    color: #004796;
+}
+
+h3{
+    color: #004796;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+    position: relative;
+}
+h3::after{
+    content: '';
+    position: absolute;
+    width: 45.67px;
+    height: 1.41px;
+    background-color: #004796;
+    top: 100%;
+    left: 49%;
+}
+.layer{
+    background-color: #004796;
+    background-blend-mode: darken;
+}
+.list-package i{ 
+    color: #f8c101;
+    font-size: 15px;
+    margin-right: 10px;
+}
+.list-package{
+    margin-left: 20px;
+}
+.list-package li{
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+}
+.discount{
+    text-align: center;
+}
+.discount h5{
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+.trips h5{
+    color: #FFCA0E;
+    font-size: 30px;
+    line-height: 45px;
+    font-weight:700;
+    font-family: 'Poppins', sans-serif;
+
+}
+.trips ul li{
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 37.5px;
+    font-family:'Poppins', sans-serif ;
+}
+.trips ul i{
+    margin-right: 7px;
+    font-weight: 20px;
+}
+.review{
+    background-color: #297CBB !important;
+    color: #FFFFFF;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    padding: 5px;
+}
+#packageDetails .card-body h6{
+    font-family: Lato;
+font-size: 17px;
+font-weight: 700;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+#packageDetails .location span{
+    font-family: Lato;
+font-size: 14px;
+font-weight: 700;
+line-height: 17px;
+letter-spacing: 0em;
+text-align: left;
+color: #FFFFFF;
+
+}
+/****************************/
+@media screen and (max-width:1200px){
+    .content{
+        margin-top: 10px
+    }
+}

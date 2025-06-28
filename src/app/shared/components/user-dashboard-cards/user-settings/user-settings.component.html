@@ -1,0 +1,219 @@
+<section class="settings">
+  <h2>Basic Info</h2>
+  <form>
+    <div class="row image-file">
+      <div class="col-lg-4 pb-4">
+        <!-- <label>Project Logo</label> -->
+      </div>
+      <div class="col-lg-8 upload position-relative">
+        <label for="upload">
+          <div *ngIf="!imagePreview && userDetails?.image" class="preview">
+            <img [src]="userDetails?.image" [alt]="getImageName(userDetails?.image)" />
+          </div>
+          <div *ngIf="imagePreview" class="preview">
+            <img [src]="imagePreview" alt="Preview" />
+          </div>
+
+        </label>
+        <div class="pen"(click)="fileInput.click()"
+        >
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <g clip-path="url(#clip0_1412_50197)">
+                <path d="M0 9.49953V11.9999H2.50035L9.87802 4.62217L7.37767 2.12183L0 9.49953Z" fill="#B5B5C3" />
+                <path
+                  d="M11.8045 1.7519L10.2476 0.195027C9.98759 -0.065009 9.56419 -0.065009 9.30415 0.195027L8.08398 1.4152L10.5843 3.91554L11.8045 2.69537C12.0646 2.43534 12.0646 2.01193 11.8045 1.7519Z"
+                  fill="#B5B5C3" />
+              </g>
+              <defs>
+                <clipPath id="clip0_1412_50197">
+                  <rect width="12" height="12" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <!-- <span class="ms-2">Remove</span> -->
+          <input
+          type="file"
+          id="upload"
+          #fileInput
+          (change)="previewImage(fileInput.files)"
+          class="d-none"
+        />
+        </div>
+
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <label>Name</label>
+      </div>
+      <div class="col-lg-8">
+        <input [(ngModel)]="name" type="text" name="username" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label>Phone Number</label>
+      </div>
+      <div class="col-lg-8">
+        <ngx-intl-tel-input
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [separateDialCode]="true"
+        [selectFirstCountry]="true"
+        [maxLength]="20"
+        name="phone"
+        [phoneValidation]="false"
+        [customPlaceholder]="'Enter phone number'"
+        [preferredCountries]="['de']"
+        [(ngModel)]="phone"
+        (countryChange)="onCountryChange($event)">
+      </ngx-intl-tel-input>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label>Email</label>
+      </div>
+      <div class="col-lg-8">
+        <input type="email" [(ngModel)]="email" name="email" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label>Date Of Birth</label>
+      </div>
+      <div class="col-lg-8">
+        <input type="Date" [(ngModel)]="dob" name="dob" />
+      </div>
+    </div>
+   <div class="row">
+  <div class="col-lg-4">
+    <label>Country</label>
+  </div>
+  <div class="col-lg-8">
+    <div class="dropdown-2" tabindex="0">
+      <div class="dropdown-btn-2 d-flex align-items-center gap-1">
+        {{ selectedCountryName || userDetails?.overviwe?.country }}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label for="timezone">Time Zone:</label>
+      </div>
+      <div class="col-lg-8">
+        <select id="timezone" name="timezone">
+          <option value="GMT-12:00">
+            (GMT-23:00) International Date Line West
+          </option>
+          <option value="GMT-11:00">
+            (GMT-23:00) International Date Line West
+          </option>
+          <option value="GMT-10:00">
+            (GMT-23:00) International Date Line West
+          </option>
+          <!-- Add more options for other time zones -->
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label>Gender</label>
+      </div>
+      <div class="col-lg-8">
+        <div class="top">
+          <div
+            class="item"
+            [class.selected-1]="isSelected(items[0])"
+            (click)="selectItem(items[0])"
+          >
+            <p>
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                  <path
+                    d="M14.0426 5.02893C14.3258 4.69579 14.8254 4.65528 15.1585 4.93845C15.4917 5.22162 15.5322 5.72124 15.249 6.05437L8.51985 13.971C8.23224 14.3094 7.72261 14.3451 7.3907 14.05L3.8282 10.8834C3.50141 10.5929 3.47198 10.0925 3.76245 9.7657C4.05293 9.43891 4.55332 9.40948 4.88011 9.69995L7.83765 12.3289L14.0426 5.02893Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+            </p>
+            <span> Male </span>
+          </div>
+          <div
+            class="item"
+            [class.selected-1]="isSelected(items[1])"
+            (click)="selectItem(items[1])"
+          >
+            <p>
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                  <path
+                    d="M14.0426 5.02893C14.3258 4.69579 14.8254 4.65528 15.1585 4.93845C15.4917 5.22162 15.5322 5.72124 15.249 6.05437L8.51985 13.971C8.23224 14.3094 7.72261 14.3451 7.3907 14.05L3.8282 10.8834C3.50141 10.5929 3.47198 10.0925 3.76245 9.7657C4.05293 9.43891 4.55332 9.40948 4.88011 9.69995L7.83765 12.3289L14.0426 5.02893Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+            </p>
+            <span> Female </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="submit">
+      <button routerLink="/">Discard</button>
+      <button (click)="submit()">Save Changes</button>
+    </div>
+  </form>
+
+
+  <div class="links">
+
+    <div class="deactivate">
+      <h3>Deactivate Account</h3>
+      <div class="deactivate-content">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="33" height="34" viewBox="0 0 33 34" fill="none">
+            <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+              d="M16.4412 30.4364C24.0081 30.4364 30.1422 24.3023 30.1422 16.7354C30.1422 9.16856 24.0081 3.03442 16.4412 3.03442C8.87437 3.03442 2.74023 9.16856 2.74023 16.7354C2.74023 24.3023 8.87437 30.4364 16.4412 30.4364Z"
+              fill="#F89C47" />
+            <rect x="15.0703" y="9.88477" width="2.7402" height="10.9608" rx="1" fill="#F89C47" />
+            <rect x="15.0703" y="22.2158" width="2.7402" height="2.7402" rx="1" fill="#F89C47" />
+          </svg>
+        </span>
+        <div>
+          <h5>You are deactivatiing your account</h5>
+          <p>
+            For extra security, this requires you to confirm your email or phone
+            number when you reset your password. <a>Learn more</a>
+          </p>
+        </div>
+      </div>
+      <div class="check-content">
+        <div class="form-check">
+          <input [(ngModel)]="deactivateChaecked" name="deactivateChaecked" class="form-check-input" type="checkbox"
+            value="" id="flexCheckDisabled" />
+          <label class="form-check-label" for="flexCheckDisabled">
+            Confirm Account Deactivation
+          </label>
+        </div>
+        <div class="text-end">
+          <button (click)="deactivate()">Deactivate Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

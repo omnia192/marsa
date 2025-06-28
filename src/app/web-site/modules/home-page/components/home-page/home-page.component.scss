@@ -1,0 +1,140 @@
+.input-group {
+    width: 405.25px;
+    height: 43px;
+    background-color: #FFFFFF;
+
+}
+
+input::placeholder {
+    color: #3B444F;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19.2px;
+    font-family: 'Lato', sans-serif;
+}
+
+.input-group button {
+    background-color: #0DB1FF;
+    width: 105.25px;
+    height: 43px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+
+}
+
+.nav-item {
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 19.2px;
+    color: #0000;
+}
+
+.nav-item a {
+    color: #000;
+}
+
+/**********************************/
+
+/***********************************/
+
+.nav-link {
+    color: #FFF !important;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.bg-img-hero-bottom {
+    background-image: url(../../../../../../assets/images/cover.webp);
+    background-size: cover;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    .caption {
+        h1 {
+            color: var(--White, #FFF);
+            font-family: Poppins;
+            font-size: 60px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            line-height: normal;
+        }
+
+        p {
+            color: #FFF;
+            text-align: center;
+            font-family: Poppins;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: -0.5px;
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .bg-img-hero-bottom {
+        background-size: 100%;
+
+        .caption {
+            h1 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .bg-img-hero-bottom {
+        height: 200px !important;
+    }
+}
+
+.quick-search-form {
+    position: absolute;
+    bottom: -4%;
+    left: 5%;
+}
+
+/*****************************************/
+@media screen and (min-width:992px) and (max-width: 1200px) {
+    .quick-search-form {
+        position: absolute;
+        bottom: -10%;
+        left: 0;
+
+    }
+
+    .bg-img-hero-bottom {
+        padding-bottom: 20px;
+        margin-bottom: 120px;
+    }
+}
+
+@media screen and (min-width:1200.98px) and (max-width: 1400px) {
+    .quick-search-form {
+        position: absolute;
+        bottom: -12%;
+        left: 0;
+
+    }
+
+    .bg-img-hero-bottom {
+        padding-bottom: 20px;
+        margin-bottom: 140px;
+    }
+}

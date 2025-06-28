@@ -1,0 +1,117 @@
+@import url(../../../../shared/components/cards/activity-card/activity-card.component.scss);
+.content {
+  margin-top: 180px;
+}
+.btn-loading {
+  border: none;
+  background-color: transparent; /* Optional: Makes the button background transparent when loading */
+}
+.btn-loading .spinner-border {
+  width: 1rem;
+  height: 1rem;
+}
+.spinner-border {
+  margin-right: 5px;
+}
+.show-more-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  text-align: center;
+  flex-direction: row;
+}
+.show-more-container .horizontal-line {
+  margin: 0;
+ // border: 1px solid #ccc;
+}
+button.btn-outline-primary {
+  position: relative;
+  height: 40px;
+  padding-right: 8px;
+  padding-left: 8px;
+  width: 14%;
+  padding-top: 7px;
+}
+
+.horizontal-line {
+  flex: 1;
+  height: 5px;
+  background-color: #c8ddf1;
+  margin: auto 10px;
+}
+#all-activity select {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgba(59, 68, 79, 1);
+  height: 52px;
+  border: 1px solid rgba(217, 217, 217, 1);
+  border-radius: 10px;
+  width: 142px;
+  padding-right: 10px;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &.last {
+    width: 161px;
+  }
+  &:hover {
+    border: 1px solid #0db1ff;
+    color: #1e6485;
+  }
+}
+@media screen and (max-width: 768px) {
+
+  .content {
+    margin-top: 0;
+  }
+  #all-activity select {
+    width: 100px;
+  }
+  .show-more-container {
+    flex-direction: column;
+  }
+
+  .show-more-container .flex-grow-1 {
+    width: 100%;
+  }
+
+  .show-more-container .btn {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+  }
+  @media screen and (max-width: 1200px) {
+
+    .content {
+      margin-top: 10px;
+    }
+  }
+  @media screen and (min-width: 992px) {
+
+    .show-more-container .btn {
+     font-size: 18px;
+
+    }
+  }
+  @media screen and (min-width: 360.9px) and (max-width: 570px) {
+
+    .show-more-container .btn {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+
+
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+
+
+    .show-more-container .btn {
+      font-size: 15px;
+     }
+  }
+
+}

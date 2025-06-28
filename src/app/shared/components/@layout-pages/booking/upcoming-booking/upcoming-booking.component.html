@@ -1,0 +1,825 @@
+<section class="container">
+  <div>
+    <h4>Upcoming bookings</h4>
+    <!------------------------->
+    <ul class="nav">
+      <li
+        class="nav-item"
+        [class.active]="'all' === activeSection"
+        (click)="setActiveSection('all')"
+      >
+        All
+      </li>
+
+      <li
+        *ngFor="let tab of tabs"
+        class="nav-item"
+        [ngClass]="{
+          'd-none': tab.category == null,
+          active: tab.categoryid === activeSection
+        }"
+        (click)="setActiveSection(tab.categoryid)"
+      >
+        {{ tab.category }}
+      </li>
+    </ul>
+    <!------------------->
+
+    <div class="deactivate-content mt-4 w-xl-75 w-100">
+      <span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="33"
+          height="34"
+          viewBox="0 0 33 34"
+          fill="none"
+        >
+          <path
+            opacity="0.3"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M16.4412 30.4364C24.0081 30.4364 30.1422 24.3023 30.1422 16.7354C30.1422 9.16856 24.0081 3.03442 16.4412 3.03442C8.87437 3.03442 2.74023 9.16856 2.74023 16.7354C2.74023 24.3023 8.87437 30.4364 16.4412 30.4364Z"
+            fill="#F89C47"
+          />
+          <rect
+            x="15.0703"
+            y="9.88477"
+            width="2.7402"
+            height="10.9608"
+            rx="1"
+            fill="#F89C47"
+          />
+          <rect
+            x="15.0703"
+            y="22.2158"
+            width="2.7402"
+            height="2.7402"
+            rx="1"
+            fill="#F89C47"
+          />
+        </svg>
+      </span>
+      <div>
+        <h5>
+          The Exact pick-UP time from your Hotel Reception or your specifid
+          location will be communicated via email and whatsapp 24 hours prior to
+          the trip
+        </h5>
+      </div>
+    </div>
+    <!------------------->
+    <div class="booking-cards">
+      <Section class="row">
+        <div class="col-lg-9">
+          <section>
+            <!------#1 First card------------------------>
+            <div *ngIf="this.upcomingTrips.length != 0">
+              <div *ngFor="let trip of upcomingTrips" class="d-flex place-card">
+                <section class="first-place">
+                  <div class="position-relative img-content">
+
+                    <div
+                    *ngIf="trip?.categoryid != 4"
+                      class="img"
+                      [style.backgroundImage]="'url(' + trip?.image + ')'"
+                      style="
+                        background-position: center center;
+                        background-size: cover;
+                        height: 285px;
+                      "
+                    ></div>
+                    <div
+                    *ngIf="trip?.categoryid == 4"
+                      class="img"
+                      [style.backgroundImage]="'url(' + trip?.image + ')'"
+                      style="
+                        background-position: center center;
+                        background-size: cover;
+                        height: 250px;
+                      "
+                    ></div>
+
+                    <div class="d-flex justify-content-between">
+                      <span style="margin-top: -0.5rem"> Top Pick </span>
+                      <span style="margin-top: -0.5rem">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <g clip-path="url(#clip0_1112_38571)">
+                            <path
+                              d="M2.50194 10.3818L2.50194 10.3818C2.44089 7.66535 3.8254 5.36033 5.75775 4.23307C7.55119 3.1891 9.78564 3.18167 11.6846 4.72595L12.0001 4.9825L12.3155 4.72595C14.2147 3.18153 16.4491 3.18822 18.2423 4.23305C20.1746 5.3592 21.5593 7.66514 21.4982 10.3818C21.4342 13.2131 19.4517 15.7412 17.1921 17.6006C16.0733 18.5213 14.9129 19.2556 13.9454 19.7577C13.4615 20.0088 13.0316 20.1988 12.6843 20.3247C12.3205 20.4565 12.0952 20.5 12.0001 20.5C11.905 20.5 11.6796 20.4565 11.3158 20.3247C10.9684 20.1988 10.5386 20.0088 10.0546 19.7577C9.08698 19.2556 7.92652 18.5213 6.80764 17.6006C4.54793 15.7411 2.56546 13.2131 2.50194 10.3818Z"
+                              fill="none"
+                              stroke="white"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1112_38571">
+                              <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="trip">
+                    <div>
+                      <div class="d-xl-flex city">
+                        <div
+                          class="w-m-100"
+                          style="width: 239px"
+                          *ngIf="trip?.categoryid != 4"
+                        >
+                          <h5 class="mb-0">{{ trip?.trip }}</h5>
+                        </div>
+                        <div
+                          class="w-m-100 d-flex mt-1"
+                          style="width: 200px"
+                          *ngIf="trip?.categoryid == 4">
+                          <div>
+                            <span class="d-inline-block">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="23"
+                                height="23"
+                                viewBox="0 0 16 19"
+                                fill="none"
+                              >
+                                <path
+                                  d="M7.02961 18.7666L1.56506 12.2116C1.09591 11.6675 0.726802 11.0453 0.474738 10.3736C0.0495203 9.21012 -0.0929274 7.96296 0.0590208 6.73416C0.210969 5.50537 0.652994 4.32983 1.34898 3.30362C2.02368 2.28808 2.94082 1.45477 4.01833 0.878265C5.09584 0.301756 6.30015 0 7.52353 0C8.7469 0 9.95122 0.301756 11.0287 0.878265C12.1062 1.45477 13.0233 2.28808 13.698 3.30362C14.3945 4.33022 14.8366 5.50639 14.9882 6.73581C15.1398 7.96523 14.9966 9.2129 14.5703 10.3766C14.3193 11.0483 13.9504 11.6702 13.481 12.2136L8.01941 18.7666C7.95969 18.8401 7.8842 18.8994 7.79849 18.9402C7.71277 18.9809 7.61901 19.002 7.52402 19.002C7.42903 19.002 7.33527 18.9809 7.24955 18.9402C7.16384 18.8994 7.08933 18.8401 7.02961 18.7666ZM2.42023 4.0596C1.84383 4.90809 1.47747 5.88032 1.35119 6.89676C1.22491 7.9132 1.34228 8.94499 1.69368 9.90762C1.89266 10.4342 2.1835 10.9217 2.55283 11.3476L7.52402 17.3106L12.4932 11.3496C12.862 10.925 13.1525 10.4388 13.3514 9.9136C13.7033 8.95045 13.8211 7.91806 13.6949 6.90091C13.5688 5.88375 13.2024 4.91076 12.6258 4.06161C12.0678 3.22246 11.3095 2.53397 10.4188 2.05765C9.52812 1.58133 8.53268 1.332 7.52151 1.332C6.51033 1.332 5.5149 1.58133 4.62418 2.05765C3.73347 2.53397 2.97519 3.22246 2.41716 4.06161L2.42023 4.0596ZM3.88229 7.65964C3.90107 6.94674 4.13072 6.25518 4.54242 5.67148C4.95413 5.08777 5.52966 4.63783 6.19701 4.37796C6.86436 4.11809 7.59384 4.0598 8.2943 4.21042C8.99477 4.36104 9.63505 4.71382 10.135 5.2247C10.635 5.73558 10.9726 6.38188 11.1054 7.08267C11.2382 7.78346 11.1604 8.50763 10.8817 9.16464C10.603 9.82165 10.1359 10.3823 9.53864 10.7765C8.94141 11.1706 8.24065 11.3808 7.52402 11.3806C6.54552 11.3675 5.6122 10.9686 4.92876 10.2716C4.24533 9.57465 3.86757 8.6364 3.87831 7.66263L3.88229 7.65964ZM5.18262 7.65964C5.19448 8.11797 5.3419 8.56264 5.60643 8.93802C5.87097 9.3134 6.24085 9.60282 6.66983 9.77005C7.09881 9.93728 7.56782 9.97489 8.01818 9.8782C8.46854 9.78152 8.88025 9.55483 9.20179 9.22647C9.52334 8.89811 9.74049 8.48266 9.82598 8.03214C9.91147 7.58161 9.86154 7.116 9.68246 6.69357C9.50338 6.27114 9.20305 5.91066 8.81913 5.6572C8.43521 5.40374 7.98474 5.2686 7.52402 5.26865C7.21205 5.27256 6.90392 5.33756 6.61721 5.45999C6.3305 5.58242 6.07079 5.75984 5.85299 5.98215C5.6352 6.20446 5.46357 6.46731 5.34785 6.75565C5.23214 7.04398 5.17465 7.35218 5.17863 7.66263L5.18262 7.65964Z"
+                                  fill="#0DB1FF"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                          <div>
+                            <h5 class="mb-0 ms-1">{{ trip?.From }}</h5>
+                          </div>
+                        </div>
+
+                        <div>
+                          <span *ngIf="trip?.categoryid != 4">
+                            <div class="d-flex">
+                              <div>
+                                <span class="d-inline-block">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="23"
+                                    height="23"
+                                    viewBox="0 0 16 19"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M7.02961 18.7666L1.56506 12.2116C1.09591 11.6675 0.726802 11.0453 0.474738 10.3736C0.0495203 9.21012 -0.0929274 7.96296 0.0590208 6.73416C0.210969 5.50537 0.652994 4.32983 1.34898 3.30362C2.02368 2.28808 2.94082 1.45477 4.01833 0.878265C5.09584 0.301756 6.30015 0 7.52353 0C8.7469 0 9.95122 0.301756 11.0287 0.878265C12.1062 1.45477 13.0233 2.28808 13.698 3.30362C14.3945 4.33022 14.8366 5.50639 14.9882 6.73581C15.1398 7.96523 14.9966 9.2129 14.5703 10.3766C14.3193 11.0483 13.9504 11.6702 13.481 12.2136L8.01941 18.7666C7.95969 18.8401 7.8842 18.8994 7.79849 18.9402C7.71277 18.9809 7.61901 19.002 7.52402 19.002C7.42903 19.002 7.33527 18.9809 7.24955 18.9402C7.16384 18.8994 7.08933 18.8401 7.02961 18.7666ZM2.42023 4.0596C1.84383 4.90809 1.47747 5.88032 1.35119 6.89676C1.22491 7.9132 1.34228 8.94499 1.69368 9.90762C1.89266 10.4342 2.1835 10.9217 2.55283 11.3476L7.52402 17.3106L12.4932 11.3496C12.862 10.925 13.1525 10.4388 13.3514 9.9136C13.7033 8.95045 13.8211 7.91806 13.6949 6.90091C13.5688 5.88375 13.2024 4.91076 12.6258 4.06161C12.0678 3.22246 11.3095 2.53397 10.4188 2.05765C9.52812 1.58133 8.53268 1.332 7.52151 1.332C6.51033 1.332 5.5149 1.58133 4.62418 2.05765C3.73347 2.53397 2.97519 3.22246 2.41716 4.06161L2.42023 4.0596ZM3.88229 7.65964C3.90107 6.94674 4.13072 6.25518 4.54242 5.67148C4.95413 5.08777 5.52966 4.63783 6.19701 4.37796C6.86436 4.11809 7.59384 4.0598 8.2943 4.21042C8.99477 4.36104 9.63505 4.71382 10.135 5.2247C10.635 5.73558 10.9726 6.38188 11.1054 7.08267C11.2382 7.78346 11.1604 8.50763 10.8817 9.16464C10.603 9.82165 10.1359 10.3823 9.53864 10.7765C8.94141 11.1706 8.24065 11.3808 7.52402 11.3806C6.54552 11.3675 5.6122 10.9686 4.92876 10.2716C4.24533 9.57465 3.86757 8.6364 3.87831 7.66263L3.88229 7.65964ZM5.18262 7.65964C5.19448 8.11797 5.3419 8.56264 5.60643 8.93802C5.87097 9.3134 6.24085 9.60282 6.66983 9.77005C7.09881 9.93728 7.56782 9.97489 8.01818 9.8782C8.46854 9.78152 8.88025 9.55483 9.20179 9.22647C9.52334 8.89811 9.74049 8.48266 9.82598 8.03214C9.91147 7.58161 9.86154 7.116 9.68246 6.69357C9.50338 6.27114 9.20305 5.91066 8.81913 5.6572C8.43521 5.40374 7.98474 5.2686 7.52402 5.26865C7.21205 5.27256 6.90392 5.33756 6.61721 5.45999C6.3305 5.58242 6.07079 5.75984 5.85299 5.98215C5.6352 6.20446 5.46357 6.46731 5.34785 6.75565C5.23214 7.04398 5.17465 7.35218 5.17863 7.66263L5.18262 7.65964Z"
+                                      fill="#0DB1FF"
+                                    />
+                                  </svg>
+                                </span>
+                              </div>
+                              <div>
+                                <span class="place-name">
+                                  {{ trip?.Place }}
+                                </span>
+                              </div>
+                            </div>
+                          </span>
+                          <div
+                            class="w-m-100 d-flex mt-1"
+                            style="width: 200px"
+                            *ngIf="trip?.categoryid == 4"
+                          >
+                            <div>
+                              <span class="d-inline-block">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="23"
+                                  height="23"
+                                  viewBox="0 0 16 19"
+                                  fill="none"
+                                >
+                                  <path
+                                    d="M7.02961 18.7666L1.56506 12.2116C1.09591 11.6675 0.726802 11.0453 0.474738 10.3736C0.0495203 9.21012 -0.0929274 7.96296 0.0590208 6.73416C0.210969 5.50537 0.652994 4.32983 1.34898 3.30362C2.02368 2.28808 2.94082 1.45477 4.01833 0.878265C5.09584 0.301756 6.30015 0 7.52353 0C8.7469 0 9.95122 0.301756 11.0287 0.878265C12.1062 1.45477 13.0233 2.28808 13.698 3.30362C14.3945 4.33022 14.8366 5.50639 14.9882 6.73581C15.1398 7.96523 14.9966 9.2129 14.5703 10.3766C14.3193 11.0483 13.9504 11.6702 13.481 12.2136L8.01941 18.7666C7.95969 18.8401 7.8842 18.8994 7.79849 18.9402C7.71277 18.9809 7.61901 19.002 7.52402 19.002C7.42903 19.002 7.33527 18.9809 7.24955 18.9402C7.16384 18.8994 7.08933 18.8401 7.02961 18.7666ZM2.42023 4.0596C1.84383 4.90809 1.47747 5.88032 1.35119 6.89676C1.22491 7.9132 1.34228 8.94499 1.69368 9.90762C1.89266 10.4342 2.1835 10.9217 2.55283 11.3476L7.52402 17.3106L12.4932 11.3496C12.862 10.925 13.1525 10.4388 13.3514 9.9136C13.7033 8.95045 13.8211 7.91806 13.6949 6.90091C13.5688 5.88375 13.2024 4.91076 12.6258 4.06161C12.0678 3.22246 11.3095 2.53397 10.4188 2.05765C9.52812 1.58133 8.53268 1.332 7.52151 1.332C6.51033 1.332 5.5149 1.58133 4.62418 2.05765C3.73347 2.53397 2.97519 3.22246 2.41716 4.06161L2.42023 4.0596ZM3.88229 7.65964C3.90107 6.94674 4.13072 6.25518 4.54242 5.67148C4.95413 5.08777 5.52966 4.63783 6.19701 4.37796C6.86436 4.11809 7.59384 4.0598 8.2943 4.21042C8.99477 4.36104 9.63505 4.71382 10.135 5.2247C10.635 5.73558 10.9726 6.38188 11.1054 7.08267C11.2382 7.78346 11.1604 8.50763 10.8817 9.16464C10.603 9.82165 10.1359 10.3823 9.53864 10.7765C8.94141 11.1706 8.24065 11.3808 7.52402 11.3806C6.54552 11.3675 5.6122 10.9686 4.92876 10.2716C4.24533 9.57465 3.86757 8.6364 3.87831 7.66263L3.88229 7.65964ZM5.18262 7.65964C5.19448 8.11797 5.3419 8.56264 5.60643 8.93802C5.87097 9.3134 6.24085 9.60282 6.66983 9.77005C7.09881 9.93728 7.56782 9.97489 8.01818 9.8782C8.46854 9.78152 8.88025 9.55483 9.20179 9.22647C9.52334 8.89811 9.74049 8.48266 9.82598 8.03214C9.91147 7.58161 9.86154 7.116 9.68246 6.69357C9.50338 6.27114 9.20305 5.91066 8.81913 5.6572C8.43521 5.40374 7.98474 5.2686 7.52402 5.26865C7.21205 5.27256 6.90392 5.33756 6.61721 5.45999C6.3305 5.58242 6.07079 5.75984 5.85299 5.98215C5.6352 6.20446 5.46357 6.46731 5.34785 6.75565C5.23214 7.04398 5.17465 7.35218 5.17863 7.66263L5.18262 7.65964Z"
+                                    fill="#0DB1FF"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
+                            <div>
+                              <h5 class="mb-0 ms-1">{{ trip?.to }}</h5>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf="trip.way==2">
+
+                        </div>
+                      </div>
+
+                      <ul class="timing list-unstyled">
+                        <li>
+                          <span>
+                            <img
+                              src="../../../../../assets/images/calendar.svg"
+                              alt="calendar"
+                            />
+                          </span>
+                          <span> Trip Date : {{ trip?.booking_date }}</span>
+                        </li>
+                        <li>
+                          <span>
+                            <img
+                              src="../../../../../assets/images/clock.svg"
+                              alt="clock"
+                            />
+                          </span>
+                          <span *ngIf="trip?.categoryid!=2 && trip?.categoryid !=5 && trip?.categoryid!=4">
+                            Starting Time : {{trip?.booking_time}}
+                          </span>
+                          <span *ngIf="trip?.categoryid==2">
+                            Starting Time : 8:30 AM
+
+                          </span>
+                          <span *ngIf="trip?.categoryid ==4">
+                            <span>
+                              Starting Time:
+                              {{
+                                "1970-01-01T" + (trip?.booking_time || "00:00:00")
+                                  | date : "h:mm a"
+                              }}
+                            </span>
+
+
+                          </span>
+                          <span *ngIf="trip?.categoryid==5">
+                            Starting Time : 8:00 AM
+
+                          </span>
+
+                        </li>
+                        <li>
+                          <div class="d-flex">
+                            <div>
+                              <span>
+                                <img
+                                  src="../../../../../assets/images/Forma1.svg"
+                                  alt="Forma"
+                                />
+                              </span>
+                            </div>
+                            <div class="pt-2 ps-3">
+                              <span
+                              *ngIf="
+                                trip?.categoryid != 4 && trip?.categoryid != 2
+                              "
+                              >No.Of People: {{ trip?.adult }} Adult ({{person.adult}})</span
+                            >
+                            <span
+                              *ngIf="
+                                trip?.categoryid == 4 || trip?.categoryid == 2"
+                              >No.Of People: {{ trip?.persons }} People</span
+                            >
+                            </div>
+                          </div>
+
+
+                        </li>
+                        <li *ngIf="trip?.categoryid == 4">
+                          <div class="d-flex">
+                            <div>
+                              <span>
+                                <img
+                                  style="
+                                    width: 33px !important;
+                                    height: 35px !important;
+                                  "
+                                  src="../../../../../../assets/icons/car.svg"
+                                  alt="Forma"
+                                />
+                              </span>
+                            </div>
+                            <div class="pt-2 ps-2">
+                              <span >Car type: {{ trip?.car }} </span>
+                            </div>
+                          </div>
+
+
+                        </li>
+                        <li *ngIf="trip?.childern > 0">
+                          <span>
+                            <img
+                              src="../../../../../assets/images/profile-2user.svg"
+                              alt="profile-user"
+                            />
+                          </span>
+
+                          <span> {{ trip?.childern }} Children (5-10) </span>
+                        </li>
+                        <li *ngIf="trip?.infant > 0">
+                          <span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="23"
+                              height="23"
+                              viewBox="0 0 23 24"
+                              fill="none"
+                            >
+                              <path
+                                d="M17.8889 3.15789C17.8889 4.92632 16.4833 6.31579 14.6944 6.31579C12.9056 6.31579 11.5 4.92632 11.5 3.15789C11.5 1.38947 12.9056 0 14.6944 0C16.4833 0 17.8889 1.38947 17.8889 3.15789ZM15.3333 7.57895H14.3111C11.6278 7.57895 9.07222 6.06316 7.79445 3.66316C7.66667 3.53684 7.53889 3.41053 7.53889 3.28421L5.23889 4.29474C5.87778 6.06316 7.92222 8.33684 10.8611 9.47368L8.56111 15.7895L3.57778 14.4L0 21.3474L2.55556 21.9789L4.85556 17.4316L10.6056 18.9474C11.8833 19.2 13.1611 18.5684 13.6722 17.4316L16.6111 9.34737C16.8667 8.46316 16.2278 7.57895 15.3333 7.57895ZM20.3167 6.31579L15.9722 18.1895C15.2056 20.2105 13.2889 21.4737 11.2444 21.4737C10.8611 21.4737 10.35 21.4737 9.96667 21.3474L6.26111 20.3368L5.11111 22.6105L7.66667 23.2421L9.45555 23.7474C10.0944 23.8737 10.7333 24 11.3722 24C14.5667 24 17.3778 22.1053 18.5278 19.0737L23 6.31579H20.3167Z"
+                                fill="#0DB1FF"
+                              />
+                            </svg>
+                          </span>
+                          <span> {{ trip?.infant }} Infant (0-4) </span>
+                        </li>
+                      </ul>
+                      <div></div>
+                    </div>
+
+                    <div class="trip-rating">
+                      <p class="mt-4">
+                        total-price: <b>${{ trip?.price }} </b>
+                      </p>
+
+                      <div class="mobile-btn" *ngIf="trip?.categoryid != 4">
+                        <button
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal2"
+                          (click)="setBookingId(trip?.booking_inform)"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          (click)="setActiveBooking(trip?.id)"
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                        >
+                          cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div *ngIf="this.upcoming?.length == 0" class="my-4">
+              No Upcoming Bookings available
+            </div>
+          </section>
+
+        </div>
+        <!--------end of first column------------->
+        <!--------column 2---------------------->
+        <div class="col-lg-3">
+          <div class="book-with-us">
+            <h6>Why Book With Us?</h6>
+            <ul>
+              <li>
+                <span>
+                  <img src="../../../../../assets/images/global-refresh.svg" />
+                </span>
+                <span> Unique Destinations </span>
+              </li>
+              <li>
+                <span>
+                  <img src="../../../../../assets/images/call-calling.svg" />
+                </span>
+                <span> 24/7 Expert customer support </span>
+              </li>
+              <li>
+                <span>
+                  <img src="../../../../../assets/images/routing.svg" />
+                </span>
+                <span> Expert Tour Guide </span>
+              </li>
+              <li>
+                <span>
+                  <img src="../../../../../assets/images/dollar-square.svg" />
+                </span>
+                <span> Best Price Guarantee </span>
+              </li>
+              <li>
+                <span>
+                  <img
+                    src="../../../../../assets/images/empty-wallet-tick.svg"
+                  />
+                </span>
+                <span> Free Cancellation </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!------------------------------------>
+      </Section>
+    </div>
+  </div>
+</section>
+
+<!---------------------------------------->
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade py-3 step1"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to cancel this tour ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal">Back</button>
+        <button
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal1"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-------------------------------------->
+
+<!-- Modal -->
+<div
+  class="modal fade py-3 step2"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <header>
+          <p>Before you go would you mind letting us know why ?</p>
+          <span>Your feedback will help us make marsawaves better</span>
+        </header>
+        <form>
+          <div class="form-check" *ngFor="let reason of reasons">
+            <input
+              (change)="setReason(reason)"
+              class="form-check-input"
+              name="choosenReason"
+              type="radio"
+              [value]="reason"
+              [id]="'reason-' + reason.id"
+            />
+            <label class="form-check-label" [for]="'reason-' + reason.id">
+              {{ reason.label }}
+            </label>
+          </div>
+          <div>
+            <textarea
+              *ngIf="choosenReason?.id === 4"
+              [(ngModel)]="other"
+              name="other"
+              class="form-control"
+              placeholder="Write here ..."
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal">Cancel</button>
+        <button
+          (click)="cancelBooking()"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div
+  class="modal fade py-3 step1"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered"
+    style="margin: auto; max-width: 80% !important"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="customerForm">
+          <div class="row">
+            <!-- Input -->
+            <div class="col-sm-4 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Name </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  [ngClass]="{
+                    'is-invalid':
+                      customerForm.get('name')?.invalid &&
+                      customerForm.get('name')?.touched
+                  }"
+                  placeholder="Please enter your name."
+                  required
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('name')?.invalid &&
+                    (customerForm.get('name')?.dirty ||
+                      customerForm.get('name')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Email </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid':
+                      customerForm.get('email')?.invalid &&
+                      customerForm.get('email')?.touched
+                  }"
+                  placeholder="enter emial"
+                  required
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('email')?.invalid &&
+                    (customerForm.get('email')?.dirty ||
+                      customerForm.get('email')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Email is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Phone </label>
+                <div>
+                  
+                  <ngx-intl-tel-input
+                    [cssClass]="'form-control'"
+                    [enableAutoCountrySelect]="true"
+                    [searchCountryFlag]="true"
+                    [selectFirstCountry]="false"
+                    [separateDialCode]="true"
+                    [maxLength]="20"
+                    [phoneValidation]="false"
+                    name="phone"
+                    [enablePlaceholder]="true"
+                    [customPlaceholder]="'Enter phone number'"
+                    [preferredCountries]="['de']"
+                    formControlName="phone"
+                    (countryChange)="onCountryChange($event)"
+                  ></ngx-intl-tel-input>
+                </div>
+
+
+                <ng-container
+                  *ngIf="
+                    customerForm.get('phone')?.errors &&
+                    customerForm.get('phone')?.touched
+                  "
+                >
+                  <div
+                    class="alert alert-danger my-2 text-dark"
+                    *ngIf="customerForm.get('phone')?.errors?.['required']"
+                  >
+                    Phone is required
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <!-- End Input -->
+
+            <div class="w-100"></div>
+
+            <!-- End Input -->
+            <div class="w-100"></div>
+            <p class="text-left fs-6">Do you want a pick up services ?</p>
+            <div class="d-flex gap-3 flex-wrap mb-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="pickupService"
+                  id="flexRadioDefault1"
+                  [checked]="showServices"
+                  (change)="showServices = true"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Yes, I can add it now (recommended)
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="pickupService"
+                  id="flexRadioDefault2"
+                  [checked]="!showServices"
+                  (change)="showServices = false"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  I don't know yet ( later )
+                </label>
+              </div>
+            </div>
+            <!-- Input -->
+            <ng-container *ngIf="showServices">
+              <div class="col-sm-6 mb-4">
+                <div class="js-form-message">
+                  <label class="form-label"> Pick up Location </label>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control location"
+                      aria-describedby="helpId"
+                      [value]="locationValue"
+                      placeholder="Location"
+                      formControlName="locationValue"
+                      (click)="openMapModal()"
+                      readonly
+                    />
+                   
+                  </div>
+                  <div
+                    *ngIf="
+                      !locationValue &&
+                      customerForm.get('locationValue')?.touched
+                    "
+                    class="alert alert-danger my-2"
+                  >
+                    Pick up Location is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mb-4">
+                <label class="form-label"> Name your place </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="pickup_point"
+                  placeholder="Enter Pick up Place"
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('pickup_point')?.invalid &&
+                    (customerForm.get('pickup_point')?.dirty ||
+                      customerForm.get('pickup_point')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Pick up Place is required
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div class="col-sm-6 mb-4">
+                <div class="js-form-message">
+                  <label class="form-label">
+                    <p class="text-left fs-6">
+                      You must choose location before 24 hours
+                    </p>
+                  </label>
+                </div>
+              </div>
+            </ng-template>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-12 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Special Requirements </label>
+                <textarea
+                  type="number"
+                  class="form-control w-100"
+                  formControlName="note"
+                  placeholder="Enter Special Requirements"
+                  style="font-size: 15px"
+                  rows="2"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="first" data-bs-dismiss="modal" #btn>
+          Cancel
+        </button>
+        <button type="button" class="second" (click)="confirmEdit()">
+          Confirm Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Map Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="max-width: 90%; margin: 1.75rem auto;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="map-container">
+          <div class="search-box mb-3">
+            <div class="input-group">
+              <input
+                #searchInput
+                type="text"
+                class="form-control"
+                placeholder="Search location"
+                [formControl]="searchControl"
+                (keyup)="onSearchInput($event)"
+                autocomplete="off"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()" *ngIf="searchControl.value">
+                  <i class="fa fa-times"></i>
+                </button>
+                <div class="btn btn-outline-secondary" *ngIf="isSearching">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </div>
+              </div>
+            </div>
+            <!-- Search Results -->
+            <div *ngIf="showResults" class="search-results">
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let result of searchResults" (click)="selectLocation(result)">
+                  {{ result.name }}
+                </li>
+              </ul>
+            </div>
+            <!-- No results message -->
+            <div *ngIf="searchControl.value && !isSearching && searchResults.length === 0 && searchControl.value.trim().length >= 2" class="alert alert-info mt-2">
+              No locations found for "{{ searchControl.value }}"
+            </div>
+          </div>
+          <div id="googleMap" style="height:400px; width: 100%;"></div>
+          <div class="mt-3">
+            <button class="btn btn-secondary mr-2" (click)="setCurrentLocation()">
+              <i class="fa fa-location-arrow mr-1"></i> Set Current Location
+            </button>
+            <button class="btn btn-primary" (click)="confirmLocation()" data-bs-dismiss="modal">
+              <i class="fa fa-check mr-1"></i> Confirm Location
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

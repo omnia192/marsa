@@ -1,0 +1,40 @@
+section{
+    background-image: url(../../../../../assets/images/scuba-dive-course-hurghada.jpg);
+    height: 406px;
+    background-position: center center;
+    background-size: cover;
+}
+.container{
+    min-height: 406px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   color: #fff;
+   text-align: center;
+}
+
+.layer{
+ 
+    background-color: rgba(0, 0, 0, .7);
+    background-blend-mode: darken;
+}
+h5{
+    color: #FFF;
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: 700;
+}
+a{
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    background: transparent;
+    padding: 15px 38px;
+    font-size: 16px;
+    line-height: 19.2px;
+    font-weight: 400;
+    display: inline-flex;
+    width: 19%;
+    justify-content: center;
+    align-items: center;
+}

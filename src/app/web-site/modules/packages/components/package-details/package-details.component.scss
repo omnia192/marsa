@@ -1,0 +1,360 @@
+@import url(../../../../../../styles/packages-edit.scss);
+.packages-content {
+  margin-top: 150px;
+}
+
+
+.diving-carousel {
+    ::ng-deep {
+    .p-carousel {
+      .p-carousel-indicators {
+        margin-top: 1rem;
+      }
+
+      .p-carousel-indicator {
+        button {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #D6D6D6;
+          border: none;
+          margin: 0 5px;
+          transition: all 0.3s ease;
+
+          &.p-highlight {
+            background: #0db1ff;
+          }
+        }
+      }
+    }
+  }
+
+  .carousel-card {
+    img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+}
+
+.p-calendar-overlay-visible .sticky-nav {
+  position: static !important;
+  top: auto !important;
+}
+.p-calendar-overlay {
+  z-index: 9999 !important;
+}
+
+.p-datepicker {
+  z-index: 10000 !important;
+}
+
+body.p-overflow-hidden .sticky-nav {
+  position: static !important;
+  top: auto !important;
+}
+::ng-deep{
+  .p-calendar{
+width:100%  !important;
+  }
+  .p-button{
+    background: transparent !important;
+  }
+  .p-calendar-overlay {
+    z-index: 9999 !important;
+  }
+
+  .p-datepicker {
+    z-index: 10000 !important;
+  }
+
+  body.p-overflow-hidden .sticky-nav {
+    position: static !important;
+    top: auto !important;
+  }
+  .mat-datepicker-toggle button svg {
+    color: #0057FF !important;
+  }
+  .custom-calendar .p-inputwrapper .p-datepicker-trigger {
+    background-color: transparent !important;
+    border: none;
+  }
+
+  .custom-calendar calendaricon svg {
+    color: #0057FF !important;
+    font-size: 1.2rem;
+  }
+  .custom-calendar .p-input-icon-right>.p-icon-wrapper{
+    left: 0 !important;
+    padding-left: 0.5rem;
+  }
+  .custom-calendar .p-inputtext, .time-calendar .p-inputtext{
+    padding-left: 1.9rem;
+  }
+  .custom-calendar .p-inputtext::placeholder, .time-calendar .p-inputtext::placeholder {
+    color: #3b444f;
+  }
+  .p-element .p-icon-wrapper svg path {
+    color: #0057FF !important;
+  }
+  .custom-calendar .p-datepicker {
+   margin-top: 4rem;
+
+  }
+
+}
+::ng-deep  .p-datepicker-touch-ui {
+  width: 250px !important; /* تقليل العرض */
+  min-width:30%; /* التأكد من عدم تجاوز الشاشة */
+}
+::ng-deep{
+
+
+ .mat-datepicker-content {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+  mat-datepicker {
+    transform-origin: top right !important;
+    direction: ltr !important;
+  }
+
+  .cdk-overlay-connected-position-bounding-box {
+    justify-content: flex-end !important;
+  }
+}
+
+
+
+@media (min-width: 1300px) {
+//  ::ng-deep{
+//   .cdk-overlay-pane{
+//     left: 1400.64px !important;
+//   }
+//   }
+}
+
+
+
+h4,
+.heading,
+.option h3,
+.card-body h5,
+.my-tours-work h5.text-center {
+  font-family: Lato;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 30px;
+  line-height: 36px;
+  text-align: left;
+}
+h5,
+h6 {
+  color: #3b444f;
+  font-weight: 700;
+  font-family: Lato;
+}
+h5 {
+  font-size: 24px;
+}
+h6 {
+  font-size: 22px;
+}
+.fa-solid {
+  border: 1px solid #ebf0f7;
+  width: 30px;
+  height: 26px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  color: #3b444f;
+}
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+}
+.breadcrumb,
+.popular,
+.location,
+.list,
+.navs li,
+.top,
+.collective,
+.private,
+.border,
+.priceTitle p,
+.badge-sale,
+.sale,
+.check,
+.cart,
+.book {
+  font-family: Lato;
+}
+.breadcrumb,
+.popular,
+.bookDetails small {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.breadcrumb i {
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+.popular,
+.collective,
+.private,
+.review,
+.badge-sale,
+.check,
+.cart,
+.book {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.average-label,
+.location,
+.list {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+.average-label {
+  color: #67747c;
+  font-family: Lato;
+}
+.priceTitle p span {
+  font-weight: 700;
+}
+.progress-bar {
+  background-color: #0057ff;
+}
+.about-title {
+  color: #67747c;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+}
+.navs {
+  box-shadow: 6px 3px 30px 8px rgba(0, 0, 0, 0.3);
+  padding: 10px 0;
+}
+.text-decoration-underline {
+  cursor: pointer;
+}
+
+.rate-num,
+h2.rate {
+  color: #0057ff;
+}
+.tab-pane {
+  margin-top: 25px;
+  border-bottom: 1px solid #ebf0f7;
+}
+
+.tab-content {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sticky-nav {
+  border-radius: 10px;
+  position: sticky;
+  top: 80px;
+  z-index: 200;
+  background-color: #fff;
+  margin-top: 20px;
+}
+.selected {
+  color: yellow !important;
+  text-shadow: 0.5px 0.5px #ffea01;
+  border: none !important;
+}
+
+.yellow-star {
+  color: yellow !important;
+  border: none !important;
+}
+.review {
+  background: #297cbb;
+  text-align: center;
+  height: 40px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 7px !important;
+}
+.fa-solid
+{
+  border: none !important;
+}
+@media (max-width: 992px) {
+  .sticky-nav {
+    display: none;
+  }
+  .exc-div{
+    margin-left: 1rem;
+  }
+}
+
+::ng-deep {
+  .Map {
+    iframe {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .packages-content {
+    margin-top: 0px;
+  }
+}
+.active {
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  background-color: #0db1ff !important;
+  border-radius: 25px;
+}
+
+.btnReview,
+.check {
+  background-color: #0db1ff;
+}
+
+.sale,
+.check,
+.badge-sale,
+.active {
+  color: #fff;
+}
+
+.sale {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.check {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

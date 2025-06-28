@@ -1,0 +1,181 @@
+
+
+<app-header [background]="'#0DB1FF'"></app-header>
+<section class="container">
+  <div class="row">
+    <div [class.col-lg-12]="">
+      <ul class="nav" style="justify-content: center;">
+        <li *ngFor="let tab of tabs" class="nav-item active"
+          (click)="setActiveSection(tab.section)">
+          <span>
+            {{tab.section}}
+          </span>
+          <span>
+            {{ tab.label }}
+          </span>
+        </li>
+      </ul>
+
+      <div class="multi-step-form">
+        <div class="confirmation">
+          <div class=" thanks-message">
+            <div class="test d-flex justify-content-center align-items-center gap-3">
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="19" viewBox="0 0 27 19" fill="none">
+                  <path d="M26.6005 0.378418C26.3421 0.135343 26.0007 0 25.646 0C25.2912 0 24.9498 0.135343 24.6915 0.378418L8.51746 15.8545L2.30045 9.90552C2.04196 9.66267 1.70062 9.52734 1.34595 9.52734C0.991273 9.52734 0.649938 9.66267 0.391449 9.90552C0.266637 10.0227 0.167183 10.1642 0.0991821 10.3213C0.0311817 10.4784 -0.00390625 10.6479 -0.00390625 10.8191C-0.00390625 10.9903 0.0311817 11.1595 0.0991821 11.3167C0.167183 11.4738 0.266637 11.6152 0.391449 11.7324L7.56345 18.5945C7.82193 18.8373 8.16327 18.9724 8.51794 18.9724C8.87262 18.9724 9.21395 18.8373 9.47244 18.5945L26.6005 2.20459C26.7251 2.08742 26.8245 1.94584 26.8924 1.78882C26.9603 1.6318 26.9953 1.46258 26.9953 1.2915C26.9953 1.12043 26.9603 0.95121 26.8924 0.794189C26.8245 0.637168 26.7251 0.495585 26.6005 0.378418Z" fill="white"/>
+                </svg>
+              </div>
+              <div class="thanks">
+                <p>
+                  Thank you for choosing  Marsa Waves Great News ! we have sent your confirmation  to
+                  <span>
+                    info&#64;jessica.com
+                  </span>
+                </p>
+                <p>
+                  Expect  a follow up email or what’s app message shortly
+                  with your scheduled pickup time from your location
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="result">
+          <div class="mb-5  bg-white rounded-sm"
+          style=" margin: 30px auto !important;box-shadow: 0.5px 0.8659999966621399px 4px 0px rgba(27, 32, 50, 0.08);">
+          <div class="pt-4 pb-3 px-5 ">
+              <div class="d-flex justify-content-between">
+                  <h5 id="scroll-description" class="font-size-21 font-weight-bold text-dark mb-2">
+                      Traveler Information
+                  </h5>
+
+              </div>
+              <!-- Fact List -->
+              <ul class="list-unstyled font-size-1 mb-0 font-size-16">
+                  <li class="d-flex justify-content-between py-2  flex-column flex-sm-row">
+                      <span class="font-weight-medium">Booking number</span>
+                      <span class="text-secondary text-right">{{confirmRequest?.Bookingnumber}}</span>
+                  </li>
+
+                  <li class="d-flex justify-content-between py-2  flex-column flex-sm-row">
+                      <span class="font-weight-medium">Name</span>
+                      <span class="text-secondary text-right">{{confirmRequest?.name}}</span>
+                  </li>
+
+                  <li class="d-flex justify-content-between py-2  flex-column flex-sm-row">
+                      <span class="font-weight-medium">E-mail address</span>
+                      <span class="text-secondary text-right">{{confirmRequest["E-mail"]}}</span>
+                  </li>
+
+                  <li class="d-flex justify-content-between py-2  flex-column flex-sm-row">
+                      <span class="font-weight-medium">Phone Number</span>
+                      <span class="text-secondary text-right">{{confirmRequest?.Phone}}</span>
+                  </li>
+              </ul>
+              <!-- End Fact List -->
+          </div>
+          <div class="pt-4 pb-3 px-5 ">
+              <div class="d-flex justify-content-between">
+                <div [innerHTML]="confirmRequest?.Bookinginstraction"></div>
+              </div>
+          </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-tours-work">
+    <h5 class="text-center mb-5 head">Explor things to do</h5>
+
+    <owl-carousel-o [options]="customOptions" class="my-tours">
+      <ng-container *ngFor="let item of relatedtrips">
+        <ng-template carouselSlide>
+          <app-activity-card [item]="item"></app-activity-card>
+        </ng-template>
+      </ng-container>
+
+
+    </owl-carousel-o>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

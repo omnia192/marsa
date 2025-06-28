@@ -1,0 +1,244 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+<div class="container top-155">
+  <div class="row">
+    <div class="col-lg-12 col-xl-12">
+      <div class="pb-5">
+        <!-- Contacts Form -->
+        <form [formGroup]="customerForm">
+          <div class="row col-12">
+            <h5 class="text-center">Let us know who you are</h5>
+            <!-- Input -->
+            <div class="col-sm-12 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Name </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  [ngClass]="{
+                    'is-invalid':
+                      customerForm.get('name')?.invalid &&
+                      customerForm.get('name')?.touched
+                  }"
+                  placeholder="Please enter your name."
+                  required
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('name')?.invalid &&
+                    (customerForm.get('name')?.dirty ||
+                      customerForm.get('name')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Email </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid':
+                      customerForm.get('email')?.invalid &&
+                      customerForm.get('email')?.touched
+                  }"
+                  placeholder="enter emial"
+                  required
+                />
+                <div
+                  *ngIf="
+                    customerForm.get('email')?.invalid &&
+                    (customerForm.get('email')?.dirty ||
+                      customerForm.get('email')?.touched)
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  Email is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <label class="form-label"> Phone </label>
+
+              <ngx-intl-tel-input
+                [enableAutoCountrySelect]="true"
+                [enablePlaceholder]="true"
+                [searchCountryFlag]="true"
+                [selectFirstCountry]="true"
+                [maxLength]="20"
+                [separateDialCode]="true"
+                [phoneValidation]="false"
+                name="phone"
+                [enablePlaceholder]="true"
+                [customPlaceholder]="'Enter phone number'"
+                [preferredCountries]="['de']"
+                formControlName="phone"
+                (countryChange)="onCountryChange($event)"
+                (countryChange)="onCountryChange($event)"
+              ></ngx-intl-tel-input>
+
+              <ng-container
+                *ngIf="
+                  customerForm.get('phone')?.errors &&
+                  customerForm.get('phone')?.touched
+                "
+              >
+                <div
+                  class="alert alert-danger my-2 text-dark"
+                  *ngIf="customerForm.get('phone')?.errors?.['required']"
+                >
+                  Phone is required
+                </div>
+              </ng-container>
+            </div>
+            <!-- End Input -->
+
+            <div class="w-100"></div>
+
+            <div class="w-100"></div>
+            <p>Do you want a pick up services ?</p>
+            <div class="d-flex gap-5 mb-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                  (change)="showServices = true"
+                  checked="checked"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Yes
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault2"
+                  (change)="showServices = false"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  No
+                </label>
+              </div>
+            </div>
+            <ng-container *ngIf="showServices" class="mb-2">
+              <ul class="list-unstyled ms-4">
+                <li class="pt-2">Pick up and drop off services Includes:</li>
+                <li class="pt-2">From the airport to that hotel</li>
+                <li class="pt-2">From airport to the marine</li>
+                <li class="pt-2">From hotel to the marine</li>
+              </ul>
+              <!-- Input -->
+              <ng-container
+                *ngIf="showServices; else elseTemplate"
+                class="mb-2"
+              >
+                <div class="col-sm-6 mb-4">
+                  <div class="js-form-message">
+                    <label class="form-label"> Pick up Location </label>
+                    <input
+                      (click)="openMapModal()"
+                      type="text"
+                      class="form-control location"
+                      aria-describedby="helpId"
+                      [value]="locationValue"
+                      placeholder="Location"
+                      formControlName="locationValue"
+                      readonly
+                    />
+                    <div
+                      *ngIf="
+                        !locationValue &&
+                        customerForm.get('locationValue')?.touched
+                      "
+                      class="alert alert-danger my-2"
+                    >
+                      Pick up Location is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-4">
+                  <label class="form-label"> Name your place </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="pickup_point"
+                    placeholder="Enter Pick up Place"
+                  />
+                  <div
+                    *ngIf="
+                      customerForm.get('pickup_point')?.invalid &&
+                      (customerForm.get('pickup_point')?.dirty ||
+                        customerForm.get('pickup_point')?.touched)
+                    "
+                    class="alert alert-danger my-2"
+                  >
+                    Pick up Place is required
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div class="col-sm-6 mb-4">
+                <div class="js-form-message">
+                  <label class="form-label"
+                    ><p>You must choose location before 24 hours</p></label
+                  >
+                </div>
+              </div>
+            </ng-template>
+            <!-- End Input -->
+            <div class="w-100"></div>
+            <!-- Input -->
+            <div class="col-sm-12 mb-4">
+              <div class="js-form-message">
+                <label class="form-label"> Special Requirements </label>
+
+                <textarea
+                  type="number"
+                  class="form-control w-100"
+                  formControlName="note"
+                  placeholder="Enter Special Requirements"
+                  style="font-size: 15px"
+                  rows="2"
+                ></textarea>
+              </div>
+            </div>
+            <!-- End Input -->
+            <div class="w-100"></div>
+            <div class="col align-self-end">
+              <div class="text-right gap-3 d-flex justify-content-end">
+                <button
+                  type="submit"
+                  class="btn payment bg-transparent py-3"
+                  (click)="goBack()"
+                >
+                  Cancel
+                </button>
+                <button
+                  (click)="bookNow()"
+                  type="submit"
+                  class="btn payment text-white py-3"
+                  [ngStyle]="{'cursor': isDisable ? 'not-allowed' : 'pointer', }"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- End Contacts Form -->
+      </div>
+    </div>
+    
+  </div>
+</div>

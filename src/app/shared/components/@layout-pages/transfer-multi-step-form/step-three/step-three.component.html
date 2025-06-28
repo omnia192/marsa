@@ -1,0 +1,381 @@
+<div class="mt-2">
+  <form (ngSubmit)="nextStep()">
+    <div class="row">
+      <div class="col-lg-8 order-2 order-md-1">
+        <div class="heading">
+          <img src="../../../../../../assets/images/guarantee.svg" width="41px"/>
+          <span class="ms-1"> Guaranteed safe & secure checkout </span>
+        </div>
+
+        <section class="mt-3 row align-items-center justify-content-between">
+          <ul class="nav nav-classic nav-choose border-0 nav-justified flex-column flex-md-row">
+            <li class="nav-item mx-3 mb-3 mb-md-0">
+              <a class="rounded py-5 border-width-2 border nav-link font-weight-medium active"
+                id="pills-two-example2-tab" [class.active]="isActiveTab('pills-two-example2')"
+                (click)="toggleTab('pills-two-example2', 'card')">
+                <div
+                  class="height-25 width-25 flex-content-center bg-primary rounded-circle position-absolute left-0 top-0 ml-2 mt-2">
+                  <i class="fa fa-check text-white font-size-15"></i>
+                </div>
+                <div class="d-md-flex justify-content-md-center align-items-md-center flex-wrap">
+                  <img class="img-fluid mb-3 payment-img" src="../../../../../../assets/images/payment.svg"
+                    alt="payment" />
+                  <div class="w-100 text-dark">Payment with Card</div>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item mx-3 mb-2 mb-md-0 mt-md-0 mt-3">
+              <a class="rounded py-5 border-width-2 border nav-link font-weight-medium" id="pills-one-example2-tab"
+                [class.active]="isActiveTab('pills-one-example2')" (click)="toggleTab('pills-one-example2', 'cash')">
+                <div
+                  class="height-25 width-25 flex-content-center bg-primary rounded-circle position-absolute left-0 top-0 ml-2 mt-2">
+                  <i class="fa fa-check text-white font-size-15"></i>
+                </div>
+                <div class="d-md-flex justify-content-md-center align-items-md-center flex-wrap">
+                  <img class="img-fluid mb-3" style="width: 70px;"
+                    src="../../../../../../assets/custom/Activity/banknotes.svg" alt="banknotes" />
+                  <div class="w-100 text-dark"> Book Now Pay Later (Cash) </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!--------Bottom Form---------------------->
+
+        <div class="tab-content">
+          <div class="tab-pane fade pt-8 show active" id="pills-two-example2" role="tabpanel"
+            aria-labelledby="pills-two-example2-tab" [class.show]="isActiveTab('pills-two-example2')"
+            [class.active]="isActiveTab('pills-two-example2')">
+            <form class="js-validate" novalidate="novalidate">
+              <div class="row">
+                <div class="col-sm-6 mb-4">
+                  <div class="js-form-message">
+                    <label class="form-label"> Card Holder Name* </label>
+                    <input type="text" class="form-control" name="Cardname" placeholder="" aria-label="" required=""
+                      (paste)="onPaste($event)" [(ngModel)]="cardholderName" (keypress)="letterOnly($event)" />
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-4">
+                  <div class="js-form-message">
+                    <label class="form-label"> Card Number* </label>
+
+                    <input type="text" class="form-control" name="Cardnumber" placeholder="xxxx xxxx xxxx xxxx"
+                      aria-label="" required="" (paste)="onPaste($event)" inputmode="numeric" [(ngModel)]="cardNumber"
+                      maxlength="16" (keypress)="OnlyNumbers($event)" />
+                  </div>
+                </div>
+
+                <div class="w-100"></div>
+
+                <div class="col-sm-6 mb-4">
+                  <div class="row">
+                    <div class="col-sm-6 mb-4 mb-md-0">
+                      <div class="js-form-message">
+                        <label class="form-label"> Expiry Month*</label>
+
+                        <input type="text" class="form-control" name="Expirymonth" placeholder="xx" aria-label=""
+                          [(ngModel)]="expiryMonth" (paste)="onPaste($event)" required="" maxlength="2"
+                          (keypress)="OnlyNumbers($event)" inputmode="numeric" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="js-form-message">
+                        <label class="form-label"> Expiry Year* </label>
+                        <input type="text" class="form-control" name="Expiryyear" [(ngModel)]="expirYear"
+                          placeholder="xx" (paste)="onPaste($event)" aria-label="" required="" maxlength="2"
+                          inputmode="numeric" (keypress)="OnlyNumbers($event)" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 mb-4">
+                  <div class="js-form-message">
+                    <label class="form-label"> CVV* </label>
+
+                    <input type="text" class="form-control" name="ccvnumber" placeholder="XXX" aria-label="" required=""
+                      (paste)="onPaste($event)" [(ngModel)]="cvv" maxlength="3" autocomplete="cc-number"
+                      inputmode="numeric" (keypress)="OnlyNumbers($event)" />
+                  </div>
+                </div>
+
+                <div class="w-100"></div>
+                
+                <div class="w-100"></div>
+                <div class="col">
+                  <div class="js-form-message mb-5">
+                    <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
+                      <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox"
+                        required="" />
+                      <label class="custom-control-label" for="termsCheckbox">
+                        <small>
+                          By continuing, you agree to the
+                          <a routerLink="../../privacy/privacy" class="link-muted"
+                            style="color: rgba(41, 124, 187, 1)">Terms and Conditions</a>
+                        </small>
+                      </label>
+                    </div>
+                  </div>
+                 <a
+  style="width: 50% !important; margin: auto"
+  (click)="confirmBooking()"
+  class="btn payment text-white w-100 py-3"
+  [disabled]="buttonDisabled">
+  <span *ngIf="buttonDisabled">
+    <i class="fa fa-spinner fa-spin"></i> Loading...
+  </span>
+  <span *ngIf="!buttonDisabled">CONFIRM BOOKING</span>
+</a>
+
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="tab-pane fade pt-8" id="pills-two-example2" role="tabpanel"
+            [class.show]="isActiveTab('pills-one-example2')" [class.active]="isActiveTab('pills-one-example2')"
+            aria-labelledby="pills-two-example2-tab">
+            <form class="js-validate" novalidate="novalidate">
+              <div class="row">
+                <div class="col-sm-12 mb-4" [innerHTML]="responseData?.booking?.Bookingpayment">
+
+                </div>
+                <div class="js-form-message mb-5">
+                  <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
+                    <input type="checkbox" class="custom-control-input" id="termsCheckbox2" name="termsCheckbox2"
+                      required="">
+                    <label class="custom-control-label" for="termsCheckbox2">
+                      <small>
+                        By continuing, you agree to the
+                        <a class="link-muted" style="color: rgba(41, 124, 187, 1);">Terms and
+                          Conditions</a>
+                      </small>
+                    </label>
+                  </div>
+                </div>
+               <a
+  style="width: 50% !important; margin: auto"
+  (click)="confirmBooking()"
+  class="btn payment text-white w-100 py-3"
+  [disabled]="buttonDisabled">
+  <span *ngIf="buttonDisabled">
+    <i class="fa fa-spinner fa-spin"></i> Loading...
+  </span>
+  <span *ngIf="!buttonDisabled">CONFIRM BOOKING</span>
+</a>
+
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="car-data col-lg-4 order-1 order-md-2">
+        <div>
+          <div class="img-container">
+            <img style="width: auto !important; height: 200px" [src]="selectedCar?.cover"
+              [alt]="getImageName(selectedCar?.cover)" />
+          </div>
+          <!-------------------------------->
+          <div class="mt-3 payment2">
+            <h3>Payment</h3>
+
+            <div class="d-flex justify-content-between mt-5">
+              <div class="col-6 px-0">
+                <span class="person" style=" font-weight: 700;">Transfer Total </span>
+              </div>
+              <div class="col-4">
+                <span class="age">${{
+                  SavedaddOnDetails?.pureTotal
+
+                  }}</span>
+              </div>
+            </div>
+            <div class="pb-4 mt-5" *ngIf="AllbookingOption?.length != 0">
+              <div class="col-6 px-0">
+                <span class="person" style=" font-weight: 700;">Addtional Options </span>
+              </div>
+
+              <div class="mt-3" *ngFor="let option of AllbookingOption">
+                <div class="row d-flex justify-content-between">
+                  <div class="col-5">
+                    <span class="age">{{ option.title }}</span>
+                  </div>
+                  <div class="col-3">
+                    <span class="age">{{ option.price_per_person }}</span>
+                  </div>
+                  <div class="col-4">
+                    <span class="age">{{ option.total_price }}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="d-flex justify-content-between mt-5">
+              <div class="col-6 px-0">
+                <span class="person" style=" font-weight: 700;">Total </span>
+              </div>
+              <div class="col-4">
+                <span class="age">${{
+                  SavedaddOnDetails?.maintotal
+
+                  }}</span>
+              </div>
+            </div>
+            <ng-container *ngIf="Coupons">
+
+
+              <div class="d-flex justify-content-between mt-5">
+                <div class="col-6 px-0">
+                  <span class="person" style=" font-weight: 700;">Total After Discount </span>
+                </div>
+                <div class="col-4">
+                  <span class="age">${{SavedaddOnDetails?.Total}}</span>
+                </div>
+              </div>
+            </ng-container>
+
+            <!---------------------------------->
+          </div>
+          <!---------------------------------->
+          <div class="copoun bottom-line">
+            <h3>Coupon Code</h3>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <input type="text" class="form-control" name="email" id="CouponCodeExample1" placeholder="" aria-label=""
+                aria-describedby="CouponCodeExample2" required="" [(ngModel)]="coupon" />
+              <div class="input-group-append">
+                <button class="btn py-2" type="button" id="CouponCodeExample2" (click)="applycoupon()" style="
+                    background-color: rgb(13, 177, 255);
+                    font-family: Lato;
+                    font-size: 16px;
+                    font-weight: 700;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    color: white;
+                  ">
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!------------------------->
+
+          <div class="row mt-4 justify-content-center align-items-center">
+            <div class="col-12 col-text text-center">
+              <span style="font-weight: 700; font-size: 20px">Booking Detail</span>
+            </div>
+
+            <!------------------->
+
+            <div *ngIf="activeSection == 2" class="col-12 col-text text-center" style="color: #297cbb">
+              <span>Departure trip</span>
+            </div>
+
+            <div class="col-md-7 col-12 col-text">
+              <span>Starting From :</span>
+            </div>
+            <div class="col-md-5 col-12 col-detail">
+              <span>{{ fromName }}</span>
+            </div>
+            <!----------------------->
+            <div class="col-md-7 col-12 col-text">
+              <span>Going to :</span>
+            </div>
+            <div class="col-md-5 col-12 col-detail">
+              <span>{{ toName }}</span>
+            </div>
+            <!--------------------------->
+            <div class="col-md-7 col-12 col-text">
+              <span>Pick Up Date</span>
+            </div>
+            <div class="col-md-5 col-12 col-detail">
+              <span>{{ bookingDate }}</span>
+            </div>
+            <!----------------------->
+            <div class="col-md-7 col-12 col-text">
+              <span>Pick Up Time</span>
+            </div>
+            <div class="col-md-5 col-12 col-detail">
+              <span>
+                {{
+                "1970-01-01T" + (bookingTime || "00:00:00") | date : "h:mm a"
+                }}
+              </span>
+            </div>
+            <!----------------------->
+            <hr class="horizontal-line" />
+
+            <div class="row" *ngIf="activeSection == 2">
+              <div class="col-12 col-text text-center" style="color: #297cbb">
+                <span>Returning trip</span>
+              </div>
+
+              <div class="col-7 col-text">
+                <span>Returning From:</span>
+              </div>
+              <div class="col-5 col-detail">
+                <span>{{ toName }}</span>
+              </div>
+              <!----------------------->
+              <div class="col-7 col-text">
+                <span>Returning To:</span>
+              </div>
+              <div class="col-5 col-detail">
+                <span>{{ fromName }}</span>
+              </div>
+              <!--------------------------->
+              <div class="col-7 col-text">
+                <span>Return Date:</span>
+              </div>
+              <div class="col-5 col-detail">
+                <span>{{ returnbookingdate }}</span>
+              </div>
+              <!----------------------->
+              <div class="col-7 col-text">
+                <span>Return Time:</span>
+              </div>
+              <div class="col-5 col-detail">
+                <span>{{
+                  "1970-01-01T" + returnbookingtime | date : "h:mm a"
+                  }}</span>
+              </div>
+            </div>
+
+
+            <!----------------------->
+          </div>
+          <!------------------------------->
+          <div class="row mt-3 visitors pt-4">
+            <div class="col-8">
+              <span class="person"> Number of people</span>
+            </div>
+
+            <div class="col-4 text-end">
+              <span class="num">{{ person }}</span>
+            </div>
+            <!---------------------------------->
+          </div>
+
+          <div class="row mt-3 visitors pt-4">
+            <div class="col-8">
+              <span class="person"> Kilometer</span>
+            </div>
+
+            <div class="col-4 text-end">
+              <span class="num">{{ kilometr }}km</span>
+            </div>
+            <!---------------------------------->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+</div>

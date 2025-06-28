@@ -1,0 +1,42 @@
+@import url(../../../../../styles/packages-edit.scss);
+
+.diving-carousel {
+  margin-bottom: 1.5rem;
+  ::ng-deep {
+    .p-carousel {
+      .p-carousel-indicators {
+        margin-top: 1rem;
+      }
+
+      .p-carousel-indicator {
+        button {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #D6D6D6;
+          border: none;
+          margin: 0 5px;
+          transition: all 0.3s ease;
+
+          &.p-highlight {
+            background: #0db1ff;
+          }
+        }
+      }
+    }
+  }
+
+  .carousel-card {
+    img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+}
+
+
+
+
+

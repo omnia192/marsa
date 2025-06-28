@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="user">
+    <div class="user-container flex-column flex-lg-row">
+      <div>
+        <img [src]="userDetails?.image"  [alt]="getImageName(userDetails?.image)"  />
+      </div>
+      <header>
+        <h3>{{ userDetails?.name }}</h3>
+        <div class="d-flex flex-wrap">
+          <div class="icons me-4">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+              >
+                <path
+                  opacity="0.25"
+                  d="M12.25 5.83325C12.25 9.03673 9.4352 11.7711 7.92773 13.0058C7.38118 13.4534 6.61882 13.4534 6.07227 13.0058C4.5648 11.7711 1.75 9.03673 1.75 5.83325C1.75 2.93376 4.1005 0.583252 7 0.583252C9.8995 0.583252 12.25 2.93376 12.25 5.83325Z"
+                  fill="#5E6278"
+                />
+                <path
+                  d="M8.75 5.25C8.75 6.2165 7.9665 7 7 7C6.0335 7 5.25 6.2165 5.25 5.25C5.25 4.2835 6.0335 3.5 7 3.5C7.9665 3.5 8.75 4.2835 8.75 5.25Z"
+                  fill="#5E6278"
+                />
+              </svg>
+            </span>
+            <span>{{ userDetails?.country }}</span>
+          </div>
+          <div>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+              >
+                <path
+                  opacity="0.25"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M6.99935 2.33341C4.42202 2.33341 2.33268 4.42275 2.33268 7.00008C2.33268 9.57741 4.42202 11.6667 6.99935 11.6667C7.74543 11.6667 8.44905 11.4921 9.07308 11.182C9.36158 11.0386 9.71169 11.1563 9.85507 11.4448C9.99844 11.7333 9.88079 12.0834 9.59228 12.2267C8.81053 12.6152 7.92958 12.8334 6.99935 12.8334C3.77769 12.8334 1.16602 10.2217 1.16602 7.00008C1.16602 3.77842 3.77769 1.16675 6.99935 1.16675C10.221 1.16675 12.8327 3.77842 12.8327 7.00008V7.00528C12.8327 7.16414 12.8328 7.82345 12.6205 8.46059C12.5121 8.78574 12.3352 9.14674 12.0371 9.43159C11.7251 9.72971 11.308 9.91675 10.791 9.91675C10.4688 9.91675 10.2077 9.65558 10.2077 9.33342C10.2077 9.01125 10.4688 8.75008 10.791 8.75008C11.0032 8.75008 11.1329 8.68191 11.2311 8.5881C11.3432 8.48102 11.4397 8.31338 11.5137 8.09166C11.6635 7.64225 11.666 7.14262 11.666 7.00008C11.666 4.42275 9.57668 2.33341 6.99935 2.33341Z"
+                  fill="#5E6278"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M8.75065 6.99992C8.75065 7.96642 7.96715 8.74992 7.00065 8.74992C6.03415 8.74992 5.25065 7.96642 5.25065 6.99992C5.25065 6.03342 6.03415 5.24992 7.00065 5.24992C7.96715 5.24992 8.75065 6.03342 8.75065 6.99992ZM9.18847 8.92881C8.65402 9.53453 7.87195 9.91658 7.00065 9.91658C5.38982 9.91658 4.08398 8.61075 4.08398 6.99992C4.08398 5.38909 5.38982 4.08325 7.00065 4.08325C7.65726 4.08325 8.26319 4.30022 8.75066 4.66638C8.75077 4.3443 9.01189 4.08325 9.33399 4.08325C9.65615 4.08325 9.91732 4.34442 9.91732 4.66659C9.91732 6.15589 9.92093 7.24202 10.0851 7.96439C10.1654 8.31774 10.2692 8.50712 10.3662 8.60632C10.4435 8.6853 10.5568 8.74992 10.7923 8.74992C11.1145 8.74992 11.3757 9.01109 11.3757 9.33325C11.3757 9.65542 11.1145 9.91658 10.7923 9.91658C10.2987 9.91658 9.86513 9.76245 9.53224 9.42216C9.39065 9.27743 9.2784 9.11015 9.18847 8.92881Z"
+                  fill="#5E6278"
+                />
+              </svg>
+            </span>
+            <span> {{ userDetails?.overviwe?.email }}</span>
+          </div>
+        </div>
+        <!------------------>
+        <section class="cards flex-wrap">
+          <div>
+            <div class="cards-col">
+              <div class="item-1">
+                <h4>{{ userDetails?.activity }}</h4>
+                <p>Tours & Activities</p>
+              </div>
+              <div class="item-1">
+                <h4>{{ userDetails?.liveboard }}</h4>
+                <p>Liveaboard</p>
+              </div>
+
+              <div class="item-1">
+                <h4>{{ userDetails?.package }}</h4>
+                <p>Packages</p>
+              </div>
+              <div class="item-1">
+                <h4>{{ userDetails?.transfer }}</h4>
+                <p>Transfer</p>
+              </div>
+
+
+            </div>
+          </div>
+        </section>
+      </header>
+    </div>
+    <ul class="nav flex-nowrap overflow-x-auto">
+      <li
+        *ngFor="let tab of tabs"
+        class="nav-item"
+        [class.active]="tab.section === activeSection"
+        (click)="setActiveSection(tab.section)"
+      >
+        {{ tab.label }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="tabs-container ps-lg-4">
+  <section *ngIf="activeSection === 'section1'">
+    <app-overview-card [userDetails]="userDetails"></app-overview-card>
+  </section>
+  <!------------------------------->
+  <section *ngIf="activeSection === 'section2'">
+    <app-tours
+      [types]="types"
+    ></app-tours>
+  </section>
+
+  <!----------------------------->
+  <section *ngIf="activeSection === 'section3'">
+    <app-liveboard
+      [types]="types"
+    ></app-liveboard>
+  </section>
+  <!----------------------------->
+  <section *ngIf="activeSection === 'section4'">
+    <app-packages
+      [types]="types"
+    ></app-packages>
+  </section>
+  <!----------------------------->
+  <section *ngIf="activeSection === 'transports'">
+    <app-transports></app-transports>
+  </section>
+</div>

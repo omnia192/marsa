@@ -1,0 +1,51 @@
+<app-header [background]="'#008CCF'"></app-header>
+
+<section class="content ">
+  <div class="container">
+
+    <div id="all-activity mb-3 ">
+      <h5 class="card-title mb-5" style="line-height: 45px; font-size: 35px;
+      font-weight: bold;
+      color: #1a2b49;
+      font-family: poppins;
+     ">
+        {{name}}
+      </h5>
+      <h5 class="card-title mb-1" style="line-height: 30px; font-size: 17px;
+      font-weight: bold;
+      color: #1a2b49;
+      font-family: poppins;
+     ">
+        {{overview}}
+      </h5>
+
+
+      <div class="row g-4 p-4 mt-5">
+        <div class="col-12 col-xl-4 col-lg-6 col-md-6" *ngFor="let item of visibleActivities">
+          <app-activity-card [item]="item"></app-activity-card>
+        </div>
+      </div>
+
+      <div  class="text-center">
+        <div class="show-more-container d-flex align-items-center justify-content-center mt-3">
+          <div class="flex-grow-1">
+            <hr class="horizontal-line">
+          </div>
+
+          <button class="btn btn-outline-primary rounded-5 mx-2" (click)="showMore()"
+                  [ngClass]="{'btn-loading': loading}" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border text-primary" role="status" aria-hidden="true"></span>
+            <span *ngIf="!loading">Show More</span>
+          </button>
+
+          <div class="flex-grow-1">
+            <hr class="horizontal-line">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</section>

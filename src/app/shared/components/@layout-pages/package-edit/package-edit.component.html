@@ -1,0 +1,205 @@
+<section class="packages-edit">
+  <header class="container">
+    <h3>Packages</h3>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="41"
+      height="3"
+      viewBox="0 0 41 3"
+      fill="none"
+    >
+      <path d="M40.871 0.375H0.870972V2.375H40.871V0.375Z" fill="#297CBB" />
+    </svg>
+  </header>
+  <div>
+    <div class="container">
+      <ul class="nav">
+        <li
+          class="nav-item"
+          *ngFor="let package of packages; let i = index"
+          role="presentation"
+          [class.active]="selectedTabId === i"
+          (click)="selectTab(i)"
+        >
+          {{ package.place }}
+        </li>
+      </ul>
+    </div>
+
+    <section
+      class="packages-content overflow-hidden position-relative tab-pane fade show"
+      *ngFor="let package of packages; let i = index"
+      [class.show]="selectedTabId === i"
+      [class.fade]="selectedTabId !== i"
+    >
+      <div class="position-relative mt-4 d-block d-lg-none pb-5">
+        <div class="discount-small">
+          <p>
+            UP TO <span>{{ package.discount }}</span>
+          </p>
+          <img src="../../../../../assets/images/Vector Smart Object.svg" alt="Vector Smart Object" />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 first-column">
+            <div class="packages-img">
+              <img src="../../../../../assets/images/Vacation.svg" alt="Vacation"  />
+              <img src="../../../../../assets/images/Packages.svg"  alt="Packages"/>
+            </div>
+            <div>
+              <ul class="list-unstyled package-list">
+                <li
+                *ngFor="let trip of package?.trips; let j = index"
+              >
+
+
+              <div *ngIf="j < 3" class="d-flex">
+                <div>
+                  <img src="../../../../../assets/custom/list.svg" alt="list" loading="lazy" />
+                  </div>
+                  <div class="ms-1">
+
+                    <span>
+                      {{ trip?.title }}
+                    </span>
+                  </div>
+                <!-- Show "See more" button only for the last item -->
+                <button
+                  *ngIf="j === 2 && package.trips?.length > 3"
+                  class="p-0 m-0 btn text-white btn-outline-primary"
+                  (click)="openPackModal(package.id)"
+                >
+                  See More ...
+                </button>
+              </div>
+
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+              <div
+                class="col-lg-6 position-relative d-flex justify-content-center align-items-center d-none d-lg-block"
+              ></div>
+
+              <div class="col-lg-6">
+                <div class="trip-details">
+                  <h5 class="d-none d-lg-block">Trip details :</h5>
+                  <ul class="list-unstyled times">
+                    <li>
+                      <span>
+                        <img
+                          src="../../../../../assets/images/location(1).svg"
+                          class="pe-4"
+                          alt="location"
+                          loading="lazy"
+
+                        />
+                      </span>
+                      <span>
+                        {{ package?.place }}
+                      </span>
+                    </li>
+                    <li>
+                      <span>
+                        <img
+                          src="../../../../../assets/images/chronometer(1).svg"
+                          class="pe-4"
+                          alt="chronometer"
+                          loading="lazy"
+                        />
+                      </span>
+                      <span>
+                        {{ package?.duration }}
+                      </span>
+                    </li>
+                    <li>
+                      <span>
+                        <img
+                          src="../../../../../assets/images/discount(1).svg"
+                          class="pe-4"
+                          alt="discount"
+                          loading="lazy"
+                        />
+                      </span>
+                      <span> {{ package?.countTrips }} Trips </span>
+                    </li>
+
+                  </ul>
+                  <div class="d-none d-lg-block" style="margin-bottom: 60px">
+                    <button
+                       class="get-offer-btn"
+                      [routerLink]="[
+                        '/',
+                        this.translate.currentLang,
+                        'packages',
+                        'packageDetails',
+                        package?.id,
+                        package?.name
+                      ]"
+                    >
+                      Get Offer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 position-relative">
+
+
+            <div *ngIf="isSmallScreen; else normalImages" class="diving-carousel">
+              <p-carousel [value]="[package?.cover1, package?.cover2, package?.cover3]" 
+                         [numVisible]="1" 
+                         [numScroll]="1"
+                         [responsiveOptions]="responsiveOptions"
+                         [circular]="true"
+                         [showIndicators]="true"
+                         [autoplayInterval]="0">
+                <ng-template let-item pTemplate="item">
+                  <div class="carousel-card">
+                    <img [src]="item" alt="" />
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </div>
+
+            <ng-template #normalImages>
+              <div class="diving-images">
+                <div><img [src]="package?.cover1 " alt=""/></div>
+                <div><img [src]="package?.cover2 " alt="" /></div>
+                <div class="div2"><img [src]="package?.cover3" alt=""/></div>
+              </div>
+            </ng-template>
+
+
+            <div class="d-block d-lg-none btn-container">
+              <button
+              [routerLink]="[
+              '/',
+              this.translate.currentLang,
+              'packages',
+              'packageDetails',
+              package?.id,
+              package?.name
+            ]"
+              >
+                Get Offer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="discount-2 d-none d-lg-flex">
+        <div class="percent">
+          <div>
+            <p>UP TO</p>
+            <p>{{package?.discount}}</p>
+          </div>
+          <span>discount</span>
+        </div>
+        <img src="../../../../../assets/images/Vector Smart Object.svg" alt="Vector Smart Object" style="  width: 26%;" />
+      </div>
+    </section>
+  </div>
+</section>

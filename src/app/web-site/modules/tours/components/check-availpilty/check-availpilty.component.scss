@@ -1,0 +1,141 @@
+.group-tour li p,
+.cancelWallet p,
+.headingTime p {
+
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  // margin-top: 1rem;
+  color: rgb(33, 37, 41);
+}
+.price-list{
+  width: 40%;
+  }
+.cancelWallet p{
+  margin-left:0.4rem ;
+}
+.modal-body {
+  overflow-y: auto !important;
+}
+.price-list li {
+
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+.location {
+  cursor: pointer;
+}
+
+.heading {
+
+  font-size: 20px;
+    font-weight: 700;
+   line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+ //  color: rgba(59, 68, 79, 1);
+}
+
+.desc {
+
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+select {
+  height: 53px;
+  width: 157px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.total-price h6 {
+  color: #3b444f;
+
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.total-price small {
+  color: #3b444f;
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.total-price span {
+  color: #3b444f;
+
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+h5 {
+  color: #3b444f;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.check {
+  background: #0db1ff;
+  color: #fff;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 179px;
+  height: 52px;
+}
+
+.cart {
+  border: 1px solid #0db1ff;
+  color: var(--Main-Title, #0db1ff);
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 179px;
+  height: 52px;
+}
+.close {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(13, 177, 255, 1);
+  color: #fff;
+  margin: 0px;
+  font-size: 25px;
+  padding: 0px;
+}
+@media (max-width: 992px){
+  .price-list{
+    width: 100%;
+  }
+  .group-tour li p,
+.cancelWallet p ,
+.headingTime p,.price-list li{
+
+  font-size: 16.1px;
+}
+
+}

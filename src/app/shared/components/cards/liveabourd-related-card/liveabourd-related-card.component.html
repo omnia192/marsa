@@ -1,0 +1,91 @@
+<div class="card  w-100 h-100">
+    <div class="position-relative">
+        <a [routerLink]="['/' , translate.currentLang , 'boatsDetails' ]"
+            class="d-block gradient-overlay-half-bg-gradient-v5" tabindex="0">
+            <img class=" w-100" [src]="item?.cover" [alt]="getImageName(item?.cover)">
+        </a>
+        <div class="position-absolute top-0 right-0 pt-5 pr-3">
+            <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip"
+                data-placement="top" title="Save for later" data-original-title="Save for later"
+                aria-label="Save for later" tabindex="0">
+                <span class="fa-regular fa-heart "></span>
+            </button>
+        </div>
+        <div class="position-absolute bottom-0 left-0 right-0">
+            <div class="px-3 pb-2">
+                <a [routerLink]="['/' , translate.currentLang , 'boatsDetails' , item?.id ]" tabindex="0">
+                    <span class="text-white font-weight-bold font-size-17">{{item?.Title}}</span>
+                </a>
+                <a [routerLink]="['/', translate.currentLang, 'tours', 'details', item?.id,
+            item?.Title]" class="card-title mb-0">{{ item?.typename }}</a>
+                <div class="text-white my-2">
+                    <span class="mr-1 font-size-14">From</span>
+                    <span class="font-weight-bold font-size-19">${{item?.PriceColectiv}}</span>
+                    <span class="font-size-14">/ Week</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body px-4 py-3 border-bottom">
+        <a [routerLink]="['/' , translate.currentLang , 'boatsDetails' , item?.id ]" class="d-block" tabindex="0">
+            <div class="d-flex align-items-center font-size-14 text-gray-1 gap-3">
+                <small><img src="assets/custom/Activity/locationDark.svg" alt="location"></small>
+                {{item?.place}}
+                <small>
+                    <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-solid fa-star"
+                        [ngClass]="{ 'fa-star-filled': star <= item?.rate, 'yellow-star': star <= item?.rate }"></i>
+                </small>
+                {{item?.Review}}
+            </div>
+        </a>
+
+    </div>
+    <div class="px-2 pt-3 pb-2">
+        <div class="row">
+            <div>
+                <ul class="list-unstyled mb-0 d-flex flex-wrap gap-5">
+                    <li class="media  text-gray-1 align-items-center">
+                        <small class="mr-2">
+                            <img src="assets/custom/boat-icons/Forma.svg" class="me-1 boat-icon" alt="boat" />
+                        </small>
+                        <div class="media-body font-size-1">
+                            {{item?.bed}}
+                        </div>
+                    </li>
+                    <li class="media  text-gray-1 align-items-center">
+                        <small class="mr-2">
+                            <small> <img src="../../../assets/custom/boat-icons/wifi.svg" alt="boat"></small>
+                        </small>
+                        <div class="media-body font-size-1">
+                            Free Internet
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-unstyled mb-0 d-flex flex-wrap gap-5">
+                    <li class="media mb-2 text-gray-1 align-items-center">
+                        <small class="mr-2">
+                            <small> <img src="../../../assets/custom/boat-icons/user.svg" alt="boat"></small>
+                        </small>
+                        <div class="media-body font-size-1">
+                            {{item?.person}}
+                        </div>
+                    </li>
+                    <li class="media  text-gray-1 align-items-center">
+                        <small class="mr-2">
+                            <small><img src="../../../assets/custom/boat-icons/flexable booking.svg" alt="boat"></small>
+                        </small>
+                        <div class="media-body font-size-1">
+                            Flexible Booking
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-6">
+                <ul class="list-unstyled mb-0">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

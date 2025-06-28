@@ -1,0 +1,70 @@
+{
+  "dir": "ltr",
+  "header": {
+    "home": "Home",
+    "tours-activities": "Tours & Activities",
+    "liveboard": "Liveaboard",
+    "hotels": "Hotels",
+    "boat": "Private Boats",
+    "transport": "Transfer",
+    "contact-us": "Contact Us",
+    "more": "More",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "about": "About Us",
+    "search": "Search",
+    "placeholder": "Where are you going ?",
+    "sign-in-or-register": "Sign in or Register"
+  },
+  "signup": {
+    "": "Signup",
+    "fname": "First Name",
+    "lname": "Last Name",
+    "password": "Password",
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "boat": {
+    "boat": "Boat"
+  },
+  "transfer": {
+    "transfer": "Transfer"
+  },
+  "places": {
+    "marsa-alam": "Marsa Alam",
+    "hurghada": "Hurghada",
+    "porto-ghalib": "Porto Ghalib",
+    "sharm-ellsheikh": "Sharm Elsheikh",
+    "el-quseir": "El Quseir"
+  },
+  "packages": "Packages",
+  "footer": {
+    "Services": "Services",
+    "PAYMENT_METHODS": "PAYMENT METHODS",
+    "FOLLOW_US": "FOLLOW US",
+    "termsandpolicies": "Terms and policies",
+    "Tours_&_Activities": "Tours & Activities",
+    "Hotels": "Hotels",
+    "Liveabroad": "Liveaboard",
+    "transfer": "Transfer",
+    "contactUs": "Contact Us",
+    "aboutUs": "About Us",
+    "Events": "Events",
+    "Copyright": "ِAll copyrights reserved to MarsaWaves powered by  :",
+    "MARSA_WAVES_NEWSLETTER": "MARSA WAVES NEWSLETTER",
+    "Signupandbethefirsttogetourbestoffersandnews": "Sign up and be the first to get our best offers and news",
+    "Join_Now": "Join Now"
+  },
+  "validation": {
+    "company": "user company is required",
+    "position": "user position is required",
+    "user_name": "user_name is required",
+    "user_mail": "user mail is required",
+    "phone": "phone is required",
+    "password": "Password is required",
+    "confirmPass": "Confirm Password is required",
+    "passMinlength": "Password must be at least 6 characters",
+    "invalidEmail": "Please enter a valid email",
+    "Unauthorized": "Your Account Has not been activated yet, your account is under review."
+  }
+}

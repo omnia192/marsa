@@ -1,0 +1,9 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+<main id="content">
+    <div class="" *ngIf="vouchers">
+        <app-upcoming-booking></app-upcoming-booking>
+    </div>
+    <div class="" *ngIf="!vouchers">
+        <app-vouchers></app-vouchers>
+    </div>
+</main>

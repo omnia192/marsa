@@ -1,0 +1,234 @@
+.single-wish{
+    margin-top:150px;
+    h3{
+        color: #302C2C;
+        font-family: Lato;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding-top:35px;
+    }
+    header{
+        margin-bottom: 45px;
+        padding-top: 35px;
+        margin-top: 25px;
+        a{
+            color: #302C2C;
+            font-family: Lato;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            transition: all 0.5s ease-in-out;
+            display: inline-block;
+            margin-bottom: 14px;
+            &:hover{
+                cursor: pointer;
+                transform: translateX(5px);
+            }
+        }
+        p{
+            color: #302C2C;
+            font-family: Lato;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            margin-bottom: 14px;
+
+        }
+
+    }
+}
+.place-card{
+    box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.25);
+    padding-right: 19px;
+    padding-bottom: 14px;
+    padding-left: 35px;
+    padding-top: 35px;
+    
+    .first-place{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        margin-bottom: 25px;
+        box-shadow: 1px 1px 12px 6px #c7d3dc;
+        border-radius: 5px;
+       
+        .img{
+            width: 299px;
+            height: 100%;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        .img-content{
+            margin-left: 10px;
+            div:nth-of-type(2){
+                span:nth-of-type(1){
+                    color: #FF681A;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: Lato;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    width: 97px;
+                    height: 30px;
+                    flex-shrink: 0;
+                    border-radius: 18px;
+                    position: absolute;
+                    background-color: #fff;
+                    top: 20px;
+                    left: 7px;
+                }
+                span:nth-of-type(2){
+                    position: absolute;
+                    top: 20px;
+                    right: 7px;
+                    cursor: pointer;
+                    &:hover{
+                        svg{ 
+                            path{
+                                fill: #FF681A;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .trip{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-left: 20px;
+            padding: 10px;
+            flex: 1;
+            h5{
+                margin-top:18px;
+                color: #3B444F;
+                font-family: Lato;
+                font-size: 17px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+            .place-name{
+                display: inline-block;
+                margin-left: 6px;
+                padding-top:5px;
+                color: #000;
+                font-family: Lato;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+            .trip-rating{
+                text-align: center;
+                span{
+                    span{
+                        color: #000;
+                        font-family: Lato;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        margin-right: 14px;
+                    }
+
+                }
+                p:nth-of-type(1){
+                    color: #67747C;
+                    font-family: Lato;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    margin-top:18px;
+                    margin-bottom: 22px;
+                }
+                p:nth-of-type(2){
+                   span{
+                    color: #18181A;
+                   }
+                   color: #67747C;
+                    font-family: Lato;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                }
+                button{
+                    margin-top:22px;
+                    margin-bottom: 14px;
+                    color: #297CBB;
+                    font-family: Lato;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                    width: 202px;
+                    height: 52px;
+                    flex-shrink: 0;
+                    border:1px solid #297CBB;
+                    background-color: transparent;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}
+
+/****************************/
+@media screen and (max-width:767.8px){
+    .place-card{
+        .first-place{
+            display: flex;
+            flex-direction: column;
+            .trip{
+                flex-direction: column;
+                margin-left: 0;
+                padding: 0;
+                .trip-rating{
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width:992px){
+    .single-wish{
+        margin-top: 20px;
+    }
+    
+}
+@media screen and (min-width:768px) and (max-width:992px){
+    .place-card{
+        .first-place{
+            .trip{
+                flex-direction: column;
+                .trip-rating{
+                    text-align: left;
+                    button{
+                        margin-top:10px;
+                        height: max-content;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width:992.9px) and (max-width:1201px){
+    .single-wish{
+        margin-top: 35px
+    }
+}

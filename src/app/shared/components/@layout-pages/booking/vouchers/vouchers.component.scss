@@ -1,0 +1,99 @@
+.voucher{
+    margin-bottom: 70px;
+    margin-top: 60px;
+    h2{
+        padding-top: 40px;
+        color: #000;
+        font-family: Lato;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 24px;
+    }
+    span{
+        color: #000;
+        font-family: Lato;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 70px;
+    }
+ 
+}
+.voucher-container{
+    background: #3699FF;
+    padding-top: 50px;
+    padding-bottom: 70px;
+    .marsa-logo{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 40px;
+        h5{
+            color: #FFF;
+            font-family: Lato;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-bottom: 13px;
+        }
+        p{
+            color: #FFF;
+            font-family: Lato;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+        div:nth-of-type(1){
+            text-align: center;
+        }
+        div:nth-of-type(2){
+          flex:1;
+        }
+
+    }
+}
+.apps{
+   div{
+    transition: all 0.5s ease-in-out;
+   }
+    div:hover{
+        cursor: pointer;
+        transform: translateY(5px);
+    }
+}
+.past{
+    margin-top: 48px;
+    margin-bottom: 67px;
+
+    p:nth-of-type(1){
+        color: #000;
+        font-family: Lato;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 19px;
+    }
+    p:nth-of-type(2){
+        color: #000;
+        font-family: Lato;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+    }
+}
+
+@media screen and (max-width:1200px){
+    .voucher{
+        h2{
+            padding-top: 0;
+        }
+    }
+}

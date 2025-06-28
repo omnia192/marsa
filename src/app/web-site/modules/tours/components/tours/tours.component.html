@@ -1,0 +1,330 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+
+<div class="container content">
+  <div class="row mb-5 mb-md-8 mt-xl-1 pb-md-1">
+    <div class="col-lg-4 col-xl-3 col-sm-12 order-lg-1 width-md-50 top-margin">
+
+      <div class="navbar-expand-lg navbar-expand-lg-collapse-block">
+        <button (click)="showFilter = !showFilter" class="btn d-lg-none mb-5 p-0" type="button" data-toggle="collapse"
+          data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="far fa-caret-square-down text-primary font-size-20 card-btn-arrow ml-0"></i>
+          <span class="text-primary ml-2">Tours and Activity Filter</span>
+        </button>
+        <div class="pb-4 mb-2">
+          <div class="sidebar border border-color-1 rounded-xs">
+            <div class="p-4 mx-1 mb-1">
+              <!-- Input -->
+              <span class="d-block text-gray-1 font-weight-normal mb-0 text-left">Destination</span>
+              <div class="mb-4">
+                <div class="input-group border-bottom border-width-2 border-color-1">
+                  <img src="/assets/custom/Activity/location.svg" class="me-2" alt="loation" />
+                  <select (change)="searchDestination($event)" [(ngModel)]="place_id"
+                    class="form-select border-0 border-bottom" aria-label="Select example">
+                    <option selected disabled [value]="null" hidden>
+                      Where are you going?
+                    </option>
+                    <option *ngFor="let dist of destination" [value]="dist.id">
+                      {{ dist?.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <!-- End Input -->
+              <!-- Input -->
+              <!-- <span class="d-block text-gray-1 text-left font-weight-normal mb-0">Date</span> -->
+              <!-- <div class="border-bottom border-width-2 border-color-1 mb-4">
+                <div id="datepickerWrapperFromOne" class="u-datepicker input-group flex-nowrap">
+                  <div class="input-group-prepend">
+                    <span class="d-flex align-items-center mr-2 font-size-21">
+                      <img src="../../../../../../assets/custom/Activity/calender.svg" class="me-2" alt="calendar" />
+                    </span>
+                  </div>
+                  <input [(ngModel)]="start_d" (change)="filterByDate($event)" [min]="minDate"
+                    class="js-range-datepicker font-size-16 ml-1 shadow-none font-weight-bold form-control hero-form bg-transparent border-0 flatpickr-input p-0"
+                    type="date" data-rp-wrapper="#datepickerWrapperFromOne" data-rp-type="range"
+                    data-rp-date-format="M d / Y" data-rp-default-date='["Jul 7 / 2020", "Aug 25 / 2020"]'
+                    (click)="openCalendar($event)" />
+                </div>
+
+              </div> -->
+              <!-- End Input -->
+
+              <!-- <div class="col dropdown-custom px-0 mb-5">
+                <span class="d-block text-gray-1 text-left font-weight-normal mb-2">Trip Type</span>
+                <div class="flex-horizontal-center border-bottom border-width-2 border-color-1 pb-2">
+                  <img src="../../../../../../assets/custom/Activity/booking.svg" class="me-2" alt="booking" />
+                  <select (change)="searchByType($event)"
+                    class="form-select js-select selectpicker dropdown-select bootstrap-select__custom-nav"
+                    data-style="btn-sm mt-1 py-0 px-0  text-black font-size-16 font-weight-semi-bold d-flex align-items-center truncate-select ">
+                    <option [value]="null" selected>All</option>
+                    <option *ngFor="let item of types" [value]="item.id">
+                      {{ item.type }}
+                    </option>
+                  </select>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="showFilter || !isMobile" id="sidebar">
+          <div class="mb-6 w-100">
+
+
+            <div class="sidenav border border-color-8 rounded-xs">
+              <!-- Accordiaon -->
+
+              <div id="priceCartAccordion" class="accordion rounded shadow-none">
+                <div class="border-0">
+                  <div class="card-collapse" id="priceCardHeadingOne">
+                    <h3 class="mb-0">
+                      <button type="button" class="btn btn-link btn-block card-btn py-2 px-5 text-lh-3 collapsed"
+                        data-toggle="collapse" data-target="#priceCardOne" aria-expanded="false"
+                        aria-controls="priceCardOne">
+                        <span class="row align-items-center">
+                          <span class="col-12">
+                            <span class="d-block font-size-lg-15 font-size-17 font-weight-bold text-dark">Price Range
+                              ($)</span>
+                          </span>
+                        </span>
+                      </button>
+                    </h3>
+                  </div>
+                  <div id="shopCardOne" class="collapse show" aria-labelledby="shopCardHeadingOne"
+                    data-parent="#shopCartAccordion">
+                    <div class="card-body pt-0 px-5">
+                      <div class="pb-3 mb-1 d-flex text-lh-1">
+                        <span>$</span>
+                        <span id="rangeSliderExample3MinResult" class="">{{
+                          min_priceChoosen ? min_priceChoosen : min_price
+                          }}</span>
+                        <span class="mx-0dot5"> — </span>
+                        <span>$</span>
+                        <span id="rangeSliderExample3MaxResult" class="">{{
+                          max_priceChoosen ? max_priceChoosen : max_price
+                          }}</span>
+                      </div>
+                      <mat-slider
+                        class="w-100"
+                        [min]="min_price"
+                        [max]="max_price"
+                        step="1"
+                          [(ngModel)]="min_priceChoosen"
+                          thumbLabel
+                      >
+                        <input
+                          (input)="setMinPrice($event)"
+                          [(ngModel)]="min_priceChoosen"
+                          matSliderStartThumb
+                        />
+                        <input
+                          (input)="setMaxPrice($event)"
+                          [(ngModel)]="max_priceChoosen"
+                          matSliderEndThumb
+                        />
+                      </mat-slider>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="shopCartAccordion" class="accordion rounded shadow-none p-4">
+                <div class="border-0">
+                  <h5 class="heading">Guest Rating</h5>
+                  <div class="btns d-flex gap-1 justify-content-center mb-5">
+                    <button (click)="setRate(2)" id="btn-2" class="btn active-rate">
+                      2+
+                    </button>
+                    <button (click)="setRate(3)" id="btn-3" class="btn">
+                      3+
+                    </button>
+                    <button (click)="setRate(4)" id="btn-4" class="btn">
+                      4+
+                    </button>
+                    <button (click)="setRate(5)" id="btn-5" class="btn">
+                      5
+                    </button>
+                  </div>
+                </div>
+                <!-- Rating -->
+                <div id="cityCategoryAccordion" class="accordion rounded-0 shadow-none border-top">
+                  <div class="border-0">
+                    <div class="card-collapse" id="cityCategoryHeadingOne">
+                      <h3 class="mb-0">
+                        <button type="button" class="btn btn-link btn-block card-btn py-2 px-5 text-lh-3 collapsed"
+                          data-toggle="collapse" data-target="#cityCategoryOne" aria-expanded="false"
+                          aria-controls="cityCategoryOne">
+                          <span class="row align-items-center">
+                            <span class="col-9">
+                              <span class="heading mb-3">Duration</span>
+                            </span>
+                          </span>
+                        </button>
+                      </h3>
+                    </div>
+                    <div id="cityCategoryOne" class="collapse show" aria-labelledby="cityCategoryHeadingOne"
+                      data-parent="#cityCategoryAccordion">
+                      <div class="card-body pt-0 mt-1 pb-4">
+                        <div class="form-group d-flex align-items-center justify-content-between mb-3">
+                          <div class="form-check">
+                            <input (change)="filterDuration('all')" class="form-check-input" type="radio"
+                              name="flexRadioDefault" id="flexRadioDefault1" />
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              All
+                            </label>
+                          </div>
+                        </div>
+                        <div *ngFor="let duration of duration"
+                          class="form-group d-flex align-items-center justify-content-between mb-3">
+                          <div class="form-check">
+                            <input (change)="filterDuration(duration.id)" class="form-check-input" type="radio"
+                              name="flexRadioDefault" id="flexRadioDefault1" />
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              {{ duration?.start }} - {{ duration?.end }}
+                              {{ duration?.typetime }}
+                            </label>
+                          </div>
+                          <!-- <span>{{ duration?.count }}</span> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="shopLanguagesAccordion" class="accordion rounded-0 shadow-none border-top">
+                  <div class="border-0">
+                    <div class="card-collapse" id="shopLanguagesHeadingOne">
+                      <h3 class="mb-0">
+                        <button type="button" class="btn btn-link btn-block card-btn py-2 px-5 text-lh-3 collapsed"
+                          data-toggle="collapse" data-target="#shopLanguagesOne" aria-expanded="false"
+                          aria-controls="shopLanguagesOne">
+                          <span class="row align-items-center">
+                            <span class="col-9">
+                              <span class="heading">Starting Time</span>
+                            </span>
+                          </span>
+                        </button>
+                      </h3>
+                    </div>
+                    <div id="shopLanguagesOne" class="collapse show" aria-labelledby="shopLanguagesHeadingOne"
+                      data-parent="#shopLanguagesAccordion">
+                      <div class="card-body pt-0 mt-1 px-5">
+                        <div class="form-group d-flex align-items-center justify-content-between mb-3">
+                          <div class="form-check">
+                            <input (change)="filterTime('all')" class="form-check-input" type="radio" name="flexRadio"
+                              id="flexRadioDefault2" />
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              All
+                            </label>
+                          </div>
+                        </div>
+                        <div *ngFor="let duration of time"
+                          class="form-group d-flex align-items-center justify-content-between mb-3">
+                          <div class="form-check">
+                            <input (change)="filterTime(duration.id)" class="form-check-input" type="radio"
+                              name="flexRadio" id="flexRadioDefault2" />
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              {{ duration?.start }} - {{ duration?.end }}
+                            </label>
+                          </div>
+                          <!-- <span>{{ duration?.count }}</span> -->
+                        </div>
+
+                        <!-- End Checkboxes -->
+                      </div>
+                    </div>
+                    <div class="card-body pt-0 mt-1 px-5">
+                      <button (click)="clearSelection()" class="nav-link active"
+                        id="pills-marsa-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-allActivity"
+                        type="button" role="tab" aria-controls="pills-marstrending" style="
+
+                          background-color: #008ccf;
+                          border: none;
+                          color: white !important;
+                        " aria-selected="true">
+                        Clear Selected
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Accordion -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 col-sm-12 order-lg-2">
+     
+      <!-- Activity Title -->
+      <div class="d-flex justify-content-between align-items-center">
+        <h3 style="margin-bottom: 13px">
+         {{ totalActivitiesCount }} Activities Found
+        </h3>
+        <div class="d-flex align-items-center gap-3">
+          <div class="list-view" (click)="activeView = 'list'" [class.active]="activeView == 'list'">
+            <!-- d-none d-lg-block d-xl-block -->
+            <i class="fa fa-list"></i>
+          </div>
+          <div class="grid-view" (click)="activeView = 'grid'" [class.active]="activeView == 'grid'">
+            <!-- d-none d-lg-block d-xl-block -->
+            <i class="fa fa-th"></i>
+          </div>
+        </div>
+      </div>
+      <!-- End Activity Title -->
+
+      <div>
+        <ul
+          class="nav nav-pills mb-3 d-flex justify-content-between flex-nowrap border border-radius-3 m-auto tab-nav align-items-center py-2 px-0"
+          id="pills-tab" role="tablist" style="padding-left: 2px !important">
+          <li class="nav-item d-flex align-items-center flex-shrink-0 flex-xl-shrink-1" role="presentation">
+            <button (click)="searchByType({ target: { value: null } })" class="nav-link active"
+              id="pills-marsa-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-allActivity" type="button"
+              role="tab" aria-controls="pills-marstrending" aria-selected="true">
+              All
+            </button>
+          </li>
+          <li class="nav-item d-flex align-items-center flex-shrink-0 flex-xl-shrink-1" role="presentation"
+            *ngFor="let item of types">
+            <button (click)="searchByType({ target: { value: item.id } })" class="nav-link" data-bs-toggle="pill"
+              type="button" role="tab" style="
+                padding-right: 2.7px !important;
+                padding-left: 2.7px !important ;
+              " aria-selected="false">
+              {{ item?.type }}
+            </button>
+          </li>
+        </ul>
+        <select name="" class="form-select-fill-pill form-select form-select-lg mb-3"
+          aria-label="form-select-lg example" #option id=""
+          (change)="searchByType({ target: { value: option.value } })">
+          <option value="null" selected>All</option>
+          <option value="item.id" *ngFor="let item of types">
+            {{ item?.type }}
+          </option>
+        </select>
+        <div class="tab-content">
+          <div class="tab-pane fade active show" id="pills-RecommendedLive" role="tabpanel"
+            aria-labelledby="pills-one-example-t1-tab">
+            <div class="list-cards-view" *ngIf="activeView == 'list'">
+              <div class="row">
+                <div class="col-lg-12 col-sm-12 col-md-12 mb-md-4 pb-1" *ngFor="let item of rows?.trips?.data">
+                  <app-activity-card-list [item]="item"></app-activity-card-list>
+                </div>
+              </div>
+            </div>
+            <div class="row g-4 p-4" *ngIf="activeView == 'grid'">
+              <div class="col-12 col-xl-4 col-lg-6 col-md-6" *ngFor="let item of rows?.trips?.data">
+                <app-activity-card [item]="item"></app-activity-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <p-paginator [rows]="rows?.trips?.per_page" [totalRecords]="rows?.trips?.total || rows?.trips?.data?.length"
+        [first]="(rows?.trips?.current_page - 1) * rows?.trips?.per_page" (onPageChange)="onPageChange($event)"
+        [showFirstLastIcon]="true" [showJumpToPageInput]="true"
+        class="m-auto border border-color-4 rounded-sm mb-5 mb-lg-0 overflow-auto overflow-xl-visible justify-content-center align-items-center py-2 w-100">
+      </p-paginator>
+    </div>
+  </div>
+</div>

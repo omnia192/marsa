@@ -1,0 +1,37 @@
+<div class="container text-center space-1">
+    <!-- Title -->
+    <div class="title text-center mb-5" style="color: #004796;">
+        <h3 class="mb-5">Why Book With Us?</h3>
+    </div>
+    <div class="mb-8">
+
+      <div class="">
+        <owl-carousel-o [options]="aboutOptions" class="my-destination-why">
+          <ng-container *ngFor="let item of data?.Why_chosse_us">
+            <ng-template carouselSlide>
+              <div style="display: flex;
+    justify-content: center;">
+                <img [src]="item.icon"  [alt]="getImageName(item.icon)"  class="Why_chosse_us text-center" />
+              </div>
+
+              <div>
+                <h5 class="mb-2 mt-3">
+                  <a class="heading">
+                    {{ item.title }}
+                  </a>
+                </h5>
+
+
+              </div>
+              <div>
+                <p class="desc px-xl-2 px-uw-7">
+                  {{ item.desc }}
+                </p>
+              </div>
+
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+</div>

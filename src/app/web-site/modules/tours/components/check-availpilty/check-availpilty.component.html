@@ -1,0 +1,223 @@
+<div class="modal-body p-0">
+  <div id="AvailableOptions">
+    <div class="card p-1" style="border: none">
+      <div class="row" style="padding-left: 0px !important">
+        <div class="col border-top">
+          <div class="d-flex mt-3 align-items-center justify-content-between">
+            <div class="d-flex justify-content-start flex-column gap-1">
+              <h4 class="heading">Booking Option Details</h4>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div
+                class="list-activity d-flex align-items-center justify-content-between"
+              >
+                <span class="headingTime">
+                  <div class="d-flex">
+                    <img
+                      src="../../../../../../assets/icons/profile-circle.svg"
+                      class="me-2"
+                      alt="profile-circle"
+                    />
+                    <p class="m-0">
+                      Guide :
+                      {{
+                        activityData?.AvailableOption[
+                          getAvailableOptionIndexById(avilable_option_id)
+                        ]?.Guide
+                      }}
+                    </p>
+                  </div>
+                </span>
+              </div>
+
+              <ng-container
+                *ngIf="
+                  activityData?.TypeOfRepeat === 'h' ||
+                  activityData?.TypeOfRepeat === 'm'
+                "
+              >
+                <span class="headingTime">
+                  <div class="d-flex">
+                    <img
+                      src="../../../../../../assets/custom/Activity/timer-start.svg"
+                      class="me-1"
+                      alt="timer start"
+                    />
+                    <p>
+                      Starting time at :
+                      <span class="text-dark fs-5 font-weight-bold">{{
+                        "1970-01-01T" + (selectedTime || "00:00:00")
+                          | date : "h:mm a"
+                      }}</span>
+                    </p>
+                  </div>
+                </span>
+              </ng-container>
+
+              <div class="clearfix"></div>
+
+              <span class="mt-3 mb-3 d-inline-block cancelWallet d-flex">
+                <img
+                  src="../../../../../../assets/icons/empty-wallet-tick.svg"
+                  alt="wallet"
+                />
+                <p class="mb-0">
+                  Cancel before
+                  {{
+                    formatDate(
+                      activityData?.CancelationtTime,
+                      activityData?.AvailableOption[
+                          getAvailableOptionIndexById(avilable_option_id)
+                        ]?.PickUpTime,
+                      booking_date
+                    )
+                  }}
+                  for a full refund
+                </p>
+              </span>
+              <span class="d-block cancelWallet d-flex">
+                <img
+                  src="../../../../../../assets/icons/bx_time-five.svg"
+                  alt="bx_time-five"
+                />
+                <p class="mb-0">
+                  Expected Pick Up Time from
+                  {{
+                    "1970-01-01T" +
+                      activityData?.AvailableOption[
+                        getAvailableOptionIndexById(avilable_option_id)
+                      ]?.EstimatedTimeFrom | date : "h:mm a"
+                  }}
+
+                  to
+                  {{
+                    "1970-01-01T" +
+                      (activityData?.AvailableOption[
+                        getAvailableOptionIndexById(avilable_option_id)
+                      ]?.EstimatedTimeTo || "00:00:00") | date : "h:mm a"
+                  }}
+                </p>
+              </span>
+
+              <div class="list-price mt-3 border-bottom border-top">
+                <h6
+                  style="
+                    font-family: Lato;
+                    margin-top: 44px;
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 29px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                  "
+                >
+                  Price breakdown
+                </h6>
+                <div
+                  class="d-flex align-items-center gap-5"
+                  *ngIf="class === 'collective'"
+                >
+                  <ul class="list-unstyled price-list">
+                    <li class="pt-3">
+                      <div class="d-flex justify-content-between">
+                        <div>Adult {{ avilableOptions?.Adult }}</div>
+                        <div>
+                          {{ avilableOptions?.TotalAdult }}
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      class="pt-3"
+                      *ngIf="
+                        avilableOptions?.Childern != 0 &&
+                        avilableOptions?.Childern != null
+                      "
+                    >
+                      <div class="d-flex justify-content-between">
+                        <div>Children {{ avilableOptions?.Childern }}</div>
+                        <div *ngIf="avilableOptions?.TotalChildren !== '0$'">
+                          {{
+                            avilableOptions?.TotalChildern == "0$"
+                              ? ""
+                              : avilableOptions?.TotalChildern
+                          }}
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      class="pt-3"
+                      *ngIf="
+                        avilableOptions?.Infant != 0 &&
+                        avilableOptions?.Infant != null
+                      "
+                    >
+                      <div class="d-flex justify-content-between">
+                        <div>Infant {{ avilableOptions?.Infant }}</div>
+                        <div *ngIf="avilableOptions?.TotalInfant !== '0$'">
+                          {{
+                            avilableOptions?.TotalInfant == "0$"
+                              ? ""
+                              : avilableOptions?.TotalInfant
+                          }}
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="pt-3">
+                      <div class="d-flex justify-content-between">
+                        <div style="margin-right: 2.5rem">
+                          {{ avilableOptions?.AddetionalCost[0]?.Exclude }}
+                        </div>
+                        <div>
+                          {{ avilableOptions?.AddetionalCost[0]?.Total }}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="d-flex align-items-center gap-5"
+                  *ngIf="class === 'privete'"
+                >
+                  <ul class="list-unstyled price-list">
+                    <li class="pt-3">Person {{ avilableOptions?.Adult }}</li>
+
+                    <li class="pt-3">
+                      {{ avilableOptions?.AddetionalCost[0]?.Exclude }}
+                    </li>
+                  </ul>
+                  <ul class="list-unstyled price-list">
+                    <li class="pt-3">{{ avilableOptions?.TotalAdult }}</li>
+                    <li class="pt-3">
+                      {{ avilableOptions?.AddetionalCost[0]?.Total }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div
+              class="total-price mt-3 d-flex flex-wrap justify-content-between align-items-center"
+            >
+              <div>
+                <h6>Total Price</h6>
+                <small>All taxes and fees included</small>
+              </div>
+              <div>
+                <span>${{ avilableOptions?.TotlaPrice }}</span>
+              </div>
+              <div class="btns d-flex gap-2 mt-4">
+                <a
+                  (click)="bookNow()"
+                  class="btn check d-flex align-items-center justify-content-center mb-xl-0 mb-lg-1 text-white font-weight-bold"
+                  >Start Booking</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

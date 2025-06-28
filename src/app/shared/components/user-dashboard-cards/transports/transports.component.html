@@ -1,0 +1,491 @@
+<div class="container">
+  <div *ngIf="booking.length > 0">
+    <section class="table-content-general">
+      <header class="flex-wrap">
+        <div class="tabs">
+          <div
+            class="tab"
+            *ngFor="let year of years"
+            (click)="setFilter(year.toString())"
+            [class.active]="activeTab === year.value"
+      >
+        {{ year.label }}
+          </div>
+        </div>
+      </header>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                <span> Flight </span>
+              </th>
+              <th>
+                <span> Date </span>
+              </th>
+              <th>
+                <span> Pickup locaion </span>
+              </th>
+              <th>
+                <span> Drop off location </span>
+              </th>
+              <th>
+                <span> Time </span>
+              </th>
+              <th><span> Status </span></th>
+              <!-- <th></th> -->
+              <!-- <th></th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let package of filterdPackages">
+              <td>
+                <span>{{ package?.flight }}</span>
+              </td>
+              <td>
+                <span>{{ package?.
+                  date }}</span>
+              </td>
+              <td>
+                <span>{{ package?.pickup }}</span>
+              </td>
+              <td>
+                <span>{{ package?.drop }}</span>
+              </td>
+              <td>
+                <span>{{ package?.time }} </span>
+              </td>
+              <td>
+                <span *ngIf="package?.payment_status == 'paid'" class="completed">
+                  {{ package?.payment_status }}</span>
+                <span *ngIf="package?.payment_status !== 'paid'" class="cancel">
+                  {{ package?.payment_status }}</span>
+              </td>
+              <td>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                  (click)="openModal(package)">
+                  View details
+                </button>
+              </td>
+            </tr>
+            <!------------------------------->
+          </tbody>
+        </table>
+        <div class="pagination align-items-center">
+          <button (click)="prevPage()" class="btn btn-outline-primary   " [disabled]="currentPage === 1">Previous</button>
+          <span>Page {{ currentPage }} of {{ lastPage }}</span>
+          <button (click)="nextPage()" class="btn btn-outline-primary   "
+            [disabled]="currentPage === lastPage">Next</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-------------In case no flights-------------------->
+  <div *ngIf="booking.length === 0">
+    <div class="booking">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="172" height="172" viewBox="0 0 172 172" fill="none">
+          <path
+            d="M154.333 144.025L10.4361 0.128418L0.0644531 10.5001L29.9545 40.3901C25.8711 45.9434 23.6661 52.6401 23.6661 59.5001V149.333C23.6661 153.665 25.3869 157.82 28.45 160.883C31.5131 163.946 35.6676 165.667 39.9995 165.667H137.999C142.573 165.667 146.819 163.707 149.923 160.358L161.193 171.628L171.564 161.257L154.333 144.025ZM39.9995 59.5001C39.9995 56.9684 40.6528 54.4368 41.7961 52.2318L98.0645 108.5H39.9995V59.5001ZM137.999 149.333H39.9995V116.667H56.3328V133H64.4995V116.667H106.231L137.999 148.435V149.333ZM121.666 43.1668C125.998 43.1668 130.152 44.8876 133.216 47.9507C136.279 51.0138 137.999 55.1682 137.999 59.5001V106.867L154.333 123.2V59.5001C154.333 50.8363 150.891 42.5275 144.765 36.4013C138.639 30.2751 130.33 26.8334 121.666 26.8334V18.6668C121.666 14.3349 119.945 10.1804 116.882 7.11734C113.819 4.05425 109.665 2.33342 105.333 2.33342H72.6661C68.3343 2.33342 64.1798 4.05425 61.1167 7.11734C58.0536 10.1804 56.3328 14.3349 56.3328 18.6668V25.2001L74.2995 43.1668H121.666ZM72.6661 18.6668H105.333V26.8334H72.6661V18.6668Z"
+            fill="#B5B5C3" fill-opacity="0.55" />
+        </svg>
+      </div>
+      <h3>No Bookings yet , let’s changes that</h3>
+      <div>
+        <button routerLink="/">Back to Home</button>
+      </div>
+    </div>
+  </div>
+  <!------------------------------------------------->
+</div>
+<div class="modal fade py-3 step1" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="margin: auto; max-width: 90% !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <h4>Booking Information</h4>
+          <div class="booking-info mt-5">
+            <div class="row">
+              <div class="col-xl-5 col-m-12">
+                <div class="image-container"
+                  [style.backgroundImage]="'url(' + (selectedtransfer?.tripinfo?.cover || '') + ')'">
+                </div>
+                <div>
+                  <div class="row mt-5">
+                    <h5 class="d-inline">Total price:
+                      <p class="d-inline ms-2">{{ selectedtransfer?.tripinfo?.total }}</p>
+                     </h5>
+                  </div>
+                  <div class="row mt-5" *ngIf="selectedtransfer?.tripinfo?.option?.length">
+                    <h5>Additional Options :</h5>
+                    <div class="row" *ngFor="let option of selectedtransfer?.tripinfo?.option">
+                      <p class="col-6">
+                        {{ option.name }}
+                      </p>
+                      <p class="col-6">
+                        {{ option.price }}
+                      </p>
+
+
+                    </div>
+
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-xl-1 col-m-12">
+                <!-- <div>
+                  <img src="../../../../../assets/icons/transfer-icons/Vector (1).svg">
+                </div>
+                <div class="location"></div> -->
+              </div>
+              <div class="col-xl-6 col-m-12">
+                <div class="row">
+
+                  <div class="row">
+                    <div class="col-xl-6 col-12">
+
+                        <h5>Trip Info</h5>
+
+                    </div>
+                    <div class="col-xl-6 col-12">
+                      <span *ngIf="selectedtransfer?.payment_status == 'paid'" class="completed">
+                        {{ selectedtransfer?.payment_status }}</span>
+
+                  </div>
+                  </div>
+
+                  <div class="mt-4" *ngIf="selectedtransfer?.tripinfo?.way==1">
+                    <div class="row ">
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/calender.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>{{selectedtransfer?.tripinfo?.bookdate}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/clock.svg">
+                          </div>
+                          <div class="ms-1">
+                            <p>{{
+                              "1970-01-01T" + selectedtransfer?.tripinfo?.booktime
+                              | date : "h:mm a"
+                              }}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/call.svg">
+                          </div>
+                          <div class="ms-1">
+                            <p>{{userdata?.overviwe?.phonenumber}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-4"  >
+
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/people.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>NO.OF Pepole : {{selectedtransfer?.tripinfo?.person}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12" *ngIf="selectedtransfer?.tripinfo?.flightnumbber!=null">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/carbon_flight-roster.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>{{selectedtransfer?.tripinfo?.flightnumbber}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="row mt-4">
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/Vector.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>Pick Up Location : <br>  {{selectedtransfer?.tripinfo?.from}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/Vector (1).svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>Goig To : <br> {{selectedtransfer?.tripinfo?.to}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row mt-4">
+
+                        <div class="d-flex" *ngIf="selectedtransfer?.tripinfo?.requirements!=null">
+                          <div>
+                            <h6>
+                              Requirements
+                            </h6>
+                          </div>
+                          <div class="ms-2">
+                            <p>  {{selectedtransfer?.tripinfo?.requirements}}</p>
+                          </div>
+
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <div class="mt-4" *ngIf="selectedtransfer?.tripinfo?.way==2">
+                    <div class="row">
+                      <h5>Departure Trip</h5>
+                    </div>
+                    <div class="row ">
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/calender.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>{{selectedtransfer?.tripinfo?.bookdate}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/clock.svg">
+                          </div>
+                          <div class="ms-1">
+                            <p>{{
+                              "1970-01-01T" + selectedtransfer?.tripinfo?.booktime
+                              | date : "h:mm a"
+                              }}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/call.svg">
+                          </div>
+                          <div class="ms-1">
+                            <p>{{userdata?.overviwe?.phonenumber}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/people.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>NO.OF Pepole : {{selectedtransfer?.tripinfo?.person}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12" *ngIf="selectedtransfer?.tripinfo?.flightnumbber!=null">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/carbon_flight-roster.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>{{selectedtransfer?.tripinfo?.flightnumbber}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="row mt-4 ">
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/Vector.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>Pick Up Location : <br>  {{selectedtransfer?.tripinfo?.from}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/Vector (1).svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>Goig To : <br> {{selectedtransfer?.tripinfo?.to}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                    <hr class="horizontal-line">
+
+                    <div class="row">
+                      <h5>Returning Trip</h5>
+                    </div>
+                    <div class="row ">
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/calender.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>{{selectedtransfer?.tripinfo?.returndate}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/clock.svg">
+                          </div>
+                          <div class="ms-1">
+                            <p>{{
+                              "1970-01-01T" + selectedtransfer?.tripinfo?.returntime
+                              | date : "h:mm a"
+                              }}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row mt-4"  >
+
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/people.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>NO.OF Pepole : {{selectedtransfer?.tripinfo?.person}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12" *ngIf="selectedtransfer?.tripinfo?.flightnumbber!=null">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/carbon_flight-roster.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>{{selectedtransfer?.tripinfo?.flightnumbber}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="row mt-4 ">
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/Vector.svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>Returning From:
+                              <br>  {{selectedtransfer?.tripinfo?.to}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-xl col-12">
+                        <div class="d-flex">
+                          <div>
+                            <img src="../../../../../assets/icons/transfer-icons/Vector (1).svg">
+                          </div>
+                          <div class="ms-2">
+                            <p>Returning To:
+                              : <br> {{selectedtransfer?.tripinfo?.from}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+
+                    <div class="row mt-4">
+
+                        <div class="d-flex" *ngIf="selectedtransfer?.tripinfo?.requirements!=null">
+                          <div>
+                            <h6>
+                              Requirements
+                            </h6>
+                          </div>
+                          <div class="ms-2">
+                            <p>  {{selectedtransfer?.tripinfo?.requirements}}</p>
+                          </div>
+
+                      </div>
+
+
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

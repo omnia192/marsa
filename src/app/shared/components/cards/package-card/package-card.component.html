@@ -1,0 +1,68 @@
+<div class="card mb-1 tab-card" style="box-shadow: 0px 0px 50px 0px #20202026 !important;">
+    <div class="position-relative mb-2" style="overflow: hidden;">
+        <a [routerLink]="['/',translate.currentLang ,'tours','details', item.id, item.name]"
+            class="d-block gradient-overlay-half-bg-gradient-v5">
+            <img
+                style="filter: brightness(1); height: 200px"
+                class="w-100"
+                [src]="item?.cover"
+                [alt]="getImageName(item?.cover)"
+
+                />
+            </a>
+
+            <div class="position-absolute top-0 right-0 pt-4 pr-2" style="margin-top: -0.8rem;">
+                <button
+                type="button"
+                class="btn btn-sm btn-icon text-black-50 rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+                data-original-title="Save for later"
+                aria-label="Save for later"
+                #btn
+                (click)="addtoFavorits(btn,$event)"
+                >
+                <i class="fa fa-heart fs-3 "></i>
+                <!-- <span class="fa-regular fa-heart font-size-20"></span> -->
+                </button>
+            </div>
+        <div class="position-absolute bottom-0 left-0 right-0">
+            <div class="px-3 pb-3">
+                <div class="d-flex gap-2"><img src="../../../../../assets/icons/location-package.svg"
+                        style="width: 14.97px;" alt="location">
+                    <span class="pb-0 place-location">
+                        {{item.Place}}
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body px-4 py-2">
+        <a  class="d-block">
+            <div class="mb-2 d-flex align-items-center title">
+                {{item.title}}
+            </div>
+        </a>
+        <a class="card-title mb-0">{{ item?.typename }}</a>
+        
+        <div class="my-2">
+          <div class="d-inline-flex align-items-center review">
+            <span class="stars">
+              <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-solid fa-star" style="color: #bfbfbf" [ngClass]="{
+                  'fa-star-filled': star <= getRoundedRate(item?.rate),
+                  'yellow-star': star <= getRoundedRate(item?.rate)
+                }"></i>
+            </span>
+            <span>{{ item?.countRev }} Reviews</span>
+          </div>
+        </div>
+        <div class="mb-1  review">
+            <div class="py-3">
+                From
+                <span class="px-2" style="font-weight: 700; font-size: 18px; color:#000">${{item.price}}</span>
+            </div>
+        </div>
+    </div>
+</div>

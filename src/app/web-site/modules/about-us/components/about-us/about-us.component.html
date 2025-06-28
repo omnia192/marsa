@@ -1,0 +1,209 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+
+<div id="content">
+  <!-- Hero Section -->
+  <div class="bg-img-hero text-center mb-1 gradient-overlay-half-black-gradient"
+    [style.backgroundImage]="'url(' + currentBackgroundImage + ')'">
+    <div class="container space-top-xl-3 py-6 py-xl-0">
+      <div
+        class="row justify-content-center py-xl-4 d-flex justify-content-center align-items-center h-100 flex-column">
+        <div>
+          <h1>About Us</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-no-gutter justify-content-center mb-0">
+              <li class="breadcrumb-item font-size-14">
+                <a class="text-white" [routerLink]="['/', translate.currentLang]">Home</a>
+              </li>
+              <li class="breadcrumb-item custom-breadcrumb-item font-size-14 text-white active" aria-current="page">
+                About Us
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider border-bottom border-color-3">
+    <div class="container space-1">
+
+      <section class="mx-auto content">
+        <div class="container">
+          <div class="row mt-2">
+            <div class="col-md-6 p-5">
+              <img [src]="data.aboutus?.story_image"  [alt]="getImageName(data.aboutus?.story_image)"  style="
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 20px;
+                " />
+            </div>
+            <div class="m-auto col-md-6 p-5">
+              <h2 class="text-center text-md-left pb-lg-4">Our Story</h2>
+              <div style="width: 100%;">
+                <p>{{ data.aboutus?.Story }}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <section class="mx-auto content">
+        <div class="container">
+          <div class="row">
+            <div class="m-auto col-md-6 p-5 order-2 order-md-1">
+              <h2 class="text-center text-md-left pb-lg-4">Our mission</h2>
+              <div style="width: 100%;">
+                <p>{{ data.aboutus?.mission }}</p>
+              </div>
+            </div>
+            <div class="col-md-6 p-5 order-1 order-md-2">
+              <img [src]="data.aboutus?.mission_image"  [alt]="getImageName(data.aboutus?.mission_image)"  style="width: 100%; height: 100%; border-radius: 20px;" />
+            </div>
+          </div>
+        </div>
+
+
+
+      </section>
+    </div>
+  </div>
+  <div class="container text-center space-1">
+    <div class="text-center mx-md-auto pb-6">
+      <h2 class="booking">Why Book With Us?</h2>
+    </div>
+    <div class="mb-8">
+
+      <div class="">
+        <owl-carousel-o [options]="aboutOptions" class="my-destination-why">
+          <ng-container *ngFor="let item of data.Why_chosse_us">
+            <ng-template carouselSlide>
+              <div style="display: flex;
+    justify-content: center;">
+                <img [src]="item.icon"  [alt]="getImageName(item.icon)"  class="Why_chosse_us text-center" />
+              </div>
+
+              <div>
+                <h5 class="mb-2 mt-3">
+                  <a class="heading">
+                    {{ item.title }}
+                  </a>
+                </h5>
+
+
+              </div>
+              <div>
+                <p class="desc px-xl-2 px-uw-7">
+                  {{ item.desc }}
+                </p>
+              </div>
+
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <div class="bg-img-hero space-3 space-top-lg-4 space-bottom-lg-3"
+     [style.backgroundImage]="'url(' + data.aboutus?.chosse_us_background + ')'" style="
+     background-position: center center;
+     background-size: cover;
+     height: 406px;"
+    >
+    <div class="text-center banner mt-xl-2 h-100 d-flex justify-content-center align-items-center flex-column vid">
+      <h5 class="mb-2">Traveling Highlights</h5>
+      <h6 class="mb-lg-5 opacity-7">{{data.aboutus?.chosse_us_text}}</h6>
+      <a class="js-fancybox d-inline-block u-media-player" data-src="//vimeo.com/167434033" data-speed="700"
+        data-animate-in="zoomIn" data-animate-out="zoomOut" data-caption="MyTravel - Responsive Website Template"
+        (click)="showDialog()">
+        <span class="u-media-player__icon u-media-player__icon--lg bg-transparent text-white">
+          <img src="../../../../../../assets/images/play.png" alt="play" />
+        </span>
+      </a>
+
+      <p-dialog [(visible)]="visible" [modal]="true" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+        [style]="{ width: '70vw' }" [draggable]="false" [resizable]="false">
+        <video controls="" style="width: 92% ; max-height:100% " muted name="media">
+          <source [src]="videoUrl" type="video/mp4">
+        </video>
+
+      </p-dialog>
+    </div>
+  </div>
+  <div class="container mb-5">
+    <div>
+      <app-clients></app-clients>
+    </div>
+  </div>
+  <div class="bg-img-hero-2">
+    <div class="container text-center space-1">
+      <div class="row icon-block justify-content-center align-items-center">
+        <div class="col-6 col-sm-6 col-md-3 mb-4" *ngFor="let item of data?.counter?.slice(0, 4)">
+          <div class="d-flex justify-content-center">
+            <img [src]="item.icon"  [alt]="getImageName(item.icon)"  class="Why_chosse_us text-center" />
+          </div>
+          <div>
+            <h5 class="mb-2 pt-3">{{ item.title }}</h5>
+            <p class="px-uw-3">{{ item.desc }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+  <div class="team">
+    <div class="container space-top-1">
+      <div class="w-md-80 w-lg-70 text-center mx-md-auto mb-5 mt-3">
+        <h2 class="title mb-0">Our Partners</h2>
+      </div>
+      <section class="myDestination">
+        <div id="partner">
+          <owl-carousel-o [options]="aboutOptions" class="my-destination">
+            <ng-container *ngFor="let imagePath of partnerPaths">
+              <ng-template carouselSlide>
+                <img [src]="imagePath"  [alt]="getImageName(imagePath)"  alt="Partner Image" class="partner_img" />
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="team border-color-3">
+    <div class="container space-top-1">
+      <div class="w-md-80 w-lg-70 text-center mx-md-auto mb-5 mt-3">
+        <h2 class="title mb-0">Deticated Team</h2>
+      </div>
+      <div class="row text-center pb-2 pt-5">
+
+        <owl-carousel-o [options]="aboutOptions" class="my-destination">
+          <ng-container *ngFor="let item of data.team">
+            <ng-template carouselSlide>
+              <div style="display: flex;
+                   justify-content: center;">
+                <figure class="d-inline-block u-avatar-image rounded-circle overflow-hidden">
+                  <img [src]="item.icon"  [alt]="getImageName(item.icon)"  alt="Image-Descrition" />
+                </figure>
+              </div>
+
+              <div>
+                <h6 class="mb-0">{{ item.title }}</h6>
+                <span class="l">
+                  {{ item.desc }}
+                </span>
+              </div>
+
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #videoModal>
+  <div mat-dialog-content>
+    <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+  </div>
+</ng-template>

@@ -1,0 +1,155 @@
+section {
+    background-image: url("../../../../../../assets/images/application.webp");
+    background-position: center center;
+    background-size: cover;
+    height: 596px;
+    margin-top: 70px;
+}
+.gradient-overlay-half-black-gradient::before {
+  background-color: #18181a !important;
+  opacity: 0.5 !important;
+}
+
+.home {
+    height: 479px;
+    transform: scale(1.8) translate(10px, 45px);
+}
+ h3 {
+    color: var(--White, #FFF);
+    font-family: Poppins;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+p {
+
+    color: var(--White, #FFF);
+    font-family: Poppins;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 40px;
+}
+.appstore {
+    margin-bottom: 20px;
+}
+
+.qr-bg {
+    background-color: #FFF;
+    padding: 11px 15px 0px;
+    text-align: center;
+}
+
+.apps-container {
+    padding-top: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mobile {
+    display: flex;
+    justify-content: center;
+    gap: 39px;
+    align-items: center;
+}
+
+/*******************************************/
+
+@media screen and (max-width :570px) {
+
+    .home {
+        height: 380px;
+        transform: scale(1.2) translate(10px, 45px);
+        margin-top: -170px;
+    }
+
+
+    ::ng-deep .mobile-content * {
+      font-size: 22px !important;
+    }
+
+    .mobile {
+        flex-direction: column;
+        gap: 10px;
+
+    }
+
+    .qr {
+        margin-bottom: 0;
+    }
+
+    .qr-bg {
+        background: transparent;
+        padding: 25px;
+    }
+
+    .appstore {
+        margin-bottom: 0;
+    }
+
+    .apps-container {
+        padding-top: 50px;
+    }
+}
+
+@media screen and (min-width:570.9px) and (max-width:767.8px) {
+    section {
+        height: fit-content;
+        margin-top: 165px;
+        padding-bottom: 50px;
+    }
+
+    .home {
+        transform: scale(1.8) translate(10px, 0);
+        margin-top: -48px;
+
+    }
+
+    ::ng-deep .mobile-content * {
+      font-size: 25px !important;
+    }
+
+
+    .mobile {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:992.9px) {
+    .apps-container {
+        padding-top: 40px;
+        align-items: flex-start;
+    }
+
+    .home {
+        text-align: left;
+    }
+
+    .mobile {
+        flex-direction: column;
+    }
+
+    ::ng-deep .mobile-content * {
+      font-size: 29px !important;
+    }
+
+}
+
+@media screen and (min-width:992.9px) and (max-width:1200px) {
+    .apps-container {
+        padding-top: 40px;
+    }
+
+    // ::ng-deep .mobile-content h1 span {
+    //     font-size: 39px !important;
+    // }
+
+    ::ng-deep .mobile-content p {
+        font-size: 27px !important;
+    }
+}

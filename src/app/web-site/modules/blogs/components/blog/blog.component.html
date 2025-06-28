@@ -1,0 +1,295 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+<div
+  class="bg-img-hero text-center mb-5 mb-lg-8 content gradient-overlay-half-black-gradient"
+  [style.backgroundImage]="'url(' + cover + ')'"
+>
+  <div class="container space-top-xl-3 py-6 py-xl-0">
+    <div class="row justify-content-center py-xl-4">
+      <!-- Info -->
+      <div class="py-xl-10 py-lg-5">
+        <h1
+          class="font-size-40 font-size-xs-30 text-white font-weight-bold mb-0"
+        >
+          Blogs
+        </h1>
+        <nav aria-label="breadcrumb">
+          <ol
+            class="breadcrumb breadcrumb-no-gutter mb-0 d-flex justify-content-center py-3"
+          >
+            <li class="breadcrumb-item font-size-14">
+              <a class="text-white" [routerLink]="['/']">Home</a>
+            </li>
+            <li
+              class="breadcrumb-item custom-breadcrumb-item font-size-14 text-white active"
+              aria-current="page"
+            >
+              Blogs
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Info -->
+    </div>
+  </div>
+</div>
+<div class="mb-6 mb-lg-8 pt-lg-1">
+  <div class="container mb-5 mb-lg-9 pb-lg-1">
+    <div class="row">
+      <div class="col-lg-8 col-xl-9 order-2 order-md-1">
+        <div class="mb-5 pb-1">
+          <div class="row">
+              <div class="mb-4 col-lg-6 col-xl-6" *ngFor="let blog of filteredBlogs">
+                <owl-carousel-o [options]="carouselOptions" class="trending">
+                  <ng-container *ngFor="let img of blog?.image">
+                    <ng-template carouselSlide>
+                      <div class="item">
+                        <a
+                          class="d-block"
+                          [routerLink]="[
+                            '/',
+                            translate.currentLang,
+                            'blogs',
+                            'blogSignal',
+                            blog.id
+                          ]"
+                        >
+                          <div class="image-container">
+                            <img
+                              class="img-fluid mb-4 rounded-xs w-100"
+                              [src]="img"
+                              [alt]="blog?.title"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </ng-template>
+                  </ng-container>
+                </owl-carousel-o>
+
+                <h5 class="font-weight-bold font-size-21 text-gray-3 mt-2">
+                  <a
+                    [routerLink]="[
+                      '/',
+                      translate.currentLang,
+                      'blogs',
+                      'blogSignal',
+                      blog.id
+                    ]"
+                    >{{ blog?.title }}</a
+                  >
+                </h5>
+                <div class="mb-3">
+                  <a class="mr-3 pr-1">
+                    <span class="font-weight-normal text-gray-3">{{ blog?.date }}</span>
+                  </a>
+                  <a>
+                    <span
+                      [class.activeLink]="
+                        selectedCategory === blog?.category_id ? true : false
+                      "
+                      style="color: rgba(41, 124, 187, 1)"
+                      (click)="filterByCategory(blog?.category_id)"
+                      >{{ blog?.category }}</span>
+                  </a>
+                </div>
+                <!-- <p class="mb-0" [innerHTML]="blog?.overview"></p> -->
+              </div>
+
+
+          </div>
+          <div *ngIf="isMobile">
+
+            <div class="border border-color-7 rounded p-4 mb-5 booking">
+              <h6 class="mx-2 mb-3 pb-1 head">Why Book With Us?</h6>
+              <div
+                class="d-flex align-items-center mb-3"
+                *ngFor="let about of Why_chosse_us"
+              >
+                <img
+                  [src]="about.icon"
+                  class="me-3"
+                  [alt]="about.title"
+                  loading="lazy"
+                  width="24"
+                  height="24"
+                />
+                <h6 class="mb-0 font-size-14 text-gray-1">
+                  <a>{{ about.title }}</a>
+                </h6>
+              </div>
+            </div>
+
+            <div class="border border-color-7 rounded p-4">
+              <h6 class="tags mx-1 mb-3 pb-1">Tags</h6>
+
+              <div class="d-flex flex-wrap" >
+                <ng-container *ngFor="let tag of allTags">
+                  <a
+                    class="btn d-flex align-items-center justify-content-center btn-gray-1 rounded-xs transition-3d-hover font-size-14 text-gray-1 width-auto mr-2 mb-2 text-wrap"
+                    style="white-space: normal; word-break: break-word;"
+                    [routerLink]="['/', translate.currentLang, 'blogs', 'blogSignal', tag.blogId]"
+                  >
+                    {{tag.name}}, {{tag.name2}}, {{tag.name3}}
+                  </a>
+                </ng-container>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <!-- <nav aria-label="Page navigation"> -->
+        <div class="paginator">
+          <button
+            class="button link prev border-0"
+            (click)="previous()"
+            [disabled]="page == 1"
+          >
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 29 29"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.73875 28.25L20.2613 28.25C25.2663 28.25 28.25 25.2663 28.25 20.2613L28.25 8.7525C28.25 3.73375 25.2663 0.75 20.2613 0.75L8.7525 0.75C3.7475 0.75 0.76375 3.73375 0.76375 8.73875L0.76375 20.2613C0.75 25.2663 3.73375 28.25 8.73875 28.25ZM10.6637 13.7713L15.5175 8.9175C15.7238 8.71125 15.985 8.615 16.2463 8.615C16.5075 8.615 16.7688 8.71125 16.975 8.9175C17.1668 9.11156 17.2743 9.37341 17.2743 9.64625C17.2743 9.91909 17.1668 10.1809 16.975 10.375L12.85 14.5L16.975 18.625C17.1668 18.8191 17.2743 19.0809 17.2743 19.3537C17.2743 19.6266 17.1668 19.8884 16.975 20.0825C16.5763 20.4812 15.9162 20.4812 15.5175 20.0825L10.6637 15.2287C10.2512 14.83 10.2512 14.17 10.6637 13.7713Z"
+                fill="#0DB1FF"
+              />
+            </svg>
+          </button>
+          <div class="pages">
+            <div
+              class="page"
+              [class.active]="pageNum == page"
+              *ngFor="let pageNum of pages"
+              (click)="navigateByPage(pageNum)"
+            >
+              {{ pageNum }}
+            </div>
+          </div>
+          <button
+            class="button link next border-0"
+            (click)="next()"
+            [disabled]="page == last_page"
+          >
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 29 29"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.73875 28.25L20.2613 28.25C25.2663 28.25 28.25 25.2663 28.25 20.2613L28.25 8.7525C28.25 3.73375 25.2663 0.75 20.2613 0.75L8.7525 0.75C3.7475 0.75 0.76375 3.73375 0.76375 8.73875L0.76375 20.2613C0.75 25.2663 3.73375 28.25 8.73875 28.25ZM10.6637 13.7713L15.5175 8.9175C15.7238 8.71125 15.985 8.615 16.2463 8.615C16.5075 8.615 16.7688 8.71125 16.975 8.9175C17.1668 9.11156 17.2743 9.37341 17.2743 9.64625C17.2743 9.91909 17.1668 10.1809 16.975 10.375L12.85 14.5L16.975 18.625C17.1668 18.8191 17.2743 19.0809 17.2743 19.3537C17.2743 19.6266 17.1668 19.8884 16.975 20.0825C16.5763 20.4812 15.9162 20.4812 15.5175 20.0825L10.6637 15.2287C10.2512 14.83 10.2512 14.17 10.6637 13.7713Z"
+                fill="#0DB1FF"
+              />
+            </svg>
+          </button>
+        </div>
+
+
+      </div>
+      <div class="col-lg-4 col-xl-3 order-1 order-md-2">
+        <form class="input-group input-group-borderless mb-5">
+          <!-- Input -->
+          <!-- <div class="js-focus-state w-100">
+            <div
+              class="input-group border border-color-8 border-width-2 rounded d-flex align-items-center"
+            >
+              <input
+                type="text"
+                class="form-control font-size-14 placeholder-1 ml-1"
+                placeholder="Search"
+                aria-label="Company or title"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i
+                    class="fa-solid fa-magnifying-glass font-size-20 text-gray-8 mr-1"
+                  ></i>
+                </span>
+              </div>
+            </div>
+          </div> -->
+          <!-- End Input -->
+        </form>
+        <h5 class="ps-2 pb-2">All Categories</h5>
+        <ul
+          id="sidebarNav"
+          class="custom-dropdown list-unstyled border border-color-7 rounded pt-4 pb-1 mb-5"
+        >
+
+          <li class="list-item">
+            <a class="d-block">
+              <span
+                class="font-weight-normal ps-3"
+                (click)="filterByCategory('all')"
+                [class.activeLink]="activeCategory === 'all'"
+                >All</span
+              >
+            </a>
+          </li>
+          <li class="list-item" *ngFor="let item of allCategories">
+            <a class="d-block">
+              <span
+                class="font-weight-normal ps-3"
+                (click)="filterByCategory(item.id)"
+                [class.activeLink]="activeCategory === item.id"
+                >{{ item.name }}</span
+              >
+            </a>
+
+
+
+
+          </li>
+        </ul>
+
+        <div *ngIf="!isMobile">
+
+          <div class="border border-color-7 rounded p-4 mb-5 booking">
+            <h6 class="mx-2 mb-3 pb-1 head">Why Book With Us?</h6>
+            <div
+              class="d-flex align-items-center mb-3"
+              *ngFor="let about of Why_chosse_us"
+            >
+              <img
+                [src]="about.icon"
+                class="me-3"
+                [alt]="about.title"
+                loading="lazy"
+                width="24"
+                height="24"
+              />
+              <h6 class="mb-0 font-size-14 text-gray-1">
+                <a>{{ about.title }}</a>
+              </h6>
+            </div>
+          </div>
+
+          <div class="border border-color-7 rounded p-4">
+            <h6 class="tags mx-1 mb-3 pb-1">Tags</h6>
+            <div class="d-flex flex-wrap">
+              <ng-container *ngFor="let tag of allTags">
+                <a
+                  class="btn d-flex align-items-center justify-content-center btn-gray-1 rounded-xs transition-3d-hover font-size-14 text-gray-1 width-auto mr-2 mb-2 text-wrap"
+                  style="white-space: normal; word-break: break-word;"
+                  [routerLink]="['/', translate.currentLang, 'blogs', 'blogSignal', tag.blogId]"
+                >
+                  {{tag.name}}, {{tag.name2}}, {{tag.name3}}
+                </a>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="border border-color-8"></div>
+</div>
+<app-clients></app-clients>

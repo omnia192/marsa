@@ -1,0 +1,56 @@
+<section class="gradient-overlay-half-black-gradient"  [style.backgroundImage]="'url(' + mobile_image + ')'" style="
+background-position: center center;
+    background-size: cover;
+    height: 596px;
+    margin-top: 70px;
+">
+  <div class="container text-center">
+    <div class="res row">
+      <div class="col-md-6">
+        <img
+          class="home"
+          src="../../../../../../assets/images/Home.webp"
+          alt="home"
+          loading="lazy"
+        />
+        <!-- <img
+        class="home"
+        [src]="mobile_image"
+        alt="home"
+        loading="lazy"
+      /> -->
+      </div>
+
+      <div class="col-md-6 apps-container">
+        <div *ngIf="mobile_description" class="mobile-content" [innerHTML]="mobile_description"></div>
+
+
+        <div class="mobile">
+
+
+          <div class="d-flex align-items-center flex-column gap-3">
+            <a href="https://apps.apple.com/eg/app/marsa-waves/id6737450382" target="_blank">
+
+              <img
+               width="205px"
+              
+                src="../../../../../../assets/images/appStore.svg"
+                class="appstore"
+                alt="app-Store"
+                loading="lazy"
+              />
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.misk.marsa" target="_blank">
+
+              <img
+                src="../../../../../../assets/images/googleplay.svg"
+                alt="googleplay"
+                loading="lazy"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

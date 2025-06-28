@@ -1,0 +1,246 @@
+<div class="container">
+  <section class="table-content-general">
+    <!-- <header class="flex-wrap">
+      <div class="tabs">
+        <div
+          class="tab"
+          *ngFor="let year of years"
+          (click)="setFilter(year.toString())"
+          [class.active]="activeTab === year.value"
+    >
+      {{ year.label }}
+        </div>
+      </div>
+    </header> -->
+
+    <div *ngIf="filterdLiveAboard?.length > 0" class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <span> Liveaboard </span>
+            </th>
+            <th>
+              <span> Time </span>
+            </th>
+            <!-- <th>
+              <span> Type </span>
+            </th> -->
+            <th><span> Price </span></th>
+            <th><span> Status </span></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let live of filterdLiveAboard">
+            <td>
+              <span>{{ live?.name }}</span>
+            </td>
+            <td>
+              <span>{{ live?.time }}</span>
+            </td>
+            <!-- <td>
+              <span>{{ live?.type }}</span>
+            </td> -->
+            <td>
+              <span>${{ live?.price?.toFixed(2) }} </span>
+            </td>
+            <td>
+              <span *ngIf="live?.status == 'paid'" class="completed">
+                {{ live?.status }}</span
+              >
+              <span *ngIf="live?.status !== 'paid'"  class="cancel"> {{ live?.status }}</span>
+            </td>
+            <td>
+              <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+                (click)="openModal(live)"
+
+              >
+                View details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination align-items-center">
+        <button (click)="prevPage()" class="btn btn-outline-primary   " [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ lastPage }}</span>
+        <button (click)="nextPage()" class="btn btn-outline-primary   " [disabled]="currentPage === lastPage">Next</button>
+      </div>
+    </div>
+    <div *ngIf="filterdLiveAboard?.length == 0">
+      <div class="booking">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="172"
+            height="172"
+            viewBox="0 0 172 172"
+            fill="none"
+          >
+            <path
+              d="M154.333 144.025L10.4361 0.128418L0.0644531 10.5001L29.9545 40.3901C25.8711 45.9434 23.6661 52.6401 23.6661 59.5001V149.333C23.6661 153.665 25.3869 157.82 28.45 160.883C31.5131 163.946 35.6676 165.667 39.9995 165.667H137.999C142.573 165.667 146.819 163.707 149.923 160.358L161.193 171.628L171.564 161.257L154.333 144.025ZM39.9995 59.5001C39.9995 56.9684 40.6528 54.4368 41.7961 52.2318L98.0645 108.5H39.9995V59.5001ZM137.999 149.333H39.9995V116.667H56.3328V133H64.4995V116.667H106.231L137.999 148.435V149.333ZM121.666 43.1668C125.998 43.1668 130.152 44.8876 133.216 47.9507C136.279 51.0138 137.999 55.1682 137.999 59.5001V106.867L154.333 123.2V59.5001C154.333 50.8363 150.891 42.5275 144.765 36.4013C138.639 30.2751 130.33 26.8334 121.666 26.8334V18.6668C121.666 14.3349 119.945 10.1804 116.882 7.11734C113.819 4.05425 109.665 2.33342 105.333 2.33342H72.6661C68.3343 2.33342 64.1798 4.05425 61.1167 7.11734C58.0536 10.1804 56.3328 14.3349 56.3328 18.6668V25.2001L74.2995 43.1668H121.666ZM72.6661 18.6668H105.333V26.8334H72.6661V18.6668Z"
+              fill="#B5B5C3"
+              fill-opacity="0.55"
+            />
+          </svg>
+        </div>
+        <h3>No Bookings yet , let’s changes that</h3>
+        <div>
+          <button routerLink="/">Back to Home</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div
+  class="modal fade py-3 step1"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered"
+    style="margin: auto; max-width: 90% !important;  overflow: auto"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <h4>Booking Information</h4>
+          <div class="booking-info mt-5">
+            <div class="row">
+              <div class="col-xl-4 col-m-12">
+                <div
+                  class="image-container"
+                  [style.backgroundImage]="'url(' + (selectedLiveAboard?.tripinfo?.Cover || '') + ')'"
+                  >
+                </div>
+              </div>
+
+              <div class="col-xl-8 col-m-12">
+                <div class="row mb-3" *ngIf="selectedLiveAboard?.cancellation==1">
+
+                  <div class="col-xl-4 col-12">
+
+                    <span class="cancel"> Canceled</span>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-4 col-m-12">
+                    <h6>Title</h6>
+                    <p>{{ selectedLiveAboard?.tripinfo?.title }}</p>
+                  </div>
+                  <div class="col-xl-8 col-sm-12">
+                    <div class="row">
+                      <div class="col-xl col-sm-12">
+                        <h6>Type</h6>
+                        <p>{{ selectedLiveAboard?.tripinfo?.type }}</p>
+                      </div>
+                      <div class="col-xl col-sm-12">
+                        <h6>Place</h6>
+                        <p>{{ selectedLiveAboard?.tripinfo?.place }}</p>
+
+                      </div>
+                      <div class="col-xl col-sm-12" *ngIf="selectedLiveAboard?.tripinfo?.boat!=null">
+                        <h6>Boat</h6>
+                        <p *ngFor="let boat of  selectedLiveAboard?.tripinfo?.boat">{{ boat}}</p>
+
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <h6>
+                    Short overview
+                  </h6>
+                  <p>{{ selectedLiveAboard?.tripinfo?.shortoverview }}</p>
+                </div>
+                <div class="row">
+                  <div class="col-xl col-sm-12">
+                    <h6>
+                      Price
+                    </h6>
+                    <p>${{ selectedLiveAboard?.tripinfo?.totlprice }}</p>
+                  </div>
+                  <div class="col-xl col-sm-12" *ngIf="selectedLiveAboard?.tripinfo?.child !=null && selectedLiveAboard?.tripinfo?.child !=0">
+                    <h6>
+                      Price For Child
+                    </h6>
+                    <p>${{ selectedLiveAboard?.tripinfo?.child }}</p>
+                  </div>
+                  <div class="col-xl col-12">
+                    <h6>
+                      Number of people
+                    </h6>
+                    <p>{{ selectedLiveAboard?.tripinfo?.adult }}</p>
+                  </div>
+                  <div class="col-xl col-sm-12">
+                    <h6>
+                      Date
+                    </h6>
+                    <p>{{ selectedLiveAboard?.tripinfo?.Schedule }}</p>
+                  </div>
+
+                </div>
+                <div class="row" *ngIf="selectedLiveAboard?.tripinfo?.pickuplocation!=null">
+
+                  <h6>
+                    Pick Up Location
+                  </h6>
+                  <p>{{ selectedLiveAboard?.tripinfo?.pickuplocation }}</p>
+                </div>
+
+
+
+              </div>
+
+            </div>
+
+            <div class="row mt-5" *ngFor="let cabin of selectedLiveAboard?.tripinfo?.cabin">
+              <div class="col-xl col-6">
+                <h6>Name</h6>
+                <p>{{cabin.name}}</p>
+              </div>
+              <div class="col-xl col-6">
+                <h6>NO.Of pepole</h6>
+                <p>{{cabin.person}}</p>
+              </div>
+              <div class="col-xl col-6">
+                <h6>Price</h6>
+                <p>${{cabin.price}}</p>
+              </div>
+              <div class="col-xl col-6">
+                <h6>Total</h6>
+                <p>${{cabin.total}}</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" #btn>Cancel</button>
+
+      </div> -->
+    </div>
+  </div>
+</div>

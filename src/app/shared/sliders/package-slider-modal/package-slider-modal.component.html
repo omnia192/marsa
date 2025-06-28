@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="modal-title">Trips</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="image-slider">
+        <owl-carousel-o [options]="imagesOptions" class="my-tours">
+            <ng-container *ngFor="let trip of packages">
+                <ng-template carouselSlide>
+                    <div class="card mb-1 tab-card" style="box-shadow: 0px 0px 50px 0px #20202026 !important;">
+                        <div class="position-relative mb-2" style="overflow: hidden;">
+                            <img class="w-100" [src]="trip.cover" [alt]="trip.title" >
+
+                        </div>
+
+                        <div class="card-body px-4 py-2">
+                            <a class="d-block">
+                                <div class="mb-2 d-flex align-items-center title">
+                                    {{trip.title}}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+</div>

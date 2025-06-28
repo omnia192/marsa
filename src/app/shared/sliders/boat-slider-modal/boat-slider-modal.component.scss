@@ -1,0 +1,24 @@
+.close {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(255, 255, 255) !important ;
+  color: rgba(13, 177, 255, 1);
+  margin: 0px;
+  font-size: 25px;
+  padding: 0px;
+  opacity: 1;
+}
+
+.modal-header {
+  direction: rtl;
+  border-bottom: 0px !important;
+}
+::ng-deep {
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: transparent !important;
+  }
+  .cdk-overlay-pane {
+    overflow: auto !important;
+  }
+}

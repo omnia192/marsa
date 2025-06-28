@@ -1,0 +1,29 @@
+<!-- <div class="custom-logo-spinner">
+  <ngx-spinner bdColor="rgba(0,0,0,0.8)" size="large" color="#0DB1FF" type="ball-spin-clockwise.css" [fullScreen]="true">
+    <img src="assets/images/logo.webp" alt="Website Logo" class="custom-logo">
+    <p style="font-size: 20px; color: white !important">Loading...</p>
+  </ngx-spinner>
+</div> -->
+<app-connectivity-notification></app-connectivity-notification>
+<router-outlet></router-outlet>
+<div
+  style="
+    text-align: start;
+    position: fixed;
+    left: -22px;
+    bottom: -1px;
+    z-index: 9999;
+    width: 11%;
+  "
+  class="px-4"
+>
+  <img
+
+    (click)="contactWhatsapp()"
+    class="transition-3d-hover whatsapp-img"
+    style="cursor: pointer"
+    [src]="imageUrl"
+    [alt]="getImageName(imageUrl)"
+  />
+</div>
+

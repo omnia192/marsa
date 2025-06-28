@@ -1,0 +1,173 @@
+.table-content-general {
+    border-radius: 12px;
+    background: var(--Base-White, #FFF);
+    padding-right: 35px;
+    padding-left: 45px;
+    margin-bottom: 120px;
+    header {
+       height: max-content;
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 0;
+        border-bottom: 1px solid #EFF2F5;
+        margin-bottom: 17px;
+        .tabs {
+            display: flex;
+            gap: 28px;
+        }
+
+        .tab {
+            color: #B5B5C3;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            cursor: pointer;
+            transition: color 0.5s ease-in-out;
+            padding-bottom: 22px;
+            &:hover{
+                color: #00A3FF;
+            }
+        }
+
+        .tab.active {
+            color: #3F4254;
+            border-bottom: 1px solid #00A3FF;
+        }
+    }
+    .table{
+       tr{
+        height: 49px;
+       }
+       span{
+        text-transform: capitalize;
+       }
+        th{
+            border-top: none;
+            padding-bottom: 20px;
+            color: #3F4254;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 21px; 
+
+        }
+        td{
+            color: #7E8299;
+            font-family: Roboto;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 21px; /* 131.25% */
+            padding-bottom: 20px;
+            vertical-align: top;
+            padding-top: 15px;
+            &:last-of-type{
+                text-align: right;
+            }
+            button{
+                display: inline-flex;
+                padding: 10px 16px;
+                align-items: flex-start;
+                gap: 10px;
+                border-radius: 6px;
+                background: #F5F8FA;
+                color: #A1A5B7;
+                text-align: center;
+                font-family: Roboto;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                border: 1px solid transparent;
+                cursor: pointer;
+                transition: all 0.5s ease-in-out;
+                &:hover{
+                    background-color: #00A3FF;
+                    color: #fff;
+                }
+            }
+        }
+        td.info-date{
+            color: #00A3FF;
+        }
+    }
+    .cancel{
+        display: inline-flex;
+        padding: 6px 11.5px;
+        align-items: center;
+        gap: 10px;
+        border-radius: 6px;
+        background: #FFE8EB;
+        color: #E5021E;
+        font-family: Roboto;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        width: 80px;
+    }
+    .completed{
+        color: #50CD89;
+        font-family: Roboto;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        display: inline-flex;
+        padding: 6px 11.5px;
+        align-items: center;
+        gap: 10px;
+        border-radius: 6px;
+        background: #E8FFF3;
+        width: 80px;
+    }
+}
+.completed{
+  color: #50CD89;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: inline-flex;
+  padding: 6px 11.5px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  background: #E8FFF3;
+  width: 80px;
+}
+.featured-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 55px;
+    h3{
+        color: #3B444F;
+        font-family: Lato;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+    .line{
+        margin: 0;   // Removes default margin
+        border: none; // Removes default border
+        background-color: #297CBB;
+        height: 2px;
+        width: 40px;
+    }
+}
+/******************************/
+@media screen and (max-width : 768px) {
+    .table-content-general{
+        padding-right: 10px;
+        padding-left: 10px;
+        margin-bottom: 50px;
+    }
+}

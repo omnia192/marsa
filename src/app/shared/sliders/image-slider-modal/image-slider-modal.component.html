@@ -1,0 +1,50 @@
+<div class="modal-header w-100 w-lg-75 m-auto">
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body w-100 w-lg-75 m-auto">
+  <div class="image-slider">
+
+    <p-carousel
+        [value]="images"
+        [numVisible]="1"
+        [numScroll]="1"
+        [showIndicators]="false"
+        [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+            </ng-template>
+            <ng-template let-product pTemplate="item">
+                <div class="border-1 surface-border border-round m-2 p-3">
+                    <div class="mb-3">
+                        <div class="relative mx-auto">
+                            <img
+                            [src]="product?.value"
+                            [alt]="product.name"
+                            width="100%"
+                            style="height: auto; max-height:350px  "
+                                class="w-full border-round m-auto " />
+
+                        </div>
+                    </div>
+
+                </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+            </ng-template>
+    </p-carousel>
+    <!-- <owl-carousel-o [options]="imagesOptions" class="trending">
+      <ng-container *ngFor="let img of images">
+        <ng-template carouselSlide>
+          <img
+            style="height: 400px"
+            [src]="img?.value"
+            alt="item"
+            loading="lazy"
+            class="pe-3 bigimg"
+          />
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o> -->
+  </div>
+</div>

@@ -1,0 +1,1640 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+<div class="container live details-page">
+  <div>
+    <div>
+      <nav class="py-3" aria-label="breadcrumb">
+        <ol
+          class="breadcrumb breadcrumb-no-gutter gap-1 mb-0 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+        >
+          <li class="flex-shrink-0 flex-xl-shrink-1">
+            <a [routerLink]="['/', translate.currentLang]">Home</a>
+          </li>
+          <i class="fa-solid fa-angle-right"></i>
+          <li class="flex-shrink-0 flex-xl-shrink-1">
+            <a>{{ liveabourdData?.Place }}</a>
+          </li>
+          <i class="fa-solid fa-angle-right"></i>
+          <li class="flex-shrink-0 flex-xl-shrink-1">
+            <a> {{ liveabourdData?.Type }}</a>
+          </li>
+          <i class="fa-solid fa-angle-right"></i>
+          <li class="flex-shrink-0 flex-xl-shrink-1" aria-current="page">
+            {{ liveabourdData?.Name }}
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-xl-9 py-5 order-2 order-md-1">
+        <div
+          class="d-block d-md-flex flex-center-between align-items-start mb-3"
+        >
+          <div class="mb-1">
+            <div class="mb-2 mb-md-0 d-flex align-items-center">
+              <h4 class="font-size-23 font-weight-bold mb-1 mr-3">
+                {{ liveabourdData?.Name }}
+                <div class="d-inline-block fw-bold fs-5 mx-4" style="
+                    border: 1px solid gray;
+                    padding: 0px 30px;
+                    border-radius: 30px;
+                    color: #297cbb;
+                    font-size: 10px;
+                  " *ngIf="liveabourdData?.trending != 0">
+                  Popular
+                </div>
+              </h4>
+            </div>
+            <div class="d-block mt-4">
+              <div class="d-block mt-4font-size-14 text-gray-1 mb-2 mb-md-0">
+                <div
+                  class="d-block d-md-flex flex-horizontal-center font-size-14 text-gray-1 mb-2 mb-md-0"
+                >
+                  <img
+                    src="../../../../../../assets/custom/Activity/locationDark.svg"
+                    class="pe-2"
+                    alt="location"
+                  />
+                  <a class="location">{{ liveabourdData?.Place }}</a>
+                  <a
+                    (click)="scrollTo('showmap')"
+                    [class.active]="activeTabId === 'showmap'"
+                    class="ml-1 d-block d-md-inline location text-primary"
+                  >
+                    - View on map</a
+                  >
+                </div>
+                <div *ngIf="showMapFrame">
+                  <div [innerHTML]="googleIframe"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <ul
+            class="list-group list-group-borderless list-group-horizontal row"
+          >
+            <li
+              class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2"
+              *ngIf="liveabourdData?.Cancellation === 0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 22 22"
+                fill="none"
+              >
+                <path
+                  d="M11 0C8.82441 0 6.69768 0.645125 4.88874 1.85382C3.0798 3.06252 1.66988 4.78051 0.837317 6.7905C0.00475341 8.80048 -0.213066 11.0122 0.211371 13.146C0.635809 15.2798 1.68346 17.2398 3.22184 18.7782C4.76022 20.3165 6.72022 21.3642 8.85401 21.7886C10.9878 22.2131 13.1995 21.9953 15.2095 21.1627C17.2195 20.3301 18.9375 18.9202 20.1462 17.1113C21.3549 15.3023 22 13.1756 22 11C21.9968 8.08359 20.8369 5.28755 18.7747 3.22534C16.7125 1.16313 13.9164 0.00317634 11 0ZM11 1.431C12.5603 1.43118 14.0968 1.81285 15.4758 2.54276C16.8548 3.27266 18.0345 4.32865 18.912 5.61877C19.7895 6.9089 20.3382 8.394 20.5104 9.94473C20.6827 11.4955 20.4731 13.0648 19.9 14.516L9.09 9.155C9.08122 9.0973 9.06544 9.04088 9.04301 8.987C8.92072 8.69711 8.86435 8.38367 8.878 8.06934C8.89164 7.75501 8.97495 7.44764 9.12189 7.16943C9.26884 6.89123 9.47577 6.64916 9.7277 6.46069C9.97963 6.27223 10.2703 6.1421 10.5787 6.07968C10.887 6.01727 11.2054 6.02413 11.5108 6.09979C11.8162 6.17546 12.101 6.31802 12.3445 6.51718C12.5881 6.71634 12.7844 6.96712 12.9192 7.2514C13.054 7.53569 13.1239 7.84639 13.124 8.16101C13.1204 8.25722 13.1363 8.35317 13.1706 8.44312C13.2049 8.53306 13.2571 8.61514 13.3239 8.68448C13.3907 8.75382 13.4707 8.80898 13.5593 8.84665C13.6479 8.88432 13.7432 8.90375 13.8395 8.90375C13.9358 8.90375 14.0311 8.88432 14.1197 8.84665C14.2083 8.80898 14.2884 8.75382 14.3552 8.68448C14.422 8.61514 14.4741 8.53306 14.5084 8.44312C14.5428 8.35317 14.5586 8.25722 14.555 8.16101C14.5538 7.3428 14.271 6.54995 13.7539 5.9158C13.2369 5.28166 12.5172 4.84488 11.716 4.67899V3.608C11.7196 3.51179 11.7037 3.41584 11.6694 3.3259C11.6351 3.23595 11.583 3.15384 11.5162 3.0845C11.4494 3.01516 11.3693 2.96001 11.2807 2.92233C11.1921 2.88466 11.0968 2.86523 11.0005 2.86523C10.9042 2.86523 10.8089 2.88466 10.7203 2.92233C10.6317 2.96001 10.5516 3.01516 10.4848 3.0845C10.418 3.15384 10.3659 3.23595 10.3316 3.3259C10.2972 3.41584 10.2814 3.51179 10.285 3.608V4.67899C9.48379 4.84488 8.76415 5.28166 8.24711 5.9158C7.73007 6.54995 7.44718 7.3428 7.44602 8.16101C7.44602 8.22168 7.44602 8.28201 7.44602 8.34201L2.814 6.04199C3.66704 4.63459 4.86852 3.47087 6.30244 2.66318C7.73635 1.85549 9.35426 1.43111 11 1.431ZM11 20.569C9.42472 20.5691 7.87379 20.1802 6.4849 19.4369C5.09601 18.6936 3.9121 17.6189 3.03834 16.3081C2.16457 14.9974 1.62797 13.4911 1.47614 11.9232C1.32431 10.3552 1.56196 8.77405 2.16801 7.32001L12.711 12.549C12.7289 12.5942 12.7514 12.6374 12.778 12.678C12.9596 12.9548 13.0739 13.2702 13.1119 13.599C13.15 13.9279 13.1106 14.261 12.997 14.572C12.8834 14.8829 12.6987 15.1629 12.4576 15.3898C12.2165 15.6167 11.9257 15.784 11.6085 15.8785C11.2912 15.9731 10.9563 15.9922 10.6304 15.9342C10.3045 15.8763 9.99659 15.743 9.73133 15.545C9.46607 15.3469 9.25076 15.0896 9.10261 14.7936C8.95445 14.4976 8.87753 14.171 8.878 13.84C8.88159 13.7438 8.86576 13.6478 8.83143 13.5579C8.79709 13.4679 8.74496 13.3858 8.67817 13.3165C8.61137 13.2472 8.53127 13.192 8.44266 13.1543C8.35406 13.1167 8.25879 13.0973 8.16251 13.0973C8.06623 13.0973 7.97093 13.1167 7.88233 13.1543C7.79373 13.192 7.71365 13.2472 7.64686 13.3165C7.58006 13.3858 7.52793 13.4679 7.4936 13.5579C7.45926 13.6478 7.4434 13.7438 7.447 13.84C7.44816 14.6582 7.73104 15.4511 8.24808 16.0852C8.76513 16.7194 9.4848 17.1561 10.286 17.322V18.393C10.2824 18.4892 10.2983 18.5852 10.3326 18.6751C10.3669 18.7651 10.4191 18.8472 10.4858 18.9165C10.5526 18.9858 10.6327 19.041 10.7214 19.0787C10.81 19.1163 10.9052 19.1357 11.0015 19.1357C11.0978 19.1357 11.1931 19.1163 11.2817 19.0787C11.3703 19.041 11.4504 18.9858 11.5172 18.9165C11.584 18.8472 11.6361 18.7651 11.6704 18.6751C11.7048 18.5852 11.7206 18.4892 11.717 18.393V17.322C12.5182 17.1561 13.2379 16.7194 13.7549 16.0852C14.272 15.4511 14.5548 14.6582 14.556 13.84C14.5559 13.7107 14.5489 13.5815 14.535 13.453L19.275 15.804C18.4333 17.2529 17.2261 18.4556 15.774 19.2918C14.3218 20.128 12.6757 20.5684 11 20.569Z"
+                  fill="#297CBB"
+                />
+              </svg>
+              <div class="ml-1 text-gray-1 mt-2">No Cancelation</div>
+            </li>
+            <li
+              class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2"
+              *ngIf="liveabourdData?.Cancellation > 0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 22 22"
+                fill="none"
+              >
+                <path
+                  d="M11 0C8.82441 0 6.69768 0.645125 4.88874 1.85382C3.0798 3.06252 1.66988 4.78051 0.837317 6.7905C0.00475341 8.80048 -0.213066 11.0122 0.211371 13.146C0.635809 15.2798 1.68346 17.2398 3.22184 18.7782C4.76022 20.3165 6.72022 21.3642 8.85401 21.7886C10.9878 22.2131 13.1995 21.9953 15.2095 21.1627C17.2195 20.3301 18.9375 18.9202 20.1462 17.1113C21.3549 15.3023 22 13.1756 22 11C21.9968 8.08359 20.8369 5.28755 18.7747 3.22534C16.7125 1.16313 13.9164 0.00317634 11 0ZM11 1.431C12.5603 1.43118 14.0968 1.81285 15.4758 2.54276C16.8548 3.27266 18.0345 4.32865 18.912 5.61877C19.7895 6.9089 20.3382 8.394 20.5104 9.94473C20.6827 11.4955 20.4731 13.0648 19.9 14.516L9.09 9.155C9.08122 9.0973 9.06544 9.04088 9.04301 8.987C8.92072 8.69711 8.86435 8.38367 8.878 8.06934C8.89164 7.75501 8.97495 7.44764 9.12189 7.16943C9.26884 6.89123 9.47577 6.64916 9.7277 6.46069C9.97963 6.27223 10.2703 6.1421 10.5787 6.07968C10.887 6.01727 11.2054 6.02413 11.5108 6.09979C11.8162 6.17546 12.101 6.31802 12.3445 6.51718C12.5881 6.71634 12.7844 6.96712 12.9192 7.2514C13.054 7.53569 13.1239 7.84639 13.124 8.16101C13.1204 8.25722 13.1363 8.35317 13.1706 8.44312C13.2049 8.53306 13.2571 8.61514 13.3239 8.68448C13.3907 8.75382 13.4707 8.80898 13.5593 8.84665C13.6479 8.88432 13.7432 8.90375 13.8395 8.90375C13.9358 8.90375 14.0311 8.88432 14.1197 8.84665C14.2083 8.80898 14.2884 8.75382 14.3552 8.68448C14.422 8.61514 14.4741 8.53306 14.5084 8.44312C14.5428 8.35317 14.5586 8.25722 14.555 8.16101C14.5538 7.3428 14.271 6.54995 13.7539 5.9158C13.2369 5.28166 12.5172 4.84488 11.716 4.67899V3.608C11.7196 3.51179 11.7037 3.41584 11.6694 3.3259C11.6351 3.23595 11.583 3.15384 11.5162 3.0845C11.4494 3.01516 11.3693 2.96001 11.2807 2.92233C11.1921 2.88466 11.0968 2.86523 11.0005 2.86523C10.9042 2.86523 10.8089 2.88466 10.7203 2.92233C10.6317 2.96001 10.5516 3.01516 10.4848 3.0845C10.418 3.15384 10.3659 3.23595 10.3316 3.3259C10.2972 3.41584 10.2814 3.51179 10.285 3.608V4.67899C9.48379 4.84488 8.76415 5.28166 8.24711 5.9158C7.73007 6.54995 7.44718 7.3428 7.44602 8.16101C7.44602 8.22168 7.44602 8.28201 7.44602 8.34201L2.814 6.04199C3.66704 4.63459 4.86852 3.47087 6.30244 2.66318C7.73635 1.85549 9.35426 1.43111 11 1.431ZM11 20.569C9.42472 20.5691 7.87379 20.1802 6.4849 19.4369C5.09601 18.6936 3.9121 17.6189 3.03834 16.3081C2.16457 14.9974 1.62797 13.4911 1.47614 11.9232C1.32431 10.3552 1.56196 8.77405 2.16801 7.32001L12.711 12.549C12.7289 12.5942 12.7514 12.6374 12.778 12.678C12.9596 12.9548 13.0739 13.2702 13.1119 13.599C13.15 13.9279 13.1106 14.261 12.997 14.572C12.8834 14.8829 12.6987 15.1629 12.4576 15.3898C12.2165 15.6167 11.9257 15.784 11.6085 15.8785C11.2912 15.9731 10.9563 15.9922 10.6304 15.9342C10.3045 15.8763 9.99659 15.743 9.73133 15.545C9.46607 15.3469 9.25076 15.0896 9.10261 14.7936C8.95445 14.4976 8.87753 14.171 8.878 13.84C8.88159 13.7438 8.86576 13.6478 8.83143 13.5579C8.79709 13.4679 8.74496 13.3858 8.67817 13.3165C8.61137 13.2472 8.53127 13.192 8.44266 13.1543C8.35406 13.1167 8.25879 13.0973 8.16251 13.0973C8.06623 13.0973 7.97093 13.1167 7.88233 13.1543C7.79373 13.192 7.71365 13.2472 7.64686 13.3165C7.58006 13.3858 7.52793 13.4679 7.4936 13.5579C7.45926 13.6478 7.4434 13.7438 7.447 13.84C7.44816 14.6582 7.73104 15.4511 8.24808 16.0852C8.76513 16.7194 9.4848 17.1561 10.286 17.322V18.393C10.2824 18.4892 10.2983 18.5852 10.3326 18.6751C10.3669 18.7651 10.4191 18.8472 10.4858 18.9165C10.5526 18.9858 10.6327 19.041 10.7214 19.0787C10.81 19.1163 10.9052 19.1357 11.0015 19.1357C11.0978 19.1357 11.1931 19.1163 11.2817 19.0787C11.3703 19.041 11.4504 18.9858 11.5172 18.9165C11.584 18.8472 11.6361 18.7651 11.6704 18.6751C11.7048 18.5852 11.7206 18.4892 11.717 18.393V17.322C12.5182 17.1561 13.2379 16.7194 13.7549 16.0852C14.272 15.4511 14.5548 14.6582 14.556 13.84C14.5559 13.7107 14.5489 13.5815 14.535 13.453L19.275 15.804C18.4333 17.2529 17.2261 18.4556 15.774 19.2918C14.3218 20.128 12.6757 20.5684 11 20.569Z"
+                  fill="#297CBB"
+                />
+              </svg>
+              <div class="ml-1 text-gray-1 mt-2">Free cancellation up to</div>
+              <div class="ml-1 text-gray-1 mt-2">
+                {{ formatCancellationTime(liveabourdData?.Cancellation_time) }}
+              </div>
+            </li>
+            <li
+              class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2"
+              *ngIf="liveabourdData?.PrintedOrMobileVoucherAccepted > 0"
+            >
+              <img
+                src="../../../../../../assets/custom/Activity/booking.svg"
+                width="24"
+                height="24"
+                alt="booking"
+              />
+              <div class="ml-1 text-gray-1">
+                Printed or mobile voucher accepted
+              </div>
+            </li>
+
+            <li
+              class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2"
+              *ngIf="liveabourdData?.OpenDateTicket > 0"
+            >
+              <img
+                src="../../../../../../assets/custom/Activity/document.svg"
+                width="24"
+                height="24"
+                alt="document"
+              />
+              <div class="ml-1 text-gray-1">Open Date Ticket</div>
+            </li>
+            <li
+              class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2"
+              *ngIf="liveabourdData?.CollectPhysicalTicket > 0"
+            >
+              <img
+                src="../../../../../../assets/icons/pickUp.svg"
+                alt="pickup"
+                width="24"
+                height="24"
+              />
+              <div class="ml-1 text-gray-1">Collect Physical Ticket</div>
+            </li>
+          </ul>
+        </div>
+        <div class="col mb-5">
+          <div class="image">
+
+            <p-galleria
+              [value]="coverAndImages"
+              [responsiveOptions]="responsiveOptions"
+              [containerStyle]="{ width: '100%' }"
+              [numVisible]="6"
+            >
+              <ng-template pTemplate="item" let-item>
+                <img
+                  [src]="item"
+                  [alt]="getImageName(item)"
+                  style="width: 100%; height: 480px"
+                />
+              </ng-template>
+              <ng-template pTemplate="thumbnail" let-item>
+                <div class="grid grid-nogutter justify-content-center">
+                  <img [src]="item" [alt]="getImageName(item)" />
+                </div>
+              </ng-template>
+            </p-galleria>
+            <p-galleria
+              [value]="coverAndImages"
+              [(visible)]="displayBasic"
+              [responsiveOptions]="responsiveOptions"
+              [containerStyle]="{ 'max-width': '850px' }"
+              [numVisible]="7"
+              [circular]="true"
+              [fullScreen]="true"
+              [showItemNavigators]="true"
+              [showThumbnails]="false"
+            >
+              <ng-template pTemplate="item" let-item>
+                <img
+                  [src]="item"
+                  [alt]="getImageName(item)"
+                  style="width: 100%; height: 480px"
+                />
+              </ng-template>
+            </p-galleria>
+            <div
+              class="flex-horizontal-center position-absolute video-gallery"
+              style="bottom: 18%; right: 25px; z-index: 1"
+            >
+              <!-- Video -->
+              <a
+                *ngIf="liveabourdData?.Video"
+                (click)="openVideotrip()"
+                class="btn btn-white py-2 px-md-5 px-3 shadow-6"
+              >
+                <img
+                  src="../../../../../../assets/custom/Activity/youtube.svg"
+                  class="d-md-inline w-100"
+                  alt="youtube"
+                  title="Video"
+                />
+              </a>
+              <!-- End Video -->
+              <a
+                class="btn btn-white ml-2 py-2 px-md-5 px-3 shadow-6 d-md-inline"
+                (click)="displayBasic = true"
+              >
+                <img
+                  src="../../../../../../assets/custom/Activity/gallary.svg"
+                  class="d-md-inline w-100"
+                  alt="Gallery"
+                  title="Gallery"
+                />
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <!-- details section for taps -->
+        <div class="container p-0" style="max-width: 100%">
+          <!-- Tabs -->
+          <div *ngIf="!isMobile" class="sticky-nav">
+            <ul
+              class="list-unstyled d-flex justify-content-around navs tours sticky-nav"
+              role="tablist"
+            >
+              <li
+                class="nav-item"
+                role="presentation"
+                [class.active]="activeTabId === 'description'"
+              >
+                <button class="nav-link" (click)="scrollTo('description')">
+                  Description
+                </button>
+              </li>
+              <li
+                class="nav-item"
+                role="presentation"
+                [class.active]="activeTabId === 'amenitiesDetails'"
+              >
+                <button class="nav-link" (click)="scrollTo('amenitiesDetails')">
+                  Experience
+                </button>
+              </li>
+
+              <li
+                class="nav-item"
+                role="presentation"
+                [class.active]="activeTabId === 'map'"
+              >
+                <button class="nav-link" (click)="scrollTo('map')">Map</button>
+              </li>
+              <li
+                class="nav-item"
+                role="presentation"
+                [class.active]="activeTabId === 'boat'"
+              >
+                <button class="nav-link" (click)="scrollTo('boat')">
+                  Boat
+                </button>
+              </li>
+              <li
+                class="nav-item"
+                role="presentation"
+                [class.active]="activeTabId === 'importantInformation'"
+              >
+                <button
+                  class="nav-link"
+                  (click)="scrollTo('importantInformation')"
+                >
+                  Important Information
+                </button>
+              </li>
+
+              <li
+                class="nav-item"
+                role="presentation"
+                [class.active]="activeTabId === 'faq'"
+              >
+                <button class="nav-link" (click)="scrollTo('faq')">FAQ</button>
+              </li>
+              <li
+                class="nav-item"
+                role="presentation"
+                [class.active]="activeTabId === 'review'"
+              >
+                <button class="nav-link" (click)="scrollTo('review')">
+                  Review
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Content Sections -->
+          <div id="description" class="tab-pane">
+            <h5 class="heading">Description</h5>
+            <p [innerHTML]="getDisplayedDescription()" class="d-inline"></p>
+            <span
+              *ngIf="liveabourdData?.Description?.length > 1000"
+              style="color: #0db1ff"
+              (click)="toggleDescription()"
+              class="d-inline"
+            >
+              {{ showFullDescription ? "See Less" : "See More" }}
+            </span>
+
+
+            <mat-accordion>
+              <mat-expansion-panel [expanded]="true" class="p-2">
+                <mat-expansion-panel-header>
+                  <div
+                    class="d-flex justify-content-between w-100 flex-column flex-md-row align-items-start"
+                  >
+                    <p
+                      class="d-flex justify-content-start example-accordion-item-header"
+                      style="font-size: 700"
+                    >
+                      Choose your departure time
+                    </p>
+                    <p
+                      class="d-flex justify-content-end example-accordion-item-header mr-2"
+                      style="font-size: 700"
+                    >
+                      Upcoming departure
+                    </p>
+                  </div>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-list>
+                      <ul
+                        class="group-board p-2 list-unstyled gap-2 w-100"
+                        *ngFor="let schedule of liveabourdData?.Schedules"
+                      >
+                        <li class="list-board">
+                          {{ schedule?.Start }} to {{ schedule?.End }}
+                        </li>
+
+                        <li class="list-board">
+                          {{ schedule?.Day }} D/ {{ schedule?.Night }} N
+                        </li>
+                        <ng-container
+                          *ngIf="schedule.Available > 0; else elseTemplate"
+                        >
+                          <li class="list-board" style="color: #009f19">
+                            Available {{ schedule.Available }}
+                          </li>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                          <li class="list-board text-danger">fully booked</li>
+                        </ng-template>
+
+                        <li class="list-board">
+                          From $
+                          {{
+                            selectedOption === "collective"
+                              ? getRoundedRate(
+                                  liveabourdData?.PriceColective?.Adult -
+                                    (liveabourdData?.PriceColective
+                                      .AdultDiscount /
+                                      100) *
+                                      liveabourdData?.PriceColective.Adult
+                                )
+                              : getRoundedRate(
+                                  liveabourdData?.Priceprivet?.Adult -
+                                    (liveabourdData?.Priceprivet.AdultDiscount /
+                                      100) *
+                                      liveabourdData?.Priceprivet.Adult
+                                )
+                          }}
+                          <!-- From ${{ liveabourdData?.PriceColective?.Adult }} -->
+                        </li>
+                        <ng-container
+                          *ngIf="schedule.Available > 0; else elseTemplate2"
+                        >
+                          <li class="list-board">
+                            <button
+                              class="btn check d-flex align-items-center justify-content-center w-100 mb-xl-0 mb-lg-1 text-white"
+                              (click)="scrollToselectCabinButton(schedule)"
+                            >
+                              Select Cabin
+                            </button>
+                          </li>
+                        </ng-container>
+                        <ng-template #elseTemplate2>
+                          <li class="list-board">
+                            <button
+                              class="btn check d-flex align-items-center justify-content-center w-100 mb-xl-0 mb-lg-1 text-white"
+                              disabled="true"
+                            >
+                              Can't Select
+                            </button>
+                          </li>
+                        </ng-template>
+                      </ul>
+                    </mat-list>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+
+          <div id="amenitiesDetails" class="tab-pane">
+            <h5 class="font-size-21 fw-bold text-black mb-4">Experience</h5>
+            <div class="d-md-flex d-sm-block flex-wrap gap-5 mt-4">
+              <h6 class="fw-bold">Highlights</h6>
+              <ul
+                class="list-group list-group-borderless list-group-flush no-gutters"
+                [innerHTML]="liveabourdData?.Highlights"
+              ></ul>
+            </div>
+            <div class="d-flex gap-5 mt-lg-5 mt-0 w-100">
+              <div class="row mt-lg-5 mt-0 w-100">
+                <div class="col-md-6 dirction col-sm-12 d-flex gap-2">
+                  <div class="w-25">
+                    <h6 class="fw-bold">Includes</h6>
+                  </div>
+                  <ul
+                    class="list-group list-group-borderless list-group-flush no-gutters"
+                  >
+                    <li
+                      class="mb-3 text-gray-1"
+                      *ngFor="let include of liveabourdData?.Includes"
+                    >
+                      <i
+                        class="fa-solid fa-check fs-4 mr-3 font-size-8 text-primary"
+                      ></i>
+                      {{ include }}
+                    </li>
+                  </ul>
+                </div>
+                <!-- offset-md-1 -->
+                <div class="col-md-5 dirction col-sm-12 d-flex gap-5">
+                  <div class="">
+                    <h6 class="fw-bold">Excludes</h6>
+                  </div>
+                  <ul
+                    class="list-group list-group-borderless list-group-flush no-gutters"
+                  >
+                    <li
+                      class="mb-3 text-gray-1 d-flex align-items-center"
+                      *ngFor="let exclude of liveabourdData?.Excludes"
+                    >
+                      <ng-container>
+                        <i
+                          class="fa fa-times fs-4 mr-3 font-size-8"
+                          style="color: #ff681a"
+                        ></i>
+
+                        <span class="font-size-9 d-inline-block">
+                          {{ exclude.title }} <br />
+                          <p *ngIf="exclude?.price > 0">
+                            ( ${{ exclude?.price }} per person :
+                            {{ exclude?.option }})
+                          </p>
+                        </span>
+                      </ng-container>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div id="Accommodations">
+              <h5 class="font-size-21 font-weight-bold text-dark mb-4">
+                Accommodations
+              </h5>
+              <div class="row accommodations">
+                <div
+                  class="col-md-6 mt-5 mb-4"
+                  *ngFor="let cabin of flattenedCabin"
+                >
+                  <div class="card">
+                    <img
+                      class="card-img-top"
+                      (click)="openCabinSliderModal(cabin)"
+                      [src]="cabin?.images[0]"
+                      [alt]="getImageName(cabin?.images[0])"
+                    />
+                    <div class="card-body row">
+                      <p
+                        class="card-text p-3 cabinTitle col-6"
+                        (click)="openCabinSliderModal(cabin)"
+                      >
+                        {{ cabin?.accommodation_title }}
+                      </p>
+                      <p
+                        class="card-text p-3 col-6"
+                        (click)="openCabinSliderModal(cabin)"
+                      >
+                        Max Occupancy: {{ cabin?.max_occupancy }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="map" class="tab-pane">
+            <h5 class="mt-3" id="showmap">Map</h5>
+            <div class="map">
+              <div [innerHTML]="googleIframe"></div>
+            </div>
+          </div>
+
+          <div id="boat" class="tab-pane">
+            <h5 class="font-size-21 fw-bold text-black mb-4">
+              Available Boats
+            </h5>
+            <div class="card p-3" *ngFor="let item of liveabourdData?.Boats">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="position-relative mt-4">
+                    <div>
+                      <img
+                        [src]="item?.cover"
+                        [alt]="getImageName(item?.value)"
+                        class="w-100"
+                        alt="boat"
+                      />
+                    </div>
+                    <div
+                      class="flex-horizontal-center position-absolute"
+                      style="bottom: 15px; right: 25px"
+                    >
+                      <!-- Video -->
+                      <a
+                        *ngIf="item?.video"
+                        (click)="openVideoBoat()"
+                        class="js-fancybox btn btn-white py-2 px-md-5 px-3 shadow-6 mr-1"
+                      >
+                        <img
+                          src="../../../../../../assets/custom/Activity/youtube.svg"
+                          class="me-2"
+                          alt="youtube"
+                        /><span class="d-none d-md-inline">Video</span>
+                      </a>
+                      <!-- End Video -->
+                      <a
+                        class="js-fancybox btn btn-white ml-2 py-2 px-md-5 px-3 shadow-6"
+                        (click)="openBoatSliderModal(item)"
+                      >
+                        <img
+                          src="../../../../../assets/custom/Activity/gallary.svg"
+                          class="me-2"
+                          alt="gallary"
+                        /><span class="d-none d-md-inline">Gallery</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <h6>{{ item.name }}</h6>
+                  <ul class="py-3 boat-features list-unstyled">
+                    <li *ngFor="let feature of getOverviewItems(item.overview)">
+                      <div [innerHTML]="feature"></div>
+                    </li>
+                  </ul>
+                </div>
+                <p-galleria
+                  [value]="boatImages"
+                  [(visible)]="displayBoats"
+                  [responsiveOptions]="responsiveOptions"
+                  [containerStyle]="{ 'max-width': '850px' }"
+                  [numVisible]="7"
+                  [circular]="true"
+                  [fullScreen]="true"
+                  [showItemNavigators]="true"
+                  [showThumbnails]="false"
+                >
+                  <ng-template pTemplate="item" let-item>
+                    <img
+                      [src]="item?.value"
+                      [alt]="getImageName(item?.value)"
+                      style="width: 100%; height: 480px"
+                    />
+                  </ng-template>
+                </p-galleria>
+              </div>
+            </div>
+          </div>
+
+          <div id="importantInformation" class="tab-pane">
+            <h5 class="font-size-21 fw-bold text-black mb-4">
+              Important Information
+            </h5>
+            <div [innerHTML]="liveabourdData?.ImportantInformation"></div>
+          </div>
+
+          <div id="faq" class="tab-pane">
+            <div class="py-1">
+              <h5 class="font-size-21 fw-bold text-black mb-lg-0 mb-1 pb-lg-0 pb-3">FAQ</h5>
+              <div id="basicsAccordion">
+                <!-- Card -->
+                <div class="card border-0 mb-lg-4 mb-0 pb-lg-1 pb-0">
+                  <mat-accordion>
+                    <mat-expansion-panel
+                      #panel
+                      hideToggle="true"
+                      *ngFor="let faqItem of liveabourdData?.FAQ"
+                    >
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          <div class="me-5 faq">
+                            <i
+                              *ngIf="panel.expanded"
+                              class="fa-solid fa-minus"
+                            ></i>
+                            <i
+                              *ngIf="!panel.expanded"
+                              class="fa-solid fa-plus"
+                            ></i>
+                          </div>
+                          {{ faqItem.Question }}
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <p style="padding-left: 90px">
+                        {{ faqItem.Answer }}
+                      </p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+            </div>
+            <div class="py-4">
+              <h5 class="font-size-21 font-weight-bold text-dark mb-4">
+                Terms and Conditions
+              </h5>
+              <div id="basicsAccordion">
+                <!-- Card -->
+                <div
+                  class="card border-0 mb-4 pb-1"
+                  *ngFor="let termItem of liveabourdData?.Terms"
+                >
+                  <div [innerHTML]="termItem"></div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="happyGustImages.length > 0">
+              <h5 class="heading">Traveler Photos</h5>
+
+              <div class="row Traveler g-5">
+    <div class="col-md-5">
+        <img
+            class="travel-img1 w-100 img-fluid"
+            [src]="happyGustImages[0]"
+            [alt]="getImageName(happyGustImages[0])"
+            style="cursor: pointer; object-fit: cover;"
+            (click)="imageClick(0)"
+        />
+    </div>
+    <div class="col-md-7">
+        <div class="row g-3">
+            <!-- الصور الباقية -->
+            <div
+                class="col-md-6 position-relative"
+                *ngFor="let image of remainingImages.slice(0, 3); let index = index"
+            >
+                <img
+                    class="w-100 img-fluid"
+                    [src]="image"
+                    [alt]="getImageName(image)"
+                    style="
+                        cursor: pointer;
+                        height: 240px;
+                        object-fit: cover;
+                        object-position: center;"
+                    (click)="imageClick(index + 1)"
+                />
+                <div class="overlay"></div>
+            </div>
+
+            <!-- الصورة الأخيرة -->
+            <div
+                class="col-md-6 position-relative pt-1"
+                *ngIf="remainingImages.length > 3"
+            >
+                <img
+                    class="w-100 img-fluid"
+                    [src]="remainingImages[3]"
+                    [alt]="getImageName(remainingImages[3])"
+                    style="
+                        cursor: pointer;
+                        height: 240px;
+                        object-fit: cover;
+                        object-position: center;"
+                    (click)="imageClick(4)"
+                />
+
+                <!-- الoverlay والزر -->
+                <div class="see-more-container">
+                    <div class="position-relative">
+                        <div class="overlay"></div>
+                        <button
+                            class="see-more-button"
+                            (click)="imageClick(4)"
+                        >
+                            See More
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M8.9101 20.6695C8.7201 20.6695 8.5301 20.5995 8.3801 20.4495C8.0901 20.1595 8.0901 19.6795 8.3801 19.3895L14.9001 12.8695C15.3801 12.3895 15.3801 11.6095 14.9001 11.1295L8.3801 4.60953C8.0901 4.31953 8.0901 3.83953 8.3801 3.54953C8.6701 3.25953 9.1501 3.25953 9.4401 3.54953L15.9601 10.0695C16.4701 10.5795 16.7601 11.2695 16.7601 11.9995C16.7601 12.7295 16.4801 13.4195 15.9601 13.9295L9.4401 20.4495C9.2901 20.5895 9.1001 20.6695 8.9101 20.6695Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+          </div>
+          <p-galleria
+            [value]="desplayedGustImages"
+            [(visible)]="displayCustom"
+            [(activeIndex)]="activeIndex"
+            [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{ 'max-width': '850px' }"
+            [numVisible]="7"
+            [circular]="true"
+            [fullScreen]="true"
+            [showItemNavigators]="true"
+            [showThumbnails]="false"
+          >
+            <ng-template pTemplate="item" let-item>
+              <img
+                [src]="item?.value"
+                [alt]="getImageName(item?.value)"
+                style="width: 100%; display: block"
+              />
+            </ng-template>
+          </p-galleria>
+          <div id="review" class="tab-pane">
+            <div class="border-bottom py-4">
+              <h5 id="scroll-reviews">Average Reviews</h5>
+              <div class="row review-num">
+                <div class="col-md-4 mb-4 mb-md-0 d-flex flex-column">
+                  <div
+                    class="border rounded flex-content-center py-5 border-width-2"
+                    style="flex: 1"
+                  >
+                    <div class="text-center">
+                      <h2 class="font-size-50 fw-bold">
+                        {{ getRoundedRate(liveabourdData?.rate)
+                        }}<span class="font-size-20">/5</span>
+                      </h2>
+                      <div class="font-size-25 text-dark mb-3">
+                        {{ getRatingDescription(liveabourdData?.rate) }}
+                      </div>
+                      <i
+                        *ngFor="let star of [1, 2, 3, 4, 5]"
+                        class="fa-solid fa-star text-black-50"
+                        [ngClass]="{
+                          'fa-star-filled': star <= liveabourdData?.rate,
+                          'yellow-star': star <= liveabourdData?.rate
+                        }"
+                      ></i>
+                      <div class="text-gray-1">
+                        From {{ liveabourdData?.CountReview }} reviews
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h5
+                    class="font-size-21 fw-bold text-dark mb-8"
+                    *ngIf="liveabourdData?.CountReview > 0"
+                  >
+                    Showing Most Recent verified guest comments
+                  </h5>
+                  <div
+                    class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
+                    *ngFor="let review of liveabourdData?.Reviwe?.slice(-1)"
+                  >
+                    <div class="mr-md-5">
+                      <a class="d-block" href="#">
+                        <img
+                          class="comment-img mb-3 mb-md-0 rounded-circle"
+                          [src]="review?.avatar"
+                          [alt]="
+                            review?.name ||
+                            '../../../../../../assets/custom/user-dasboard/avatar-place.png'
+                          "
+                          (error)="handleImageError($event)"
+                        />
+                      </a>
+                    </div>
+                    <div class="media-body text-center text-md-left">
+                      <div class="mb-4">
+                        <h6 class="fw-bold text-gray-3">
+                          <a>{{ review?.name }}</a>
+                        </h6>
+                        <div
+                          class="font-weight-normal font-size-14 text-gray-9 mb-2"
+                        >
+                          {{ review?.date | date : "MMMM d y" }} at
+                          {{ review?.date | date : "hh:mm a" }}
+                        </div>
+                        <i
+                          *ngFor="let star of [1, 2, 3, 4, 5]"
+                          class="fa-solid fa-star"
+                          [ngClass]="{
+                            'fa-star-filled': star <= review.rate,
+                            'yellow-star': star <= review.rate
+                          }"
+                        ></i>
+                        <p class="text-lh-1dot6 mb-0 pr-lg-5">
+                          {{ review?.comment }}
+                        </p>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-bottom py-4">
+              <div *ngIf="showAllReviews">
+                <h5
+                  class="font-size-21 fw-bold text-dark mb-8"
+                  *ngIf="liveabourdData?.CountReview > 0"
+                >
+                  Showing {{ liveabourdData?.CountReview }} verified guest
+                  comments
+                </h5>
+                <div
+                  class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
+                  *ngFor="let review of liveabourdData?.Reviwe.reverse()"
+                >
+                  <div class="mr-md-5">
+                    <a class="d-block" href="#">
+                      <img
+                        class="comment-img img-fluid mb-3 mb-md-0 rounded-circle"
+                        [src]="review?.avatar"
+                        [alt]="review?.name"
+                      />
+                    </a>
+                  </div>
+                  <div class="media-body text-center text-md-left">
+                    <div class="mb-4">
+                      <h6 class="fw-bold text-gray-3">
+                        <a>{{ review?.name }}</a>
+                      </h6>
+                      <div
+                        class="font-weight-normal font-size-14 text-gray-9 mb-2"
+                      >
+                        {{ review?.date | date : "MMMM d y" }} at
+                        {{ review?.date | date : "hh:mm a" }}
+                      </div>
+                      <i
+                        *ngFor="let star of [1, 2, 3, 4, 5]"
+                        class="fa-solid fa-star"
+                        [ngClass]="{
+                          'fa-star-filled': star <= review.rate,
+                          'yellow-star': star <= review.rate
+                        }"
+                      ></i>
+                      <p class="text-lh-1dot6 mb-0 pr-lg-5">
+                        {{ review?.comment }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <p-paginator
+                  [rows]="5"
+                  [totalRecords]="items.length"
+                  [rowsPerPageOptions]="[5, 10, 20]"
+                  (onPageChange)="onPageChange($event)"
+                ></p-paginator>
+              </div>
+
+              <div class="py-4">
+                <div
+                  class="d-flex flex-column flex-md-row justify-content-between mb-4"
+                >
+                  <div>
+                    <h5
+                      class="font-size-21 fw-bold text-dark mb-2 mb-md-6"
+                      style="cursor: pointer"
+                    >
+                      Write a Review
+                      <i
+                        class="fa-solid fa-star text-black-50"
+                        (mouseenter)="onStarHover(1)"
+                        (click)="onStarClick(1)"
+                        [ngClass]="{ selected: selectedStar >= 1 }"
+                      ></i>
+                      <i
+                        class="fa-solid fa-star text-black-50"
+                        (mouseenter)="onStarHover(2)"
+                        (click)="onStarClick(2)"
+                        [ngClass]="{ selected: selectedStar >= 2 }"
+                      ></i>
+                      <i
+                        class="fa-solid fa-star text-black-50"
+                        (mouseenter)="onStarHover(3)"
+                        (click)="onStarClick(3)"
+                        [ngClass]="{ selected: selectedStar >= 3 }"
+                      ></i>
+                      <i
+                        class="fa-solid fa-star text-black-50"
+                        (mouseenter)="onStarHover(4)"
+                        (click)="onStarClick(4)"
+                        [ngClass]="{ selected: selectedStar >= 4 }"
+                      ></i>
+                      <i
+                        class="fa-solid fa-star text-black-50"
+                        (mouseenter)="onStarHover(5)"
+                        (click)="onStarClick(5)"
+                        [ngClass]="{ selected: selectedStar >= 5 }"
+                      ></i>
+                    </h5>
+                  </div>
+                  <div *ngIf="liveabourdData?.CountReview > 0" class="btns">
+                    <a
+                      (click)="showAllReviews = !showAllReviews"
+                      *ngIf="!showAllReviews"
+                      class="text-decoration-underline"
+                      >Read All Reviews</a
+                    >
+                    <a
+                      (click)="showAllReviews = !showAllReviews"
+                      *ngIf="showAllReviews"
+                      class="text-decoration-underline"
+                      >Hide All Reviews</a
+                    >
+                  </div>
+                </div>
+                <form class="js-validate" novalidate="novalidate">
+                  <div class="row mb-5 mb-lg-0">
+                    <div class="col-sm-12 mb-5">
+                      <div class="js-form-message">
+                        <div class="input-group">
+                          <textarea
+                            class="form-control"
+                            rows="6"
+                            cols="77"
+                            name="text"
+                            placeholder="Hi there, I would like to ..."
+                            [(ngModel)]="comment"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Input -->
+                    <div
+                      class="col d-flex justify-content-center justify-content-lg-start"
+                    >
+                      <button
+                        type="submit"
+                        class="btn rounded-xs btnReview text-white p-2 height-51 width-190"
+                        (click)="addReview()"
+                      >
+                        Submit Review
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+      <!-- Filter -->
+      <div
+        *ngIf="!isMobile"
+        class="col-lg-4 col-xl-3 p-0 order-1 order-md-2 top-margin"
+      >
+        <div class="mb-4 sticky-container livboard">
+          <ul
+            class="list-group list-group-borderless list-group-horizontal custom-social-share pb-3"
+          >
+            <ng-container *ngIf="liveabourdData?.wishlist; else elseTemplate2">
+              <li
+                type="button"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Save for later"
+                class="list-group-item px-1"
+              >
+                <a
+                  class="h-100 width-45 border rounded border-width-2 flex-content-center"
+                >
+                  <i class="fa fa-heart fs-3 text-danger"></i>
+                </a>
+              </li>
+            </ng-container>
+            <ng-template #elseTemplate2>
+              <li
+                type="button"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Save for later"
+                class="list-group-item px-1"
+              >
+                <a
+                  #btn
+                  (click)="addtoFavorits(btn, $event)"
+                  class="h-100 width-45 border rounded border-width-2 flex-content-center"
+                >
+                  <i class="fa fa-heart fs-3 text-black-50"></i>
+                </a>
+              </li>
+            </ng-template>
+            <li class="list-group-item px-1">
+              <a
+                type="button"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Share Trip"
+                (click)="shareLiveaboard(liveabourdID)"
+                class="height-45 width-45 border rounded border-width-2 flex-content-center"
+              >
+                <i class="fa-solid fa-share-nodes font-size-18 text-dark"></i>
+              </a>
+            </li>
+            <li class="list-group-item px-1">
+              <a class="border rounded border-width-2 flex-content-center">
+                <span class="text-white review">
+                  {{ getRoundedRate(liveabourdData?.rate) }} /5</span
+                >
+              </a>
+            </li>
+            <li class="list-group-item px-1 d-flex flex-column">
+              <span class="top fw-bold" style="color: #297cbb">{{
+                getRatingDescription(liveabourdData?.rate)
+              }}</span>
+              <small class="d-block"
+                >({{ liveabourdData?.CountReview }} Reviews)</small
+              >
+            </li>
+          </ul>
+          <span
+            class="ps-5 d-inline-block p-3 mt-5 d-inline-block py-1 px-3"
+            [ngClass]="{
+              'border collective': selectedOption === 'collective',
+              'private collective': selectedOption !== 'collective'
+            }"
+            (click)="changeOption('collective')"
+            >Collective</span
+          >
+
+          <span
+            class="ps-5 d-inline-block p-3 mt-5 d-inline-block py-1 px-3"
+            *ngIf="liveabourdData?.Privete > 0"
+            [ngClass]="{
+              'border private': selectedOption === 'privete',
+              'collective private': selectedOption !== 'privete'
+            }"
+            (click)="changeOption('privete')"
+            >Private</span
+          >
+          <div
+            *ngIf="!isMobile"
+            class="border border-color-7 p-3 rounded mb-5"
+            #selectCabinButton
+          >
+            <div class="p-1">
+              <!-- Input -->
+              <div class="priceTitle d-flex justify-content-between">
+                <span
+                  class="d-block font-size-16 text-gray-1 font-weight-normal text-left"
+                  >Price</span
+                >
+
+                <p style="font-weight: 500">
+                  <span>From </span>
+                  <span
+                    class="font-size-15 fw-bold text-dark"
+                    [style.text-decoration]="
+                      liveabourdData?.PriceColective?.AdultDiscount > 0
+                        ? 'line-through'
+                        : ''
+                    "
+                    [style.color]="
+                      liveabourdData?.PriceColective?.AdultDiscount > 0
+                        ? 'rgb(13, 177, 255) !important'
+                        : ''
+                    "
+                  >
+                    ${{
+                      selectedOption === "collective"
+                        ? liveabourdData?.PriceColective?.Adult
+                        : liveabourdData?.Priceprivet?.Adult
+                    }}
+                  </span>
+
+                  <span
+                    class="font-size-15 fw-bold text-dark mx-2"
+                    *ngIf="liveabourdData?.PriceColective?.AdultDiscount > 0"
+                    style="font-weight: 500; color: rgb(13, 177, 255)"
+                  >
+                    ${{
+                      selectedOption === "collective"
+                        ? getRoundedRate(
+                            liveabourdData?.PriceColective?.Adult -
+                              (liveabourdData?.PriceColective.AdultDiscount /
+                                100) *
+                                liveabourdData?.PriceColective.Adult
+                          )
+                        : getRoundedRate(
+                            liveabourdData?.Priceprivet?.Adult -
+                              (liveabourdData?.Priceprivet.AdultDiscount /
+                                100) *
+                                liveabourdData?.Priceprivet.Adult
+                          )
+                    }}
+                  </span>
+                </p>
+              </div>
+              <div class="mb-4">
+                <div class="border-bottom border-width-2 border-color-1 pb-1">
+                  <span class="d-block">Date</span>
+                  <div
+                    class="js-quantity flex-center-between mb-1 text-dark font-weight-bold"
+                  >
+                    <div
+                      id="datepickerWrapperFromOne"
+                      class="u-datepicker input-group flex-nowrap"
+                    >
+                      <p-dropdown
+                        class="w-100"
+                        [options]="liveabourdData?.Schedules"
+                        [formControl]="selectedDateControl"
+                        optionLabel="Start"
+                        [placeholder]="'Select Date'"
+                        [showClear]="true"
+                        [filter]="false"
+                        [disabled]="!liveabourdData?.Schedules?.length"
+                        (onChange)="onValueChange($event.value)"
+                        [ngStyle]="{ 'min-width': '100%' }"
+                        [autoDisplayFirst]="false"
+                      >
+                        <ng-template let-time pTemplate="item">
+                          {{ time?.Start }} to {{ time?.End }}
+                        </ng-template>
+                      </p-dropdown>
+                    </div>
+                    <!-- End Datepicker -->
+                  </div>
+
+                  <div
+                    *ngIf="
+                      selectedDateControl.invalid &&
+                      (selectedDateControl.dirty || selectedDateControl.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <div *ngIf="selectedDateControl.errors?.['required']">
+                      Date is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Input -->
+              <!-- Input -->
+              <div class="mb-4" *ngIf="selectedDateControl.value" [@fadeInOut]>
+                <div class="border-bottom border-width-2 border-color-1 pb-1">
+                  <div
+                    class="js-quantity flex-center-between mb-1 text-dark font-weight-bold"
+                  >
+                    <span
+                      class="d-block text-gray-1 font-weight-normal mb-2 text-left"
+                      >Persons</span
+                    >
+                    <div class="flex-horizontal-center">
+                      <a class="js-minus font-size-10 text-dark">
+                        <img
+                          (click)="decrementAdult()"
+                          src="assets/custom/Activity/Indeterminate check box.svg"
+                          alt="Decrement Icon"
+                        />
+                      </a>
+                      <input
+                        class="js-result form-control h-auto width-60 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
+                        type="number"
+                        [attr.min]="1"
+                        [attr.max]="getValue('AdultMax')"
+                        [(ngModel)]="persons"
+                        disabled
+                      />
+                      <a class="js-plus font-size-10 text-dark">
+                        <img
+                          (click)="incrementAdult()"
+                          src="assets/custom/Activity/Add box.svg"
+                          alt="Increment Icon"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="text-center">
+                <a
+                  class="btn check d-flex align-items-center justify-content-center height-60 w-100 mb-xl-0 mb-lg-1 text-white"
+                  style="font-weight: 700"
+                  (click)="bookNow()"
+                  data-bs-dismiss="modal"
+                >
+                  Select Cabin
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="border border-color-7 rounded p-4 mb-5">
+            <h6 class="book">Why Book With Us?</h6>
+            <div
+              class="d-flex align-items-center mb-3"
+              *ngFor="let about of Why_chosse_us"
+            >
+              <img
+                [src]="about.icon"
+                class="me-3"
+                [alt]="about.title"
+                loading="lazy"
+                width="24"
+                height="24"
+              />
+              <h6 class="mb-0 font-size-14 text-gray-1">
+                <a>{{ about.title }}</a>
+              </h6>
+            </div>
+          </div>
+        </div>
+        <!--End Filter -->
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="exampleModal2"
+      (hidden.bs.modal)="closeModal()"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close custom-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div *ngIf="isMobile" class="container">
+            <div class="col-lg-12 order-1 order-md-2 top-margin">
+              <div class="mb-4 sticky-container">
+                <ul
+                  class="list-group list-group-borderless list-group-horizontal custom-social-share pb-3"
+                >
+                  <ng-container
+                    *ngIf="liveabourdData?.wishlist; else elseTemplate2"
+                  >
+                    <li
+                      type="button"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="bottom"
+                      title="Save for later"
+                      class="list-group-item px-1"
+                    >
+                      <a
+                        class="h-100 width-45 border rounded border-width-2 flex-content-center"
+                      >
+                        <i class="fa fa-heart fs-3 text-danger"></i>
+                      </a>
+                    </li>
+                  </ng-container>
+                  <ng-template #elseTemplate2>
+                    <li
+                      type="button"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="bottom"
+                      title="Save for later"
+                      class="list-group-item px-1"
+                    >
+                      <a
+                        #btn
+                        (click)="addtoFavorits(btn, $event)"
+                        class="h-100 width-45 border rounded border-width-2 flex-content-center"
+                      >
+                        <i class="fa fa-heart fs-3 text-black-50"></i>
+                      </a>
+                    </li>
+                  </ng-template>
+                  <li class="list-group-item px-1">
+                    <a
+                      type="button"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="bottom"
+                      title="Share Trip"
+                      (click)="shareLiveaboard(liveabourdID)"
+                      class="height-45 width-45 border rounded border-width-2 flex-content-center"
+                    >
+                      <i
+                        class="fa-solid fa-share-nodes font-size-18 text-dark"
+                      ></i>
+                    </a>
+                  </li>
+                  <li class="list-group-item px-1">
+                    <a
+                      class="border rounded border-width-2 flex-content-center"
+                    >
+                      <span class="text-white review">
+                        {{ getRoundedRate(liveabourdData?.rate) }} /5</span
+                      >
+                    </a>
+                  </li>
+                  <li class="list-group-item px-1 d-flex flex-column">
+                    <span class="top fw-bold" style="color: #297cbb">{{
+                      getRatingDescription(liveabourdData?.rate)
+                    }}</span>
+                    <small class="d-block"
+                      >({{ liveabourdData?.CountReview }} Reviews)</small
+                    >
+                  </li>
+                </ul>
+                <div
+                  class="border border-color-7 rounded mb-5"
+                  #selectCabinButton
+                >
+                  <span
+                    class="ps-5 d-inline-block p-3 mt-5 d-inline-block py-1 px-3"
+                    [ngClass]="{
+                      'border collective': selectedOption === 'collective',
+                      'private collective': selectedOption !== 'collective'
+                    }"
+                    (click)="changeOption('collective')"
+                    >Collective</span
+                  >
+
+                  <span
+                    class="ps-5 d-inline-block p-3 mt-5 d-inline-block py-1 px-3"
+                    *ngIf="liveabourdData?.Privete > 0"
+                    [ngClass]="{
+                      'border private': selectedOption === 'privete',
+                      'collective private': selectedOption !== 'privete'
+                    }"
+                    (click)="changeOption('privete')"
+                    >Private</span
+                  >
+                  <div class="p-4">
+                    <!-- Input -->
+                    <div class="priceTitle d-flex justify-content-between">
+                      <span
+                        class="d-block text-gray-1 font-weight-normal mb-2 text-left"
+                        >Price</span
+                      >
+
+                      <p style="font-weight: 500">
+                        <span>From </span>
+                        <span
+                          class="font-size-15 fw-bold text-dark"
+                          [style.text-decoration]="
+                            liveabourdData?.PriceColective?.AdultDiscount > 0
+                              ? 'line-through'
+                              : ''
+                          "
+                          [style.color]="
+                            liveabourdData?.PriceColective?.AdultDiscount > 0
+                              ? 'rgb(13, 177, 255) !important'
+                              : ''
+                          "
+                        >
+                          ${{
+                            selectedOption === "collective"
+                              ? liveabourdData?.PriceColective?.Adult
+                              : liveabourdData?.Priceprivet?.Adult
+                          }}
+                        </span>
+
+                        <span
+                          class="font-size-15 fw-bold text-dark mx-2"
+                          *ngIf="
+                            liveabourdData?.PriceColective?.AdultDiscount > 0
+                          "
+                          style="font-weight: 500; color: rgb(13, 177, 255)"
+                        >
+                          ${{
+                            selectedOption === "collective"
+                              ? getRoundedRate(
+                                  liveabourdData?.PriceColective?.Adult -
+                                    (liveabourdData?.PriceColective
+                                      .AdultDiscount /
+                                      100) *
+                                      liveabourdData?.PriceColective.Adult
+                                )
+                              : getRoundedRate(
+                                  liveabourdData?.Priceprivet?.Adult -
+                                    (liveabourdData?.Priceprivet.AdultDiscount /
+                                      100) *
+                                      liveabourdData?.Priceprivet.Adult
+                                )
+                          }}
+                        </span>
+                      </p>
+                    </div>
+                    <div class="mb-4">
+                      <div
+                        class="border-bottom border-width-2 border-color-1 pb-1"
+                      >
+                        <span class="d-block">Date</span>
+                        <div
+                          class="js-quantity flex-center-between mb-1 text-dark font-weight-bold"
+                        >
+                          <div
+                            id="datepickerWrapperFromOne"
+                            class="u-datepicker input-group flex-nowrap"
+                          >
+                            <p-dropdown
+                              class="w-100"
+                              [options]="liveabourdData?.Schedules"
+                              [formControl]="selectedDateControl"
+                              optionLabel="Start"
+                              [placeholder]="'Select Date'"
+                              [showClear]="true"
+                              [filter]="false"
+                              [disabled]="!liveabourdData?.Schedules?.length"
+                              (onChange)="onValueChange($event.value)"
+                              [ngStyle]="{ 'min-width': '100%' }"
+                              [autoDisplayFirst]="false"
+                            >
+                              <ng-template let-time pTemplate="item">
+                                {{ time?.Start }} to {{ time?.End }}
+                              </ng-template>
+                            </p-dropdown>
+                          </div>
+                          <!-- End Datepicker -->
+                        </div>
+
+                        <div
+                          *ngIf="
+                            selectedDateControl.invalid &&
+                            (selectedDateControl.dirty ||
+                              selectedDateControl.touched)
+                          "
+                          class="text-danger"
+                        >
+                          <div *ngIf="selectedDateControl.errors?.['required']">
+                            Date is required.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Input -->
+                    <!-- Input -->
+                    <div
+                      class="mb-4"
+                      *ngIf="selectedDateControl.value"
+                      [@fadeInOut]
+                    >
+                      <div
+                        class="border-bottom border-width-2 border-color-1 pb-1"
+                      >
+                        <div
+                          class="js-quantity flex-center-between mb-1 text-dark font-weight-bold"
+                        >
+                          <span
+                            class="d-block text-gray-1 font-weight-normal mb-2 text-left"
+                            >Persons</span
+                          >
+                          <div class="flex-horizontal-center">
+                            <a class="js-minus font-size-10 text-dark">
+                              <img
+                                (click)="decrementAdult()"
+                                src="assets/custom/Activity/Indeterminate check box.svg"
+                                alt="Decrement Icon"
+                              />
+                            </a>
+                            <input
+                              class="js-result form-control h-auto width-60 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
+                              type="number"
+                              [attr.min]="1"
+                              [attr.max]="getValue('AdultMax')"
+                              [(ngModel)]="persons"
+                              disabled
+                            />
+                            <a class="js-plus font-size-10 text-dark">
+                              <img
+                                (click)="incrementAdult()"
+                                src="../../../../../../assets/custom/Activity/Add box.svg"
+                                alt="Increment Icon"
+                              />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="text-center">
+                      <a
+                        class="btn check d-flex align-items-center justify-content-center height-60 w-100 mb-xl-0 mb-lg-1 text-white"
+                        style="font-weight: 700"
+                        (click)="bookNow()"
+                        data-bs-dismiss="modal"
+                      >
+                        Select Cabin
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--End Filter -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showRelatedtrip" class="my-tours-work">
+      <h5 class="text-center mb-5">Based on what you're looking for ....</h5>
+      <owl-carousel-o [options]="customOptions" class="my-tours">
+        <ng-container *ngFor="let item of relatedtrips">
+          <ng-template carouselSlide>
+            <!-- <app-activity-card [item]="item"></app-activity-card> -->
+         <app-activity-card  [item]="item" [schedule]="getFirstSchedule(item)"></app-activity-card>
+
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+
+  <ng-template #videoBoatModal>
+    <div class="h-100" mat-dialog-content>
+      <button mat-icon-button class="close-btn" (click)="closeVideoBoatModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <iframe
+        [src]="videoBoatUrl"
+        id="inneriframe"
+        class="w-100"
+        style="height: 90%"
+        scrolling="no"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </ng-template>
+  <ng-template #videoModal>
+    <div class="video-container">
+      <button mat-icon-button class="close-btn" (click)="closeVideoModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <video
+        #videoElement
+        class="w-100 h-100"
+        [src]="videoUrl"
+        controls
+        autoplay
+      ></video>
+    </div>
+  </ng-template>
+</div>
+
+<div
+  style="position: fixed; bottom: 0px; z-index: 99999"
+  *ngIf="isMobile"
+  [ngClass]="{ 'd-none': isModalOpen }"
+  class="text-center w-100"
+>
+  <div class="d-flex justify-content-between p-2" style="background: white">
+    <div class="priceTitle d-flex justify-content-evenly align-items-center">
+      <p style="font-weight: 700">
+        From
+        <span
+          class="font-size-18 fw-bold text-dark"
+          [style.text-decoration]="
+            liveabourdData?.PriceColective?.AdultDiscount > 0
+              ? 'line-through'
+              : ''
+          "
+          [style.color]="
+            liveabourdData?.PriceColective?.AdultDiscount > 0
+              ? 'rgb(13, 177, 255) !important'
+              : ''
+          "
+        >
+
+          {{ liveabourdData?.PriceColective?.Adult }}
+          $</span
+        >
+
+        <span
+          class="font-size-18 fw-bold text-dark mx-2"
+          *ngIf="liveabourdData?.PriceColective?.AdultDiscount > 0"
+          style="font-weight: 700; "
+          >${{
+            getRoundedRate(
+              liveabourdData?.PriceColective?.Adult -
+                (liveabourdData?.PriceColective.AdultDiscount / 100) *
+                  liveabourdData?.PriceColective.Adult
+            )
+          }}
+        </span>
+      </p>
+    </div>
+    <div class="w-50">
+      <a
+        class="btn check text-white d-flex align-items-center justify-content-center height-50 w-100 mb-xl-0 mb-lg-1 fw-bold"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal2"
+        (click)="openModal()"
+      >
+        Select Cabin
+      </a>
+    </div>
+  </div>
+</div>
+
+<a
+  *ngIf="showScrollToTopButton"
+  appScrollToTop
+  class="js-go-to u-go-to-modern animated js-animation-was-fired slideInUp text-primary"
+  data-position='{"bottom": 15, "right": 15 }'
+  data-type="fixed"
+  data-offset-top="400"
+  title="back to top"
+  data-compensation="#header"
+  data-show-effect="slideInUp"
+  data-hide-effect="slideOutDown"
+>
+  <span class="fa fa-arrow-up u-go-to-modern__inner"></span>
+</a>

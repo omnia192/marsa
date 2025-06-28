@@ -1,0 +1,166 @@
+.bg-img-hero {
+  background: #0057ff12;
+}
+
+.title {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20.4px;
+  color: #297cbb;
+}
+
+.margin-cards {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.container {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+h3 {
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 45px;
+  letter-spacing: 0em;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+
+h3::after {
+  content: "";
+  position: absolute;
+  width: 45.668px;
+  height: 1.412px;
+  background-color: #297cbb;
+  top: 100%;
+  left: 46%;
+}
+
+.stars {
+  background-color: #ff681a;
+  color: white;
+  border-radius: 4px;
+  margin-inline-end: 1rem;
+}
+
+.text-name {
+  flex: 3;
+}
+
+.text-price {
+  flex: 1;
+  position: absolute;
+  right: 39px;
+  top: 45px;
+  font-size: 23px;
+}
+.gradient-overlay-half-black-gradient::before {
+  background-color: #18181a !important;
+  opacity: 0.5 !important;
+}
+
+.center-place {
+  place-items: center;
+  width: 450px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: -5px 6px 25px 0px #bdbdbd4d;
+}
+
+.btn-primary {
+  border: 0.8px solid #ffffff !important;
+  background-color: #0db1ff !important;
+  padding: 0.5rem 0.5rem !important;
+  border-radius: 10px !important;
+}
+
+.back {
+  height: 100%;
+}
+@media screen and (max-width:992px){
+  .center-place {
+    width: 100%;
+  }
+  .card-title {
+    font-size: 22px;
+    margin-top: 1rem;
+  }
+  h3 {
+
+    font-size: 24px;
+
+}
+
+h3::after {
+
+    left: 40%;
+
+
+}
+
+}
+
+@media (max-width: 768px) {
+
+  .text-price {
+    bottom: 91px;
+    right: 5px;
+  }
+  .top-0 {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    margin-bottom: 5%;
+  }
+
+  .mobile-cont {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .btn-primary {
+    padding: 0.5rem 0rem !important;
+  }
+}
+
+.sale {
+  display: inline-block;
+  width: 169px;
+  height: 45px;
+  border-radius: 4px;
+  text-align: center;
+  transform: translate(-15%, 30%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    z-index: 2;
+  }
+
+  span {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    z-index: 3;
+    display: inline-block;
+    color: white;
+    padding-top: 10px;
+  }
+  small {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0em;
+  }
+}

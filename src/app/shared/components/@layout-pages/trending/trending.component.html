@@ -1,0 +1,46 @@
+<section class="container" >
+  <div class="title text-center" style="color: #004796" *ngIf="showHeading">
+    <h3 class="mb-5">Trending</h3>
+  </div>
+  <div class="">
+    <ul
+      class="nav nav-pills ms-3 mb-3 align-items-center justify-content-start justify-content-lg-center flex-nowrap overflow-x-auto"
+      id="pills-tab" #listmobile1 role="tablist">
+      <li #tours1 class="nav-item" role="presentation">
+        <button (click)="setActiveTrend('Tours&Activities')" id="pills-Tours-tab" data-bs-toggle="pill"
+          data-bs-target="#pills-Tours" type="button" role="tab" aria-controls="pills-Tours" aria-selected="true"
+          class="nav-link active">
+          Tours& Activities
+        </button>
+      </li>
+      <li #liveboard1 class="nav-item" role="presentation">
+        <button (click)="setActiveTrend('Liveaboard')" class="nav-link" id="pills-Liveaboard-tab" data-bs-toggle="pill"
+          data-bs-target="#pills-Liveaboard" type="button" role="tab" aria-controls="pills-Liveaboard"
+          aria-selected="false">
+          Liveaboard
+        </button>
+      </li>
+      <li #boat1 class="nav-item" role="presentation">
+        <button (click)="setActiveTrend('Boats')" class="nav-link" id="pills-Boats-tab" data-bs-toggle="pill"
+          data-bs-target="#pills-Boats" type="button" role="tab" aria-controls="pills-Boats" aria-selected="false">
+          Boats
+        </button>
+      </li>
+
+    </ul>
+    <div class="my-tours-work">
+      <owl-carousel-o [options]="customOptions" class="my-tours" [ngClass]="{'single-item': isSingleCardVisible()}">
+        <ng-container *ngFor="let item of activeNowTrend">
+          <ng-template carouselSlide>
+            <ng-container [ngSwitch]="getItemType(item)">
+              <app-activity-card *ngSwitchCase="'Liveaboard'" [item]="item" [schedule]="getFirstSchedule(item)"></app-activity-card>
+              <app-activity-card *ngSwitchCase="'Boats'" [item]="item" [bed]="getBed(item)"></app-activity-card>
+              <app-activity-card *ngSwitchDefault [item]="item"></app-activity-card>
+            </ng-container>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+
+  </div>
+</section>

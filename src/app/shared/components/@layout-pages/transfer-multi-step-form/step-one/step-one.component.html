@@ -1,0 +1,215 @@
+<div class="container">
+  <h2 class="title">From {{responseData.booking.from }} Hotel to {{responseData.booking.to }} </h2>
+  <form #bookingForm="ngForm" (ngSubmit)="saveFormData(bookingForm)" novalidate>
+    <div class="thin-heading"> Please select your car:</div>
+    <div class="cars">
+      <owl-carousel-o [options]="customOptions" class="owl-theme">
+        <ng-container *ngFor="let item of responseData.car; let first = first">
+          <ng-template carouselSlide>
+            <div class="car custom-carousel-item" (click)="onCarClick($event, item.id)"
+              [class.active]="selectedCarId === item.id">
+              <img [src]="item.cover" [alt]="getImageName(item.cover)" class="img-fluid"
+                style="height: 200px; width: 400px; margin: auto;" />
+              <h2 class="text-center mt-3">{{ item.name }}</h2>
+              <div class="car-data mb-3 mt-1">
+                <span>
+                  <i style="color: #292D32; padding-right: 5px;" class="fa-solid fa-user"></i>
+                </span>
+                <span>Up to {{item.people}} people</span>
+              </div>
+              <div class="car-data">
+                <span>
+                  <i style="color: #292D32; padding-right: 5px;" class="fa-solid fa-briefcase"></i>
+                </span>
+                <span>Fits {{item.bags}} medium suitcases</span>
+              </div>
+              <div class="car-data mt-3">
+                <span>
+                  <i style="color: #292D32; padding-right: 5px;" class="fa-solid fa-clipboard-user"></i>
+                </span>
+                <span class="meet">Meet and Greet</span>
+              </div>
+              <div class="car-data mt-3">
+                <span>
+                  <i style="color: #292D32; padding-right: 5px; padding-top: 10px;" class="fa-solid fa-tag "></i>
+                </span>
+                <span class="meet">
+                  Car price:
+                  <span style="font-weight: 700; font-size: 20px; color: #2d303c;">
+                    $ {{item.price}}
+                  </span>
+                </span>
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+    <div class="car1">
+      <div class="row">
+        <div class="col">
+          <div class="bold-heading">Starting From:</div>
+          <div class="thin-heading ">{{formData.from}} </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col" *ngIf="Isairport">
+              <div class="bold-heading">Flight Number</div>
+              <div class="form-outline" data-mdb-input-init>
+                <mat-form-field appearance="outline">
+                  <mat-label>Arrival flight number (optional)</mat-label>
+                  <input matInput placeholder="e.g. EK 213" name="flightNumber" [(ngModel)]="formData.flightNumber" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col" *ngIf="!Isairport">
+              <div class="bold-heading">Pickup Date:</div>
+              <div class="form-outline" data-mdb-input-init>
+                <form class="example-form">
+                  <mat-form-field appearance="outline">
+                    <!-- <mat-label>Outline form field</mat-label> -->
+                    <input [(ngModel)]="formData.date" [value]="formData.date" #dateInput="ngModel" matInput readonly>
+                    <mat-icon matSuffix>calendar_today</mat-icon>
+                  </mat-form-field>
+                </form>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="bold-heading">Pickup Time</div>
+              <mat-form-field appearance="outline">
+                <mat-label>Pickup Time</mat-label>
+                <input matInput [(ngModel)]="formData.pickuptime" placeholder="Pick up time" name="formData.pickuptime"
+                  [ngxTimepicker]="pickuptime" required>
+                <ngx-material-timepicker-toggle matSuffix [for]="pickuptime"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #pickuptime></ngx-material-timepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-md-4 mt-2">
+        <div class="col">
+          <div class="bold-heading">Going to:</div>
+          <div class="thin-heading">{{formData.to}} </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col" *ngIf="!Isairport">
+              <div class="bold-heading">Flight Number</div>
+              <div class="form-outline" data-mdb-input-init>
+                <form class="example-form">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Departure flight number (optional)</mat-label>
+                    <input matInput placeholder="e.g. EK 213" name="flightNumber" [(ngModel)]="formData.flightNumber">
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeSection == 2">
+        <hr class="horizontal-line">
+        <div class="row">
+          <div class="col">
+            <div class="bold-heading">Returning From:</div>
+            <div class="thin-heading">{{formData.to}} </div>
+          </div>
+          <div class="col ">
+            <div class="row">
+              <div class="col">
+                <div class="bold-heading">Return Date:</div>
+                <div class="form-outline" data-mdb-input-init>
+                  <form class="example-form">
+                    <mat-form-field appearance="outline">
+                      <input [(ngModel)]="return_date" [value]="return_date" #returndateInput="ngModel" matInput
+                        readonly>
+                      <mat-icon matSuffix>calendar_today</mat-icon>
+                    </mat-form-field>
+                  </form>
+                </div>
+              </div>
+              <div class="col">
+                <div class="bold-heading">Return Time:</div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Return Time</mat-label>
+                  <input matInput [(ngModel)]="return_time" name="return_time" [ngxTimepicker]="returnpicker"
+                    placeholder="Return time" required>
+                  <ngx-material-timepicker-toggle matSuffix [for]="returnpicker"></ngx-material-timepicker-toggle>
+                  <ngx-material-timepicker #returnpicker></ngx-material-timepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-md-5 mt-2">
+          <div class="col">
+            <div class="bold-heading">Returning To:</div>
+            <div class="thin-heading">{{formData.from}} </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col" *ngIf="Isairport">
+                <div class="bold-heading">Flight Number</div>
+                <div class="form-outline" data-mdb-input-init>
+                  <form class="example-form">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Departure flight number (optional)</mat-label>
+                      <input matInput placeholder="e.g. EK 213">
+                    </mat-form-field>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal-line">
+      <div class="row mb-5">
+        <div class="col-md col-12">
+          <div class="bold-heading">Phone Number* </div>
+        </div>
+        <div class="col-md col-12 mt-2 ">
+          <div class="d-flex ms-2 position-relative phone">
+
+            <ngx-intl-tel-input [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+              [selectFirstCountry]="true" [separateDialCode]="true" [maxLength]="20" [phoneValidation]="false"
+              name="phoneNumber" [customPlaceholder]="'Enter phone number'" [preferredCountries]="['de']"
+              [(ngModel)]="formData.phoneNumber" (ngModelChange)="formData.phoneNumber = ($event?.nationalNumber || '')"
+              (countryChange)="onCountryChange($event)"></ngx-intl-tel-input>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-md col-12">
+          <div class="bold-heading">Email* </div>
+        </div>
+        <div class="col-md col-12 mt-2 fixed-input-wrapper">
+          <mat-form-field appearance="outline">
+            <!-- <mat-label>Email</mat-label> -->
+            <input matInput placeholder="xxx@xxx.com" [(ngModel)]="formData.email" name="email" required email
+              #email="ngModel" [ngModelOptions]="{ updateOn: 'blur' }">
+            <mat-error *ngIf="email.invalid && email.touched">
+              Please enter a valid email address (e.g., xxx&#64;xxx.com).
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="message mt-5">
+        <label style="font-weight: bold;">
+          Special Requirements
+        </label>
+        <textarea class="form-control" placeholder="I need Child seat" name="specialRequirements"
+          [(ngModel)]="formData.specialRequirements" rows="2" style="font-size: 16px;">
+        </textarea>
+      </div>
+
+    </div>
+    <div class="btns">
+      <button type="button" routerLink="/{{ translate.currentLang }}/privacy/privacy">Cancel</button>
+      <button type="submit">Continue</button>
+    </div>
+  </form>
+</div>

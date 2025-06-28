@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="832" height="112" viewBox="0 0 832 112">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 416.667px;
+        fill: #fff;
+        text-anchor: middle;
+        font-family: Poppins;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    </style>
+  </defs>
+  <text id="Vacation" class="cls-1" transform="translate(419.367 109.522) scale(0.371)"><tspan x="0">Vacation</tspan></text>
+</svg>

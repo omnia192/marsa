@@ -1,0 +1,14 @@
+
+
+.dropdown-menu.show {
+  display: block;
+}
+.logo-img{
+  width: 89px;
+  height: 57px;
+}
+::ng-deep{
+  .cdk-overlay-pane.mat-mdc-dialog-panel{
+    margin: auto !important;
+  }
+}

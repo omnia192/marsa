@@ -1,0 +1,42 @@
+<div *ngIf="destinations && destinations.length > 0" class="destination-block mt-4">
+  <div class="container space-bottom-1 space-top-lg-1">
+    <div class="title text-center mb-5" style="color: #004796">
+      <h3 class="mb-5">Top Destinations</h3>
+    </div>
+
+    <p-carousel
+      class="dest-carousel"
+      [value]="destinations"
+      [numVisible]="screenWidth > 768 ? 3 : 2"
+      [numScroll]="1"
+      [responsiveOptions]="responsiveOptions"
+      class="custom-carousel"
+      [circular]="false"
+      [autoplayInterval]="false"
+      [showIndicators]="screenWidth <= 768"
+      [showNavigators]="screenWidth > 768">
+      <ng-template pTemplate="item" let-dist>
+        <mat-card
+          cdkDrag
+          class="dist-card gradient-overlay-half-bg-gradient transition-3d-hover shadow-hover-2"
+          style="height: 250px; margin-left: 1.2rem;"
+
+          [routerLink]="['destination', dist?.name]"
+          [style.background]="'url(' + dist?.cover + ')'"
+          [style.background-size]="'cover !important'"
+
+          (click)="logId(dist.id)">
+          <mat-card-content>
+            <div class="destination-title text-white font-weight-bold font-size-21 pb-3 mb-3 text-lh-1 d-block">
+              {{ dist?.name }}
+            </div>
+            <div class="destination-dropdown v1">
+
+              <a class="dropdown-item"[routerLink]="['destination', dist?.name]"  [queryParams]="{ id: dist.id }" (click)="logId(dist.id)">View Tours</a>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>

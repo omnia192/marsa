@@ -1,0 +1,51 @@
+<form (ngSubmit)="nextStep()">
+  <div>
+    <h2>If you need more options please select from the list</h2>
+
+    <div *ngIf="!(savedSelectedOpti?.option && savedSelectedOpti.option.length)">
+      <p>No options available.</p>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-12 " *ngFor="let option of savedSelectedOpti?.option">
+
+        <div class="form-check d-xl-flex justify-content-between w-xl-80" >
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault-{{option.id}}"
+                 [value]="option.name"
+                 [checked]="option.selected"
+                 (change)="onOptionChange(option, $event)">
+
+          <div class="label">
+            <img [src]="option.icon" [alt]="getImageName(option.icon)" width="25px" height="25px" style="margin-top: -0.5rem;">
+            <label class="form-check-label" for="flexCheckDefault-{{option.id}}">
+              {{ option.name }}
+            </label>
+            <div class="d-flex gap-3 mt-1">
+              <span>$ {{ option.price }}</span>
+            </div>
+          </div>
+
+          <div class="number-input">
+            <button type="button" class="decrement" (click)="decrement(option)">-</button>
+            <input
+              type="number"
+              [(ngModel)]="option.number"
+              name="numberOfOption-{{option.name}}"
+              [attr.min]="0"
+              placeholder="0"
+              (ngModelChange)="savenumberOfOption(option)">
+            <button type="button" class="increment" (click)="increment(option)">+</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+  <div class="btns">
+    <button type="button" (click)="previousStep()">Cancel</button>
+    <button type="submit" [disabled]="!formData.selectedOptions || formData.selectedOptions === {}">Continue</button>
+  </div>
+</form>

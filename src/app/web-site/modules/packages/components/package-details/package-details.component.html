@@ -1,0 +1,775 @@
+<app-header [background]="'#0DB1FF'"></app-header>
+
+<!---------------------------------->
+<section class="packages-content overflow-hidden position-relative">
+  <div class="position-relative mt-4 d-block d-lg-none pb-5">
+    <div class="discount-small">
+      <p>
+        UP TO <span>{{ rows?.discount }}</span>
+      </p>
+      <img src="../../../../../assets/images/Vector Smart Object.svg" alt="Vector smart" />
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 first-column">
+        <div class="packages-img">
+          <img src="../../../../../assets/images/Vacation.svg" alt="vacation" />
+          <img src="../../../../../assets/images/Packages.svg" alt="packages" />
+        </div>
+        <div>
+          <ul class="list-unstyled package-list">
+            <li *ngFor="let trip of rows?.PackageTrips.slice(0, 3); let j = index">
+              <img src="../../../../../../assets/custom/list.svg" class="pe-2" alt="list" loading="lazy" />
+              <span>
+                {{ trip?.title }}
+              </span>
+              <button *ngIf="j === 2 && rows.PackageTrips.length > 3" class="p-0 m-0 btn text-white btn-outline-primary"
+                (click)="openPackModal(packageID)">
+                See More ...
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 position-relative d-flex justify-content-center align-items-center d-none d-lg-block">
+          </div>
+
+          <div class="col-lg-6">
+            <div class="trip-details">
+              <h5 class="d-none d-lg-block">Trip details :</h5>
+              <ul class="list-unstyled times">
+                <li>
+                  <span>
+                    <img src="../../../../../assets/images/location(1).svg" class="pe-4" alt="location"
+                      loading="lazy" />
+                  </span>
+                  <span>
+                    {{ rows?.place }}
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <img src="../../../../../assets/images/chronometer(1).svg" class="pe-4" alt="chronometer"
+                      loading="lazy" />
+                  </span>
+                  <span>
+                    {{ rows?.duration }}
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <img src="../../../../../assets/images/discount(1).svg" class="pe-4" alt="discount"
+                      loading="lazy" />
+                  </span>
+                  <span> {{ rows?.CountTrips }} Trips </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 position-relative">
+       <div *ngIf="isSmallScreen; else normalImages" class="diving-carousel">
+              <p-carousel [value]="[rows?.cover1, rows?.cover2, rows?.cover3]"
+                         [numVisible]="1"
+                         [numScroll]="1"
+                         [responsiveOptions]="responsiveOptions"
+                         [circular]="true"
+                         [showIndicators]="true"
+                         [autoplayInterval]="0">
+                <ng-template let-item pTemplate="item">
+                  <div class="carousel-card">
+                    <img [src]="item" alt="" />
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </div>
+
+            <ng-template #normalImages>
+              <div class="diving-images">
+                <div><img [src]="rows?.cover1 " alt=""/></div>
+                <div><img [src]="rows?.cover2 " alt="" /></div>
+                <div class="div2"><img [src]="rows?.cover3" alt=""/></div>
+              </div>
+            </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="discount-2 d-none d-lg-flex">
+    <div class="percent">
+      <div>
+        <p>UP TO</p>
+        <p>{{ rows?.discount }}</p>
+      </div>
+      <span>discount</span>
+    </div>
+    <img src="../../../../../assets/images/Vector Smart Object.svg" />
+  </div>
+</section>
+<!-------------------------------->
+<div class="row ps-lg-5">
+  <div class="col-md-9 col-sm-12 order-2 order-md-1">
+    <!-- details section for taps -->
+    <div class="container p-2">
+      <!-- Tabs -->
+      <div *ngIf="!isMobile" class="sticky-nav">
+        <ul class="list-unstyled d-flex justify-content-around navs tours sticky-nav" role="tablist">
+          <li class="nav-item" role="presentation" [class.active]="activeTabId === 'packageTrips'">
+            <button class="nav-link" (click)="scrollTo('packageTrips')">
+              Package Trips
+            </button>
+          </li>
+          <li class="nav-item" role="presentation" [class.active]="activeTabId === 'description'">
+            <button class="nav-link" (click)="scrollTo('description')">
+              Description
+            </button>
+          </li>
+          <li class="nav-item" role="presentation" [class.active]="activeTabId === 'experience'">
+            <button class="nav-link" (click)="scrollTo('experience')">
+              Experience
+            </button>
+          </li>
+          <li class="nav-item" role="presentation" [class.active]="activeTabId === 'importantInformation'">
+            <button class="nav-link" (click)="scrollTo('importantInformation')">
+              Important Information
+            </button>
+          </li>
+          <li class="nav-item" role="presentation" [class.active]="activeTabId === 'faq'">
+            <button class="nav-link" (click)="scrollTo('faq')">FAQ</button>
+          </li>
+          <li class="nav-item" role="presentation" [class.active]="activeTabId === 'review'">
+            <button class="nav-link" (click)="scrollTo('review')">
+              Review
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Content Sections -->
+      <div id="packageTrips" class="tab-pane">
+        <h5 class="heading">Package Trips</h5>
+
+        <div class="row">
+          <div class="col-lg-4 col-sm-12 py-3" *ngFor="let item of rows?.PackageTrips">
+            <app-package-card [item]="item"></app-package-card>
+          </div>
+        </div>
+      </div>
+      <div id="description" class="tab-pane">
+        <h5 class="heading">Description</h5>
+        <p [innerHTML]="getDisplayedDescription()" class="d-inline"></p>
+        <span *ngIf="rows?.Description?.length > 1000" style="color: #0db1ff" (click)="toggleDescription()"
+          class="d-inline">
+          {{ showFullDescription ? "See Less" : "See More" }}
+        </span>
+
+        <!-- <p>
+          {{ getDisplayedDescription() }}
+        </p> -->
+      </div>
+
+      <div id="experience" class="tab-pane">
+        <h5 class="heading">Experience</h5>
+        <div class="d-md-flex d-sm-block gap-5 mt-4">
+          <div>
+            <h6>Highlights</h6>
+          </div>
+          <div class="exc-div">
+            <ul class="list-group list-group-borderless list-group-flush no-gutters" [innerHTML]="rows?.Highlights">
+            </ul>
+          </div>
+        </div>
+        <div class="d-flex gap-5 mt-5">
+          <div class="row w-100">
+            <div class="col-md-6 col-sm-12 d-md-flex d-sm-block gap-5">
+              <div class=""></div>
+              <h6>Includes</h6>
+              <div class="exc-div">
+                <ul class="list-group list-group-borderless list-group-flush no-gutters">
+                  <li class="mb-3 text-gray-1" *ngFor="let include of rows?.Includes">
+                    <span class="d-inline-flex justify-content-center align-items-center me-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+                        <path
+                          d="M15.78 0.594482C15.639 0.45391 15.448 0.375 15.249 0.375C15.0499 0.375 14.8589 0.45391 14.718 0.594482L5.71796 9.56946L2.25999 6.11951C2.11873 5.98268 1.92936 5.90678 1.7327 5.9082C1.53605 5.90963 1.34782 5.98821 1.20856 6.12708C1.06931 6.26594 0.990179 6.45398 0.988197 6.65063C0.986216 6.84729 1.06154 7.03682 1.19798 7.17847L5.18699 11.1584C5.32796 11.299 5.51889 11.3781 5.71796 11.3781C5.91704 11.3781 6.108 11.299 6.24897 11.1584L15.776 1.65845C15.8466 1.58914 15.9028 1.50658 15.9413 1.41541C15.9798 1.32423 15.9998 1.22628 16.0002 1.12732C16.0005 1.02835 15.9813 0.930331 15.9435 0.838867C15.9057 0.747403 15.8501 0.664315 15.78 0.594482Z"
+                          fill="#297CBB" />
+                      </svg>
+                    </span>
+                    {{ include }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- offset-md-1 -->
+            <div class="col-md-6 dirction col-sm-12 d-flex gap-5">
+              <div class="">
+                <h6 class="fw-bold">Excludes</h6>
+              </div>
+
+              <div class="exc-div">
+                <ul class="list-group list-group-borderless list-group-flush no-gutters">
+                  <li class="mb-3 text-gray-1 d-flex align-items-center" *ngFor="let exclude of rows?.Excludes">
+                    <i class="fa fa-times fs-4 mr-3 font-size-8" style="color: #ff681a"></i>
+
+                    <span class="font-size-9 d-inline-block">
+                      {{ exclude.title }} <br />
+                      <p *ngIf="exclude?.price > 0">
+                        ( ${{ exclude?.price }} per person :
+                        {{ exclude?.option }})
+                      </p>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="importantInformation" class="tab-pane">
+        <h5 class="heading">Important Information</h5>
+        <div [innerHTML]="rows?.ImportantInformation"></div>
+      </div>
+
+      <div id="faq" class="tab-pane">
+        <div class="py-4">
+          <h5 class="heading text-uppercase">Faq</h5>
+          <div id="basicsAccordion">
+            <!-- Card -->
+            <div class="card border-0 mb-4 pb-1">
+              <mat-accordion>
+                <mat-expansion-panel *ngFor="let faqItem of rows?.faq_package" (opened)="faqItem.isOpen = true"
+                  (closed)="faqItem.isOpen = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <div class="me-4 faq">
+                        <i class="fa-solid" [ngClass]="faqItem.isOpen ? 'fa-minus' : 'fa-plus'"></i>
+                      </div>
+                      {{ faqItem.Question }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <p style="padding-left: 55px">
+                    {{ faqItem.Answer }}
+                  </p>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </div>
+          </div>
+        </div>
+        <div class="py-4">
+          <h5 class="heading">Terms and Conditions</h5>
+          <div id="basicsAccordion">
+            <div class="card border-0 mb-4 pb-1" *ngFor="let termItem of rows?.Terms">
+              <div [innerHTML]="termItem"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="review" class="tab-pane">
+        <div class="border-bottom py-4">
+          <h5 id="scroll-reviews">Average Reviews</h5>
+          <div class="row review-num">
+            <div class="col-md-4 mb-4 mb-md-0 d-flex flex-column">
+              <div class="border rounded flex-content-center py-5 border-width-2" style="flex: 1">
+                <div class="text-center">
+                  <h2 class="font-size-50 fw-bold">
+                    {{ getRoundedRate(rows?.rate)
+                    }}<span class="font-size-20">/5</span>
+                  </h2>
+                  <div class="font-size-25 text-dark mb-3">
+                    {{ getRatingDescription(rows?.rate) }}
+                  </div>
+                  <div class="text-gray-1">
+                    From {{ rows?.CountReview }} reviews
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <h5 class="font-size-21 fw-bold text-dark mb-8" *ngIf="rows?.CountReview > 0">
+                Showing Most Recent verified guest comments
+              </h5>
+              <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
+                *ngFor="let review of rows?.Reviwe?.slice(-1)">
+                <div class="mr-md-5">
+                  <a class="d-block" href="#">
+                    <img class="comment-img mb-3 mb-md-0 rounded-circle" [src]="
+                        review?.avatar ||
+                        '../../../../../../assets/custom/user-dasboard/avatar-place.png'
+                      " (error)="handleImageError($event)" [alt]="review?.name" />
+                  </a>
+                </div>
+                <div class="media-body text-center text-md-left">
+                  <div class="mb-4">
+                    <h6 class="fw-bold text-gray-3">
+                      <a>{{ review?.name }}</a>
+                    </h6>
+                    <div class="font-weight-normal font-size-14 text-gray-9 mb-2">
+                      {{ review?.date | date : "MMMM d y" }} at
+                      {{ review?.date | date : "hh:mm a" }}
+                    </div>
+                    <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-solid fa-star" [ngClass]="{
+                        'fa-star-filled': star <= review.rate,
+                        'yellow-star': star <= review.rate
+                      }"></i>
+                    <p class="text-lh-1dot6 mb-0 pr-lg-5">
+                      {{ review?.comment }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-bottom py-4">
+          <div *ngIf="showAllReviews">
+            <h5 class="font-size-21 fw-bold text-dark mb-8" *ngIf="rows?.CountReview > 0">
+              Showing {{ rows?.CountReview }} verified guest comments
+            </h5>
+            <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
+              *ngFor="let review of rows?.Reviwe">
+              <div class="mr-md-5">
+                <a class="d-block" href="#">
+                  <img class="comment-img img-fluid mb-3 mb-md-0 rounded-circle" [src]=" review?.avatar ||
+                        '../../../../../../assets/custom/user-dasboard/avatar-place.png'"
+                    [alt]="review?.name" />
+                </a>
+              </div>
+              <div class="media-body text-center text-md-left">
+                <div class="mb-4">
+                  <h6 class="fw-bold text-gray-3">
+                    <a>{{ review?.name }}</a>
+                  </h6>
+                  <div class="font-weight-normal font-size-14 text-gray-9 mb-2">
+                    {{ review?.date | date : "MMMM d y" }} at
+                    {{ review?.date | date : "hh:mm a" }}
+                  </div>
+                  <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-solid fa-star" [ngClass]="{
+                      'fa-star-filled': star <= review.rate,
+                      'yellow-star': star <= review.rate
+                    }"></i>
+                  <p class="text-lh-1dot6 mb-0 pr-lg-5">
+                    {{ review?.comment }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-4">
+              <div>
+                <h5 class="font-size-21 fw-bold text-dark mb-2 mb-md-6" style="cursor: pointer">
+                  Write a Review
+                  <i class="fa-solid fa-star text-black-50" (mouseenter)="onStarHover(1)" (click)="onStarClick(1)"
+                    [ngClass]="{ selected: selectedStar >= 1 }"></i>
+                  <i class="fa-solid fa-star text-black-50" (mouseenter)="onStarHover(2)" (click)="onStarClick(2)"
+                    [ngClass]="{ selected: selectedStar >= 2 }"></i>
+                  <i class="fa-solid fa-star text-black-50" (mouseenter)="onStarHover(3)" (click)="onStarClick(3)"
+                    [ngClass]="{ selected: selectedStar >= 3 }"></i>
+                  <i class="fa-solid fa-star text-black-50" (mouseenter)="onStarHover(4)" (click)="onStarClick(4)"
+                    [ngClass]="{ selected: selectedStar >= 4 }"></i>
+                  <i class="fa-solid fa-star text-black-50" (mouseenter)="onStarHover(5)" (click)="onStarClick(5)"
+                    [ngClass]="{ selected: selectedStar >= 5 }"></i>
+                </h5>
+              </div>
+              <div *ngIf="rows?.CountReview > 0" class="btns">
+                <a (click)="showAllReviews = !showAllReviews" *ngIf="!showAllReviews"
+                  class="text-decoration-underline">Read All Reviews</a>
+                <a (click)="showAllReviews = !showAllReviews" *ngIf="showAllReviews"
+                  class="text-decoration-underline">Hide All Reviews</a>
+              </div>
+            </div>
+            <form class="js-validate" novalidate="novalidate">
+              <div class="row mb-5 mb-lg-0">
+                <div class="col-sm-12 mb-5">
+                  <div class="js-form-message">
+                    <div class="input-group">
+                      <textarea class="form-control" rows="6" cols="77" name="text"
+                        placeholder="Hi there, I would like to ..." [(ngModel)]="comment"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Input -->
+                <div class="col d-flex justify-content-center justify-content-lg-start">
+                  <button type="submit" class="btn rounded-xs btnReview text-white p-2 height-51 width-190"
+                    (click)="addReview()">
+                    Submit Review
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="my-tours-work">
+        <h5 class="text-center mb-5 mt-5">
+          Based on what you're looking for ....
+        </h5>
+        <owl-carousel-o [options]="customOptions" class="my-tours">
+          <ng-container *ngFor="let item of relatedtrips">
+            <ng-template carouselSlide>
+              <app-activity-card [item]="item"></app-activity-card>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isMobile" class="col-md-3 col-sm-12 order-1 order-md-2">
+    <div class="mb-4 sticky-container p-5">
+      <div class="border border-color-7 rounded mb-5">
+        <div class="p-4" #checkAvailabilityButton>
+          <div class="priceTitle d-flex justify-content-between">
+            <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Price</span>
+            <p style="font-weight: 700">
+              <ng-container *ngIf="hasDiscount(rows)">
+                <!-- Original Price with Strikethrough -->
+                <span>From </span>
+                <span class="font-size-18 fw-bold text-dark" style="
+                    text-decoration: line-through;
+                    color: rgb(13, 177, 255) !important;
+                  ">
+                  ${{ rows?.Price.Adult }}
+                </span>
+
+                <!-- Discounted Price -->
+                <span class="mx-2 font-size-18 fw-bold text-dark" style="font-weight: 700">
+                  ${{
+                  calculateDiscountedPrice(
+                  rows?.Price.Adult,
+                  rows?.Price.AdultDiscount
+                  )
+                  }}
+                </span>
+              </ng-container>
+
+              <ng-container *ngIf="!hasDiscount(rows)">
+                <!-- Display only the price if no discount is available -->
+                <span class="font-size-18 fw-bold text-dark" style="font-weight: 700">
+                  From ${{ rows?.Price.Adult }}
+                </span>
+              </ng-container>
+            </p>
+          </div>
+
+          <div class="mb-4">
+            <div class="border-bottom border-width-2 border-color-1 pb-1 package-date">
+              <span class="d-block">Date</span>
+
+              <label for="endDate">Start date</label>
+              <p-calendar id="startDate" [(ngModel)]="startDate" [showIcon]="true" [readonlyInput]="true"
+                [minDate]="today" [touchUI]="true" [appendTo]="'body'" (onSelect)="onStartDateChange($event)"
+                dateFormat="dd MM, yy" placeholder="Start Date" [formControl]="selectedDateControl"></p-calendar>
+
+
+
+              <div class="p-field" *ngIf="startDate">
+                <label for="endDate">End Date</label>
+                <p-calendar id="endDate" [(ngModel)]="endDate" [showIcon]="true" [readonlyInput]="true"
+                   dateFormat="dd MM, yy" [disabled]="true"></p-calendar>
+              </div>
+              <div *ngIf="
+                  selectedDateControl.invalid &&
+                  (selectedDateControl.dirty || selectedDateControl.touched)
+                " class="text-danger">
+                <div *ngIf="selectedDateControl.errors?.['required']">
+                  Start date is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Adults</span>
+          <div class="mb-4">
+            <div class="border-bottom border-width-2 border-color-1 pb-1">
+              <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
+                <span class="d-block">Age
+                  {{ this.rows?.Price.AdultAge }}
+                </span>
+                <span class="badge bg-green p-2 sale">{{ this.rows?.Price.AdultDiscount }}%</span>
+                <div class="flex-horizontal-center">
+                  <a class="js-minus font-size-10 text-dark" (click)="decrementAdult()">
+                    <img src="../../../../../../assets/custom/Activity/Indeterminate check box.svg" alt="image"
+                      loading="lazy" />
+                  </a>
+                  <input
+                    class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-transparent border-0 rounded p-0 mx-1 text-center"
+                    type="text" [attr.min]="1" [attr.max]="getMaxValue('adultsMax')" [(ngModel)]="adults" disabled />
+                  <a class="js-plus font-size-10 text-dark" (click)="incrementAdult()">
+                    <img src="../../../../../../assets/custom/Activity/Add box.svg" alt="image" loading="lazy" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Children</span>
+          <div class="mb-4">
+            <div class="border-bottom border-width-2 border-color-1 pb-1">
+              <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
+                <span class="d-inline-block">Age
+                  {{ this.rows?.Price.childernAge }}
+                </span>
+                <span class="badge bg-orange p-2 sale">{{ this.rows?.Price.childernDiscount }}%</span>
+                <div class="flex-horizontal-center">
+                  <a class="js-minus font-size-10 text-dark" (click)="decrementChildren()">
+                    <img src="../../../../../../assets/custom/Activity/Indeterminate check box.svg" alt="image"
+                      loading="lazy" />
+                  </a>
+                  <input
+                    class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
+                    type="text" [attr.min]="1" [attr.max]="getMaxValue('childrenMax')" [(ngModel)]="children"
+                    disabled />
+                  <a class="js-plus font-size-10 text-dark" (click)="incrementChildren()">
+                    <img src="../../../../../../assets/custom/Activity/Add box.svg" alt="image" loading="lazy" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Infant</span>
+          <div class="mb-4">
+            <div class="border-bottom border-width-2 border-color-1 pb-1">
+              <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
+                <span class="d-block">Age
+                  {{ this.rows?.Price.infantAge }}
+                </span>
+                <span class="badge bg-green p-2 sale">{{ this.rows?.Price.infantDiscount }}%</span>
+                <div class="flex-horizontal-center">
+                  <a class="js-minus font-size-10 text-dark" (click)="decrementInfant()">
+                    <img src="../../../../../../assets/custom/Activity/Indeterminate check box.svg"
+                      alt="image of Indeterminate check box" loading="lazy" />
+                  </a>
+                  <input
+                    class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
+                    type="text" [attr.min]="1" [attr.max]="getMaxValue('infantsMax')" [(ngModel)]="infant" disabled />
+                  <a class="js-plus font-size-10 text-dark" (click)="incrementInfant()">
+                    <img src="../../../../../../assets/custom/Activity/Add box.svg" alt="image" loading="lazy" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="text-center">
+            <a class="btn check text-white d-flex align-items-center justify-content-center height-60 w-100 mb-xl-0 mb-lg-1"
+              (click)="checkPrice()">
+              Book Now
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border border-color-7 rounded p-4 mb-5">
+        <h6 class="book">Why Book With Us?</h6>
+        <div class="d-flex align-items-center mb-3 mt-3" *ngFor="let about of Why_chosse_us">
+          <img [src]="about.icon" class="me-3" [alt]="about.title" loading="lazy" width="24" height="24" />
+          <h6 class="about-title">
+            <a>{{ about.title }}</a>
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" (hidden.bs.modal)="closeModal()" id="exampleModal2" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close custom-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div *ngIf="isMobile" class="">
+          <div class="col-md-3 col-sm-12 order-1 order-md-2">
+            <div class="mb-4 sticky-container ">
+              <div class="border border-color-7 rounded mb-5">
+                <div class="p-4" #checkAvailabilityButton>
+                  <div class="priceTitle d-flex justify-content-between">
+                    <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Price</span>
+                    <p style="font-weight: 700">
+                      <ng-container *ngIf="hasDiscount(rows)">
+                        <!-- Original Price with Strikethrough -->
+                        <span>From </span>
+                        <span class="font-size-18 fw-bold text-dark" style="
+                            text-decoration: line-through;
+                            color: rgb(13, 177, 255) !important;
+                          ">
+                          ${{ rows?.Price.Adult }}
+                        </span>
+
+                        <!-- Discounted Price -->
+                        <span class="mx-2 font-size-18 fw-bold text-dark" style="font-weight: 700">
+                          ${{
+                          calculateDiscountedPrice(
+                          rows?.Price.Adult,
+                          rows?.Price.AdultDiscount
+                          )
+                          }}
+                        </span>
+                      </ng-container>
+
+                      <ng-container *ngIf="!hasDiscount(rows)">
+                        <!-- Display only the price if no discount is available -->
+                        <span class="font-size-18 fw-bold text-dark" style="font-weight: 700">
+                          From ${{ rows?.Price.Adult }}
+                        </span>
+                      </ng-container>
+                    </p>
+                  </div>
+
+                  <div class="mb-4">
+                    <div class="border-bottom border-width-2 border-color-1 pb-1 package-date">
+                      <span class="d-block">Date</span>
+                      <mat-form-field class="w-100" (click)="startPicker.open()">
+                        <mat-label>Start Date</mat-label>
+                        <input matInput placeholder="Start date" [matDatepicker]="startPicker"
+                          [matDatepickerFilter]="dateFilter" [formControl]="selectedDateControl"
+                          (dateInput)="onStartDateChange2($event)" [readonly]="true" />
+                        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startPicker panelClass="custom-datepicker-panel"></mat-datepicker>
+                      </mat-form-field>
+
+                      <mat-form-field class="w-100" *ngIf="startDate">
+                        <mat-label>End date</mat-label>
+                        <input matInput placeholder="End date" [matDatepicker]="endPicker" [min]="endDate"
+                          [max]="endDate" [value]="endDate" />
+                        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endPicker panelClass="custom-datepicker-panel"></mat-datepicker>
+                      </mat-form-field>
+
+                      <div *ngIf="
+                          selectedDateControl.invalid &&
+                          (selectedDateControl.dirty ||
+                            selectedDateControl.touched)
+                        " class="text-danger">
+                        <div *ngIf="selectedDateControl.errors?.['required']">
+                          Start date is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Adults</span>
+                  <div class="mb-4">
+                    <div class="border-bottom border-width-2 border-color-1 pb-1">
+                      <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
+                        <span class="d-block">Age
+                          {{ this.rows?.Price.AdultAge }}
+                        </span>
+                        <span class="badge bg-green p-2 sale">{{ this.rows?.Price.AdultDiscount }}%</span>
+                        <div class="flex-horizontal-center">
+                          <a class="js-minus font-size-10 text-dark" (click)="decrementAdult()">
+                            <img src="../../../../../../assets/custom/Activity/Indeterminate check box.svg" alt="image"
+                              loading="lazy" />
+                          </a>
+                          <input
+                            class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-transparent border-0 rounded p-0 mx-1 text-center"
+                            type="text" [attr.min]="1" [attr.max]="getMaxValue('adultsMax')" [(ngModel)]="adults"
+                            disabled />
+                          <a class="js-plus font-size-10 text-dark" (click)="incrementAdult()">
+                            <img src="../../../../../../assets/custom/Activity/Add box.svg" alt="image"
+                              loading="lazy" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Children</span>
+                  <div class="mb-4">
+                    <div class="border-bottom border-width-2 border-color-1 pb-1">
+                      <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
+                        <span class="d-inline-block">Age
+                          {{ this.rows?.Price.childernAge }}
+                        </span>
+                        <span class="badge bg-orange p-2 sale">{{ this.rows?.Price.childernDiscount }}%</span>
+                        <div class="flex-horizontal-center">
+                          <a class="js-minus font-size-10 text-dark" (click)="decrementChildren()">
+                            <img src="../../../../../../assets/custom/Activity/Indeterminate check box.svg" alt="image"
+                              loading="lazy" />
+                          </a>
+                          <input
+                            class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
+                            type="text" [attr.min]="1" [attr.max]="getMaxValue('childrenMax')" [(ngModel)]="children"
+                            disabled />
+                          <a class="js-plus font-size-10 text-dark" (click)="incrementChildren()">
+                            <img src="../../../../../../assets/custom/Activity/Add box.svg" alt="image"
+                              loading="lazy" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Infant</span>
+                  <div class="mb-4">
+                    <div class="border-bottom border-width-2 border-color-1 pb-1">
+                      <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
+                        <span class="d-block">Age
+                          {{ this.rows?.Price.infantAge }}
+                        </span>
+                        <span class="badge bg-green p-2 sale">{{ this.rows?.Price.infantDiscount }}%</span>
+                        <div class="flex-horizontal-center">
+                          <a class="js-minus font-size-10 text-dark" (click)="decrementInfant()">
+                            <img src="../../../../../../assets/custom/Activity/Indeterminate check box.svg" alt="image"
+                              loading="lazy" />
+                          </a>
+                          <input
+                            class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
+                            type="text" [attr.min]="1" [attr.max]="getMaxValue('infantsMax')" [(ngModel)]="infant"
+                            disabled />
+                          <a class="js-plus font-size-10 text-dark" (click)="incrementInfant()">
+                            <img src="../../../../../../assets/custom/Activity/Add box.svg" alt="image"
+                              loading="lazy" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="text-center">
+                    <a class="btn check text-white d-flex align-items-center justify-content-center height-60 w-100 mb-xl-0 mb-lg-1"
+                      (click)="checkPrice()">
+                      Book Now
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: fixed; bottom: 0px; z-index: 99999" *ngIf="isMobile && !hideMobileFooter"
+  class="text-center w-100" [ngClass]="{ 'd-none': isModalOpen }">
+  <div class="d-flex justify-content-between p-3" style="background: white">
+    <div class="priceTitle d-flex justify-content-between">
+      <p style="font-weight: 500" class="mb-0 pt-1">
+        From
+        <span class="font-size-16 fw-bold text-dark" [style.text-decoration]="hasDiscount(rows) ? 'line-through' : ''"
+          [style.color]="hasDiscount(rows) ? 'rgb(13, 177, 255) !important' : ''">
+          ${{ rows?.Price.Adult }}
+        </span>
+        <span *ngIf="hasDiscount(rows)" class="mx-1 font-size-16 fw-bold text-dark" style="font-weight: 500">${{
+          calculateDiscountedPrice(
+          rows?.Price.Adult,
+          rows?.Price.AdultDiscount
+          )
+          }}
+        </span>
+      </p>
+    </div>
+    <div class="w-50">
+      <a class="btn check text-white d-flex align-items-center justify-content-center height-40 w-100 mb-xl-0 mb-lg-1 fw-bold"
+        type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        Book Now
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+.mat-dialog-container {
+  background-color: transparent !important;
+  width: 100vw !important; /* Make modal take full viewport width */
+  max-width: 100vw; /* Ensure it doesn't exceed viewport width */
+  margin: 0; /* Remove default margin */
+}
+.modal-body {
+  background-color: transparent !important; /* Make modal body background transparent */
+}
+.image-slider {
+  background-color: transparent; /* Ensure slider background is also transparent */
+}
+
+.close {
+  position: absolute; /* Position absolutely within the modal-header */
+  top: 10px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(255, 255, 255) !important;
+  color: rgba(13, 177, 255, 1);
+  margin: 0px;
+  font-size: 25px;
+  padding: 0px;
+  opacity: 1;
+}
+
+.owl-carousel .owl-nav .owl-prev {
+  left: 10px; /* Adjust as needed */
+  position: absolute;
+}
+
+.owl-carousel .owl-nav .owl-next {
+  right: 10px; /* Adjust as needed */
+  position: absolute;
+}
+
+.modal-header {
+  position: relative; /* This allows absolute positioning within the header */
+  border-bottom: 0px !important;
+  direction: rtl;
+}
+::ng-deep {
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: transparent !important;
+  }
+  .cdk-overlay-pane {
+    overflow: auto !important;
+  }
+}

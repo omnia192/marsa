@@ -1,0 +1,45 @@
+header{
+    margin-top: 150px;
+    h2{
+        color: #181C32;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+}
+nav {
+    a{
+        color: #3F4254;
+        font-family: Poppins;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+    }
+    li:not(li:last-of-type){
+        a{
+            color: #B5B5C3;
+        }
+    }
+
+}
+.breadcrumb{
+    padding: 10px 0!important ;
+}
+.breadcrumb-item + .breadcrumb-item::before{
+    content: '/';
+}
+
+/***************************/
+@media screen and (max-width: 992px){
+    header{
+        padding-top: 10px;
+    }
+}
+@media screen and (max-width: 1199.9px){
+    header{
+        margin-top: 15px;
+    }
+}

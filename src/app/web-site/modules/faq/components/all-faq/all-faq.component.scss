@@ -1,0 +1,209 @@
+#content {
+  margin-top: 120px;
+}
+h5 a {
+  font-family: Lato;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(59, 68, 79, 1);
+}
+h6 {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 1.5rem;
+}
+a span {
+  cursor: pointer;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(59, 68, 79, 1);
+}
+.gradient-overlay-half-black-gradient::before {
+  background-color: #18181a !important;
+  opacity: 0.5 !important;
+}
+
+p {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(103, 116, 124, 1);
+}
+h5 {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(24, 24, 26, 1);
+}
+.collapse li {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(103, 116, 124, 1);
+}
+.head {
+  font-family: Lato;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  line-height: 20px !important;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(59, 68, 79, 1) !important;
+}
+.booking h6 {
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(103, 116, 124, 1);
+}
+.tags {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(59, 68, 79, 1);
+}
+.activeLink {
+  color: rgba(41, 124, 187, 1) !important;
+  position: relative;
+  cursor: pointer;
+}
+mat-expansion-panel p{
+  padding-left: 90px
+}
+.activeLink::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 40px;
+  background: rgba(41, 124, 187, 1);
+  left: -13px;
+}
+.list-item a {
+  padding: 0.475rem 0.7rem !important;
+}
+.mat-expansion-panel-header {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  color: rgba(59, 68, 79, 1) !important;
+}
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}
+@media (max-width: 768px) {
+  mat-expansion-panel {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  mat-expansion-panel p{
+    padding-left: 40px
+  }
+
+  mat-expansion-panel-header {
+    padding: 10px;
+  }
+
+  p {
+    padding-left: 20px;
+  }
+}
+@media (max-width: 366px) {
+  mat-expansion-panel {
+    padding: 4px; /* تقليل الحواف الداخلية */
+    margin-bottom: 6px; /* تقليل الهامش السفلي */
+  }
+
+  mat-expansion-panel-header {
+    padding: 6px; /* تقليل الحواف الداخلية للعنوان */
+  }
+
+  mat-panel-title {
+    white-space: normal; /* السماح للنص بالالتفاف */
+    word-wrap: break-word; /* كسر النص إذا كان طويلًا */
+    font-size: 13px; /* تقليل حجم الخط لتناسب الشاشة */
+  }
+
+  p {
+    padding-left: 10px; /* تقليل الحواف الداخلية لتناسب العرض */
+    white-space: normal; /* السماح للنص بالالتفاف */
+    word-wrap: break-word; /* كسر النص إذا كان طويلًا */
+    font-size: 13px; /* تقليل حجم الخط */
+  }
+
+  .faq i {
+    margin-right: 3px; /* تقليل المسافة بين الأيقونة والنص */
+    font-size: 13px; /* تقليل حجم الأيقونة لتناسب النص */
+  }
+}
+
+@media (max-width: 320px) {
+  mat-expansion-panel {
+    padding: 3px; /* تقليل الحواف الداخلية أكثر */
+    margin-bottom: 5px; /* تقليل الهامش السفلي */
+  }
+
+  mat-panel-title, p {
+    font-size: 12px; /* تقليل حجم الخط أكثر */
+  }
+
+  .faq i {
+    font-size: 12px; /* تقليل حجم الأيقونة لتناسب النص */
+  }
+}
+
+
+.bg-img-hero {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.faq {
+  width: 47px;
+  height: 42px;
+  border: 2px solid rgba(235, 240, 247, 1);
+  /* background: aqua; */
+  padding: 12px 15px;
+  /* width: 1440px; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+/*******************************/
+@media screen and (max-width: 992px) {
+  .bg-img-hero {
+    height: auto;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #content {
+    margin-top: 0px;
+  }
+}

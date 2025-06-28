@@ -1,0 +1,147 @@
+<div class="card">
+  <div class="row d-flex" style="height: auto">
+    <div class="col-md-4 d-flex flex-column">
+      <div class="position-relative w-100">
+        <a
+          [routerLink]="[
+            '/',
+            translate.currentLang,
+            'tours',
+            'details',
+            item?.id,
+            item?.Title
+          ]"
+        >
+          <img
+            class="card-img-top"
+            style="min-height: 230px"
+            [src]="item?.cover"
+            [alt]="getImageName(item?.cover)"
+          />
+        </a>
+        <div class="position-absolute" style="top: 22px; left: 7px">
+          <span
+            class="badge badge-pill bg-white text-primary px-4"
+            *ngIf="item?.Featured > 0"
+            >Featured</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 d-flex flex-column   justify-content-between p-5 pe-lg-1 pt-lg-0">
+      <div >
+        <div class="d-flex    justify-content-between pe-3 pt-3">
+          <h5 class="card-heading">{{ item?.Title }}</h5>
+          <ng-container *ngIf="item.wishlist; else elseTemplate">
+            <i
+            class="fa-regular fa-heart fs-3 text-danger"
+          ></i>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <i
+            #btn
+            (click)="addtoFavorits(btn, $event)"
+            class="fa-regular fa-heart fs-3 text-black-50"
+          ></i>
+          </ng-template>
+
+        </div>
+        <div class="d-flex justify-content-between pe-3 card-title">
+          <p>{{ item?.type }}</p>
+          <p>
+            <span
+              [style.text-decoration]="item?.discount > 0 ? 'line-through' : ''"
+              [style.color]="item.discount > 0 ? 'rgb(13, 177, 255)' : ''"
+              >${{ item?.PriceColectiv }} </span
+            >
+            <span
+              class="mx-2"
+              *ngIf="item?.discount > 0"
+              style="font-size: 15px; font-weight: 700"
+              >${{
+                item?.PriceColectiv -
+                  (item?.discount / 100) * item?.PriceColectiv
+              }}
+              </span
+            >
+            <span style="font-size: 15px !important">per person</span>
+          </p>
+        </div>
+        <small class="pe-2 card-desc">
+          <span>{{ item?.shortOverviwe?.substr(0, 100) }} </span
+          ><a
+            style="color: #0057ff; cursor: pointer"
+            class="mx-2"
+            [routerLink]="[
+              '/',
+              translate.currentLang,
+              'tours',
+              'details',
+              item?.id,
+              item?.Title
+            ]"
+            *ngIf="item?.shortOverviwe?.length > 100 && !readMore"
+            >see more</a
+          >
+
+          <span *ngIf="item?.shortOverviwe?.length > 100 && readMore">{{
+            item?.shortOverviwe?.substr(100, item?.shortOverviwe?.length)
+          }}</span>
+          <span
+            style="color: #0057ff; cursor: pointer"
+            class="mx-2"
+            (click)="readMore = false"
+            *ngIf="item?.shortOverviwe?.length > 100 && readMore"
+            >see less</span
+          >
+        </small>
+        <span class="stars d-block mt-5 pe-3">
+          <i
+            *ngFor="let star of [1, 2, 3, 4, 5]"
+            class="fa-solid fa-star"
+            style="color: #bfbfbf"
+            [ngClass]="{
+              'fa-star-filled': star <= item?.rate,
+              'yellow-star': star <= item?.rate
+            }"
+          ></i>
+          {{ item.Review }} Reviews
+        </span>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="icons mt-4">
+          <small class="pe-3 d-flex mb-2">
+            <div>
+
+              <i class="fa-solid fa-location-dot pe-2"></i>
+            </div>
+            <div class="me-2">
+
+              {{ item?.place }}
+            </div>
+          </small>
+          <small>
+
+            <i class="fa-solid fa-clock pe-2"></i>{{ item?.duration }}
+            {{ item?.durationType }}
+          </small>
+        </div>
+        <div class="btns">
+          <a
+            [routerLink]="[
+              '/',
+              translate.currentLang,
+              'tours',
+              'details',
+              item?.id,
+              item?.Title
+            ]"
+            title="details"
+            ><button class="btn me-2">View Details</button></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

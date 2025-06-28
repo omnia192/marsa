@@ -1,0 +1,265 @@
+h3 {
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 45px;
+  letter-spacing: 0em;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+.owl-carousel .owl-stage{
+  transition: transform 2s ease;
+}
+.my-tours-work{
+  width: 100%;
+}
+.owl-carousel .owl-item img{
+   height: 65vh;
+}
+::ng-deep {
+  .my-tours.single-item .owl-item {
+    width: 350px !important;
+  }
+}
+h3::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 2.059px;
+  background-color: #297cbb;
+  top: 100%;
+  left: 50px;
+}
+.yellow-star {
+  color: #ffd700 !important;
+}
+
+.featured {
+  width: 97px;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  color: #297cbb;
+  padding: 6px 8px;
+}
+
+.sale {
+  width: 60px;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  text-align: left;
+  color: #ff0045;
+  text-align: center;
+}
+
+small {
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+}
+
+h2 {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20.4px;
+}
+
+.title {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20.4px;
+  color: #297cbb;
+}
+
+.card-title {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20.4px;
+  color: #3b444f;
+}
+
+.review {
+  gap: 10px;
+}
+
+.review p {
+  width: 59px;
+  height: 22px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #ff681a;
+  border-radius: 5px;
+  font-family: Lato;
+  font-size: 13px;
+  font-weight: 400;
+  align-content: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.review span {
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  color: #67747c;
+  padding-bottom: 10px;
+}
+.nav-pills li {
+  color: #008ccf;
+  font-family: "Rubik", Helvetica, Arial, sans-serif;;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.card-wrapper {
+  margin: 0 10px; /* لإضافة المسافة بين البطاقات */
+}
+
+.p-carousel .p-carousel-content {
+  display: flex;
+  justify-content: center; /* لجعل البطاقات في المنتصف */
+}
+
+.nav-pills .active {
+  height: 56px;
+  background-color: #0db1ff;
+  color: #ffffff;
+}
+section {
+  margin-top:80px;
+  padding-bottom: 40px;
+  margin-bottom: 70px;
+}
+/********************************/
+@media screen and (max-width: 500px) {
+  .trending .ui-carousel-item .card {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    float: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .nav-link {
+    color: #67747c !important;
+  }
+  .nav-pills {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    padding-bottom: 10px;
+    position: relative;
+    top: 10px;
+    li {
+      font-size: 16px !important;
+      white-space: nowrap !important;
+    }
+  }
+  .nav-pills .active {
+    color: #0db1ff !important;
+    background-color: transparent !important;
+  }
+  h3::after {
+    left: 44%;
+  }
+
+}
+
+.title {
+  font-family: Lato;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20.4px;
+  color: #297cbb;
+}
+
+.imgBox {
+  display: inline-block; /* shrink wrap to image */
+  overflow: hidden; /* hide the excess */
+  height: 200px;
+  width: 100%;
+}
+.imgBox .card-img-top {
+  display: block; /* no whitespace */
+  transition: 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.gradient-overlay-half-bg-gradient-v5::before {
+  height: 200px;
+  background: linear-gradient(
+    to top,
+    #131313 1%,
+    rgba(19, 19, 19, 0.2) 30%,
+    rgba(34, 34, 34, 0) 89%,
+    rgba(44, 44, 44, 0) 100%
+  );
+}
+
+.card:hover {
+  .imgBox .card-img-top {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+    height: 200px;
+  }
+}
+
+.text-name {
+  color: #297cbb !important;
+}
+
+.stars {
+  background-color: #ff681a;
+  color: white;
+  border-radius: 4px;
+  margin-inline-end: 1rem;
+}
+
+.no-results {
+  width: 45%;
+}
+
+.carousel-inner {
+  width: 90% !important;
+  margin: auto;
+}
+
+@media (max-width: 1024px) {
+  section {
+    margin-top:2rem;
+    margin-bottom:5px;
+  }
+
+  .min-height-230 {
+    min-height: 10rem !important;
+  }
+
+  .dropdown:hover .destination-dropdown {
+    padding-top: 10px !important;
+  }
+
+  .d-inline-flex {
+    flex-direction: column;
+  }
+}
+@media (min-width: 1024px) {
+  .tab-card {
+    width: 300px;
+  }
+}

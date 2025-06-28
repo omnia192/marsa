@@ -1,0 +1,36 @@
+<app-header [style.background]="'transparent'"></app-header>
+<!--------New Head---------------------->
+
+<main id="content">
+  <!-- ========== HERO ========== -->
+  <div
+    class="bg-img-hero-bottom gradient-overlay-half-black-gradient text-center"
+
+  >
+    <!-- Info -->
+    <div
+      class="py-xl-10 d-flex flex-column justify-content-center align-content-center caption"
+      style="height: 118%"
+    >
+      <h1>Let’s The World Together !</h1>
+      <p>
+        Are you planning a vacation to enjoy your free time? Looking for a place
+        to explore
+      </p>
+    </div>
+    <!-- End Info -->
+    <div class="container quick-search-form d-none d-lg-block">
+      <app-quick-search [changeStyle]="false"></app-quick-search>
+      <!-- Nav Classic -->
+    </div>
+  </div>
+
+  <!-- ========== END HERO ========== -->
+  <div class="container d-block d-lg-none">
+    <app-quick-search [changeStyle]="true"></app-quick-search>
+  </div>
+  <app-destination></app-destination>
+  <app-trending></app-trending>
+  <app-banner></app-banner>
+  <app-clients></app-clients>
+</main>

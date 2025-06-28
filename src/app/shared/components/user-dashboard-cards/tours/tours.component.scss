@@ -1,0 +1,37 @@
+/******************************/
+ul {
+  margin-top: 10px;
+  padding-top: 30px;
+  padding-left: 40px;
+  gap: 32px;
+  li {
+    color: #a1a5b7;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 6px;
+    padding: 11px 20px;
+    transition: color 0.5s ease-in-out;
+    &.active {
+      background: #f5f8fa;
+      color: #00a3ff;
+    }
+    &:hover {
+      cursor: pointer;
+      color: #00a3ff;
+    }
+  }
+}
+
+/**********************/
+@media screen and (max-width: 992px) {
+  .nav {
+    justify-content: center;
+  }
+  ul {
+    gap: 5px;
+    padding-left: 5px;
+  }
+}

@@ -1,0 +1,157 @@
+<div class="card">
+  <div class="position-relative w-100" style="overflow: hidden">
+    <a
+      class="d-block gradient-overlay-half-bg-gradient-v5"
+      [routerLink]="['/', translate.currentLang, 'boats', 'details', item?.id,
+            item?.Title]"
+    >
+      <img
+        style="height: 200px"
+        class="min-height-230 bg-img-hero w-100"
+        [src]="item.cover"
+        [alt]="getImageName(item?.cover)"
+      />
+      <div
+        style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, #1e2022 0%, transparent 49%);"
+      ></div>
+    </a>
+   
+    <div class="position-absolute top-0 right-0 pt-5 pr-2" style="margin-top: -0.8rem;">
+      <ng-container *ngIf="item.wishlist; else elseTemplate">
+        <button
+        type="button"
+        class="btn btn-sm btn-icon text-danger rounded-circle"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Save for later"
+        data-original-title="Save for later"
+        aria-label="Save for later"
+
+      >
+        <i class="fa fa-heart fs-3"></i>
+      </button>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <button
+        type="button"
+        class="btn btn-sm btn-icon text-black-50 rounded-circle"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Save for later"
+        data-original-title="Save for later"
+        aria-label="Save for later"
+        #btn
+        (click)="addtoFavorits(btn, $event)"
+      >
+        <i class="fa fa-heart fs-3"></i>
+      </button>
+      </ng-template>
+   
+    </div>
+    <div class="position-absolute bottom-0 left-0 right-0">
+      <div class="px-3 pb-2">
+        <a
+          [routerLink]="[
+            '/',
+            translate.currentLang,
+            'boats',
+            'details',
+            item?.id,
+            item?.Title
+          ]"
+        >
+          <span class="text-white font-weight-bold font-size-17">
+            {{ item.Title }}
+          </span>
+        </a>
+        <div class="text-white my-2">
+          <span class="mr-1 font-size-14">From</span>
+          <span
+            [style.text-decoration]="item.discount > 0 ? 'line-through' : ''"
+            [style.color]="item.discount > 0 ? '#0db1ff' : ''"
+          >
+            ${{ item?.PriceColectiv }}
+          </span>
+          <span class="mx-2" *ngIf="item.discount > 0">
+            ${{
+              getRoundedRate(item?.PriceColectiv - item?.PriceColectiv * (item?.discount / 100))
+            }}
+
+          </span>
+
+       
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body px-4 py-4 border-bottom">
+    <a class="d-block">
+      <div
+        class="d-flex align-items-center justify-content-between font-size-14 text-gray-1"
+      >
+        <div class="d-flex">
+          <img
+            src="assets/custom/Activity/locationDark.svg"
+            style="width: 15px"
+            class="me-2"
+            alt="Location"
+          />
+          {{ item.place }}
+        </div>
+        <div>
+          <span class="pl-3 stars">
+            <i
+              *ngFor="let star of [1, 2, 3, 4, 5]"
+              class="fa-solid fa-star"
+              style="color: #bfbfbf"
+              [ngClass]="{
+                'fa-star-filled': star <= item.rate,
+                'yellow-star': star <= item.rate
+              }"
+            ></i>
+          </span>
+          {{ item.Review }}
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="pt-3 pb-2" style="padding-left: 20px">
+    <div class="row icon">
+      <div class="col-6">
+        <div *ngIf="item.person"
+        >
+          <img
+            src="assets/custom/boat-icons/user.svg"
+            class="me-2 boat-icon"
+            alt="boat"
+          /><span>{{ item.person }}</span>
+        </div>
+        <div>
+          <img
+            src="assets/custom/boat-icons/flexable booking.svg"
+            class="me-2 boat-icon"
+            alt="boat"
+          /><span>Flexible Booking</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div *ngIf="item.bed">
+          <img
+            src="assets/custom/boat-icons/Forma.svg"
+            class="me-1 boat-icon"
+            alt="boat"
+          /><span>{{ item.bed }}</span>
+        </div>
+        <div>
+          <img
+            src="assets/custom/boat-icons/wifi.svg"
+            class="me-1 boat-icon"
+            alt="boat"
+          /><span>Free Internet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="223" height="32" viewBox="0 0 223 32">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 33.333px;
+        fill: #ffca0e;
+        text-anchor: middle;
+        font-family: Poppins;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <text id="DISCOUNT" class="cls-1" transform="translate(110.641 31.204) scale(1.277)"><tspan x="0">DISCOUNT</tspan></text>
+</svg>

@@ -1,0 +1,235 @@
+// Define common styles
+$font-lato: Lato;
+$color-primary: rgba(41, 124, 187, 1);
+$color-secondary: rgba(103, 116, 124, 1);
+$color-heading: #3B444F;
+$color-highlight: #297CBB;
+$color-warning: #FF681A;
+
+// Common styles for text elements
+@mixin text-styles {
+  font-family: $font-lato;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0em;
+}
+
+// Common styles for headings
+@mixin heading-styles {
+  @include text-styles;
+  font-weight: 700;
+}
+.payment {
+  width: auto;
+  padding: 10px 15px;
+  border: 1px solid rgba(13, 177, 255, 1);
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: rgba(13, 177, 255, 1);
+  background-color: rgba(13, 177, 255, 1);
+  border-radius: 10px;
+}
+// Define styles for specific elements
+h5, h3 {
+  @include heading-styles;
+  font-size: 21px;
+}
+
+a {
+  @include text-styles;
+  font-size: 14px;
+  color: $color-primary;
+}
+
+li span, p {
+  @include text-styles;
+  font-size: 16px;
+  color: $color-secondary;
+}
+
+h3 {
+  text-align: center;
+  color: $color-primary;
+}
+
+.my-tours-work {
+  h5 {
+    @include heading-styles;
+    font-size: 30px;
+    color: $color-heading;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 40px;
+      height: 2px;
+      background-color: $color-highlight;
+      position: absolute;
+      bottom: -6px;
+      left: 40%;
+    }
+  }
+}
+.content{
+  margin-top: 150px;
+}
+.fa-star {
+  color: #C6C7C6;
+  font-size: 15px;
+}
+
+.btnReview {
+  background-color: #0DB1FF;
+}
+
+.card-body {
+  h6, h5 {
+    @include heading-styles;
+    color: $color-highlight;
+    font-size: 17px;
+  }
+
+  .review {
+    @include text-styles;
+    font-size: 13px;
+    color: #FFF;
+    background-color: $color-warning;
+    border-radius: 5px;
+    width: 59px;
+    height: 22px;
+    padding: 7px;
+  }
+}
+/***********************************/
+@media screen and (max-width: 1200px){
+  .content{
+    margin-top: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .responsive-text {
+      font-size: 16px !important;
+      line-height: 22px !important;
+  }
+}
+
+// Map styles
+.map-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  .search-box {
+    position: relative;
+    z-index: 1001;
+    
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 1002;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      
+      .list-group {
+        margin: 0;
+        
+        .list-group-item {
+          cursor: pointer;
+          border: none;
+          border-bottom: 1px solid #eee;
+          padding: 12px 15px;
+          font-size: 14px;
+          transition: background-color 0.2s ease;
+          
+          &:hover {
+            background-color: #f8f9fa;
+            border-left: 3px solid #0db1ff;
+          }
+          
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+  
+  #googleMap {
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+  
+  .btn {
+    margin-right: 8px;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.location {
+  cursor: pointer;
+}
+
+// Loading spinner styles
+.fa-spinner {
+  color: #0db1ff;
+}
+
+// Alert styles for no results
+.alert-info {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  color: #6c757d;
+  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+// Input group styles
+.input-group-append .btn {
+  border-radius: 0 4px 4px 0;
+  border-left: none;
+}
+
+.input-group-append .btn:hover {
+  background-color: #e9ecef;
+}
+
+.form-control {
+  border-radius: 4px 0 0 4px;
+}
+
+// Make readonly inputs look clickable
+.form-control[readonly] {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.form-control[readonly]:hover {
+  background-color: #f8f9fa;
+  border-color: #0db1ff;
+}
+
+// Map modal input styles
+.map-container .form-control {
+  cursor: text;
+}
+
+.map-container .form-control:hover {
+  border-color: #0db1ff;
+}

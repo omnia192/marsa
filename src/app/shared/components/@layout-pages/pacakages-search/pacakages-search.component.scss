@@ -1,0 +1,42 @@
+div.title h3 {
+   font-family: Poppins;
+   font-size: 30px;
+   font-weight: 700;
+   line-height: 45px;
+   letter-spacing: 0em;
+   position: relative;
+}
+
+div.title h3::after {
+   content: "";
+   position: absolute;
+   width: 45.67px;
+   height: 1.41px;
+   background-color: #004796;
+   top: 100%;
+   left: 48%;
+}
+
+
+.tabs-bg{
+  background-image: url(../../../../../assets/images/bgPackages.webp);
+  background-position: center center;
+  background-size: cover;
+  height: 743px;
+}
+/**********************************/
+@media screen and (max-width: 540px) {
+  .tabs-bg {
+     height: 723px;
+  }
+}
+@media screen and (min-width: 540.9px) and (max-width: 768px){
+  .tabs-bg{
+     height: 768px;
+  }
+}
+@media screen and (min-width: 768.9px) and (max-width: 1200px){
+  .tabs-bg{
+     height: 80vh;
+  }
+}

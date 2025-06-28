@@ -1,0 +1,132 @@
+.table-content-general{
+    margin-top: 59px;
+}
+
+
+.modal-body{
+  .completed{
+    color: #50CD89;
+    font-family: Roboto;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: inline-flex;
+    padding: 6px 11.5px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    background: #E8FFF3;
+    width: 113px;
+    height: 40px;
+  }
+  .booking-info{
+    // border: 1px gray dashed;
+    width:100%;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='11' ry='11' stroke='%23CCCCCC' stroke-width='3' stroke-dasharray='6%2c%2014' stroke-dashoffset='49' stroke-linecap='round'/%3e%3c/svg%3e");
+    border-radius: 10px;
+    padding: 2rem;
+  }
+
+  .image-container{
+    width: 100%;
+    height: 45vh;
+     border-radius: 8px;
+      background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+  }
+  h6,h5{
+    font-weight: 700;
+    color: black;
+  }
+  // .location{
+  //   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect  fill='none' rx='11' ry='11' stroke='%23CCCCCC' stroke-width='3' stroke-dasharray='6%2c%2014' stroke-dashoffset='49' stroke-linecap='round'/%3e%3c/svg%3e");
+  //   width:100%;
+  // }
+}
+.horizontal-line {
+  flex: 1;
+  height: 5px;
+  background-color: #c8ddf1;
+ 
+}
+
+.booking{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    gap:40px;
+    svg{
+        width: 196px;
+        height: 196px;
+    }
+    h3{
+        margin-top:32px;
+        margin-bottom: 21px;
+        color: #302C2C;
+        font-family: Lato;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-align: center;
+    }
+    button{
+        color: #FFF;
+        font-family: Lato;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        width: 217px;
+        height: 60px;
+        flex-shrink: 0;
+        background-color: #0DB1FF;
+        border:1px solid #0DB1FF;
+        transition: all 0.5s ease-in-out;
+        &:hover{
+            cursor: pointer;
+            transform: translateY(4px);
+            background-color: #fff;
+            color: #0DB1FF;
+        }
+    }
+}
+
+/*******************************/
+@media screen and (min-width:1800px){
+    .booking{
+        gap: 60px;
+    }
+}
+
+@media screen and (max-width: 768px){
+  .modal-body{
+
+    .image-container{
+      width: 100%;
+      height: 16vh;
+       border-radius: 8px;
+        background-size: cover;
+         background-position: center;
+         background-repeat: no-repeat;
+    }
+
+  }
+}
+@media screen and (max-width: 1200px){
+  .modal-body{
+
+    .image-container{
+
+      height: 16vh;
+      margin-bottom: 2rem;
+
+    }
+
+  }
+}

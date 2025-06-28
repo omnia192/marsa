@@ -1,0 +1,43 @@
+<div class="container">
+  <ul class="nav flex-nowrap overflow-x-auto">
+    <li
+      class="nav-item"
+      [class.active]="'all' === activeSection"
+      (click)="setActiveSection('all')"
+    >
+      All
+    </li>
+    <li
+      *ngFor="let tab of activityTypes"
+      class="nav-item"
+      [class.active]="tab.section === activeSection"
+      (click)="setActiveSection(tab.id)"
+    >
+      {{ tab.name }}
+    </li>
+  </ul>
+</div>
+
+<div class="container">
+  <div>
+    <section *ngIf="activeSection === 'all' && tours">
+      <app-tours-table   [tours]="tours"></app-tours-table>
+    </section>
+  </div>
+
+  <div *ngFor="let t of activityTypes">
+    <section *ngIf="activeSection === t.id">
+      <app-tours-table [tours]="filteredTours"></app-tours-table>
+    </section>
+  </div>
+
+
+  <div class="pagination align-items-center">
+    <button (click)="prevPage()" class="btn btn-outline-primary   " [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ lastPage }}</span>
+    <button (click)="nextPage()" class="btn btn-outline-primary   " [disabled]="currentPage === lastPage">Next</button>
+  </div>
+
+
+
+</div>

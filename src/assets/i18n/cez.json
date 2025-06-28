@@ -1,0 +1,32 @@
+{
+    "dir": "ltr",
+    "header": {
+        "home": "Domov",
+        "tours-activities": "Zájezdy a aktivity",
+        "liveboard": "Živý přenos",
+        "hotels": "Hotely",
+        "boat": "Lodě",
+        "transport": "Přeprava",
+        "contact-us": "Kontaktujte nás",
+        "more": "Více",
+        "blog": "Blog",
+        "faq": "Často kladené otázky",
+        "about": "O nás",
+        "search": "Hledat",
+        "placeholder": "Kam se chystáte?",
+        "sign-in-or-register": "Přihlásit se nebo registrovat"
+    },
+    "validation" : {
+        "company" :"Název společnosti je povinný",
+        "position" : "Pozice je povinná",
+        "user_name":"Uživatelské jméno je povinné",
+        "user_mail" : "E-mail uživatele je povinný",
+        "phone" :"Telefonní číslo je povinné",
+        "password" : "Heslo je povinné",
+        "confirmPass":"Potvrzení hesla je povinné",
+        "passMinlength" :"Heslo musí mít nejméně 6 znaků",
+        "invalidEmail" :"Zadejte prosím platný e-mail",
+        "Unauthorized" :"Váš účet ještě nebyl aktivován, váš účet je ve fázi přezkumu."
+    }
+    
+}
