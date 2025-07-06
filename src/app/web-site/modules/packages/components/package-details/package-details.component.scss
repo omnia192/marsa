@@ -48,7 +48,7 @@
 }
 
 .p-datepicker {
-  z-index: 10000 !important;
+  z-index: 2000 !important;
 }
 
 body.p-overflow-hidden .sticky-nav {
@@ -116,6 +116,7 @@ width:100%  !important;
     max-width: 90vw !important;
     max-height: 90vh !important;
     overflow-y: auto !important;
+    z-index: 2000 !important;
   }
   mat-datepicker {
     transform-origin: top right !important;
@@ -357,4 +358,10 @@ h2.rate {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+.sticky-container {
+  position: sticky;
+  top: 70px;
+  // z-index: 10;
 }

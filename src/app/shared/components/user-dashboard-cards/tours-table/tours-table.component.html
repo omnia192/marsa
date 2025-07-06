@@ -2,12 +2,8 @@
   <header class="flex-wrap">
     <header class="flex-wrap">
       <div class="tabs">
-        <div
-          class="tab"
-          *ngFor="let year of years"
-          (click)="setFilter(year.value)"
-          [class.active]="activeTab === year.value"
-        >
+        <div class="tab" *ngFor="let year of years" (click)="setFilter(year.value)"
+          [class.active]="activeTab === year.value">
           {{ year.label }}
         </div>
       </div>
@@ -50,14 +46,11 @@
           </td>
           <td>
             <span *ngIf="tour?.status == 'paid'" class="completed">
-              {{ tour?.status }}</span
-            >
+              {{ tour?.status }}</span>
             <span *ngIf="tour?.status !== 'paid'" class="cancel"> {{ tour?.status }}</span>
           </td>
           <td>
-            <button  type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal2" (click)="openModal(tour)">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="openModal(tour)">
               View details
             </button>
           </td>
@@ -70,18 +63,10 @@
   <div *ngIf="filterdTours?.length == 0">
     <div class="booking">
       <div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="172"
-          height="172"
-          viewBox="0 0 172 172"
-          fill="none"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="172" height="172" viewBox="0 0 172 172" fill="none">
           <path
             d="M154.333 144.025L10.4361 0.128418L0.0644531 10.5001L29.9545 40.3901C25.8711 45.9434 23.6661 52.6401 23.6661 59.5001V149.333C23.6661 153.665 25.3869 157.82 28.45 160.883C31.5131 163.946 35.6676 165.667 39.9995 165.667H137.999C142.573 165.667 146.819 163.707 149.923 160.358L161.193 171.628L171.564 161.257L154.333 144.025ZM39.9995 59.5001C39.9995 56.9684 40.6528 54.4368 41.7961 52.2318L98.0645 108.5H39.9995V59.5001ZM137.999 149.333H39.9995V116.667H56.3328V133H64.4995V116.667H106.231L137.999 148.435V149.333ZM121.666 43.1668C125.998 43.1668 130.152 44.8876 133.216 47.9507C136.279 51.0138 137.999 55.1682 137.999 59.5001V106.867L154.333 123.2V59.5001C154.333 50.8363 150.891 42.5275 144.765 36.4013C138.639 30.2751 130.33 26.8334 121.666 26.8334V18.6668C121.666 14.3349 119.945 10.1804 116.882 7.11734C113.819 4.05425 109.665 2.33342 105.333 2.33342H72.6661C68.3343 2.33342 64.1798 4.05425 61.1167 7.11734C58.0536 10.1804 56.3328 14.3349 56.3328 18.6668V25.2001L74.2995 43.1668H121.666ZM72.6661 18.6668H105.333V26.8334H72.6661V18.6668Z"
-            fill="#B5B5C3"
-            fill-opacity="0.55"
-          />
+            fill="#B5B5C3" fill-opacity="0.55" />
         </svg>
       </div>
       <h3>No Bookings yet , let's changes that</h3>
@@ -92,25 +77,12 @@
   </div>
 
 </section>
-<div
-  class="modal fade py-3 step1"
-  id="exampleModal2"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div
-    class="modal-dialog modal-dialog-centered"
-    style="margin: auto; max-width: 90% !important;"
-  >
+<div class="modal fade py-3 step1" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="margin: auto; max-width: 90% !important;">
     <div class="modal-content">
       <div class="modal-header">
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container">
@@ -118,10 +90,8 @@
           <div class="booking-info mt-5">
             <div class="row">
               <div class="col-xl-4 col-12">
-                <div
-                  class="image-container"
-                  [style.backgroundImage]="'url(' + (selectedTour?.tripinfo?.cover || '') + ')'"
-                  >
+                <div class="image-container"
+                  [style.backgroundImage]="'url(' + (selectedTour?.tripinfo?.cover || '') + ')'">
                 </div>
               </div>
 
@@ -175,11 +145,25 @@
                     <p>${{ selectedTour?.tripinfo?.totlprice }}</p>
                   </div>
 
-                  <div class="col-xl col-12">
+                   <div class="col-xl col-12">
                     <h6>
                       Number of people
                     </h6>
-                    <p>{{ selectedTour?.tripinfo?.adult }}</p>
+                    <div class="row">
+                      <div class="col-6" *ngIf="selectedTour?.tripinfo?.adult!=null&&
+                       selectedTour?.tripinfo?.adult!=0">
+                        <p>adult: {{ selectedTour?.tripinfo?.adult }}</p>
+                      </div>
+                       <div class="col-6" *ngIf="selectedTour?.tripinfo?.chiled!=null &&
+                       selectedTour?.tripinfo?.chiled!=0">
+                        <p>Chiled: {{ selectedTour?.tripinfo?.chiled }}</p>
+                      </div>
+                      <div class="col-6" *ngIf="selectedTour?.tripinfo?.infant != null
+                       && selectedTour?.tripinfo?.infant !== 0">
+                        <p>Infant: {{ selectedTour?.tripinfo?.infant }}</p>
+                      </div>
+                    </div>
+
                   </div>
                   <div class="col-xl col-12">
                     <h6>

@@ -342,15 +342,6 @@
                         formControlName="locationValue"
                         readonly
                       />
-                      <div
-                        *ngIf="
-                          !locationValue &&
-                          customerForm.get('locationValue')?.touched
-                        "
-                        class="alert alert-danger my-2"
-                      >
-                        Pick up Location is required
-                      </div>
                     </div>
                   </div>
                   <div class="col-sm-6 mb-4">

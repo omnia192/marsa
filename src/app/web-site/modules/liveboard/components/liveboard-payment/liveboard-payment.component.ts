@@ -200,12 +200,7 @@ export class LiveboardPaymentComponent implements OnInit {
       this.customerForm.get('pickup_point')?.updateValueAndValidity();
     }
 
-    // Adjusted conditional to handle TypeScript's type checking
-    if (
-      this.customerForm.valid &&
-      this.locationValue &&
-      this.locationValue != ''
-    ) {
+    if (this.customerForm.valid) {
       stepper.next();
     } else {
       this.markFormGroupTouched(this.customerForm);

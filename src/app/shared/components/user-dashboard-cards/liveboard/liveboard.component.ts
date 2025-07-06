@@ -43,7 +43,6 @@ export class LiveboardComponent implements OnInit {
       console.log('Liveaboards loaded:', this.liveaboards);
       console.log('Liveaboards length:', this.liveaboards?.length);
       
-      // تطبيق الفلتر بعد تحميل البيانات
       this.applyFilter();
       this.cdr.markForCheck();
     }, (error) => {

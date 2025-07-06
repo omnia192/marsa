@@ -678,30 +678,30 @@
                     Showing Most Recent verified guest comments
                   </h5>
                   <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
-                    *ngFor="let review of activityData?.Reviwe?.slice(-1)">
+                    *ngIf="activityData?.Reviwe && activityData?.Reviwe.length > 0">
                     <div class="mr-md-5">
                       <a class="d-block" href="#">
                         <img class="comment-img mb-3 mb-md-0 rounded-circle" [src]="
-                            review?.avatar ||
+                            activityData?.Reviwe[activityData?.Reviwe.length - 1]?.avatar ||
                             '../../../../../../assets/custom/user-dasboard/avatar-place.png'
-                          " [alt]="review?.name" />
+                          " [alt]="activityData?.Reviwe[activityData?.Reviwe.length - 1]?.name" />
                       </a>
                     </div>
                     <div class="media-body text-center text-md-left">
                       <div class="mb-4">
                         <h6 class="fw-bold text-gray-3">
-                          <a>{{ review?.name }}</a>
+                          <a>{{ activityData?.Reviwe[activityData?.Reviwe.length - 1]?.name }}</a>
                         </h6>
                         <div class="font-weight-normal font-size-14 text-gray-9 mb-2">
-                          {{ review?.date | date : "MMMM d y" }} at
-                          {{ review?.date | date : "hh:mm a" }}
+                          {{ activityData?.Reviwe[activityData?.Reviwe.length - 1]?.date | date : "MMMM d y" }} at
+                          {{ activityData?.Reviwe[activityData?.Reviwe.length - 1]?.date | date : "hh:mm a" }}
                         </div>
                         <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-solid fa-star" [ngClass]="{
-                            'fa-star-filled': star <= review.rate,
-                            'yellow-star': star <= review.rate
+                            'fa-star-filled': star <= activityData?.Reviwe[activityData?.Reviwe.length - 1]?.rate,
+                            'yellow-star': star <= activityData?.Reviwe[activityData?.Reviwe.length - 1]?.rate
                           }"></i>
                         <p class="text-lh-1dot6 mb-0 pr-lg-5">
-                          {{ review?.comment }}
+                          {{ activityData?.Reviwe[activityData?.Reviwe.length - 1]?.comment }}
                         </p>
                       </div>
                     </div>
@@ -718,7 +718,7 @@
                 </h5>
 
                 <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
-                  *ngFor="let review of activityData?.Reviwe.reverse()">
+                  *ngFor="let review of activityData?.Reviwe?.slice().reverse()">
                   <div class="mr-md-5">
                     <a class="d-block" href="#">
                       <img class="comment-img img-fluid mb-3 mb-md-0 rounded-circle" [src]="review?.avatar"
@@ -800,7 +800,7 @@
       </div>
       <!-- Filter -->
       <div *ngIf="!isMobile" class="col-lg-12 col-xl-3 p-0 order-1 order-md-2 top-margin">
-        <div class="mb-4 sticky-container">
+        <div class="mb-4 sticky-container " style="position:sticky; top:70px; ">
           <ul class="list-group list-group-borderless list-group-horizontal custom-social-share">
             <ng-container *ngIf="activityData?.wishlist; else elseTemplate2">
               <li type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save for later"
@@ -853,7 +853,7 @@
             <div class="border border-color-7 rounded mb-5">
               <div class="p-1 px-4">
                 <div class="priceTitle d-flex justify-content-between">
-                  <span class="d-block text-gray-1 font-weight-normal text-left">Price</span>
+                  <span class="d-block text-gray-1 font-weight-normal text-left mt-2">Price</span>
                   <p style="font-weight: 700">
                     From
                     <span class="font-size-18 fw-bold text-dark" [style.text-decoration]="
@@ -915,7 +915,8 @@
                     <span class="d-block">Date</span>
 
                     <p-calendar [formControl]="selectedDateControl" [showIcon]="true" class="custom-calendar"
-                      [readonlyInput]="true" (onSelect)="addEvent($event)" [touchUI]="true" [appendTo]="'body'"
+                      [readonlyInput]="true" (onSelect)="addEvent($event)" [touchUI]="true"
+                       placeholder="DD/MM/YYYY" [appendTo]="'body'"
                       [minDate]="minAllowedDate" [disabledDays]="disabledDays" dateFormat="dd MM, yy"></p-calendar>
 
 
@@ -1368,7 +1369,7 @@
     </div>
 
     <div class="my-tours-work">
-      <h5 class="text-center mb-5">Based on what you’re looking for ....</h5>
+      <h5 class="text-center mb-5">Based on what you're looking for ....</h5>
       <owl-carousel-o [options]="customOptions" class="my-tours">
         <ng-container *ngFor="let item of relatedtrips">
           <ng-template carouselSlide>

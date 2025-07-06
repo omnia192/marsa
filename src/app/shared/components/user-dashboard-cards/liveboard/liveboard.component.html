@@ -13,7 +13,7 @@
       </div>
     </header> -->
 
-    <div *ngIf="filterdLiveAboard?.length > 0" class="table-responsive">
+    <div *ngIf="liveaboards?.length > 0" class="table-responsive">
       <table class="table">
         <thead>
           <tr>
@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let live of filterdLiveAboard">
+          <tr *ngFor="let live of liveaboards">
             <td>
               <span>{{ live?.name }}</span>
             </td>
@@ -71,7 +71,7 @@
         <button (click)="nextPage()" class="btn btn-outline-primary   " [disabled]="currentPage === lastPage">Next</button>
       </div>
     </div>
-    <div *ngIf="filterdLiveAboard?.length == 0">
+    <div *ngIf="liveaboards?.length == 0">
       <div class="booking">
         <div>
           <svg

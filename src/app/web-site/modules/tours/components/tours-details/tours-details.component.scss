@@ -138,7 +138,11 @@ width:100%  !important;
   width: 100%; /* Ensure the image itself fills the width */
   height: auto; /* Maintain aspect ratio */
 }
+.sticky-container {
+  position: sticky;
+  top: 70px;
 
+}
 
 h4 {
   font-size: 30px;

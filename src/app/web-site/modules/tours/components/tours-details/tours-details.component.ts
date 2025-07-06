@@ -1,7 +1,6 @@
 import {
   ChangeDetectorRef,
-  OnInit,
-  OnDestroy,
+
   PLATFORM_ID,
   Inject,
 } from '@angular/core';
@@ -21,10 +20,9 @@ import { HttpService } from '../../../../../core/services/http/http.service';
 import { environment } from '../../../../../../environments/environment.prod';
 import { ImageSliderModalComponent } from '../../../../../shared/sliders/image-slider-modal/image-slider-modal.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { BoatSliderModalComponent } from '../../../../../shared/sliders/boat-slider-modal/boat-slider-modal.component';
 import {
   MatDatepickerInputEvent,
-  MatDatepickerModule,
+ 
 } from '@angular/material/datepicker';
 import { TranslateService } from '@ngx-translate/core';
 import { FormControl, Validators } from '@angular/forms';
@@ -39,7 +37,6 @@ import {
   transition,
 } from '@angular/animations';
 import { HeaderService } from '../../../../../shared/services/header.service';
-import { CheckAvailpiltyComponent } from '../check-availpilty/check-availpilty.component';
 import { SEOService } from '../../../../../shared/services/seo.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import {
@@ -47,8 +44,7 @@ import {
   CustomDateAdapter,
 } from 'src/app/shared/components/Date/custom-date-adapter';
 import { Galleria } from 'primeng/galleria';
-import { GalleriaModule } from 'primeng/galleria';
-import { ButtonModule } from 'primeng/button';
+
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Meta, Title } from '@angular/platform-browser';
 // Define the participant types and their corresponding properties

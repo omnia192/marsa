@@ -404,7 +404,7 @@ export class ConfirmPaymentLiveabourdComponent implements OnInit, OnDestroy {
     }
 
     try {
-      const mapElement = document.getElementById('googleMap');
+    const mapElement = document.getElementById('googleMap');
       if (!mapElement) {
         console.log('Map element not found');
         return;
@@ -417,53 +417,53 @@ export class ConfirmPaymentLiveabourdComponent implements OnInit, OnDestroy {
         this.marker = null;
       }
 
-      this.map = this.L.map('googleMap', {
-        center: [this.latitudeValue, this.longitudeValue],
-        zoom: 12,
-        zoomControl: true
+    this.map = this.L.map('googleMap', {
+      center: [this.latitudeValue, this.longitudeValue],
+      zoom: 12,
+      zoomControl: true
+    });
+
+    this.L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(this.map);
+
+    const customIcon = this.L.icon({
+      iconUrl: 'assets/images/locatio.svg',
+      iconSize: [37, 37],
+      iconAnchor: [18, 37]
+    });
+
+    this.marker = this.L.marker([this.latitudeValue, this.longitudeValue], {
+      icon: customIcon,
+      draggable: true
+    }).addTo(this.map);
+
+    this.map.on('click', (e: any) => {
+      this.ngZone.run(() => {
+        this.latitudeValue = e.latlng.lat;
+        this.longitudeValue = e.latlng.lng;
+        this.marker.setLatLng([this.latitudeValue, this.longitudeValue]);
+        this.reverseGeocode(this.latitudeValue, this.longitudeValue);
       });
+    });
 
-      this.L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19
-      }).addTo(this.map);
-
-      const customIcon = this.L.icon({
-        iconUrl: 'assets/images/locatio.svg',
-        iconSize: [37, 37],
-        iconAnchor: [18, 37]
+    this.marker.on('dragend', (e: any) => {
+      this.ngZone.run(() => {
+        const position = this.marker.getLatLng();
+        this.latitudeValue = position.lat;
+        this.longitudeValue = position.lng;
+        this.reverseGeocode(this.latitudeValue, this.longitudeValue);
       });
-
-      this.marker = this.L.marker([this.latitudeValue, this.longitudeValue], {
-        icon: customIcon,
-        draggable: true
-      }).addTo(this.map);
-
-      this.map.on('click', (e: any) => {
-        this.ngZone.run(() => {
-          this.latitudeValue = e.latlng.lat;
-          this.longitudeValue = e.latlng.lng;
-          this.marker.setLatLng([this.latitudeValue, this.longitudeValue]);
-          this.reverseGeocode(this.latitudeValue, this.longitudeValue);
-        });
-      });
-
-      this.marker.on('dragend', (e: any) => {
-        this.ngZone.run(() => {
-          const position = this.marker.getLatLng();
-          this.latitudeValue = position.lat;
-          this.longitudeValue = position.lng;
-          this.reverseGeocode(this.latitudeValue, this.longitudeValue);
-        });
-      });
+    });
 
       // إعادة تحجيم الخريطة بعد التهيئة
-      setTimeout(() => {
+    setTimeout(() => {
         if (this.map) {
-          this.map.invalidateSize();
+      this.map.invalidateSize();
         }
-      }, 500);
+    }, 500);
 
       console.log('Map initialized successfully');
     } catch (error) {

@@ -216,13 +216,13 @@
                       <div class="">
                         <div class="d-inline-flex align-items-center review" style="font-size: 0.75rem; color: yellow;">
                           <span class="stars">
-                            <i *ngFor="let star of [1,2,3]" class="fa-solid fa-star"
+                            <i *ngFor="let star of [1,2,3,4,5]" class="fa-solid fa-star"
                               style="color: #bfbfbf; font-size: 0.875rem;" [ngClass]="{
                                 'fa-star-filled': star <= getRoundedRate(item?.rate),
                                 'yellow-star': star <= getRoundedRate(item?.rate)
                               }"></i>
                           </span>
-                          <span class="mt-1" style="font-size: 17px;">{{ item?.Review }} Reviews</span>
+                          <span class="mt-1" style="font-size:14px;">{{ item?.Review }} Reviews</span>
                         </div>
                         <div class="d-flex align-items-center gap-2">
                           <img src="../../../../../assets/custom/Activity/time.png" style="width: 12px;" alt="time" />
@@ -336,7 +336,7 @@
           </div>
 
           <div class="dropdown-container">
-            <label for="time" class="form-label">Time</label>
+            <label for="time" class="form-label">Starting time</label>
             <select id="time" class="form-select" (change)="filterTime($event)">
               <option [value]="'all'">All Times</option>
               <option *ngFor="let type of placeDetails?.time" [value]="type?.id">
@@ -348,7 +348,7 @@
       </ng-template>
 
 
-      <h5>{{ AllActivities?.length }} Activities found</h5>
+      <h5 class="mt-4">{{ AllActivities?.length }} Activities found</h5>
       <div class="row g-4 p-4">
         <div class="col-12 col-xl-4 col-lg-6 col-md-6" *ngFor="let item of AllActivities.slice(0, 6)">
           <app-activity-card [item]="item"></app-activity-card>

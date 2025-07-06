@@ -780,17 +780,18 @@
                   >
                     Showing Most Recent verified guest comments
                   </h5>
+
                   <div
                     class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
-                    *ngFor="let review of liveabourdData?.Reviwe?.slice(-1)"
+                    *ngIf="liveabourdData?.Reviwe && liveabourdData?.Reviwe.length > 0"
                   >
                     <div class="mr-md-5">
                       <a class="d-block" href="#">
                         <img
                           class="comment-img mb-3 mb-md-0 rounded-circle"
-                          [src]="review?.avatar"
+                          [src]="liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.avatar"
                           [alt]="
-                            review?.name ||
+                            liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.name ||
                             '../../../../../../assets/custom/user-dasboard/avatar-place.png'
                           "
                           (error)="handleImageError($event)"
@@ -800,26 +801,25 @@
                     <div class="media-body text-center text-md-left">
                       <div class="mb-4">
                         <h6 class="fw-bold text-gray-3">
-                          <a>{{ review?.name }}</a>
+                          <a>{{ liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.name }}</a>
                         </h6>
                         <div
                           class="font-weight-normal font-size-14 text-gray-9 mb-2"
                         >
-                          {{ review?.date | date : "MMMM d y" }} at
-                          {{ review?.date | date : "hh:mm a" }}
+                          {{ liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.date | date : "MMMM d y" }} at
+                          {{ liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.date | date : "hh:mm a" }}
                         </div>
                         <i
                           *ngFor="let star of [1, 2, 3, 4, 5]"
                           class="fa-solid fa-star"
                           [ngClass]="{
-                            'fa-star-filled': star <= review.rate,
-                            'yellow-star': star <= review.rate
+                            'fa-star-filled': star <= liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.rate,
+                            'yellow-star': star <= liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.rate
                           }"
                         ></i>
                         <p class="text-lh-1dot6 mb-0 pr-lg-5">
-                          {{ review?.comment }}
+                          {{ liveabourdData?.Reviwe[liveabourdData?.Reviwe.length - 1]?.comment }}
                         </p>
-
                       </div>
                     </div>
                   </div>
@@ -837,7 +837,7 @@
                 </h5>
                 <div
                   class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
-                  *ngFor="let review of liveabourdData?.Reviwe.reverse()"
+                  *ngFor="let review of liveabourdData?.Reviwe?.slice().reverse()"
                 >
                   <div class="mr-md-5">
                     <a class="d-block" href="#">

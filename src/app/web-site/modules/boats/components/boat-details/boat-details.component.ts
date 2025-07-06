@@ -782,8 +782,18 @@ getBed(item: any): any {
 
   selectedDestination: any = null;
 
+  
+
   onDestinationChange(event: any) {
-    this.selectedDestination = event.value;
-    // إذا كنت تحتاج منطق إضافي أضفه هنا
+    // event.value هو العنصر المختار في p-dropdown
+    if (event && event.value) {
+      // إذا كان العنصر المختار يحتوي على price
+      this.price = event.value.price || null;
+      this.discount = event.value.discount || 0;
+      // أضيفي أي متغيرات أخرى تحتاجينها
+    } else {
+      this.price = null;
+      this.discount = 0;
+    }
   }
 }

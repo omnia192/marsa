@@ -37,6 +37,8 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
   mapInitialized: boolean = false;
   private destroy$ = new Subject<void>();
   private searchSubject$ = new Subject<string>();
+  private googleMapsApiLoaded = false;
+  private googleMapsApiKey = 'AIzaSyD5vcOBqpoSG7bh0bkvPjnXhZ9Z6MIZyak'; // مفتاح المستخدم
 
   constructor(
     private ngZone: NgZone,
@@ -61,8 +63,7 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
     this.spinner.show();
 
     if (this.isBrowser) {
-      this.loadLeafletCSS();
-      this.loadLeaflet();
+      this.loadGoogleMapsApi();
     }
 
     // Setup search with debounce
@@ -100,7 +101,7 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
         this.searchResults = results;
         this.showResults = results.length > 0;
         this.isSearching = false;
-        this.cdr.detectChanges();
+      this.cdr.detectChanges();
       });
     });
   }
@@ -164,150 +165,114 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
   // Clear search
   clearSearch(): void {
     this.ngZone.run(() => {
-      this.searchValue = '';
-      this.searchResults = [];
-      this.showResults = false;
+    this.searchValue = '';
+    this.searchResults = [];
+    this.showResults = false;
       this.isSearching = false;
       this.cdr.detectChanges();
     });
   }
 
-  loadLeafletCSS(): void {
-    if (!document.getElementById('leaflet-css')) {
-      const link = document.createElement('link');
-      link.id = 'leaflet-css';
-      link.rel = 'stylesheet';
-      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-      link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-      link.crossOrigin = '';
-      document.head.appendChild(link);
-    }
-  }
-
-  loadLeaflet(): void {
-    if (!this.isBrowser) {
-      this.spinner.hide();
-      return;
-    }
-
-    if (window.L && typeof window.L.map === 'function') {
-      this.L = window.L;
+  loadGoogleMapsApi(): void {
+    if ((window as any).google && (window as any).google.maps) {
+      this.googleMapsApiLoaded = true;
       setTimeout(() => this.initializeMap(), 500);
       return;
     }
-
+    const scriptId = 'google-maps-api';
+    if (document.getElementById(scriptId)) {
+      (document.getElementById(scriptId) as HTMLScriptElement).addEventListener('load', () => {
+        this.googleMapsApiLoaded = true;
+        setTimeout(() => this.initializeMap(), 500);
+      });
+      return;
+    }
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
-    script.crossOrigin = '';
+    script.id = scriptId;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.googleMapsApiKey}&libraries=places`;
+    script.async = true;
+    script.defer = true;
     script.onload = () => {
-      this.L = window.L;
+      this.googleMapsApiLoaded = true;
       setTimeout(() => this.initializeMap(), 500);
     };
     script.onerror = (error) => {
-      console.error('Failed to load Leaflet script:', error);
+      console.error('Failed to load Google Maps script:', error);
       this.spinner.hide();
     };
     document.head.appendChild(script);
   }
 
   initializeMap(): void {
-    if (!this.isBrowser || !this.L) {
+    if (!this.isBrowser || !(window as any).google || !(window as any).google.maps) {
       this.spinner.hide();
       return;
     }
-
     if (this.mapInitialized) {
       this.spinner.hide();
       return;
     }
-
     try {
       const mapElement = document.getElementById('googleMap');
-
       if (!mapElement) {
         this.spinner.hide();
         return;
       }
-
-      this.map = this.L.map('googleMap', {
-        center: [this.latitudeValue, this.longitudeValue],
+      this.map = new (window as any).google.maps.Map(mapElement, {
+        center: { lat: this.latitudeValue, lng: this.longitudeValue },
         zoom: this.isEditMode ? 12 : 6,
-        zoomControl: true
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
       });
-
-      this.L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19
-      }).addTo(this.map);
-
-      const customIcon = this.L.icon({
-        iconUrl: 'assets/images/locatio.svg',
-        iconSize: [37, 37],
-        iconAnchor: [18, 37]
+      this.marker = new (window as any).google.maps.Marker({
+        position: { lat: this.latitudeValue, lng: this.longitudeValue },
+        map: this.map,
+        draggable: true,
+        icon: {
+          url: 'assets/images/locatio.svg',
+          scaledSize: new (window as any).google.maps.Size(37, 37),
+          anchor: new (window as any).google.maps.Point(18, 37)
+        }
       });
-
-      this.marker = this.L.marker([this.latitudeValue, this.longitudeValue], {
-        icon: customIcon,
-        draggable: true
-      }).addTo(this.map);
-
-      this.map.on('click', (e: any) => {
+      this.map.addListener('click', (e: any) => {
         this.ngZone.run(() => {
-          this.latitudeValue = e.latlng.lat;
-          this.longitudeValue = e.latlng.lng;
-          this.marker.setLatLng([this.latitudeValue, this.longitudeValue]);
+          this.latitudeValue = e.latLng.lat();
+          this.longitudeValue = e.latLng.lng();
+          this.marker.setPosition({ lat: this.latitudeValue, lng: this.longitudeValue });
           this.reverseGeocode(this.latitudeValue, this.longitudeValue);
         });
       });
-
-      this.marker.on('dragend', (e: any) => {
+      this.marker.addListener('dragend', (e: any) => {
         this.ngZone.run(() => {
-          const position = this.marker.getLatLng();
-          this.latitudeValue = position.lat;
-          this.longitudeValue = position.lng;
+          const position = this.marker.getPosition();
+          this.latitudeValue = position.lat();
+          this.longitudeValue = position.lng();
           this.reverseGeocode(this.latitudeValue, this.longitudeValue);
         });
       });
-
       setTimeout(() => {
-        this.map.invalidateSize();
+        (window as any).google.maps.event.trigger(this.map, 'resize');
         this.spinner.hide();
       }, 500);
-
       this.mapInitialized = true;
-
       if (this.isEditMode) {
         this.reverseGeocode(this.latitudeValue, this.longitudeValue);
       }
     } catch (error) {
-      console.error('Error initializing map:', error);
+      console.error('Error initializing Google Map:', error);
       this.spinner.hide();
     }
   }
 
   // Simplified reverse geocode
   reverseGeocode(lat: number, lon: number): void {
-    if (!this.isBrowser) return;
-
-    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
-    const headers = new HttpHeaders({
-      'Accept-Language': 'en'
-    });
-
-    this.http.get(url, { headers }).pipe(
-      takeUntil(this.destroy$),
-      catchError(error => {
-        console.error('Reverse geocoding error:', error);
-        return of(null);
-      })
-    ).subscribe((result: any) => {
-      if (result && result.display_name) {
+    if (!this.isBrowser || !(window as any).google || !(window as any).google.maps) return;
+    const geocoder = new (window as any).google.maps.Geocoder();
+    geocoder.geocode({ location: { lat, lng: lon } }, (results: any, status: any) => {
+      if (status === 'OK' && results && results[0]) {
         this.ngZone.run(() => {
-          // Just update the model value
-          this.searchValue = result.display_name;
-          console.log('Updated search value:', this.searchValue);
+          this.searchValue = results[0].formatted_address;
         });
       }
     });

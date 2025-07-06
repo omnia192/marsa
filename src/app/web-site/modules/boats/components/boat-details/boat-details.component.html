@@ -423,7 +423,7 @@
                     Showing Most Recent verified guest comments
                   </h5>
                   <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
-                    *ngFor="let review of boatData?.Reviwe?.slice(-1)">
+                    *ngFor="let review of boatData?.Reviwe?.slice(0, 1)">
                     <div class="mr-md-5">
                       <a class="d-block" href="#">
                         <img class="comment-img mb-3 mb-md-0 rounded-circle" [src]="
@@ -543,7 +543,7 @@
       <!-- Filter -->
 
       <div *ngIf="!isMobile" class="col-lg-4 col-xl-3 p-0 order-1 order-md-2" style="margin-top: 9.5rem">
-        <div class="mb-4 sticky-container">
+        <div class="mb-4 sticky-container p-5" style="position:sticky; top:70px; ">
           <ul class="list-group list-group-borderless list-group-horizontal custom-social-share pb-3">
             <ng-container *ngIf="boatData?.wishlist; else elseTemplate2">
               <li type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Save for later"
@@ -587,8 +587,10 @@
               <!-- Input -->
 
               <div class="mb-4">
-                <div class="priceTitle d-flex justify-content-between" *ngIf="price">
-                  <span class="d-block text-gray-1 font-weight-normal text-left">Price</span>
+                <div class="priceTitle justify-content-between" *ngIf="price !== null && price !== undefined">
+                  <div>
+                    <span class="d-block text-gray-1 font-weight-normal text-left">Price</span>
+                  </div>
                   <p>
                     <span>From </span>
                     <span class="font-size-15 fw-bold text-dark" [style.text-decoration]="
@@ -621,7 +623,7 @@
                   <span class="d-block">Destination</span>
 
                   <ng-container *ngIf="boatData?.Distnation">
-                    <p-dropdown 
+                    <!-- <p-dropdown 
                       [options]="boatData?.Distnation" 
                       [(ngModel)]="selectedDestination"
                       optionLabel="distnation"
@@ -630,6 +632,10 @@
                       (onChange)="onDestinationChange($event)"
                       styleClass="w-100 mt-2 "
                       [showClear]="true">
+                    </p-dropdown> -->
+                    <p-dropdown [options]="boatData?.Distnation" [(ngModel)]="selectedDestination"
+                      optionLabel="distnation" placeholder="Where are you going" [formControl]="selectedDateControl"
+                      (onChange)="onDestinationChange($event)" styleClass="w-100 mt-2" [showClear]="true">
                     </p-dropdown>
                   </ng-container>
                 </div>
@@ -694,7 +700,7 @@
 
             <div *ngIf="isMobile" class="container">
               <div class="col-lg-4 col-xl-3 p-0 order-1 order-md-2">
-                <div class="mb-4 sticky-container">
+                <div class="mb-4 sticky-container p-5" style="position:sticky; top:70px; ">
 
 
                   <div class="border border-color-7 rounded mb-5 p-5" #selectCabinButton>
@@ -702,7 +708,8 @@
                       <!-- Input -->
 
                       <div class="mb-4">
-                        <div class="priceTitle d-flex justify-content-between" *ngIf="price">
+                        <div class="priceTitle d-flex justify-content-between"
+                          *ngIf="price !== null && price !== undefined">
                           <span class="d-block text-gray-1 font-weight-normal text-left">Price</span>
                           <p>
                             <span>From </span>

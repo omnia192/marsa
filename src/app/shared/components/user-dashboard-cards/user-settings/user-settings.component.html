@@ -59,7 +59,7 @@
         <label>Phone Number</label>
       </div>
       <div class="col-lg-8">
-        <ngx-intl-tel-input
+        <!-- <ngx-intl-tel-input
         [enableAutoCountrySelect]="true"
         [enablePlaceholder]="true"
         [searchCountryFlag]="true"
@@ -71,6 +71,20 @@
         [customPlaceholder]="'Enter phone number'"
         [preferredCountries]="['de']"
         [(ngModel)]="phone"
+        (countryChange)="onCountryChange($event)">
+      </ngx-intl-tel-input> -->
+       <ngx-intl-tel-input
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [separateDialCode]="true"
+        [selectFirstCountry]="true"
+        [maxLength]="20"
+        name="phoneNumber"
+        [phoneValidation]="false"
+        [customPlaceholder]="'Enter phone number'"
+        [preferredCountries]="['de']"
+        [(ngModel)]="phoneNumber"
         (countryChange)="onCountryChange($event)">
       </ngx-intl-tel-input>
 

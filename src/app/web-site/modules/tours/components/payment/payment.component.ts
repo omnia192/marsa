@@ -102,7 +102,14 @@ export class PaymentComponent {
       const addetionalCost = this.avilableOptions?.AddetionalCost;
 
       this.Total = this.avilableOptions?.TotlaPrice;
-      this.booking_date = params['booking_date'];
+      if (params['booking_date']) {
+        const parts = params['booking_date'].split('/');
+        if (parts.length === 3) {
+          this.booking_date = new Date(+parts[2], +parts[1] - 1, +parts[0]);
+        } else {
+          this.booking_date = params['booking_date'];
+        }
+      }
       this.class = params['class'];
       this.avilable_option_id = params['avilable_option_id'];
       this.time = params['booking_time'];
@@ -392,7 +399,6 @@ export class PaymentComponent {
     if (!this.showServices) {
       this.locationValue = 'ddd';
     }
-
     // Update pickup_point validator based on showServices
     if (this.showServices) {
       this.customerForm
@@ -402,13 +408,7 @@ export class PaymentComponent {
       this.customerForm.get('pickup_point')?.clearValidators();
       this.customerForm.get('pickup_point')?.updateValueAndValidity();
     }
-
-    // Adjusted conditional to handle TypeScript's type checking
-    if (
-      this.customerForm.valid &&
-      this.locationValue &&
-      this.locationValue != ''
-    ) {
+    if (this.customerForm.valid) {
       stepper.next();
     } else {
       this.markFormGroupTouched(this.customerForm);

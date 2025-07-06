@@ -70,9 +70,10 @@ export class UserSettingsComponent implements OnInit {
       this.dob = this.userDetails?.overviwe?.dateofbirth || '';
       this.gender = this.userDetails?.overviwe?.gender;
       this.phoneNumber =
-        '+' +
-        (this.userDetails?.overviwe?.countrycode || '') +
-        (this.phone ? this.phone.replace(/\s/g, '') : ''); if (this.gender === 1) {
+      '+' +
+      (this.userDetails?.overviwe?.countrycode || '') +
+      (this.phone ? this.phone.replace(/\s/g, '') : '');
+       if (this.gender === 1) {
           this.selectedItem = this.items[0];
         } else if (this.gender === 0) {
           this.selectedItem = this.items[1];
@@ -90,6 +91,16 @@ export class UserSettingsComponent implements OnInit {
     console.log('الدولة المختارة:', this.selectedCountryName);
   }
 }
+// onCountryChange(event: any) {
+//     if (event) {
+//       const dialCode = event.dialCode;
+//       const currentNumber = this.phone ? this.phone.replace(/\s/g, '') : '';
+
+//       setTimeout(() => {
+//         this.phoneNumber = `+${dialCode}${currentNumber}`;
+//       });
+//     }
+//   }
 
 
 

@@ -69,7 +69,7 @@
               fill="#B5B5C3" fill-opacity="0.55" />
           </svg>
         </div>
-        <h3>No Bookings yet , let’s changes that</h3>
+        <h3>No Bookings yet , let's changes that</h3>
         <div>
           <button routerLink="/">Back to Home</button>
         </div>
@@ -132,11 +132,25 @@
                     <p>{{ selectedpackage?.tripinfo?.totlprice }}</p>
                   </div>
                  
-                   <div class="col-xl col-12">
+                  <div class="col-xl col-12">
                     <h6>
                       Number of people
                     </h6>
-                    <p>{{ selectedpackage?.tripinfo?.adult }}</p>
+                    <div class="row">
+                      <div class="col-6" *ngIf="selectedpackage?.tripinfo?.adult!=null&&
+                       selectedpackage?.tripinfo?.adult!=0">
+                        <p>adult: {{ selectedpackage?.tripinfo?.adult }}</p>
+                      </div>
+                       <div class="col-6" *ngIf="selectedpackage?.tripinfo?.chiled!=null &&
+                       selectedpackage?.tripinfo?.chiled!=0">
+                        <p>Chiled: {{ selectedpackage?.tripinfo?.chiled }}</p>
+                      </div>
+                      <div class="col-6" *ngIf="selectedpackage?.tripinfo?.infant != null
+                       && selectedpackage?.tripinfo?.infant !== 0">
+                        <p>Infant: {{ selectedpackage?.tripinfo?.infant }}</p>
+                      </div>
+                    </div>
+
                   </div>
                   <div class="col-xl col-sm-12">
                     <h6>

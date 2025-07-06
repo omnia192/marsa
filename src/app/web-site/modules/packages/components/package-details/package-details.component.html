@@ -291,7 +291,7 @@
                 Showing Most Recent verified guest comments
               </h5>
               <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
-                *ngFor="let review of rows?.Reviwe?.slice(-1)">
+                *ngFor="let review of rows?.Reviwe?.slice(0,1)">
                 <div class="mr-md-5">
                   <a class="d-block" href="#">
                     <img class="comment-img mb-3 mb-md-0 rounded-circle" [src]="
@@ -418,7 +418,7 @@
     </div>
   </div>
   <div *ngIf="!isMobile" class="col-md-3 col-sm-12 order-1 order-md-2">
-    <div class="mb-4 sticky-container p-5">
+    <div class="mb-4 sticky-container p-5" style="position:sticky; top:70px;">
       <div class="border border-color-7 rounded mb-5">
         <div class="p-4" #checkAvailabilityButton>
           <div class="priceTitle d-flex justify-content-between">
