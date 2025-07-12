@@ -34,8 +34,8 @@ export class UpcomingBookingComponent implements OnDestroy {
   isSearching: boolean = false;
   map: any = null;
   marker: any = null;
-  private L: any;
-  private isBrowser: boolean;
+  private googleMapsApiLoaded = false;
+  private googleMapsApiKey = 'AIzaSyD5vcOBqpoSG7bh0bkvPjnXhZ9Z6MIZyak';
   private destroy$ = new Subject<void>();
   private searchSubject$ = new Subject<string>();
 
@@ -99,7 +99,6 @@ export class UpcomingBookingComponent implements OnDestroy {
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   setActiveSection(section: string) {
@@ -122,6 +121,7 @@ export class UpcomingBookingComponent implements OnDestroy {
     this.titleService.setTitle('Upcoming Booking');
     this.initForm();
     this.setupSearch();
+    this.loadGoogleMapsApi();
 
     this.httpService.get(environment.marsa, 'profile').subscribe((res: any) => {
       this.tabs = res?.triptypes;
@@ -154,7 +154,7 @@ export class UpcomingBookingComponent implements OnDestroy {
       phone: ['', [Validators.required]],
       note: [''],
       pickup_point: ['', this.showServices ? [Validators.required] : []],
-      locationValue: [''],
+      locationValue: ['', Validators.required],
     });
   }
 
@@ -335,156 +335,112 @@ export class UpcomingBookingComponent implements OnDestroy {
 
   // map
   openMapModal(): void {
-    if (this.isBrowser) {
-      const mapModal = document.getElementById('mapModal');
-      if (mapModal) {
-        // تحقق من أن المودال ليس مفتوحاً بالفعل
-        const modalInstance = (window as any).bootstrap.Modal.getInstance(mapModal);
-        if (modalInstance && modalInstance._isShown) {
-          return; // المودال مفتوح بالفعل
-        }
-
-        const modal = new (window as any).bootstrap.Modal(mapModal);
-        modal.show();
-
-        // تهيئة الخريطة عند فتح المودال
-        mapModal.addEventListener('shown.bs.modal', () => {
-          setTimeout(() => {
-            this.loadLeafletCSS();
-            this.loadLeaflet();
-          }, 100);
-        }, { once: true });
-
-        // إعادة تهيئة الخريطة عند إغلاق المودال
-        mapModal.addEventListener('hidden.bs.modal', () => {
-          if (this.map) {
-            this.map.remove();
-            this.map = null;
-            this.marker = null;
-          }
-        });
+    const mapModal = document.getElementById('mapModal');
+    if (mapModal) {
+      // تحقق من أن المودال ليس مفتوحاً بالفعل
+      const modalInstance = (window as any).bootstrap.Modal.getInstance(mapModal);
+      if (modalInstance && modalInstance._isShown) {
+        return; // المودال مفتوح بالفعل
       }
+
+      const modal = new (window as any).bootstrap.Modal(mapModal);
+      modal.show();
+
+      // تهيئة الخريطة عند فتح المودال
+      mapModal.addEventListener('shown.bs.modal', () => {
+        setTimeout(() => {
+          this.initializeMap();
+        }, 100);
+      }, { once: true });
+
+      // إعادة تهيئة الخريطة عند إغلاق المودال
+      mapModal.addEventListener('hidden.bs.modal', () => {
+        if (this.map) {
+          this.map = null;
+          this.marker = null;
+        }
+      });
     }
   }
 
-  // Map methods
-  loadLeafletCSS(): void {
-    if (!this.isBrowser) return;
-    
-    // تجنب تحميل CSS مرتين
-    if (document.getElementById('leaflet-css')) {
-      return;
-    }
-    
-    const link = document.createElement('link');
-    link.id = 'leaflet-css';
-    link.rel = 'stylesheet';
-    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-    link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-    link.crossOrigin = '';
-    document.head.appendChild(link);
-  }
-
-  loadLeaflet(): void {
-    if (!this.isBrowser) return;
-
-    // إذا كانت المكتبة محملة بالفعل
-    if (window.L && typeof window.L.map === 'function') {
-      this.L = window.L;
+  // تحميل Google Maps API ديناميكياً
+  loadGoogleMapsApi(): void {
+    if ((window as any).google && (window as any).google.maps) {
+      this.googleMapsApiLoaded = true;
       setTimeout(() => this.initializeMap(), 500);
       return;
     }
-
-    // تحميل المكتبة إذا لم تكن محملة
+    const scriptId = 'google-maps-api';
+    if (document.getElementById(scriptId)) {
+      (document.getElementById(scriptId) as HTMLScriptElement).addEventListener('load', () => {
+        this.googleMapsApiLoaded = true;
+        setTimeout(() => this.initializeMap(), 500);
+      });
+      return;
+    }
     const script = document.createElement('script');
-    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
-    script.crossOrigin = '';
-    
+    script.id = scriptId;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.googleMapsApiKey}&libraries=places`;
+    script.async = true;
+    script.defer = true;
     script.onload = () => {
-      this.L = window.L;
+      this.googleMapsApiLoaded = true;
       setTimeout(() => this.initializeMap(), 500);
     };
-    
     script.onerror = (error) => {
-      console.error('Failed to load Leaflet script:', error);
+      console.error('Failed to load Google Maps script:', error);
     };
-    
     document.head.appendChild(script);
   }
 
   initializeMap(): void {
-    if (!this.isBrowser || !this.L) {
-      console.log('Browser or Leaflet not available');
+    if (!(window as any).google || !(window as any).google.maps) {
       return;
     }
-
-    try {
     const mapElement = document.getElementById('googleMap');
-      if (!mapElement) {
-        console.log('Map element not found');
-        return;
-      }
-
-      // إزالة الخريطة السابقة إذا كانت موجودة
-      if (this.map) {
-        this.map.remove();
-        this.map = null;
-        this.marker = null;
-      }
-
-    this.map = this.L.map('googleMap', {
-      center: [this.latitudeValue, this.longitudeValue],
-      zoom: 12,
-      zoomControl: true
-    });
-
-    this.L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 19
-    }).addTo(this.map);
-
-    const customIcon = this.L.icon({
-      iconUrl: 'assets/images/locatio.svg',
-      iconSize: [37, 37],
-      iconAnchor: [18, 37]
-    });
-
-    this.marker = this.L.marker([this.latitudeValue, this.longitudeValue], {
-      icon: customIcon,
-      draggable: true
-    }).addTo(this.map);
-
-    this.map.on('click', (e: any) => {
-      this.ngZone.run(() => {
-        this.latitudeValue = e.latlng.lat;
-        this.longitudeValue = e.latlng.lng;
-        this.marker.setLatLng([this.latitudeValue, this.longitudeValue]);
-        this.reverseGeocode(this.latitudeValue, this.longitudeValue);
-      });
-    });
-
-    this.marker.on('dragend', (e: any) => {
-      this.ngZone.run(() => {
-        const position = this.marker.getLatLng();
-        this.latitudeValue = position.lat;
-        this.longitudeValue = position.lng;
-        this.reverseGeocode(this.latitudeValue, this.longitudeValue);
-      });
-    });
-
-      // إعادة تحجيم الخريطة بعد التهيئة
-    setTimeout(() => {
-        if (this.map) {
-      this.map.invalidateSize();
-        }
-    }, 500);
-
-      console.log('Map initialized successfully');
-    } catch (error) {
-      console.error('Error initializing map:', error);
+    if (!mapElement) {
+      return;
     }
+    if (this.map) {
+      this.map = null;
+      this.marker = null;
+    }
+    this.map = new (window as any).google.maps.Map(mapElement, {
+      center: { lat: this.latitudeValue, lng: this.longitudeValue },
+      zoom: 12,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+    });
+    this.marker = new (window as any).google.maps.Marker({
+      position: { lat: this.latitudeValue, lng: this.longitudeValue },
+      map: this.map,
+      draggable: true,
+      icon: {
+        url: 'assets/images/locatio.svg',
+        scaledSize: new (window as any).google.maps.Size(37, 37),
+        anchor: new (window as any).google.maps.Point(18, 37)
+      }
+    });
+    this.map.addListener('click', (e: any) => {
+      this.ngZone.run(() => {
+        this.latitudeValue = e.latLng.lat();
+        this.longitudeValue = e.latLng.lng();
+        this.marker.setPosition({ lat: this.latitudeValue, lng: this.longitudeValue });
+        this.reverseGeocode(this.latitudeValue, this.longitudeValue);
+      });
+    });
+    this.marker.addListener('dragend', (e: any) => {
+      this.ngZone.run(() => {
+        const position = this.marker.getPosition();
+        this.latitudeValue = position.lat();
+        this.longitudeValue = position.lng();
+        this.reverseGeocode(this.latitudeValue, this.longitudeValue);
+      });
+    });
+    setTimeout(() => {
+      (window as any).google.maps.event.trigger(this.map, 'resize');
+    }, 500);
   }
 
   onSearchInput(event: any): void {
@@ -508,8 +464,10 @@ export class UpcomingBookingComponent implements OnDestroy {
       this.longitudeValue = location.lon;
       this.showResults = false;
       if (this.map && this.marker) {
-        this.map.setView([location.lat, location.lon], 15);
-        this.marker.setLatLng([location.lat, location.lon]);
+        this.map.setCenter({ lat: this.latitudeValue, lng: this.longitudeValue });
+        this.map.setZoom(15);
+        this.marker.setPosition({ lat: this.latitudeValue, lng: this.longitudeValue });
+        this.reverseGeocode(this.latitudeValue, this.longitudeValue);
       }
     });
   }
@@ -524,19 +482,17 @@ export class UpcomingBookingComponent implements OnDestroy {
   }
 
   setCurrentLocation(): void {
-    if (!this.isBrowser) return;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           this.ngZone.run(() => {
-            this.latitudeControl.setValue(position.coords.latitude);
-            this.longitudeControl.setValue(position.coords.longitude);
             this.latitudeValue = position.coords.latitude;
             this.longitudeValue = position.coords.longitude;
             if (this.map && this.marker) {
-              this.map.setView([position.coords.latitude, position.coords.longitude], 15);
-              this.marker.setLatLng([position.coords.latitude, position.coords.longitude]);
-              this.reverseGeocode(position.coords.latitude, position.coords.longitude);
+              this.map.setCenter({ lat: this.latitudeValue, lng: this.longitudeValue });
+              this.map.setZoom(15);
+              this.marker.setPosition({ lat: this.latitudeValue, lng: this.longitudeValue });
+              this.reverseGeocode(this.latitudeValue, this.longitudeValue);
             }
           });
         },
@@ -548,8 +504,8 @@ export class UpcomingBookingComponent implements OnDestroy {
   }
 
   confirmLocation(): void {
-    const lat = this.latitudeControl.value;
-    const lon = this.longitudeControl.value;
+    const lat = this.latitudeValue;
+    const lon = this.longitudeValue;
     this.locationValue = `(${lon} - ${lat})`;
     this.customerForm.patchValue({
       locationValue: this.locationValue
@@ -558,14 +514,14 @@ export class UpcomingBookingComponent implements OnDestroy {
   }
 
   reverseGeocode(lat: number, lon: number): void {
-    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
-    const headers = new HttpHeaders({
-      'Accept-Language': 'en'
-    });
-    this.http.get(url, { headers }).subscribe((result: any) => {
-      this.ngZone.run(() => {
-        this.searchControl.setValue(result.display_name);
-      });
+    if (!(window as any).google || !(window as any).google.maps) return;
+    const geocoder = new (window as any).google.maps.Geocoder();
+    geocoder.geocode({ location: { lat, lng: lon } }, (results: any, status: any) => {
+      if (status === 'OK' && results && results[0]) {
+        this.ngZone.run(() => {
+          this.searchControl.setValue(results[0].formatted_address);
+        });
+      }
     });
   }
 
@@ -647,6 +603,12 @@ export class UpcomingBookingComponent implements OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    if (this.map) {
+      this.map = null;
+    }
+    if (this.marker) {
+      this.marker = null;
+    }
   }
 
   private setupSearch(): void {
@@ -665,7 +627,7 @@ export class UpcomingBookingComponent implements OnDestroy {
   }
 
   private performSearch(query: string): Observable<any[]> {
-    if (!this.isBrowser || !query || query.trim().length < 2) {
+    if (!query || query.trim().length < 2) {
       return of([]);
     }
 

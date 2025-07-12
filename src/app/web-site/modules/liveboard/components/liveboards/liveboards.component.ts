@@ -23,7 +23,7 @@ export class LiveboardsComponent implements OnInit {
   min_price = 0;
   min_priceChoosen: any = null;
   max_priceChoosen: any = null;
-  max_price = 9999;
+  max_price = 99999;
   isMobile = false;
   showFilter = true;
   minSelected: number = this.min_price; // To store selected min price
@@ -90,7 +90,7 @@ export class LiveboardsComponent implements OnInit {
         this.start_d = null;
         this.rate = null;
         this.min_priceChoosen = this.min_price; // Reset to default minimum price
-        this.max_priceChoosen = 9999; // Reset to default maximum price
+        this.max_priceChoosen = 99999; // Reset to default maximum price
         for (let i = 2; i <= 5; i++) {
           if (i != 2) {
             document
@@ -136,7 +136,7 @@ export class LiveboardsComponent implements OnInit {
           this.start_d = null;
           this.rate = null;
           this.min_priceChoosen = this.min_price; // Reset to default minimum price
-          this.max_priceChoosen = 9999; // Reset to default maximum price
+          this.max_priceChoosen = 99999; // Reset to default maximum price
           for (let i = 2; i <= 5; i++) {
             if (i != 2) {
               document

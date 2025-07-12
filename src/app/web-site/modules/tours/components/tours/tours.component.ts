@@ -29,8 +29,8 @@ export class ToursComponent {
   rate: any = null;
   min_price = 0;
   min_priceChoosen: number = 0;
-  max_price = 999;
-  max_priceChoosen: number = 999;
+  max_price = 99999;
+  max_priceChoosen: number = 99999;
   showFilter = true;
   isMobile = false;
    currentPage: number = 1;

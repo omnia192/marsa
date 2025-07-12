@@ -450,12 +450,17 @@ export class PaymentComponent {
       this.customerForm.get('pickup_point')?.updateValueAndValidity();
     }
     if (this.customerForm.valid) {
-      const parts = this.booking_date?.split('/');
-      const formattedDate = new Date(
-        parseInt(parts[2]),
-        parseInt(parts[1]) - 1,
-        parseInt(parts[0])
-      );
+      let formattedDate: Date;
+      if (typeof this.booking_date === 'string') {
+        const parts = this.booking_date.split('/');
+        formattedDate = new Date(
+          parseInt(parts[2]),
+          parseInt(parts[1]) - 1,
+          parseInt(parts[0])
+        );
+      } else {
+        formattedDate = this.booking_date;
+      }
 
       // Format the date using DatePipe
       const formattedDateString = this.datePipe.transform(
@@ -586,12 +591,17 @@ export class PaymentComponent {
     }
     event.preventDefault();
     if (this.customerForm.valid) {
-      const parts = this.booking_date.split('/');
-      const formattedDate = new Date(
-        parseInt(parts[2]),
-        parseInt(parts[1]) - 1,
-        parseInt(parts[0])
-      );
+      let formattedDate: Date;
+      if (typeof this.booking_date === 'string') {
+        const parts = this.booking_date.split('/');
+        formattedDate = new Date(
+          parseInt(parts[2]),
+          parseInt(parts[1]) - 1,
+          parseInt(parts[0])
+        );
+      } else {
+        formattedDate = this.booking_date;
+      }
 
       const formattedDateString = this.datePipe.transform(
         formattedDate,
@@ -706,13 +716,17 @@ export class PaymentComponent {
       this.isDisable = true;
       this.isLoading = true;
 
-      const parts = this.booking_date?.split('/');
-      console.log(this.booking_date);
-      const formattedDate = new Date(
-        parseInt(parts[2]),
-        parseInt(parts[1]) - 1,
-        parseInt(parts[0])
-      );
+      let formattedDate: Date;
+      if (typeof this.booking_date === 'string') {
+        const parts = this.booking_date.split('/');
+        formattedDate = new Date(
+          parseInt(parts[2]),
+          parseInt(parts[1]) - 1,
+          parseInt(parts[0])
+        );
+      } else {
+        formattedDate = this.booking_date;
+      }
 
       // Format the date using DatePipe
       const formattedDateString = this.datePipe.transform(

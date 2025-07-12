@@ -84,9 +84,12 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
 
+    // Google Maps doesn't need explicit cleanup - it's handled automatically
     if (this.map) {
-      this.map.remove();
       this.map = null;
+    }
+    if (this.marker) {
+      this.marker = null;
     }
   }
 
@@ -155,8 +158,9 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showResults = false;
 
     if (this.map && this.marker) {
-      this.map.setView([this.latitudeValue, this.longitudeValue], 15);
-      this.marker.setLatLng([this.latitudeValue, this.longitudeValue]);
+      this.map.setCenter({ lat: this.latitudeValue, lng: this.longitudeValue });
+      this.map.setZoom(15);
+      this.marker.setPosition({ lat: this.latitudeValue, lng: this.longitudeValue });
     }
       this.cdr.detectChanges();
     });
@@ -290,8 +294,9 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
             this.longitudeValue = position.coords.longitude;
 
             if (this.map && this.marker) {
-              this.map.setView([this.latitudeValue, this.longitudeValue], 15);
-              this.marker.setLatLng([this.latitudeValue, this.longitudeValue]);
+              this.map.setCenter({ lat: this.latitudeValue, lng: this.longitudeValue });
+              this.map.setZoom(15);
+              this.marker.setPosition({ lat: this.latitudeValue, lng: this.longitudeValue });
               this.reverseGeocode(this.latitudeValue, this.longitudeValue);
             }
 

@@ -304,8 +304,9 @@ export class LiveboardDetailsComponent {
   scrollToselectCabinButton(schedule: any) {
     this.selectedDateControl.setValue(schedule);
     this.selectedSchedule = schedule.id;
+    
     console.log(schedule);
-    this.bookNow();
+  //  this.bookNow();
   }
 
   scrollToCabin() {
@@ -374,7 +375,7 @@ export class LiveboardDetailsComponent {
           }
         });
         this.googleIframe = this.sanitizer.bypassSecurityTrustHtml(
-          this.liveabourdData.PlaceOnMap
+          this.liveabourdData.Map
         );
         this.availableOptionMap = this.sanitizer.bypassSecurityTrustHtml(
           this.liveabourdData.Map
