@@ -59,7 +59,9 @@ export class UserSettingsComponent implements OnInit {
 
   fillUserData() {
     if (this.userDetails) {
-      this.selectedCountryName = this.userDetails?.overviwe?.country || '';
+      setTimeout(() => {
+        this.selectedCountryName = this.userDetails?.overviwe?.country || '';
+      });
 
       this.name = this.userDetails?.name || '';
       this.phone = this.userDetails?.overviwe?.phone
@@ -69,10 +71,14 @@ export class UserSettingsComponent implements OnInit {
       this.email = this.userDetails?.overviwe?.email || '';
       this.dob = this.userDetails?.overviwe?.dateofbirth || '';
       this.gender = this.userDetails?.overviwe?.gender;
-      this.phoneNumber =
-      '+' +
-      (this.userDetails?.overviwe?.countrycode || '') +
-      (this.phone ? this.phone.replace(/\s/g, '') : '');
+      
+      setTimeout(() => {
+        this.phoneNumber =
+        '+' +
+        (this.userDetails?.overviwe?.countrycode || '') +
+        (this.phone ? this.phone.replace(/\s/g, '') : '');
+      });
+      
        if (this.gender === 1) {
           this.selectedItem = this.items[0];
         } else if (this.gender === 0) {
@@ -85,22 +91,14 @@ export class UserSettingsComponent implements OnInit {
 
  onCountryChange(event: any) {
   if (event && event.dialCode) {
-    this.phoneNumber = event.dialCode;
-    this.selectedCountryName = event.name || ''; // تحديث الدولة المختارة
-    console.log('تم تغيير كود الدولة:', this.phoneNumber);
-    console.log('الدولة المختارة:', this.selectedCountryName);
+    setTimeout(() => {
+      const originalNumber = this.phone ? this.phone.replace(/\s/g, '') : '';
+      this.phoneNumber = '+' + event.dialCode + originalNumber;
+      this.selectedCountryName = event.name || ''; 
+    });
+   
   }
 }
-// onCountryChange(event: any) {
-//     if (event) {
-//       const dialCode = event.dialCode;
-//       const currentNumber = this.phone ? this.phone.replace(/\s/g, '') : '';
-
-//       setTimeout(() => {
-//         this.phoneNumber = `+${dialCode}${currentNumber}`;
-//       });
-//     }
-//   }
 
 
 
@@ -142,7 +140,6 @@ export class UserSettingsComponent implements OnInit {
       return;
     }
 
-    // معالجة رقم الهاتف ليكون string فقط
     let phoneValue = this.phone;
     if (typeof phoneValue === 'object' && phoneValue.number) {
       phoneValue = phoneValue.number;
@@ -195,10 +192,7 @@ export class UserSettingsComponent implements OnInit {
     }
     formData.append('cover', this.imageFile);
 
-    // اطبع نوع الصورة
-    console.log('imageFile:', this.imageFile);
-    console.log('imageFile instanceof File:', this.imageFile instanceof File);
-
+  
     const token = localStorage.getItem('userToken');
 
     const headers = token

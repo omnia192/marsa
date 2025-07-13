@@ -27,6 +27,8 @@ export class ToursComponent {
       this.currentPage = data.userDashboard.ActivityDetails.current_page;
       this.lastPage = data.userDashboard.ActivityDetails.last_page;
       this.total = data.userDashboard.ActivityDetails.total;
+      console.log(this.tours);
+      console.log(this.currentPage);
       this.cdr.markForCheck();
     });
   }
@@ -34,6 +36,8 @@ export class ToursComponent {
   nextPage(): void {
     if (this.currentPage < this.lastPage) {
       this.loadProfiles(this.currentPage + 1);
+      console.log(this.tours);
+      console.log(this.currentPage);
     }
   }
 

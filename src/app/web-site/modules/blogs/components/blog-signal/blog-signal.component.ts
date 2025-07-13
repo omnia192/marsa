@@ -29,6 +29,7 @@ export class BlogSignalComponent implements OnInit {
   comment: any;
   userData: any;
   review:any;
+  lastReview: any;
   isMobile = false;
   items: any[] = [];
   pagedItems: any[] = [];
@@ -97,6 +98,7 @@ export class BlogSignalComponent implements OnInit {
         this.blog = res.Blog[0];
       this.review=this.blog.comments;
       this.items = this.review.reverse();
+      this.lastReview = this.review && this.review.length > 0 ? this.review[this.review.length - 1] : null;
       console.log(this.review);
         this.getAdjacentBlogs(blogID);
         // this.seoService.updateSEO(

@@ -158,30 +158,30 @@
                       Showing Most Recent verified guest comments
                     </h5>
                     <div class="media flex-column flex-md-row align-items-center align-items-md-start mb-4"
-                      *ngFor="let review of review?.slice(0, 1).reverse()">
+                      *ngIf="lastReview">
                       <div class="mr-md-5">
                         <a class="d-block" href="#">
-                          <img  class="comment-img mb-3 mb-md-0 rounded-circle" [src]="review?.avatar"
-                            [alt]="review?.name || '../../../../../../assets/custom/user-dasboard/avatar-place.png'"
+                          <img  class="comment-img mb-3 mb-md-0 rounded-circle" [src]="lastReview?.avatar"
+                            [alt]="lastReview?.name || '../../../../../../assets/custom/user-dasboard/avatar-place.png'"
                             (error)="handleImageError($event)" />
                         </a>
                       </div>
                       <div class="media-body text-center text-md-left">
                         <div class="mb-4">
                           <h6 class="fw-bold text-gray-3">
-                            <a>{{ review?.user }}</a>
+                            <a>{{ lastReview?.user }}</a>
                           </h6>
                           <div class="font-weight-normal font-size-14 text-gray-9 mb-2">
                              at
-                            {{ review?.date}}
+                            {{ lastReview?.date}}
                           </div>
 
                           <p class="text-lh-1dot6 mb-0 pr-lg-5">
-                            {{ review?.comment }}
+                            {{ lastReview?.comment }}
                           </p>
-                          <h5 *ngIf="review?.reply" style="color:rgba(41, 124, 187, 1);" class="mt-3 text-lh-1dot6 mb-0 pr-lg-5">
+                          <h5 *ngIf="lastReview?.reply" style="color:rgba(41, 124, 187, 1);" class="mt-3 text-lh-1dot6 mb-0 pr-lg-5">
                             Reply:
-                            <span style="color:black">{{ review?.reply }}</span>
+                            <span style="color:black">{{ lastReview?.reply }}</span>
                           </h5>
 
 
