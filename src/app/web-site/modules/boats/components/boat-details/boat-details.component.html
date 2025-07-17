@@ -656,19 +656,16 @@
                   <span class="d-block">Destination</span>
 
                   <ng-container *ngIf="boatData?.Distnation">
-                    <!-- <p-dropdown 
-                      [options]="boatData?.Distnation" 
-                      [(ngModel)]="selectedDestination"
+                    <p-dropdown
+                      [options]="boatData?.Distnation"
+                      [(ngModel)]="selectedSchedule"
                       optionLabel="distnation"
+                      optionValue="id"
                       placeholder="Where are you going"
                       [formControl]="selectedDateControl"
                       (onChange)="onDestinationChange($event)"
-                      styleClass="w-100 mt-2 "
+                      styleClass="w-100 mt-2"
                       [showClear]="true">
-                    </p-dropdown> -->
-                    <p-dropdown [options]="boatData?.Distnation" [(ngModel)]="selectedDestination"
-                      optionLabel="distnation" placeholder="Where are you going" [formControl]="selectedDateControl"
-                      (onChange)="onDestinationChange($event)" styleClass="w-100 mt-2" [showClear]="true">
                     </p-dropdown>
                   </ng-container>
                 </div>

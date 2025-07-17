@@ -96,7 +96,7 @@ export class BoatDetailsComponent {
   @ViewChild('selectCabinButton') selectCabinButton!: ElementRef;
   showMapFrame: boolean = false;
   googleIframe!: SafeHtml;
-  selectedSchedule: any;
+  selectedSchedule: number | null = null;
   selectedDateControl: FormControl<string | null> = new FormControl<
     string | null
   >('', Validators.required);
@@ -780,20 +780,13 @@ getBed(item: any): any {
     this.isModalOpen = false;
   }
 
-  selectedDestination: any = null;
 
   
 
   onDestinationChange(event: any) {
-    // event.value هو العنصر المختار في p-dropdown
-    if (event && event.value) {
-      // إذا كان العنصر المختار يحتوي على price
-      this.price = event.value.price || null;
-      this.discount = event.value.discount || 0;
-      // أضيفي أي متغيرات أخرى تحتاجينها
-    } else {
-      this.price = null;
-      this.discount = 0;
-    }
+    // selectedSchedule يحتوي الآن على id فقط
+    const selectedObj = this.boatData?.Distnation?.find((d: any) => d.id === this.selectedSchedule);
+    this.price = selectedObj?.price || null;
+    this.discount = selectedObj?.discount || 0;
   }
 }

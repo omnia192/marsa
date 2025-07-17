@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { HttpService } from 'src/app/core/services/http/http.service';
 import { ProfileService } from 'src/app/core/services/http/profile-service.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-tours',
@@ -21,7 +22,9 @@ export class ToursComponent {
 
 
   loadProfiles(page: number): void {
-    this.profileService.getProfiles(page).subscribe((data) => {
+   
+    this ._httpsService.get(environment.marsa, 'profile', { page }).subscribe({
+      next: (data: any)  => {
       this.profiles = data.userDashboard.data;
       this.tours = data.userDashboard.ActivityDetails.data; // Ensure this is correct
       this.currentPage = data.userDashboard.ActivityDetails.current_page;
@@ -30,6 +33,7 @@ export class ToursComponent {
       console.log(this.tours);
       console.log(this.currentPage);
       this.cdr.markForCheck();
+      },
     });
   }
 
@@ -51,6 +55,7 @@ export class ToursComponent {
   constructor(
     private httpService: HttpService,
     private profileService: ProfileService,
+    private _httpsService: HttpService,
     private cdr: ChangeDetectorRef
   ) {}
 

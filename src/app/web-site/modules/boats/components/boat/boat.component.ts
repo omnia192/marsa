@@ -23,8 +23,8 @@ export class BoatComponent {
   minDate: string;
 
   min_priceChoosen: any = null;
-   max_price = 9999;
-  max_priceChoosen: number = 9999;
+   max_price = 99999;
+  max_priceChoosen: number = 99999;
   isMobile = false;
   showFilter = true;
   constructor(

@@ -1,55 +1,43 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { HttpService } from 'src/app/core/services/http/http.service';
 import { ProfileService } from 'src/app/core/services/http/profile-service.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-liveboard',
   templateUrl: './liveboard.component.html',
   styleUrls: ['./liveboard.component.scss'],
 })
-export class LiveboardComponent implements OnInit {
+export class LiveboardComponent {
   activeTab: string = 'year';
   @Input() liveaboards: any;
   thisYear: number = new Date().getFullYear();
   filterdLiveAboard: any = [];
-  selectedLiveAboard: any;
+  selectedLiveAboard : any;
   profiles: any[] = [];
   currentPage: number = 1;
   lastPage: number = 1;
   total: number = 0;
   years: { label: string; value: string }[] = [];
 
-  constructor(
-    private profileService: ProfileService,
-    private cdr: ChangeDetectorRef
-  ) {}
-
-  ngOnInit() {
-    this.generateYears();
-    this.activeTab = this.thisYear.toString();
-    console.log('Initial activeTab:', this.activeTab);
-    this.loadProfiles(this.currentPage);
-  }
 
   loadProfiles(page: number): void {
-    this.profileService.getProfiles(page).subscribe((data: any) => {
-      console.log('API Response:', data);
-      
+    this._httpsService.get(environment.marsa, 'profile', { page }).subscribe({
+      next: (data: any)  => {
       this.profiles = data.userDashboard.data;
-      this.liveaboards = data.userDashboard.liveboardDetails.data;
+
+
+      this.liveaboards = data.userDashboard.liveboardDetails.data; // Ensure this is correct
+      this.filterdLiveAboard = this.liveaboards;
       this.currentPage = data.userDashboard.liveboardDetails.current_page;
       this.lastPage = data.userDashboard.liveboardDetails.last_page;
       this.total = data.userDashboard.liveboardDetails.total;
-      
-      console.log('Liveaboards loaded:', this.liveaboards);
-      console.log('Liveaboards length:', this.liveaboards?.length);
-      
-      this.applyFilter();
       this.cdr.markForCheck();
-    }, (error) => {
-      console.error('Error loading profiles:', error);
+      }
+
     });
   }
-
+ 
   generateYears() {
     const currentYear = new Date().getFullYear();
     this.years = [
@@ -65,58 +53,43 @@ export class LiveboardComponent implements OnInit {
       this.loadProfiles(this.currentPage + 1);
     }
   }
+  openModal(liveAboard: any) {
+    this.selectedLiveAboard = liveAboard;
+
+  }
 
   prevPage(): void {
+
+
     if (this.currentPage > 1) {
       this.loadProfiles(this.currentPage - 1);
     }
   }
 
-  openModal(liveAboard: any) {
-    this.selectedLiveAboard = liveAboard;
+  constructor(
+    private _httpsService: HttpService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+
+
+  ngOnChanges() {
+    // this.activityTypes = this.types[0].types;
   }
+
+  ngOnInit() {
+    this.loadProfiles(this.currentPage);
+    this.filterdLiveAboard = this.liveaboards;
+    this.generateYears();
+    this.activeTab = this.thisYear.toString();
+  }
+ 
+
 
   setFilter(year: string) {
-    console.log('Setting filter for year:', year);
     this.activeTab = year;
-    this.applyFilter();
-  }
-
-  applyFilter() {
-    if (!this.liveaboards || !Array.isArray(this.liveaboards)) {
-      console.log('No liveaboards data available');
-      this.filterdLiveAboard = [];
-      return;
-    }
-
-    console.log('Applying filter for year:', this.activeTab);
-    console.log('Total liveaboards before filter:', this.liveaboards.length);
-
-    // إذا كان الفلتر هو "This Year" أو لم يتم تحديد فلتر، اعرض جميع البيانات
-    if (!this.activeTab || this.activeTab === 'year') {
-      this.filterdLiveAboard = this.liveaboards;
-      console.log('Showing all liveaboards:', this.filterdLiveAboard.length);
-      return;
-    }
-
-    this.filterdLiveAboard = this.liveaboards.filter((item: any) => {
-      if (!item.time) {
-        console.log('Item has no time:', item);
-        return false;
-      }
-      
-      const itemYear = item.time.toString().substr(0, 4);
-      const matches = itemYear === this.activeTab;
-      
-      if (matches) {
-        console.log('Match found:', item.name, 'Year:', itemYear);
-      }
-      
-      return matches;
+    this.filterdLiveAboard = this.liveaboards?.filter((item: any) => {
+      return item.time.substr(0, 4) === year;
     });
-
-    console.log('Active Tab:', this.activeTab);
-    console.log('Total Liveaboards:', this.liveaboards?.length);
-    console.log('Filtered Liveaboards:', this.filterdLiveAboard?.length);
   }
 }

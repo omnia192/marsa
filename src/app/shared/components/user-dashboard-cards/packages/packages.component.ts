@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { ProfileService } from 'src/app/core/services/http/profile-service.service';
+import { HttpService } from 'src/app/core/services/http/http.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-packages',
@@ -16,8 +17,13 @@ export class PackagesComponent {
   lastPage: number = 1;
   total: number = 0;
   selectedpackage:any;
+   constructor(
+    private cdr: ChangeDetectorRef,
+    private _httpsService: HttpService,
+  ) {}
   loadProfiles(page: number): void {
-    this.profileService.getProfiles(page).subscribe((data: any) => {
+    this._httpsService.get(environment.marsa, 'profile', { page }).subscribe({
+        next: (data: any)  => {
       this.profiles = data.userDashboard.data;
       this.packages = data.userDashboard.packageDetails.data; // Ensure this is correct
       this.filterdPackages = this.packages;
@@ -25,8 +31,10 @@ export class PackagesComponent {
       this.lastPage = data.userDashboard.packageDetails.last_page;
       this.total = data.userDashboard.packageDetails.total;
       this.cdr.markForCheck();
+        },
     });
   }
+  
 
   nextPage(): void {
     if (this.currentPage < this.lastPage) {
@@ -46,10 +54,7 @@ export class PackagesComponent {
     }
   }
 
-  constructor(
-    private profileService: ProfileService,
-    private cdr: ChangeDetectorRef
-  ) {}
+ 
 
   ngOnChanges() {
   }
